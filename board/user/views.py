@@ -86,7 +86,15 @@ def new_user(request):
             if (formulario.cleaned_data['password1']!=formulario.cleaned_data['password2']):
                formulario.add_error('password2','no coinciden las contraseñas')
                return render(request,"newuser.html",{"form":formulario})
-            user = User(username=formulario.cleaned_data['username'], password=formulario.cleaned_data['password1'])
+            username = formulario.cleaned_data['username']
+            password = formulario.cleaned_data['password1']
+            name = formulario.cleaned_data['name']
+            last_name = formulario.cleaned_data['last_name']
+            email = formulario.cleaned_data['email']
+            bio = formulario.cleaned_data['bio']
+            picture = formulario.cleaned_data['picture']
+
+            user = User(username=username, password=password,first_name=name,last_name=last_name,email=email,bio=bio,picture=picture)
             user.set_password(user.password)
             user.save()
             do_login(request, user)

@@ -1,13 +1,10 @@
+from .models import Game, Status
 from django import forms
 
-from .models import Game
-from django import forms
-
-
-
-class NewGame(forms.ModelForm):
-
-    class Meta:
-        model = Game
-        fields = ('name', 'description','status','price','picture','address', )
-    
+class NewGame(forms.Form):
+    name = forms.CharField(max_length=20,label="Nombre")
+    description = forms.CharField(max_length=200,label="Descripción",widget=forms.Textarea)
+    price = forms.CharField(max_length=5,label="Precio (€/día)")
+    status = forms.ChoiceField(choices=[(str(x),x.value) for x in Status], label="Estado")
+    picture = forms.CharField(max_length=500,label="Foto")
+    address = forms.CharField(max_length=50,label="Zona")

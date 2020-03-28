@@ -38,15 +38,27 @@ def delete(request, pk):
 
     # Después redireccionamos de nuevo a la lista
     return redirect('/')
+
 def new_game(request):
     if request.method == "POST":
         form = NewGame(request.POST)
         if form.is_valid():
-            Game = form.save(commit=False)
-            Game.owner = request.user
 
-            Game.save()
-            return redirect('/gameDetail/{}'.format(Game.id))
+            name = form.cleaned_data['name']
+            description = form.cleaned_data['description']
+            status = form.cleaned_data['status']
+            try:
+                price = float(form.cleaned_data['price'])
+            except ValueError:
+                form.add_error('price','Introduzca un dato numérico')
+                return render(request,"newgame.html",{"form":form})
+            picture = form.cleaned_data['picture']
+            address = form.cleaned_data['address']
+            owner = request.user
+            game = Game(name=name,description=description,status=status,price=price,picture=picture,address=address,owner=owner)
+
+            game.save()
+            return redirect('/gameDetail/{}'.format(game.id))
     else:
        form = NewGame()
     return render(request, 'newgame.html', {'form': form})
