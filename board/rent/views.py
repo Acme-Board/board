@@ -16,7 +16,10 @@ from user.models import User
 
 
 def games_list(request):
-    games = Game.objects.all()
+    if(request.user.is_authenticated):
+        games = Game.objects.exclude(owner=request.user)
+    else:
+        games = Game.objects.all()
     return render(request,'games.html',{'games':games})
 
 def games_list_by_user(request):
@@ -184,4 +187,4 @@ def empty_cart(request):
             for item in cart.items.all():
                 cart.items.remove(item)
                 item.delete()
-    return render(request, 'orders.html', {'order': cart.items.all(), 'id':cart.id, 'mensaje': 'Carrito vaciado','sum':cart.get_total_price()})
+    #return render(request, 'orders.html', {'order': cart.items.all(), 'id':cart.id, 'mensaje': 'Carrito vaciado','sum':cart.get_total_price()})
