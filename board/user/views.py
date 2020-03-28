@@ -3,9 +3,11 @@ from django.contrib.auth import logout as do_logout
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as do_login
+from django.contrib.auth.hashers import check_password
+from django import forms
 
 from user.models import User
-from user.forms import NewUser
+from user.forms import NewUser, Register
 from reviews.models import Valoration, Comment
 
 
@@ -14,7 +16,7 @@ from reviews.models import Valoration, Comment
 def profile(request, id_user):
      user = get_object_or_404(User, pk=id_user)
      list_comments = Comment.objects.filter(toUser=user)
-     return render(request,'profile.html', {'user':user},{'comments': list_comments})
+     return render(request,'profile.html', {'user':user, 'comments': list_comments})
 
 def logout(request):
      do_logout(request)
@@ -45,22 +47,6 @@ def login(request):
     # Si llegamos al final renderizamos el formulario
     return render(request, "login.html", {'form': form})
 
-def new_user(request):
-    if request.method == "POST":
-        form = NewUser(request.POST)
-        if form.is_valid():
-           
-            User = form.save(commit=False)
-            User.set_password(User.password)
-            
-
-
-            User.save()
-            do_login(request, User)
-            return redirect('/profile/{}'.format(User.id))
-    else:
-       form = NewUser()
-    return render(request, 'newuser.html', {'form': form})
 def delete_myUSer(request, pk):
     # Recuperamos la instancia del user y la borramos
     instancia = User.objects.get(id=pk)
@@ -70,4 +56,49 @@ def delete_myUSer(request, pk):
   
     
     return redirect('/')
-  
+def edit_user(request, pk):
+    # Recuperamos la instancia de la persona
+    instancia = User.objects.get(id=pk)
+
+    # Creamos el formulario con los datos de la instancia
+    form = NewUser(instance=instancia)
+
+    # Comprobamos si se ha enviado el formulario
+    if request.method == "POST":
+        # Actualizamos el formulario con los datos recibidos
+        form = NewUser(request.POST, instance=instancia)
+        # Si el formulario es válido...
+        if form.is_valid():
+            # Guardamos el formulario pero sin confirmarlo,
+            # así conseguiremos una instancia para manejarla
+            instancia = form.save(commit=False)
+            # Podemos guardarla cuando queramos
+            instancia.save()
+            return  redirect('/profile/{}'.format(pk))
+
+    # Si llegamos al final renderizamos el formulario
+    return render(request, "newuser.html", {'form': form})
+
+def new_user(request):
+    if(request.method=='POST'):
+        formulario = Register(request.POST)
+        if(formulario.is_valid()):
+            if (formulario.cleaned_data['password1']!=formulario.cleaned_data['password2']):
+               formulario.add_error('password2','no coinciden las contraseñas')
+               return render(request,"newuser.html",{"form":formulario})
+            username = formulario.cleaned_data['username']
+            password = formulario.cleaned_data['password1']
+            name = formulario.cleaned_data['name']
+            last_name = formulario.cleaned_data['last_name']
+            email = formulario.cleaned_data['email']
+            bio = formulario.cleaned_data['bio']
+            picture = formulario.cleaned_data['picture']
+
+            user = User(username=username, password=password,first_name=name,last_name=last_name,email=email,bio=bio,picture=picture)
+            user.set_password(user.password)
+            user.save()
+            do_login(request, user)
+            return redirect('/profile/{}'.format(user.id))
+    else:
+        formulario = Register()
+    return render(request,"newuser.html",{"form":formulario})

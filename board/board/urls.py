@@ -56,6 +56,7 @@ urlpatterns = [
     path('newuser', user_views.new_user),
     path('deleteUser/<int:pk>', user_views.delete_myUSer),
     path('delete/<int:pk>', rent_views.delete),
+    path('editUser/<int:pk>', user_views.edit_user),
 
     #Review
     re_path(r'review/(?P<id_user>\d+)',reviews_views.create_review),

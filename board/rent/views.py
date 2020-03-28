@@ -16,7 +16,10 @@ from user.models import User
 
 
 def games_list(request):
-    games = Game.objects.all()
+    if(request.user.is_authenticated):
+        games = Game.objects.exclude(owner=request.user)
+    else:
+        games = Game.objects.all()
     return render(request,'games.html',{'games':games})
 
 def games_list_by_user(request):
@@ -38,15 +41,27 @@ def delete(request, pk):
 
     # Después redireccionamos de nuevo a la lista
     return redirect('/')
+
 def new_game(request):
     if request.method == "POST":
         form = NewGame(request.POST)
         if form.is_valid():
-            Game = form.save(commit=False)
-            Game.owner = request.user
 
-            Game.save()
-            return redirect('/gameDetail/{}'.format(Game.id))
+            name = form.cleaned_data['name']
+            description = form.cleaned_data['description']
+            status = form.cleaned_data['status']
+            try:
+                price = float(form.cleaned_data['price'])
+            except ValueError:
+                form.add_error('price','Introduzca un dato numérico')
+                return render(request,"newgame.html",{"form":form})
+            picture = form.cleaned_data['picture']
+            address = form.cleaned_data['address']
+            owner = request.user
+            game = Game(name=name,description=description,status=status,price=price,picture=picture,address=address,owner=owner)
+
+            game.save()
+            return redirect('/gameDetail/{}'.format(game.id))
     else:
        form = NewGame()
     return render(request, 'newgame.html', {'form': form})
@@ -64,7 +79,7 @@ def edit_game(request, pk):
         form = NewGame(instance=juego)
     return render(request, 'newgame.html', {'form': form})
 
-def rent_game(request, id_game):
+def rent_game(request, id_game, days):
     dato = get_object_or_404(Game, pk=id_game)
     user = get_object_or_404(User, pk=request.user.id)
     letters = string.ascii_uppercase
@@ -72,8 +87,9 @@ def rent_game(request, id_game):
     ramdomLetters = ''.join(random.choice(letters) for i in range(3))
     ramdomNumber = ''.join(random.choice(digits) for i in range(4))
     ticker = ramdomLetters + '-' + ramdomNumber
-    rent = Rent(ticker=ticker, game=dato, user= user, rentable=False)
+    rent = Rent(ticker=ticker, game=dato,days = days, user= user, rentable=False)
     rent.save()
+
 
 def rents_list(request,id_user):
     rents = Rent.objects.filter(user=request.user)
@@ -99,6 +115,19 @@ def add_item_to_cart(request, id_game):
     dato = get_object_or_404(Game, pk=id_game)
     user = get_object_or_404(User, pk=request.user.id)
     list_carts = Order.objects.filter(user=user)
+    days = 1
+    if request.method == "POST":
+        if request.POST.get("days") is None:
+            dato = get_object_or_404(Game, pk=id_game)
+            return render(request, 'gameDetail.html',
+                      {'name': dato.name, 'description': dato.description, 'price': dato.price,
+                       'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner})
+        if int(request.POST.get("days")) <=0:
+            dato = get_object_or_404(Game, pk=id_game)
+            return render(request, 'gameDetail.html',
+                          {'name': dato.name, 'description': dato.description, 'price': dato.price,
+                           'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner})
+        days = request.POST.get("days")
     if not list_carts:
         ramdomLetters = ''.join(random.choice(string.ascii_uppercase) for i in range(4))
         ramdomNumber = ''.join(random.choice(string.digits) for i in range(5))
@@ -111,7 +140,7 @@ def add_item_to_cart(request, id_game):
                 añadir = False
                 break
         if añadir:
-            item = OrderItem(game=dato, is_ordered=False, date_added=date.today())
+            item = OrderItem(game=dato, days=days, is_ordered=False, date_added=date.today())
             item.save()
             cart.items.add(item)
             cart.save()
@@ -129,7 +158,7 @@ def add_item_to_cart(request, id_game):
                         añadir = False
                         return render(request, 'orders.html', {'order': cart.items.all(), 'id':cart.id, 'mensaje': 'No puedes comprar tu propio juego','sum':cart.get_total_price()})
                 if añadir:
-                    item = OrderItem(game=dato, is_ordered=False, date_added=date.today())
+                    item = OrderItem(game=dato, days=days, is_ordered=False, date_added=date.today())
                     item.save()
                     cart.items.add(item)
                     cart.save()
@@ -158,4 +187,4 @@ def empty_cart(request):
             for item in cart.items.all():
                 cart.items.remove(item)
                 item.delete()
-    return render(request, 'orders.html', {'order': cart.items.all(), 'id':cart.id, 'mensaje': 'Carrito vaciado','sum':cart.get_total_price()})
+    #return render(request, 'orders.html', {'order': cart.items.all(), 'id':cart.id, 'mensaje': 'Carrito vaciado','sum':cart.get_total_price()})
