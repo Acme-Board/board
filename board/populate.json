@@ -517,6 +517,7 @@
 			"ticker": "ABC-1234",
 			"rentable": true,
 			"user": 16,
+			"days": 3,
 			"game": 22
 		},
 		"model": "rent.rent",
@@ -527,6 +528,7 @@
 			"ticker": "ABC-2222",
 			"rentable": true,
 			"user": 10,
+			"days": 1,
 			"game": 45
 		},
 		"model": "rent.rent",
@@ -537,6 +539,7 @@
 			"ticker": "AFC-3333",
 			"rentable": true,
 			"user": 32,
+			"days": 1,
 			"game": 44
 		},
 		"model": "rent.rent",
@@ -547,6 +550,7 @@
 			"ticker": "GBC-3421",
 			"rentable": true,
 			"user": 16,
+			"days": 4,
 			"game": 43
 		},
 		"model": "rent.rent",
@@ -557,6 +561,7 @@
 			"ticker": "DBC-6234",
 			"rentable": true,
 			"user": 10,
+			"days": 5,
 			"game": 42
 		},
 		"model": "rent.rent",
@@ -566,6 +571,7 @@
 		"fields": {
 			"ticker": "ALC-1884",
 			"rentable": true,
+			"days": 2,
 			"user": 16,
 			"game": 41
 		},
@@ -576,6 +582,7 @@
 		"fields": {
 			"ticker": "EBC-1214",
 			"rentable": true,
+			"days": 1,
 			"user": 10,
 			"game": 40
 		},
@@ -586,6 +593,7 @@
 		"fields": {
 			"ticker": "AAA-1634",
 			"rentable": true,
+			"days": 1,
 			"user": 11,
 			"game": 39
 		},

@@ -18,6 +18,8 @@ def charge(request,id_cart):
             source=request.POST['stripeToken'],
             api_key=settings.STRIPE_SECRET_KEY
         )
+        for item in cart.items.all():
+            rent_game(request,item.game.id, item.days)
         #rent_game(request,id_game)
         return redirect('/success/')
 

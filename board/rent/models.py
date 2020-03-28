@@ -38,6 +38,7 @@ class Rent(models.Model):
     ticker = models.CharField(max_length=8, default='ABC-1234')
     game = models.ForeignKey(Game,on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+    days = models.IntegerField(default=1, validators=[MinValueValidator(1, "No puedes alquilarlo menos de un dia")])
     rentable = models.BooleanField(default=True)
 
     @classmethod
@@ -54,6 +55,7 @@ class OrderItem(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     is_ordered = models.BooleanField(default=False)
     date_added = models.DateTimeField(auto_now=True)
+    days = models.IntegerField(default=1, validators=[MinValueValidator(1, "No puedes alquilarlo menos de un dia")])
     date_ordered = models.DateTimeField(null=True)
 
     def __str__(self):
@@ -75,5 +77,5 @@ class Order(models.Model):
     def get_total_price(self):
         sum = 0
         for x in self.get_cart_items():
-            sum = sum + x.game.price
+            sum = sum + (x.game.price * x.days)
         return sum

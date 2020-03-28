@@ -104,7 +104,12 @@
 <ul class="pager">
   {% if request.user.is_authenticated %}
   <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 42%; color:black; font-weight: bold;">Volver</a>
-  <a href= "/addCart/{{id}}" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 5%; color:black; font-weight: bold;">Añadir al carrito</a>
+  <form action="/addCart/{{id}}" method="POST">
+        <input type="number" id="days" name="days" value="1" min="1" max="100">
+        {% csrf_token %}
+        <br/>
+        <button type="submit" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 5%; color:black; font-weight: bold;">Añadir al carrito</button>
+  </form>
   {% else %}
   <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 45%;color:black; font-weight: bold;">Volver</a>
   {% endif %}
