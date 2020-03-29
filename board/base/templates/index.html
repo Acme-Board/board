@@ -8,17 +8,211 @@
 </head>
 <body>
 
-{% block content %}
+     {% block content %}
+     <section class="page-section">
+          <div class="index-main py-5">
+               <img class="index-icon" src="{% static 'img/icon.png' %}" />
+               <h1 class="index-title">¡Bienvenido a la plataforma Try On Board{% if request.user.username != '' %}, {{request.user.username}} {% endif %}!</h1> 
 
-<div class="index-main">
-     <img class="index-icon" src="{% static 'img/icon.png' %}" />
-<h1 class="index-title">¡Bienvenido a la plataforma Try On Board{% if request.user.username != '' %}, {{request.user.username}} {% endif %}!</h1> 
+               <p class="index-description">
+                    ¡Aquí podrás encontrar juegos de mesa que otra gente alquile o venda cerca de tu zona!
+               </p>
 
-<p>
-     ¡Aquí podrás encontrar juegos de mesa que otra gente alquile o venda cerca de tu zona!
-</p>
+               <a href= "/games" class="btn btn-info btn-sm;" style="border-radius: 8px; margin-left: 35%; color:black; font-weight: bold;">¡Empezar!</a>
+               <a class="btn btn-light btn-xl js-scroll-trigger" href= "#about" style="border-radius: 8px; margin-left: 5%; color:black; font-weight: bold;">¿Quiénes somos?</a>
+          </div>
+     </section>
 
-</div>
+
+     <section class="page-section py-3" id="about">
+          <div class="container">
+               <div class="row justify-content-center py-2" style="background-color: rgb(181, 127, 202); padding:50px; border-radius: 8px;">
+                    <div class="col-lg-8 text-center">
+                         <h2 class="mt-0">Sobre nosotros</h2>
+                         <hr class="divider light my-4">
+                         <p style="text-align: center;"> ¡Try on Board es un proyecto pensado para aquellos jugadores de juegos de mesa que acumulan
+                                                            juegos que usa cada mucho tiempo para sacarle el mayor partido posible alquilandolo!
+
+                                                            Creado por Acme-Board, una empresa de aficionados a los juegos formada por 10 ingenieros software.
+                                                            
+                         </p>
+                         <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">¿Qué ofrece Try on Board?</a>
+                    </div>
+               </div>
+          </div>
+     </section>
+
+
+     <section class="page-section" id="services">
+          <div class="container text-center">
+               <div style="background:rgb(128, 107, 221); height:auto; padding: 50px; border-radius: 8px;">
+                    <h2 class="text-center mt-0">¡A tu servicio!</h2>
+                    <hr class="divider my-4">
+                    <div class="row" style="margin-bottom: 25px;">
+                         <div class="col-lg-3 col-md-6 text-center">
+                              <div class="mt-5">
+                                <i class="fas fa-4x fa-handshake text-primary mb-4"></i>
+                                <h3 class="h4 mb-2">Alquila juegos</h3><br>
+                                <p class="mb-0">Alquila los juegos de mesa que te interesen</p>
+                              </div>
+                         </div>
+                         <div class="col-lg-3 col-md-6 text-center">
+                              <div class="mt-5">
+                                <i class="fas fa-4x fa-comments text-primary mb-4"></i>
+                                <h3 class="h4 mb-2">Contacta con los usuarios</h3>
+                                <p class="mb-0">Contacta con los usuarios para aclarar dudas de los juegos</p>
+                              </div>
+                         </div>
+                         <div class="col-lg-3 col-md-6 text-center">
+                              <div class="mt-5">
+                                <i class="fas fa-4x fa-map-marker-alt text-primary mb-4"></i>
+                                <h3 class="h4 mb-2">Buscar por localización</h3>
+                                <p class="mb-0">Puedes buscar los juegos publicados más cerca de tu zona</p>
+                              </div>
+                         </div>
+                         <div class="col-lg-3 col-md-6 text-center">
+                              <div class="mt-5">
+                                <i class="fas fa-4x fa-thumbs-up text-primary mb-4"></i>
+                                <h3 class="h4 mb-2">Valorar juegos y usuarios</h3>
+                                <p class="mb-0">¿Te ha gustado algun juego? ¿No? ¡Expresate valorando a los usuarios!</p>
+                              </div>
+                         </div>
+                    </div>
+                    <a class="btn btn-light btn-xl js-scroll-trigger" href="#team">El equipo</a>
+               </div>
+          </div>
+     </section>
+     
+
+     <section class="page-section py-3" id="team">
+          <table style="background-color: rgb(60, 73, 107); color:white; margin-left: 7%; margin-bottom: 200px; width: 85%; height: 90%; border-radius: 8px;">
+               <tr>
+                    <td>
+                    </td>
+                    <td>
+                         <div style="text-align: center;">
+                              <img src="{% static 'img/team/david.png' %}" style="height: 100px;"><br>
+                              David Cuevas <br> Project Manager 
+                         </div>
+                    </td>
+               </tr>
+               <tr>
+                    <td>
+                         <div style="text-align: center;">
+                              <img src="{% static 'img/team/juan.png' %}" style="height: 100px;"><br>
+                              Juan Parra <br> Frontend Leader 
+                         </div>
+                    </td>
+                    <td>
+                         <div style="text-align: center;">
+                              <img src="{% static 'img/team/antonio.png' %}" style="height: 100px;"><br>
+                              Antonio Macías Zambrano <br> Backend Leader 
+                         </div>
+                    </td>
+                    <td>
+                         <div style="text-align: center;">
+                              <img src="{% static 'img/team/felix.png' %}" style="height: 100px;"><br>
+                              Félix Jiménez Gonzalez <br> Documentation Leader 
+                         </div>
+                    </td>
+               </tr>
+               <tr>
+                    <td>
+                         <div style="text-align: center;">
+                              <img src="{% static 'img/team/pruizma.png' %}" style="height: 100px;"><br>
+                              Jose Manuel Ruiz-Mateos <br> Frontend 
+                         </div>
+                    </td>
+                    <td>
+                         <div style="text-align: center;">
+                              <img src="{% static 'img/team/antonio.png' %}" style="height: 100px;"><br>
+                              Jose María Fernandez <br> Backend 
+                         </div>
+                    </td>
+                    <td>
+                         <div style="text-align: center;">
+                              <img src="{% static 'img/team/felix.png' %}" style="height: 100px;"><br>
+                              Gonzalo Aguilar Hermoso <br> Documentation 
+                         </div> 
+                    </td>
+               </tr>
+               <tr>
+                    <td>
+                         <div style="text-align: center;">
+                              <img src="{% static 'img/team/gonzalo.png' %}" style="height: 100px;"><br>
+                              Gonzalo Fernández <br> Frontend 
+                         </div>
+                    </td>
+                    <td>
+                         <div style="text-align: center;">
+                              <img src="{% static 'img/team/pepe.png' %}" style="height: 100px;"><br>
+                              Adrían Roldan <br> Backend 
+                         </div>  
+                    </td>
+                    <td>
+                         <div style="text-align: center;">
+                              <img src="{% static 'img/team/luis.png' %}" style="height: 100px;"><br>
+                              Luis Manuel Sánchez <br> Documentation 
+                         </div>   
+                    </td>
+               </tr>
+          </table>
+          <!--
+          <div class="container">
+               <div class="row py-2" style="background-color: rgb(181, 127, 202); padding:50px;">
+                    <div style="text-align: center;">
+                         <img src="{% static 'img/team/david.png' %}" style="height: 100px;"><br>
+                         David Cuevas <br> Project Manager 
+                    </div>
+               </div>
+               <div class="row py-2" style="background-color: rgb(181, 127, 202); padding:50px;">
+                    <div style="text-align: center;">
+                         <img src="{% static 'img/team/juan.png' %}" style="height: 100px;"><br>
+                         Juan Parra <br> Frontend Leader 
+                    </div>
+                    <div style="text-align: center;">
+                         <img src="{% static 'img/team/antonio.png' %}" style="height: 100px;"><br>
+                         Antonio Macías Zambrano <br> Backend Leader 
+                    </div>
+                    <div style="text-align: center;">
+                         <img src="{% static 'img/team/felix.png' %}" style="height: 100px;"><br>
+                         Félix Jiménez Gonzalez <br> Documentation Leader 
+                    </div>
+               </div>
+               <div class="row align-items-center py-2" style="background-color: rgb(181, 127, 202); padding:50px;">
+                    <div style="text-align: center;">
+                         <img src="{% static 'img/team/pruizma.png' %}" style="height: 100px;"><br>
+                         Jose Manuel Ruiz-Mateos <br> Frontend 
+                    </div>
+                    <div style="text-align: center;">
+                         <img src="{% static 'img/team/antonio.png' %}" style="height: 100px;"><br>
+                         Jose María Fernandez <br> Backend 
+                    </div>
+                    <div style="text-align: center;">
+                         <img src="{% static 'img/team/felix.png' %}" style="height: 100px;"><br>
+                         Gonzalo Aguilar Hermoso <br> Documentation 
+                    </div>
+               </div>
+               <div class="row py-2" style="background-color: rgb(181, 127, 202); padding:50px;">
+                    <div style="text-align: center;">
+                         <img src="{% static 'img/team/gonzalo.png' %}" style="height: 100px;"><br>
+                         Gonzalo Fernández <br> Frontend 
+                    </div>
+                    <div style="text-align: center;">
+                         <img src="{% static 'img/team/pepe.png' %}" style="height: 100px;"><br>
+                         Adrían Roldan <br> Backend 
+                    </div>
+                    <div style="text-align: center;">
+                         <img src="{% static 'img/team/luis.png' %}" style="height: 100px;"><br>
+                         Luis Manuel Sánchez <br> Documentation 
+                    </div>
+               </div>
+          </div>
+     </section> -->
+
+<script src="{% static 'js/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'js/jquery-easing/jquery.easing.min.js' %}"></script>
+<script src="{% static 'js/creative.min.js' %}"></script>
 {% endblock %}
 {% block vue %}
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
