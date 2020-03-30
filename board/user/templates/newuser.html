@@ -9,14 +9,32 @@
 <body>
 
     {% block content %}
+
+<section class="form-register">
+    {% if request.user.is_authenticated == false %} 
+        <div><h3  class ="well well-sm">Nuevo Usuario:</h3> </div>
+    {% endif %}
+    {% if request.user.is_authenticated %} 
+    <div><h3  class ="well well-sm">Editar Usuario:</h3> </div>
+    {% endif %}
+     <div>      
+            <form method="POST" class="NewUser" style=" margin: 5px; padding: 5px; border-radius: 8px;">
+                {% csrf_token %}
+
     <section class="form-register">
-        <div class="row py-2 justify-content-center">
-            <div><h3  class ="well well-sm">Nuevo Usuario: </h3> </div>
+      <div class="row py-2 justify-content-center">
+          {% if request.user.is_authenticated == false %} 
+              <div><h3  class ="well well-sm">Nuevo Usuario:</h3> </div>
+          {% endif %}
+          {% if request.user.is_authenticated %} 
+              <div><h3  class ="well well-sm">Editar Usuario:</h3> </div>
+          {% endif %}
+        
             <div>      
                 <form method="POST" class="NewUser" style=" margin: 5px; padding: 5px; border-radius: 8px;">
                     {% csrf_token %}
                     <table>
-                    {% for field in form %}
+                      {% for field in form %}
                     <tr style="height: 40px; width: 40px;">
                         <div class="field">               
                            <td style="color:white;"><label class="label">{{field.label}} </label></td>
@@ -43,12 +61,14 @@
                                 <strong>{{ error|escape }}</strong>
                             </div>
                         {% endfor %}
+
                     {% endif %}
                 </div>-->
                 <p style="text-align: center;">¿Ya tiene una cuenta? <a href="/login" style="padding: 5px;"> Inicie Sesión</a></p>
                 </form>
             </div>    
         </div> 
+
     </section>
 {% endblock %}
 
