@@ -52,9 +52,11 @@
         <h5>{{user.bio}}</h5>
         </br>
         <!-- Aqui viene el pop up-->
-        <a href="/editAccount/">editar cuenta</a></br>
-        <a href="/editProfile/">editar perfil</a></br>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        
+        <a role="button" href="/editProfile/" class="btn btn-primary my-2">Editar perfil</a>
+        <a role="button" href="/editAccount/" class="btn btn-primary my-2">Editar cuenta</a>
+      </br>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
           Borrar datos
         </button>
 
@@ -88,17 +90,18 @@
 </div>
 
 <div id="app">
-  <button class="btn btn-primary" @click="com = !com" style="color:white; margin-left:38%;">Ver comentarios</button>
-
+  <div class="row justify-content-center">
+  <button class="btn btn-primary my-3" @click="com = !com" style="color:white;text-align: center;">Ver comentarios</button>
+</div>
   <div :class="{'d-none' : com}">
   <div style="background-color: #24303c; color:white; justify-content: center;">
 
-	  <h2 class="text-center my-4"> Lista de comentarios </h1></br>
-	<table>
+	  
+	<table class="table text-center">
 	{% for dato in comments %}
 
-		<tr style="align-content: center; text-align: center;">
-            <td style="background-color: rgb(78, 90, 104)"> <div style="color:white;"><h3 class="text-center">{{dato.comment}} </h3></div> <em>Usuario: {{dato.fromUser}}</em> </br> </td>
+		<tr style="align-content: center; text-align: left;">
+            <td style="background-color: rgb(78, 90, 104)">  <em>Usuario: {{dato.fromUser}}</em><div style="color:white;"><h5>" {{dato.comment}} "</h5></div> </br> </td>
     </tr>
   <br/>
 	{% empty %}
@@ -126,9 +129,9 @@
 
 })
 </script>
-
-<a href= "/" class="btn btn-info btn-sm my-3" style="border-radius: 8px; margin-left: 45%">Volver</a> </br></td>
-
+<div class="row justify-content-center">
+<a href= "/" class="btn btn-info btn-sm text-center my-3" style="border-radius: 8px;">Volver</a> </br></td>
+</div>
 {% endblock %}
 
 {% block vue %}
