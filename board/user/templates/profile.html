@@ -36,11 +36,15 @@
 
 <!-- A ver puedes centrar esto Juan -->
 <div class="d-inline-flex justify-content-center my-5 py-4 px-4" >
-    <div class="row mx-auto  ">
-      <div class="col-2 img" style="color:white;">
+    <table>
+      <tr>
+        <td>
+      <div style="color:white;">
         <img src="{{user.picture}}" style="width: 150px;"/>
       </div>
-      <div class="col-md-4 details text-left" style="color:whitesmoke; margin-left: 200px;">
+    </td>
+    <td>
+      <div class="details text-left" style="color:whitesmoke; margin-left: 50px;">
 
         <h5 class="text-left">{{user.first_name}} {{user.last_name}} </h5>
         <small>{{user.range}}</small>
@@ -76,23 +80,25 @@
         
         
       </div>
-    </div>
+      </td>
+    </tr>
+    </table>
 </div>
 
-<div class="container" id="app">
+<div id="app">
   <button class="btn btn-primary" @click="com = !com" style="color:white; margin-left:38%;">Ver comentarios</button>
 
-  <div class="container" :class="{'d-none' : com}">
-  <div class="container"  style="background-color: #24303c; color:white; justify-content: center;">
+  <div :class="{'d-none' : com}">
+  <div style="background-color: #24303c; color:white; justify-content: center;">
 
 	  <h2 class="text-center my-4"> Lista de comentarios </h1></br>
-	<table >
+	<table>
 	{% for dato in comments %}
 
-		<tr>
-            <td> <div style="color:white;"><h3 class="text-center">{{dato.comment}} </h3></div> <em>Usuario: {{dato.fromUser}}</em> </br> </td>
-	     </br>
-		</tr>
+		<tr style="align-content: center; text-align: center;">
+            <td style="background-color: rgb(78, 90, 104)"> <div style="color:white;"><h3 class="text-center">{{dato.comment}} </h3></div> <em>Usuario: {{dato.fromUser}}</em> </br> </td>
+    </tr>
+  <br/>
 	{% empty %}
 
 <!-- Hacer Visible esta pagina. -->
