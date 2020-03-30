@@ -1,6 +1,8 @@
 Plataforma sobre alquiler de juegos de mesa
 ===========================================
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f517890a06a54295a77f9ea5b5e31a74)](https://app.codacy.com/gh/Acme-Board/board?utm_source=github.com&utm_medium=referral&utm_content=Acme-Board/board&utm_campaign=Badge_Grade_Settings)
+
 El objetivo de este proyecto es implementar una plataforma para el alquiler
 de juegos de mesa, de manera que se facilite este alquiler ya que se realiza
 entre los mismo usuarios. La ventaja de esta web es que los juegos te aparecen
