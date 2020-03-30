@@ -8,6 +8,7 @@ from django import forms
 
 from user.models import User
 from user.forms import NewUser, Register, editAccount, editProfile
+
 from reviews.models import Valoration, Comment
 
 
@@ -57,13 +58,41 @@ def delete_myUSer(request, pk):
     
     return redirect('/')
 
+  
+def edit_user(request, pk):
+    # Recuperamos la instancia de la persona
+    instancia = User.objects.get(id=pk)
+
+    # Creamos el formulario con los datos de la instancia
+    form = Register(instance=instancia)
+
+    # Comprobamos si se ha enviado el formulario
+    if request.method == "POST":
+        # Actualizamos el formulario con los datos recibidos
+        form = Register(request.POST, instance=instancia)
+        # Si el formulario es válido...
+        if form.is_valid():
+            # Guardamos el formulario pero sin confirmarlo,
+            # así conseguiremos una instancia para manejarla
+            instancia = form.save(commit=False)
+            # Podemos guardarla cuando queramos
+            instancia.save()
+            return  redirect('/profile/{}'.format(pk))
+
+    # Si llegamos al final renderizamos el formulario
+    return render(request, "newuser.html", {'form': form})
+
+
 def new_user(request):
     if(request.method=='POST'):
-        formulario = Register(request.POST)
-        if(formulario.is_valid()):
+        formulario = Register(request.POST ,request.FILES or None)
+        
+        if(formulario.is_valid()  ):
             if (formulario.cleaned_data['password1']!=formulario.cleaned_data['password2']):
-               formulario.add_error('password2','no coinciden las contraseñas')
-               return render(request,"newuser.html",{"form":formulario})
+                formulario.add_error('password2','no coinciden las contraseñas')
+                return render(request,"newuser.html",{"form":formulario})
+                
+                
             username = formulario.cleaned_data['username']
             password = formulario.cleaned_data['password1']
             name = formulario.cleaned_data['name']

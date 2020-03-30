@@ -10,17 +10,6 @@
 
     {% block content %}
 
-<section class="form-register">
-    {% if request.user.is_authenticated == false %} 
-        <div><h3  class ="well well-sm">Nuevo Usuario:</h3> </div>
-    {% endif %}
-    {% if request.user.is_authenticated %} 
-    <div><h3  class ="well well-sm">Editar Usuario:</h3> </div>
-    {% endif %}
-     <div>      
-            <form method="POST" class="NewUser" style=" margin: 5px; padding: 5px; border-radius: 8px;">
-                {% csrf_token %}
-
     <section class="form-register">
       <div class="row py-2 justify-content-center">
           {% if request.user.is_authenticated == false %} 
@@ -31,7 +20,7 @@
           {% endif %}
         
             <div>      
-                <form method="POST" class="NewUser" style=" margin: 5px; padding: 5px; border-radius: 8px;">
+                <form method="POST" enctype="multipart/form-data" class="NewUser" style=" margin: 5px; padding: 5px; border-radius: 8px;">
                     {% csrf_token %}
                     <table>
                       {% for field in form %}

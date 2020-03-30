@@ -25,6 +25,15 @@ def games_list(request):
 def games_list_by_user(request):
     games = Game.objects.filter(owner=request.user)
     return render(request,'myGames.html',{'myGames':games})
+
+def games_list_by_zona(request,zona):
+    games = Game.objects.filter(address=request.address)
+    return render(request,'myGames.html',{'myGames':games})
+
+def games_list_by_status(request,status):
+    games = Game.objects.filter(status=request.status)
+    return render(request,'myGames.html',{'myGames':games})
+
 def rents_list(request):
     rents  = Rent.objects.filter(user = request.user)
     return render(request,'rents.html',{'rents':rents})
@@ -34,6 +43,7 @@ def games_detail(request,pk):
      dato = get_object_or_404(Game, pk=pk)
      return render(request,'gameDetail.html', {'name':dato.name, 'description':dato.description,'price': dato.price ,
       'status': dato.status,'picture' : dato.picture, 'id' : dato.id,'owner': dato.owner })
+
 def delete(request, pk):
     # Recuperamos la instancia de la persona y la borramos
     instancia = Game.objects.get(id=pk)
@@ -44,7 +54,8 @@ def delete(request, pk):
 
 def new_game(request):
     if request.method == "POST":
-        form = NewGame(request.POST)
+        form = NewGame(request.POST,request.FILES or None)
+        
         if form.is_valid():
 
             name = form.cleaned_data['name']
@@ -68,15 +79,35 @@ def new_game(request):
     
 def edit_game(request, pk):
     juego = get_object_or_404(Game, pk=pk)
+
     if request.method == "POST":
-        form = NewGame(request.POST, instance=juego)
+        form = NewGame(request.POST,request.FILES or None)
+
         if form.is_valid():
-            juego = form.save(commit=False)
-            
-            juego.save()
+            name = form.cleaned_data['name']
+            description = form.cleaned_data['description']
+            status = form.cleaned_data['status']
+
+            try:
+                price = float(form.cleaned_data['price'])
+            except ValueError:
+                form.add_error('price','Introduzca un dato numérico')
+                return render(request,"newgame.html",{"form":form})
+
+            picture = form.cleaned_data['picture']
+            address = form.cleaned_data['address']
+
+            Game.objects.filter(pk=pk).update(name=name,description=description,status=status,price=price,picture=picture,address=address)
+
             return redirect('/gameDetail/{}'.format(pk))
     else:
-        form = NewGame(instance=juego)
+        form = NewGame()
+        form.fields["name"].initial = juego.name
+        form.fields["description"].initial = juego.description
+        form.fields["status"].initial = juego.status
+        form.fields["price"].initial = juego.price
+        form.fields["picture"].initial = juego.picture
+        form.fields["address"].initial = juego.address
     return render(request, 'newgame.html', {'form': form})
 
 def rent_game(request, id_game, days):
