@@ -7,7 +7,7 @@ from django.contrib.auth.hashers import check_password, make_password
 from django import forms
 
 from user.models import User
-from user.forms import NewUser, Register, editAccount, editProfile
+from user.forms import Register, editAccount, editProfile
 
 from reviews.models import Valoration, Comment
 
