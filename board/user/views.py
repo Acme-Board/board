@@ -142,4 +142,10 @@ def edit_profile(request):
     else:
         formulario = editProfile()
 
+        formulario.fields["name"].initial = request.user.first_name
+        formulario.fields["last_name"].initial = request.user.last_name
+        formulario.fields["email"].initial = request.user.email
+        formulario.fields["bio"].initial = request.user.bio
+        formulario.fields["picture"].initial = request.user.picture
+
     return render(request,"newuser.html",{"form":formulario})
