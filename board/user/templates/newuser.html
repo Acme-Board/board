@@ -12,7 +12,12 @@
     {% block content %}
 
 <section class="form-register">
-    <div><h3  class ="well well-sm">Nuevo Usuario: </h3> </div>
+    {% if request.user.is_authenticated == false %} 
+        <div><h3  class ="well well-sm">Nuevo Usuario:</h3> </div>
+    {% endif %}
+    {% if request.user.is_authenticated %} 
+    <div><h3  class ="well well-sm">Editar Usuario:</h3> </div>
+    {% endif %}
      <div>      
             <form method="POST" class="NewUser" style=" margin: 5px; padding: 5px; border-radius: 8px;">
                 {% csrf_token %}
@@ -37,7 +42,9 @@
                     {% endfor %}
                 {% endif %}
             </div>-->
-            <p>¿Ya tiene una cuenta? <a href="/login" style="padding: 5px;"> Inicie Sesión</a></p>
+            {% if request.user.is_authenticated == false %} 
+                <p>¿Ya tiene una cuenta? <a href="/login" style="padding: 5px;"> Inicie Sesión</a></p>
+            {% endif %}
             </form>
       </div>
 
