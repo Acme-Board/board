@@ -115,6 +115,8 @@ def edit_account(request):
 
     else:
         formulario = editAccount()
+        
+        formulario.fields["username"].initial = request.user.username
 
     return render(request,"newuser.html",{"form":formulario})
 
