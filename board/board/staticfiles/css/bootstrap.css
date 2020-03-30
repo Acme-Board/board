@@ -4311,7 +4311,7 @@ input[type="button"].btn-block {
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   text-align: center;
-  background-color: blueviolet;
+  background-color: rgb(136, 99, 170);
 }
 
 .nav-fill .nav-item {
@@ -4336,7 +4336,6 @@ input[type="button"].btn-block {
 }
 
 .navbar {
-  position: relative;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
@@ -10051,7 +10050,7 @@ button.bg-dark:focus {
 }
 
 .text-primary {
-  color: #007bff !important;
+  color: #2d2c2e !important;
 }
 
 a.text-primary:hover, a.text-primary:focus {

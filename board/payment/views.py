@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
 from rent.models import Game, Order
-from rent.views import rent_game
+from rent.views import rent_game, empty_cart
 import stripe
 
 def pay(request):
@@ -18,10 +18,13 @@ def charge(request,id_cart):
             source=request.POST['stripeToken'],
             api_key=settings.STRIPE_SECRET_KEY
         )
+        for item in cart.items.all():
+            rent_game(request,item.game.id, item.days)
         #rent_game(request,id_game)
         return redirect('/success/')
 
 def pago_completado(request):
+    empty_cart(request)
     return render(request,'pago_completado.html')
 
 def confirm(request,id_cart):

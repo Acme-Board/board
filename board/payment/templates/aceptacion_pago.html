@@ -38,33 +38,42 @@
 
 
 <div class="index-main" style="
-background: #24303c;
-max-height: 70%;
+background: #e3d9c9;
+max-height: 90%;
 max-width: 45%;
 margin: auto;
-margin-top: 80px;
-margin-bottom: 80px;
+margin-top: 50px;
+margin-bottom: 50px;
 border-radius: 8px;
-color: white;">
+color: black;">
 
      <img class="index-icon" src="{% static 'img/icon.png' %}"/>
 
-<h3 class="index-title">Confirmar la comprar por {{total}}€</h3> 
+<h3 class="index-title" style="color: black; margin-top: 5px;">¿ Confirmar la comprar por {{total}}€ ?</h3> 
 
 <div>     
-     <div  style=" margin-top: 15px; background: #828282; padding: 10px; margin: 10px; border-radius: 8px;">
+     <div  style=" margin-top: 15px; background: #f5f5dc; padding: 10px; margin: 10px; border-radius: 8px;">
      <table>
-          <tr>
-          <h5> Informacion de la compra: </h5>
+          <h5> Informacion de la compra: </h5></br>
+         
+          <thead>
+               <tr>
+          <th style="width:20%">Imagen</th>
+          <th style="width:15%">Usuario</th>
+          <th style="width:60%">Estado</th>
+          <th style="margin: 10%">Precio</th>
           </tr>
-          <tr>
-
+          </thead>
                {% for dato in order %}
-                    <h5> Usuario: {{dato.game.owner}} </h5>
-                    <h5> Precio/dia: {{dato.game.price}} &euro;</h5>
-                    <h5> Estado: {{dato.game.status}}</h5>
+               <tbody>
+               <tr>
+                   <div> <td> <img style="width:70px;height:70px; border-radius: 8px" src="{{dato.game.picture}}"/></td>
+                    <td> {{dato.game.owner}} </td>
+                    <td> {{dato.game.status}} </td>
+                    <td> {{dato.game.price}}&euro;</td>
+                    </div>
                {% empty %}
-                    <li class="text-center" style="color:white;">Vaya, parece que no hay articulos en su carrito</li>
+                    <li class="text-center" style="color:black;">Vaya, parece que no hay articulos en su carrito</li>
 			{% endfor %}
 
  <!--         <td> <img style="width:100px;height:100px; border-radius: 8px" src="{{game.picture}}"/> </td>
@@ -72,8 +81,9 @@ color: white;">
             <h5> Usuario: {{game.owner}} </h5>
             <h5> Precio/dia: {{game.price}} &euro;</h5>
             <h5> Estado: {{game.status}}</h5>
-          </td>
-          </tr>-->
+          </td>-->
+          </tr>
+     </tbody>
      </table>
      </div>
      <div style="text-align:center; margin-top: 15px;">
