@@ -39,7 +39,7 @@
 			
 			<td data-th="Producto">
 				<div class="row">
-					<div class="col-2 hidden-xs"><img src="{{dato.game.picture}}" class="img-thumbnail"/></div>
+					<div class="col-2 hidden-xs"><img src="{{dato.game.picture.url}}" class="img-thumbnail"/></div>
 					<div class="col-10">
 						<h4 class="nomargin" style="color:white;">{{dato.game.name|capfirst}}      -    Estado: {{dato.game.status}}</h4>
 						
@@ -74,8 +74,8 @@
 			<li class="text-center" style="color:white;">Vaya, parece que no hay articulos en su carrito, ¿Por que no le 
 			echas un ojo al Catálogo?</li></br>
 
-			<!-- <a href= "/games" class="btn btn-info btn-sm"
-			style="border-radius: 8px; margin-top: 10px; color:black; font-weight: bold;">Alquilar</a></br> </br>-->
+			<a href= "/games" class="btn btn-info btn-sm"
+			style="border-radius: 8px; margin: 10px; color:black; font-weight: bold;">Ir al Catalogo</a></br> </br>
 			{% endfor %}
 
 		</tbody>
@@ -86,10 +86,11 @@
 	<!-- <a href= "/games" class="btn btn-info btn-sm"
 	style="border-radius: 8px; margin-top: 10px; color:black; font-weight: bold;">Seguir Alquilando</a></br> -->
 
+
 	<a href= "/confirm/{{id}}" class="btn btn-info btn-sm"
-	style="border-radius: 8px; margin-top: 10px; color:black; font-weight: bold;">Finalizar compra</a>
+	style="border-radius: 8px; margin: 5px; color:black; font-weight: bold;">Alquilar Juegos!</a>
 	<a href="/deleteAll" onclick="mensaje()"
-	class="btn btn-info btn-sm" style="border-radius: 8px; margin-top: 10px;color:black; font-weight: bold; background-color: #F93F42">Borrar</a></br> </br></td>
+	class="btn btn-info btn-sm" style="border-radius: 8px;color:black; font-weight: bold; background-color: #F93F42">Borrar Todo</a></br> </br></td>
 
 		</tbody>
 	</table>

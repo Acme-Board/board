@@ -40,8 +40,7 @@
       <tr>
         <td>
       <div style="color:white;">
-        <img src="{{user.picture}}" style="width: 150px;"/>
-        {% if request.user.id == user.id and request.user.is_authenticated == True %} 
+        <img src="{{user.picture.url}}" style="width: 150px;"/>
         <a role="button" href="/editPic/" class="btn btn-primary my-2">Editar foto</a>
         {% endif %}
       </div>

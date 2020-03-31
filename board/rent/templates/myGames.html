@@ -22,13 +22,8 @@
     <h3>Tus Juegos, {{user}}</h3>
     
     {% for dato in myGames %}
-    <!-- 
-    <img src= "../board/staticfiles/media/myfolder/logo-volkswagen_JlqPEC3.jpg" style="width: 150px;height: 150px;"/>
-    <img  src="{{dato.picture}}" style="width: 150px;height: 150px;"/> </td>
-                   
-    <p>{{dato.picture.url}} </p>
-    <p>{{dato.picture}} </p>
-    -->    
+
+    
     <table>
             <thead>
                     <tr>
@@ -41,7 +36,7 @@
             <tbody>
                 <tr class="table-myGames">
                   <td>
-                    <img  src="{{dato.picture}}" style="width: 150px;height: 150px;"/>
+                    <img  src="{{dato.picture.url}}" style="width: 150px;height: 150px;"/>
                     <button href= "/gameDetail/{{dato.id}}/edit" type="button" class="btn btn-primary btn-sm"
                     style="width: 150px; font-weight: bold">Editar Foto</button>
                   </td>

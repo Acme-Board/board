@@ -19,37 +19,30 @@
   background: #24303c;
   padding: 30px;
   margin: auto;
-  margin-top: 100px;
   border-radius: 8px;
   font-family: 'calibri';
   color: white;">
 
-    {% if request.user.is_authenticated == False %}
-    <div><h3  class ="well well-sm">Subida de Juego: </h3> </div>
-    {% else %}
-    <div><h3  class ="well well-sm">Editar: </h3> </div>
-    {% endif %} 
+
+    <div><h3  class ="well well-sm"> {{texto}}Juego: </h3> </div>
+  
     <div>      
             <form method="POST" enctype="multipart/form-data" class="NewGame" style=" margin: 20px;
             padding: 5px">{% csrf_token %}
          
                 {{ form.as_p }}
 
-                {% if request.user.is_authenticated == False %}
+              
                 <div style="text-align:center; margin: 15px">
-                <button type="submit" class="btn btn-primary" ; style="border-radius: 8px">Alquilar</button>
+                <button type="submit" class="btn btn-primary" ; style="border-radius: 8px">{{Alquilar}}</button>
                 </div>
-                {% else %}
-                <button type="submit" class="btn btn-primary" ; style="border-radius: 8px">Actualizar</button>
-                {% endif %} 
+
             </form>
            
       </div>
 
     </section>
-    <!-- Fin Prueba-->
 
-</div>
 
 {% endblock %}
 
