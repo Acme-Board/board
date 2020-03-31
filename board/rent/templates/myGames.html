@@ -12,6 +12,7 @@
           confirm("¿Estas seguro de Eliminar el juego?");
         }
         </script>
+
     {% endblock %} 
 
 </head>
@@ -21,12 +22,14 @@
     <h3>Tus Juegos, {{user}}</h3>
     
     {% for dato in myGames %}
+    <!-- 
     <img src= "../board/staticfiles/media/myfolder/logo-volkswagen_JlqPEC3.jpg" style="width: 150px;height: 150px;"/>
     <img  src="{{dato.picture}}" style="width: 150px;height: 150px;"/> </td>
                    
     <p>{{dato.picture.url}} </p>
     <p>{{dato.picture}} </p>
-        <table>
+    -->    
+    <table>
             <thead>
                     <tr>
                         <th style="width: 15%;"></th>
@@ -59,10 +62,35 @@
                             <a href="/delete/{{dato.id}}"
                             style="border-radius: 8px; margin-top: 5px; background-color: #F93F42" 
                             onclick="confirmar()"
-                            class="btn btn-primary">Borrar</a>
+                            class="btn btn-primary">Borrar Windows.confirm</a>
                         </div>
-                        
-                            
+                        <!-- Aqui viene el pop up-->
+        
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+            Borrar Modal
+          </button>
+  
+        
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-dark" id="popup">Advertencia</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h5 class="text-dark" id="popup">¿Estas seguro de que quieres borrar tus datos? {{dato.name}}</h5>
+                </div>
+                <div class="modal-footer">
+                  <a role="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
+                  <a role="button" href="/delete/{{dato.id}}" class="btn btn-primary">Si, continuar</a>
+                </div>
+              </div>
+            </div>
+                              
                     </td>
                 </tr>
             </tbody>
