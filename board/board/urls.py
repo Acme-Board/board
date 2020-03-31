@@ -60,6 +60,7 @@ urlpatterns = [
     path('delete/<int:pk>', rent_views.delete),
     path('editAccount/', user_views.edit_account),
     path('editProfile/', user_views.edit_profile),
+    path('editPic/', user_views.edit_pic),
 
     #Review
     re_path(r'review/(?P<id_user>\d+)',reviews_views.create_review),
