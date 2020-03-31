@@ -18,17 +18,7 @@
     <div><h3  class ="well well-sm">Editar Usuario:</h3> </div>
     {% endif %}
     <div>      
-            <form method="POST" class="NewUser" style=" margin: 5px; padding: 5px; border-radius: 8px;">
-                {% csrf_token %}
 
-            <section class="form-register">
-        <div class="row py-2 justify-content-center">
-          
-          <!--{% if request.user.is_authenticated %} 
-
-              <div><h3  class ="well well-sm">Editar Usuario:</h3> </div>
-          {% endif %}
-        -->
             <div>      
 
                 <form method="POST" enctype="multipart/form-data" class="NewUser" style=" margin: 5px; padding: 5px; border-radius: 8px;">
@@ -64,7 +54,7 @@
 
                     {% endif %}
                 </div>-->
-               
+                <p style="text-align: center;">¿Ya tiene una cuenta? <a href="/login" style="padding: 5px;"> Inicie Sesión</a></p>
                 </form>
             </div>    
     </div> 
