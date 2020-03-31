@@ -165,7 +165,7 @@ def edit_profile(request):
             email = formulario.cleaned_data['email']
             bio = formulario.cleaned_data['bio']
 
-            User.objects.filter(id=request.user.id).update(first_name=name,last_name=last_name,email=email,bio=bio,picture=picture)
+            User.objects.filter(id=request.user.id).update(first_name=name,last_name=last_name,email=email,bio=bio)
 
             return redirect('/profile/{}'.format(request.user.id))
 
