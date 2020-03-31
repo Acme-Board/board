@@ -42,7 +42,7 @@
       <h4> Usuario: <a href="/profile/{{owner.id}}" style="color:white; text-decoration: underline;">{{owner}}</a> </h4>
       <h4> Precio: {{price}} &euro;</h4></br>
       <h5>Descripción:</h5>
-      {{description}}
+      {{description}}</br>
     
     {% if request.user.is_authenticated %}
     <!--
@@ -114,17 +114,51 @@
       <button type="submit" class="btn btn-info btn-sm" style="border-radius: 8px; color:black; font-weight: bold;">Añadir al carrito</button>
       </form>
     </td>
+
+      {% else %}
+  </br>
+      <a href= "/gameDetail/{{id}}/edit" class="btn btn-info btn-sm" 
+      style=" color:black; font-weight: bold; margin-right: 5px;">Editar</a>
+    
+       <!-- Aqui viene el pop up-->
+            
+       <button type="button" class="btn btn-danger  btn-sm" data-toggle="modal" data-target="#exampleModal">
+        Borrar Juego
+      </button>
+    
+    
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-dark" id="popup">Advertencia</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h5 class="text-dark" id="popup">¿Estas seguro de que quieres borrar tus datos? {{name}}</h5>
+            </div>
+            <div class="modal-footer">
+              <a role="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
+              <a role="button" href="/delete/{{id}}" class="btn btn-primary">Si, continuar</a>
+            </div>
+          </div>
+        </div>
+                   
       {% endif %}
 
-  </tr>
-</table>
 
   {% else %}
-  <a href= "/gameDetail/{{id}}/edit" class="btn btn-info btn-sm" 
-  style="border-radius: 8px; color:black; font-weight: bold;">Editar</a>
+
+    
+
   {% endif %}
 
 
+</tr>
+</table>
 
 </div>
 
