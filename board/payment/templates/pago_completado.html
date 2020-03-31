@@ -9,6 +9,8 @@
      {% block extrahead %}
 
           <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css"> 
+          <meta charset="utf-8">
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
      {% endblock %}   
 
@@ -22,37 +24,16 @@
 
 <style>
 
-.index-main {
-
-     background-image: url("{% static 'img/bg-masthead.jpg' %}");
-
-}   
-
 </style>
 
 
 
-<div class="index-main">
+<table class="container">
 
-     <img class="index-icon" src="{% static 'img/icon.png' %}" />
-
-<h1 class="index-title">¡Pago completado! </h1>
-
-
-
-<img src="https://media.giphy.com/media/h0MTqLyvgG0Ss/giphy.gif" class="mx-auto d-block py-3">
-
-
-
-
-
-
-
-
-
-
-
+<div style= "margin: auto;">
+<h1 class="index-title" style="color: white">¡Pago completado! </h1>
 </div>
+</table>
 
 {% endblock %}
 

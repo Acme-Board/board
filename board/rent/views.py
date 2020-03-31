@@ -53,6 +53,8 @@ def delete(request, pk):
     return redirect('/')
 
 def new_game(request):
+    texto = "Subida de "
+    Alquilar = "Subir Juego"
     if request.method == "POST":
         form = NewGame(request.POST,request.FILES or None)
         
@@ -65,15 +67,15 @@ def new_game(request):
                 price = float(form.cleaned_data['price'])
             except ValueError:
                 form.add_error('price','Introduzca un dato numérico')
-                return render(request,"newgame.html",{"form":form})
+                return render(request,"newgame.html",{"form":form, 'texto': texto, 'Alquilar': Alquilar})
 
             if (price < 0):
                 form.add_error('price','No puede ser un precio negativo')
-                return render(request,"newgame.html",{"form":form})
+                return render(request,"newgame.html",{"form":form, 'texto': texto, 'Alquilar': Alquilar})
             
             if price==0:
                 form.add_error('price','No se puede regalar un juego')
-                return render(request,"newgame.html",{"form":form}) 
+                return render(request,"newgame.html",{"form":form , 'texto': texto, 'Alquilar': Alquilar}) 
 
             picture = form.cleaned_data['picture']
             address = form.cleaned_data['address']
@@ -84,9 +86,11 @@ def new_game(request):
             return redirect('/gameDetail/{}'.format(game.id))
     else:
        form = NewGame()
-    return render(request, 'newgame.html', {'form': form})
+    return render(request, 'newgame.html', {'form': form, 'texto': texto, 'Alquilar': Alquilar})
     
 def edit_game(request, pk):
+    texto = "Editar "
+    Alquilar = "Actualizar"
     juego = get_object_or_404(Game, pk=pk)
 
     if request.method == "POST":
@@ -101,15 +105,15 @@ def edit_game(request, pk):
                 price = float(form.cleaned_data['price'])
             except ValueError:
                 form.add_error('price','Introduzca un dato numérico')
-                return render(request,"newgame.html",{"form":form})
+                return render(request,"newgame.html",{"form":form, 'texto': texto, 'Alquilar': Alquilar})
 
             if (price < 0):
                 form.add_error('price','No puede ser un precio negativo')
-                return render(request,"newgame.html",{"form":form})
+                return render(request,"newgame.html",{"form":form, 'texto': texto, 'Alquilar': Alquilar})
             
             if price==0:
                 form.add_error('price','No se puede regalar un juego')
-                return render(request,"newgame.html",{"form":form}) 
+                return render(request,"newgame.html",{"form":form, 'texto': texto, 'Alquilar': Alquilar}) 
 
             address = form.cleaned_data['address']
 
@@ -123,7 +127,7 @@ def edit_game(request, pk):
         form.fields["status"].initial = juego.status
         form.fields["price"].initial = juego.price
         form.fields["address"].initial = juego.address
-    return render(request, 'newgame.html', {'form': form})
+    return render(request, 'newgame.html', {'form': form, 'texto': texto, 'Alquilar': Alquilar})
 
 def edit_pic(request, pk):
     juego = get_object_or_404(Game, pk=pk)
@@ -143,7 +147,7 @@ def edit_pic(request, pk):
 
         form.fields["picture"].initial = juego.picture
 
-    return render(request, 'newgame.html', {'form': form})
+    return render(request, 'newgame.html', {'form': form, 'texto': texto, 'Alquilar': Alquilar})
 
 def rent_game(request, id_game, days):
     dato = get_object_or_404(Game, pk=id_game)
