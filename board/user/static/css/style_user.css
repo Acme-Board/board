@@ -1,6 +1,12 @@
  .form-main{
-    padding-top: 100px;
-    color:white;
+    width:  450px;
+  background: #24303c;
+  padding: 30px;
+  margin: auto;
+  margin-top: 50px;
+  border-radius: 8px;
+  font-family: 'calibri';
+  color: white;
   }
   
   .form-main .form-title{
@@ -13,6 +19,21 @@
   .form-main .form-button {
     margin-left: 50%;
   }
+
+  .d-inline-flex{
+    background-color: #24303c; 
+    margin-left: 30%;
+    width: 35%;
+  }
   
- 
+ .form-register{
+  width:  600px;
+  background: #24303c;
+  padding: 30px;
+  margin: auto;
+  margin-top: 100px;
+  border-radius: 8px;
+  font-family: 'calibri';
+  color: white;
+ }
   

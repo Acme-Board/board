@@ -1,0 +1,81 @@
+<html>
+<head>
+
+    
+    {% extends "base.html" %}
+	{% load static %}
+	{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/rent_style.css' %}" type="text/css"> 
+
+    <script>
+        function confirmar() {
+          confirm("¿Estas seguro de Eliminar el juego?");
+        }
+        </script>
+    {% endblock %} 
+
+
+</head>
+<body>
+    {% block content %}
+
+    
+
+
+
+    <h3 class="container">Tus Juegos, {{user}}</h3>
+    
+    {% for dato in myGames %}
+<table class="container" >
+    <thead>
+        <tr>
+            <th style="width: 15%;"></th>
+            <th style="width: 20%;"></th>
+            <th style="width: 55%;"></th>
+            <th style="width: 10%"></th>
+        </tr>
+        </thead>
+        <tbody>
+    <tr class="table-myGames">
+        <td>
+        <img style="width: 150px;height: 150px; ;" src="{{dato.picture}} "/>
+        </td>
+        <td>
+        <h4>{{dato.name|capfirst}} - <i> {{dato.price}} €</i> </br></h4>
+		 Estado: {{dato.status}} </br>
+        </td>
+        <td> 
+            {{dato.description}}
+        </td>
+        <td>
+           <!-- <div><a href= "/gameDetail/{{dato.id}}" class="btn btn-info btn-sm"
+                style="border-radius: 8px; margin-top: 5px;">Ver mas</a></div>
+            -->
+                <!-- Sin funcionalidad aun -->
+            <a href= "/editGame/{{dato.id}}" class="btn btn-info btn-sm"
+                style="border-radius: 8px; margin-top: 5px; color:black; font-weight: bold;">Editar</a>
+
+                <!-- Sin funcionalidad aun href="/delete/{{dato.id}}" -->
+
+               <div> <a href="/delete/{{dato.id}}"
+                 style="border-radius: 8px; margin-top: 5px; background-color: #F93F42" 
+                 onclick="confirmar()"
+                 class="btn btn-primary">Borrar</a>
+                </div>
+            
+                  
+        </td>
+    </tr>
+</tbody>
+</table>
+    
+    {% empty %}
+
+    <!-- Hacer Visible esta pagina. -->
+    
+    <li>Vaya, parece que no has subido ningun juego</li>
+    
+    {% endfor %}
+
+    {% endblock %}
+</body>

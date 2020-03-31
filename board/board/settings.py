@@ -43,12 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles',   
     'tempus_dominus',
     'base',
     'rent',
     'reviews',
-    'stripe',
+    'payment',
     'user',
 ]
 
@@ -134,7 +134,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-# TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+# STRIPE
+
+STRIPE_SECRET_KEY = 'sk_test_bYJJIktvz640AQBxNPeHfl0E00epdjtb2Y'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_RQqzBNd4chgHUGDPxZtwsKzU00X9dZcRvR'
 
 STATIC_ROOT ='staticfiles'
 STATIC_URL = '/static/'

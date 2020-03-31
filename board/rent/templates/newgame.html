@@ -26,10 +26,10 @@
 
     <div><h3  class ="well well-sm">Subida de Juego: </h3> </div>
      <div>      
-            <form method="POST" class="NewGame" style=" margin: 5px; padding: 5px; border-radius: 8px">
-              {% csrf_token %}
-              {{ form.as_p }}
-              <div style="text-align:center; margin: 15px">
+            <form method="POST" class="NewGame" style=" margin: 20px;
+            padding: 5px">{% csrf_token %}
+                {{ form.as_p }}
+                <div style="text-align:center; margin: 15px">
                 <button type="submit" class="btn btn-primary disabled" ; style="border-radius: 8px">Alquilar</button>
                 </div>
             </form>
@@ -39,8 +39,7 @@
     <!-- Fin Prueba-->
 
 </div>
-<!-- Provisional-->
-</br></br></br></br>
+
 {% endblock %}
 
 

@@ -1,0 +1,111 @@
+
+<html>
+<head>
+		{% extends "base.html" %}
+		{% load static %}
+		{% block extrahead %}
+	   <!--<link rel="stylesheet" href="{% static 'css/rent_style.css' %}" type="text/css">-->
+
+	   <script>
+        function mensaje() {
+         alert("El Carrito ha sido vaciado");
+        }
+        </script>
+	   {% endblock %}
+	</src>
+</head>
+<body>
+
+
+{% block content %}
+
+
+<div class="container" style=" background: #24303c; margin-top:50px;">
+	<p>{{ mensaje}}</p>
+	<h2 class="text-center" style="color:white;"> Carrito de alquileres </h1></br></h2>
+	
+	
+	<table  class= "table table-hover table-condensed">
+		<thead>
+			<tr style="color:white;">
+				<th style="width:50%">Producto</th>
+				<th style="width:10%">Precio</th>
+				<th style="width:22%" class="text-center">Opciones</th>
+				
+			</tr>
+		</thead>
+		{% for dato in order %}
+		<tbody>
+			
+			<td data-th="Producto">
+				<div class="row">
+					<div class="col-2 hidden-xs"><img src="{{dato.game.picture}}" class="img-thumbnail"/></div>
+					<div class="col-10">
+						<h4 class="nomargin" style="color:white;">{{dato.game.name|capfirst}}      -    Estado: {{dato.game.status}}</h4>
+						
+					</div>
+				</div>
+			</td>
+			<td data-th="Precio" style="color:white;">{{dato.game.price}} x {{dato.days}} dias</td>
+			<td data-th="Opciones"class="text-center">
+				<a role=button href="/gameDetail/{{dato.game.id}}" class="btn btn-info btn-sm" style="color:black; font-weight: bold;">Info</a>
+
+				<a href="/deleteCart/{{dato.id}}"
+					class="btn btn-info btn-sm" style="color:black; font-weight: bold; background-color: #F93F42">Borrar</a>
+			</td>
+			<!-- -->
+			
+			<!--
+			<tr style="text-align:center;">
+				<td><img style="width: 245px;height: 245px; ; border-radius: 8px;" src="{{dato.game.picture}} "/>
+			<div><h3> {{dato.game.name|capfirst}} - <i> {{dato.game.price}} €</i> </br></h3>
+				Estado: {{dato.game.status}} </br>
+				<a href= "/gameDetail/{{dato.game.id}}" class="btn btn-info btn-sm"
+					style="border-radius: 8px; margin-top: 10px;">Ver mas</a></br> </br></div></td>
+
+			</tr>
+			-->
+					
+			{% empty %}
+
+			</tbody>
+			</table>
+
+			<li class="text-center" style="color:white;">Vaya, parece que no hay articulos en su carrito, ¿Por que no le 
+			echas un ojo al Catálogo?</li></br>
+
+			<!-- <a href= "/games" class="btn btn-info btn-sm"
+			style="border-radius: 8px; margin-top: 10px; color:black; font-weight: bold;">Alquilar</a></br> </br>-->
+			{% endfor %}
+
+		</tbody>
+	</table>
+	<li class="text-center" style="color:white;">Total: {{sum}}</li>
+
+
+	<!-- <a href= "/games" class="btn btn-info btn-sm"
+	style="border-radius: 8px; margin-top: 10px; color:black; font-weight: bold;">Seguir Alquilando</a></br> -->
+
+	<a href= "/confirm/{{id}}" class="btn btn-info btn-sm"
+	style="border-radius: 8px; margin-top: 10px; color:black; font-weight: bold;">Finalizar compra</a>
+	<a href="/deleteAll" onclick="mensaje()"
+	class="btn btn-info btn-sm" style="border-radius: 8px; margin-top: 10px;color:black; font-weight: bold; background-color: #F93F42">Borrar</a></br> </br></td>
+
+		</tbody>
+	</table>
+		
+</div>
+
+  {% block vue %}
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  {% endblock %}
+  <script src= "prueba.js"></script>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+{% endblock %}
+
+</body>
+</html>

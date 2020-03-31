@@ -8,6 +8,10 @@
     {% endblock %}
 
 <style>
+#popup{
+  text-decoration-color: black;
+}
+
 .container{
     padding:20%;
     margin-left: 20%;
@@ -30,30 +34,97 @@
 
 {% block content %}
 
-<!-- A ver puedes centrar esto Juan-->
-<div class="d-inline-flex justify-content-center my-5 py-4 px-4" style="background-color: #6D65D3; margin-left: 35%;">
+<!-- A ver puedes centrar esto Juan -->
+<div class="d-inline-flex justify-content-center my-5 py-4 px-4" >
     <div class="row mx-auto  ">
-      <div class="col-6 img">
-        <img  class="rounded-circle float-right"src="https://cdn.discordapp.com/attachments/686252510545182730/689181806754660352/perfildeusuario.png"  alt="" >
+      <div class="col-2 img" style="color:white;">
+        <img src="{{user.picture}}" style="width: 150px;"/>
       </div>
-      <div class="col-md-6 details text-left" style="color:whitesmoke;">
+      <div class="col-md-4 details text-left" style="color:whitesmoke; margin-left: 200px;">
 
         <h5 class="text-left">{{user.first_name}} {{user.last_name}} </h5>
-        <small>Sevilla, España</small>
-        <br>
-        <br>
+        <small>{{user.range}}</small>
         <h5>Valoración: {{user.rate}}</h5>
         <h5>{{user.bio}}</h5>
-        <a href="/comments/{{user.id}}" style="color:white; text-decoration:underline;">Ver mis comentarios</a>
+        </br>
+        <!-- Aqui viene el pop up-->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          Borrar datos
+        </button>
 
+      
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-dark" id="popup">Advertencia</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h5 class="text-dark" id="popup">¿Estas seguro de que quieres borrar tus datos?</h5>
+              </div>
+              <div class="modal-footer">
+                <a role="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
+                <a role="button" href="/deleteUser/{{user.id}}" class="btn btn-primary">Si, continuar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
         
       </div>
     </div>
 </div>
-<a href= "/" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 45%">Volver</a> </br></td>
+
+<div class="container" id="app">
+  <button class="btn btn-primary" @click="com = !com" style="color:white; margin-left:38%;">Ver comentarios</button>
+
+  <div class="container" :class="{'d-none' : com}">
+  <div class="container"  style="background-color: #24303c; color:white; justify-content: center;">
+
+	  <h2 class="text-center my-4"> Lista de comentarios </h1></br>
+	<table >
+	{% for dato in comments %}
+
+		<tr>
+            <td> <div style="color:white;"><h3 class="text-center">{{dato.comment}} </h3></div> <em>Usuario: {{dato.fromUser}}</em> </br> </td>
+	     </br>
+		</tr>
+	{% empty %}
+
+<!-- Hacer Visible esta pagina. -->
+
+	<li class="text-center" style="color:white;">Vaya, parece que no hay comentarios</li>
+
+	{% endfor %}
+</table>
+</div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  const app = new Vue({
+	el: '#app',
+	data: {
+		com: true
+	},
+	methods: {
+
+	}
+
+})
+</script>
+
+<a href= "/" class="btn btn-info btn-sm my-3" style="border-radius: 8px; margin-left: 45%">Volver</a> </br></td>
 
 {% endblock %}
 
+{% block vue %}
+{% endblock %}
 </body>
 
 </html>

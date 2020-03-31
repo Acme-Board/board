@@ -23,6 +23,9 @@ script:
 - coverage run --branch --source=. ./manage.py test --keepdb
 - coverage xml
 - python-codacy-coverage -r coverage.xml
+branches:
+  only:
+  - develop
 deploy:
   provider: heroku
   app: tryonboard-sprint2

@@ -4,16 +4,16 @@
 			"password": "pbkdf2_sha256$150000$40$mbu3EIOy+CJGurks5j21JugGIq6arcSgON2NUt0MTXM=",
 			"last_login": null,
 			"is_superuser": false,
-			"username": "User1",
-			"first_name": "User1",
-			"last_name": "User1",
-			"email": "user1@algo.algo",
+			"username": "Alejandro",
+			"first_name": "Alejandro",
+			"last_name": "Rodrigez",
+			"email": "alero@gmail.com",
 			"is_staff": false,
 			"is_active": true,
 			"date_joined": "2019-10-11T22:00:00Z",
-			"bio": "bio",
+			"bio": "Hola, me llamo alejandro y me encantan los juegos de mesa",
 			"range": "noob",
-			"picture": "picture",
+			"picture": "https://image.flaticon.com/icons/png/512/16/16480.png",
 			"rate": "2",
 			"admin": false,
 			"groups": [],
@@ -27,16 +27,16 @@
 			"password": "pbkdf2_sha256$150000$40$mbu3EIOy+CJGurks5j21JugGIq6arcSgON2NUt0MTXM=",
 			"last_login": null,
 			"is_superuser": false,
-			"username": "User2",
-			"first_name": "User2",
-			"last_name": "User2",
-			"email": "user2@algo.algo",
+			"username": "Luis",
+			"first_name": "Luis",
+			"last_name": "Molinares",
+			"email": "luMo@gmail.com",
 			"is_staff": false,
 			"is_active": true,
 			"date_joined": "2019-11-11T22:00:00Z",
-			"bio": "bio2",
+			"bio": "Hola, me llamo Luis y me encantan los juegos de mesa",
 			"range": "Pro",
-			"picture": "picture",
+			"picture": "https://image.flaticon.com/icons/png/512/16/16480.png",
 			"rate": "4",
 			"admin": false,
 			"groups": [],
@@ -47,19 +47,19 @@
 	},
 	{
 		"fields": {
-			"password": "pbkdf2_sha256$150000$40$U+8+6EJfQOFoP2wK/VusIFLMRiphC7SzPC0Q12n3XHQ=",
+			"password": "pbkdf2_sha256$150000$40$mbu3EIOy+CJGurks5j21JugGIq6arcSgON2NUt0MTXM=",
 			"last_login": "2019-11-11T22:00:00Z",
 			"is_superuser": false,
-			"username": "usuario",
-			"first_name": "usuario",
-			"last_name": "usuario",
-			"email": "usuario@algo.algo",
+			"username": "Rocio",
+			"first_name": "Rocio",
+			"last_name": "Lopez",
+			"email": "RoLo@gmail.com",
 			"is_staff": false,
 			"is_active": true,
 			"date_joined": "2019-11-11T22:00:00Z",
-			"bio": "usuario",
+			"bio": "Hola, me llamo Rocio y me encantan los juegos de mesa",
 			"range": "Pro",
-			"picture": "picture",
+			"picture": "https://image.flaticon.com/icons/png/512/16/16480.png",
 			"rate": "1",
 			"admin": false,
 			"groups": [],
@@ -76,13 +76,13 @@
 			"username": "Juan",
 			"first_name": "Juan",
 			"last_name": "Ro",
-			"email": "juan@algo.algo",
+			"email": "juan@gmail.com",
 			"is_staff": false,
 			"is_active": true,
 			"date_joined": "2019-11-11T22:00:00Z",
-			"bio": "Hola, soy juan",
+			"bio": "Hola, soy juan, encantado",
 			"range": "Pro",
-			"picture": "picture",
+			"picture": "https://image.flaticon.com/icons/png/512/16/16480.png",
 			"rate": "4.5",
 			"admin": false,
 			"groups": [],
@@ -98,21 +98,21 @@
 			"is_superuser": false,
 			"username": "Pedro",
 			"first_name": "Pedro",
-			"last_name": "Jek",
+			"last_name": "Jimenez",
 			"email": "Pedro@algo.algo",
 			"is_staff": false,
 			"is_active": true,
 			"date_joined": "2019-11-11T22:00:00Z",
 			"bio": "Hola, soy pedro",
 			"range": "Noob",
-			"picture": "picture",
+			"picture": "https://image.flaticon.com/icons/png/512/16/16480.png",
 			"rate": "2",
 			"admin": false,
 			"groups": [],
 			"user_permissions": []
 		},
 		"model": "user.user",
-		"pk": 17
+		"pk": 50
 	},
 	{
 		"fields": {
@@ -121,14 +121,14 @@
 			"is_superuser": false,
 			"username": "Maria",
 			"first_name": "Maria",
-			"last_name": "Re",
+			"last_name": "Repollo",
 			"email": "Maria@algo.algo",
 			"is_staff": false,
 			"is_active": true,
 			"date_joined": "2019-11-11T22:00:00Z",
 			"bio": "Hola, soy Maria",
 			"range": "Pro",
-			"picture": "picture",
+			"picture": "https://image.flaticon.com/icons/png/512/16/16480.png",
 			"rate": "5",
 			"admin": false,
 			"groups": [],
@@ -144,14 +144,14 @@
 			"is_superuser": false,
 			"username": "Paco",
 			"first_name": "Paco",
-			"last_name": "Kiao",
+			"last_name": "Saenz",
 			"email": "Paco@algo.algo",
 			"is_staff": false,
 			"is_active": true,
 			"date_joined": "2019-11-11T22:00:00Z",
-			"bio": "Hola, soy Paco",
+			"bio": "Holaaap, soy Paco",
 			"range": "Noob",
-			"picture": "picture",
+			"picture": "https://image.flaticon.com/icons/png/512/16/16480.png",
 			"rate": "3.5",
 			"admin": false,
 			"groups": [],
@@ -160,14 +160,102 @@
 		"model": "user.user",
 		"pk": 18
 	},
-
-
-
-
+	{
+		"fields": {
+			"password": "pbkdf2_sha256$150000$40$mbu3EIOy+CJGurks5j21JugGIq6arcSgON2NUt0MTXM=",
+			"last_login": "2019-11-11T22:00:00Z",
+			"is_superuser": false,
+			"username": "Rafael",
+			"first_name": "Rafael",
+			"last_name": "Jimenez",
+			"email": "Raji@algo.algo",
+			"is_staff": false,
+			"is_active": true,
+			"date_joined": "2019-11-11T22:00:00Z",
+			"bio": "Holaaap, soy Rafa y me encantan los juegos de mesa",
+			"range": "Noob",
+			"picture": "https://image.flaticon.com/icons/png/512/16/16480.png",
+			"rate": "1",
+			"admin": false,
+			"groups": [],
+			"user_permissions": []
+		},
+		"model": "user.user",
+		"pk": 29
+	},
+	{
+		"fields": {
+			"password": "pbkdf2_sha256$150000$40$mbu3EIOy+CJGurks5j21JugGIq6arcSgON2NUt0MTXM=",
+			"last_login": "2019-11-11T22:00:00Z",
+			"is_superuser": false,
+			"username": "Rodolfo",
+			"first_name": "Rodolfo",
+			"last_name": "Rios",
+			"email": "Rori@algo.algo",
+			"is_staff": false,
+			"is_active": true,
+			"date_joined": "2019-11-11T22:00:00Z",
+			"bio": "Holaaap, soy Rodolfo y me encantan los juegos de mesa",
+			"range": "Noob",
+			"picture": "https://image.flaticon.com/icons/png/512/16/16480.png",
+			"rate": "1",
+			"admin": false,
+			"groups": [],
+			"user_permissions": []
+		},
+		"model": "user.user",
+		"pk": 30
+	},
+{
+		"fields": {
+			"password": "pbkdf2_sha256$150000$40$mbu3EIOy+CJGurks5j21JugGIq6arcSgON2NUt0MTXM=",
+			"last_login": "2019-11-11T22:00:00Z",
+			"is_superuser": false,
+			"username": "Adrian",
+			"first_name": "Adrian",
+			"last_name": "Roldan",
+			"email": "adrian98rr@algo.algo",
+			"is_staff": false,
+			"is_active": true,
+			"date_joined": "2019-11-11T22:00:00Z",
+			"bio": "Holaaap, soy Adrian y me encantan los juegos de mesa",
+			"range": "Noob",
+			"picture": "https://image.flaticon.com/icons/png/512/16/16480.png",
+			"rate": "2",
+			"admin": false,
+			"groups": [],
+			"user_permissions": []
+		},
+		"model": "user.user",
+		"pk": 31
+	},
+	{
+		"fields": {
+			"password": "pbkdf2_sha256$150000$40$mbu3EIOy+CJGurks5j21JugGIq6arcSgON2NUt0MTXM=",
+			"last_login": "2019-11-11T22:00:00Z",
+			"is_superuser": false,
+			"username": "David",
+			"first_name": "David",
+			"last_name": "Cuevas",
+			"email": "david@algo.algo",
+			"is_staff": false,
+			"is_active": true,
+			"date_joined": "2019-11-11T22:00:00Z",
+			"bio": "Holaaap, soy David y me encantan los juegos de mesa",
+			"range": "Noob",
+			"picture": "https://image.flaticon.com/icons/png/512/16/16480.png",
+			"rate": "2",
+			"admin": false,
+			"groups": [],
+			"user_permissions": []
+		},
+		"model": "user.user",
+		"pk": 32
+	},
 	{
 		"fields": {
 			"name": "Kitchnexus",
-			"description": "Esta es una descripcion",
+			"description": "Se alquila juego Kitchnexus en perfecto estado, solo lo he usado una vez",
 			"status": "Perfecto",
 			"price": 20,
 			"picture": "https://images-na.ssl-images-amazon.com/images/I/61ErX6TV4KL._SY355_.jpg",
@@ -180,7 +268,7 @@
 	{
 		"fields": {
 			"name": "Tactics",
-			"description": "Esta es una descripcion",
+			"description": "Alquilo juego de mesa Tactics, esta en perfecto estado y es un juego muy divertido",
 			"status": "Perfecto",
 			"price": 10,
 			"picture": "https://cloud10.todocoleccion.online/juegos-mesa/tc/2019/04/06/09/158770522.jpg",
@@ -193,7 +281,7 @@
 	{
 		"fields": {
 			"name": "Preguntados",
-			"description": "Esta es una descripcion",
+			"description": "Alquilo juego de preguntados, esta un poco gastado pero es jugable",
 			"status": "Gastado",
 			"price": 5,
 			"picture": "https://www.juguetescolumpios.com/1913-large_default/preguntados-juego-de-mesa.jpg",
@@ -206,7 +294,7 @@
 	{
 		"fields": {
 			"name": "Monopoli",
-			"description": "Esta es una descripcion",
+			"description": "Alquilo juego de monopoli en perfecto estado con todas sus piezas y billetes",
 			"status": "Perfecto",
 			"price": 5,
 			"picture": "https://www.toysrus.es/medias/?context=bWFzdGVyfHByb2R1Y3RfaW1hZ2VzfDQ5NDIwfGltYWdlL2pwZWd8aDExL2hlZC85MjY5NTg3MjE0MzY2fGE1MTdjN2M0YTJhMTM5Y2MwYjAxNmM5NmYwZTI2ZjJiNDhlYWRkYjQ4MTQ1ZGJjNTQwYzIwMjliZmFlZDI3YzQ",
@@ -219,7 +307,7 @@
 	{
 		"fields": {
 			"name": "Fantasma",
-			"description": "Esta es una descripcion",
+			"description": "Alquilo juego Fantasmas, perfecto para toda la familia",
 			"status": "Perfecto",
 			"price": 20.3,
 			"picture": "https://images-na.ssl-images-amazon.com/images/I/61v9axzYRDL._SY355_.jpg",
@@ -232,7 +320,7 @@
 	{
 		"fields": {
 			"name": "1000 nombres",
-			"description": "Esta es una descripcion aun mas larga",
+			"description": "Alquilo juego 1000 Nombres, perfecto para toda la familia",
 			"status": "Gastado",
 			"price": 7,
 			"picture": "https://cloud10.todocoleccion.online/juegos-mesa/tc/2017/07/23/09/93894414_1500793869.jpg",
@@ -244,19 +332,279 @@
 	},
 	{
 		"fields": {
+			"name": "Master Chezz",
+			"description": "Se alquila Master Chezz juego para jugar con otra persona",
+			"status": "Perfecto",
+			"price": 7,
+			"picture": "https://img.poki.com/cdn-cgi/image/quality=78,width=204,height=204,fit=cover,g=0.5x0.5,f=auto/505695b9-1b21-47fd-a8e1-93345afb57de.png",
+			"address": "Calle de Madrid, Sevilla",
+			"owner": 17
+		},
+		"model": "rent.game",
+		"pk": 32
+	},
+	{
+		"fields": {
+			"name": "Gestos",
+			"description": "Se slquila juego Gestos, esta un poco usado, pero se puede jugar sin problemas",
+			"status": "Usado",
+			"price": 7,
+			"picture": "https://m.media-amazon.com/images/S/aplus-media/vc/b16b4221-10d9-4de7-bf64-93d061a5ea46._CR0,0,1024,1024_PT0_SX300__.jpg",
+			"address": "Calle Roja 14, Sevilla",
+			"owner": 17
+		},
+		"model": "rent.game",
+		"pk": 33
+	},
+	{
+		"fields": {
+			"name": "Mentiroso",
+			"description": "Alquilo juego Mentiroso, perfecto para toda la familia",
+			"status": "Perfecto",
+			"price": 7,
+			"picture": "https://sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/201611/07/00197631103641____3__640x640.jpg",
+			"address": "Calle Azafran, Sevilla",
+			"owner": 18
+		},
+		"model": "rent.game",
+		"pk": 34
+	},
+	{
+		"fields": {
+			"name": "La Superclase",
+			"description": "Alquilo juego la Superclase, perfecto para toda la familia",
+			"status": "Perfecto",
+			"price": 7,
+			"picture": "hhttps://ekitienda-3581.kxcdn.com/785-large_default/906.jpg",
+			"address": "Calle Juan Carlos, Sevilla",
+			"owner": 30
+		},
+		"model": "rent.game",
+		"pk": 35
+	},
+	{
+		"fields": {
+			"name": "Chess Games",
+			"description": "El juego esta gastado pero es jugable y ademas muy divertido",
+			"status": "Gastado",
+			"price": 7,
+			"picture": "https://www.panre.com/149143-large_default/juego-de-mesa-8-juegos-en-1-de-panritos-.jpg",
+			"address": "Calle de las Rosas, Sevilla",
+			"owner": 30
+		},
+		"model": "rent.game",
+		"pk": 36
+	},
+	{
+		"fields": {
+			"name": "Juegos Reunidos",
+			"description": "Alquiilo Juegos reunidos, es un juego que incluye una gran variedad de juegos, aunque un poco gastado es jugable",
+			"status": "Gastado",
+			"price": 7,
+			"picture": "https://cloud10.todocoleccion.online/juegos-mesa/tc/2020/01/23/23/191843566_tcimg_786527F2.jpg",
+			"address": "Calle Amapolas 12, Sevilla",
+			"owner": 31
+		},
+		"model": "rent.game",
+		"pk": 37
+	},
+	{
+		"fields": {
+			"name": "Alto voltaje",
+			"description": "Juego alto voltaje, en perfecto estado",
+			"status": "Perfecto",
+			"price": 7,
+			"picture": "https://www.educamoon.com/737-large_default/alto-voltaje.jpg",
+			"address": "Calle los pajaros, Sevilla",
+			"owner": 32
+		},
+		"model": "rent.game",
+		"pk": 38
+	},
+	{
+		"fields": {
+			"name": "5 segundos",
+			"description": "Alquio juego 5 segundos, u poco usado pero muy divertido",
+			"status": "Usado",
+			"price": 3,
+			"picture": "https://www.carruseljuguetes.es/492-thickbox_default/juego-de-mesa-5-segundos.jpg",
+			"address": "Calle Arrozal, Sevilla",
+			"owner": 10
+		},
+		"model": "rent.game",
+		"pk": 39
+	},
+	{
+		"fields": {
+			"name": "Mad",
+			"description": "Alquilo juego Mad aun sin usar, esta nuevo sin uso",
+			"status": "Nuevo",
+			"price": 12,
+			"picture": "https://cloud10.todocoleccion.online/juegos-mesa/tc/2019/05/14/16/163932038_tcimg_9237F106.jpg",
+			"address": "Calle Pedro Fernandez, Sevilla",
+			"owner": 11
+		},
+		"model": "rent.game",
+		"pk": 40
+	},
+	{
+		"fields": {
+			"name": "Juego de mesa de Bob Esponja",
+			"description": "Alquilo juego de mesa de bob esponja para que puedas jugar con tus hijos",
+			"status": "Perfecto",
+			"price": 10,
+			"picture": "https://cloud10.todocoleccion.online/juegos-mesa/tc/2019/07/25/18/172236917_151230670.jpg",
+			"address": "Calle la macarena, Sevilla",
+			"owner": 10
+		},
+		"model": "rent.game",
+		"pk": 41
+	},
+	{
+		"fields": {
+			"name": "BackGammon",
+			"description": "Alquilo juego BackGammon un poco gastado, pero jugable",
+			"status": "Gastado",
+			"price": 7,
+			"picture": "https://i.ebayimg.com/images/g/~eQAAOSw8-tWYz~h/s-l300.jpg",
+			"address": "Calle Maracas, Sevilla",
+			"owner": 16
+		},
+		"model": "rent.game",
+		"pk": 42
+	},
+	{
+		"fields": {
+			"name": "El gran Reto",
+			"description": "Esta en perfecto estado y es un juego muy divertido",
+			"status": "Perfecto",
+			"price": 7,
+			"picture": "https://todojuguete.es/29918-large_default/juego_el_gran_reto.jpg",
+			"address": "Calle los Cisnes, Sevilla",
+			"owner": 15
+		},
+		"model": "rent.game",
+		"pk": 43
+	},
+	{
+		"fields": {
+			"name": "Profesiones",
+			"description": "Aunque usado apenas se nota el uso y es muy divertido",
+			"status": "Usado",
+			"price": 5,
+			"picture": "https://www.lavidaenpeque.com/2722-thickbox_default/brainbox-profesiones-juego-de-mesa.jpg",
+			"address": "Calle Azucena, Sevilla",
+			"owner": 10
+		},
+		"model": "rent.game",
+		"pk": 44
+	},
+	{
+		"fields": {
+			"name": "Cranium",
+			"description": "Jueg para toda la familia apenas usado",
+			"status": "Usado",
+			"price": 6,
+			"picture": "https://img.milanuncios.com/fg/2904/79/290479999_1.jpg?VersionId=gLPKtG6AjQw8sMK330JnAQzDGLB68zDp",
+			"address": "Calle Sor Gregoria, Sevilla",
+			"owner": 32
+		},
+		"model": "rent.game",
+		"pk": 45
+	},
+	{
+		"fields": {
 			"ticker": "ABC-1234",
 			"rentable": true,
 			"user": 16,
+			"days": 3,
 			"game": 22
 		},
 		"model": "rent.rent",
-		"pk": 23
+		"pk": 51
+	},
+	{
+		"fields": {
+			"ticker": "ABC-2222",
+			"rentable": true,
+			"user": 10,
+			"days": 1,
+			"game": 45
+		},
+		"model": "rent.rent",
+		"pk": 52
+	},
+	{
+		"fields": {
+			"ticker": "AFC-3333",
+			"rentable": true,
+			"user": 32,
+			"days": 1,
+			"game": 44
+		},
+		"model": "rent.rent",
+		"pk": 53
+	},
+	{
+		"fields": {
+			"ticker": "GBC-3421",
+			"rentable": true,
+			"user": 16,
+			"days": 4,
+			"game": 43
+		},
+		"model": "rent.rent",
+		"pk": 54
+	},
+	{
+		"fields": {
+			"ticker": "DBC-6234",
+			"rentable": true,
+			"user": 10,
+			"days": 5,
+			"game": 42
+		},
+		"model": "rent.rent",
+		"pk": 55
+	},
+	{
+		"fields": {
+			"ticker": "ALC-1884",
+			"rentable": true,
+			"days": 2,
+			"user": 16,
+			"game": 41
+		},
+		"model": "rent.rent",
+		"pk": 56
+	},
+	{
+		"fields": {
+			"ticker": "EBC-1214",
+			"rentable": true,
+			"days": 1,
+			"user": 10,
+			"game": 40
+		},
+		"model": "rent.rent",
+		"pk": 57
+	},
+	{
+		"fields": {
+			"ticker": "AAA-1634",
+			"rentable": true,
+			"days": 1,
+			"user": 11,
+			"game": 39
+		},
+		"model": "rent.rent",
+		"pk": 58
 	},
 	{
 		"fields": {
 			"fromUser": 16,
 			"toUser": 17,
-			"comment": "Comentarioooo"
+			"comment": "Todo perfecto, muy amable"
 		},
 		"model": "reviews.comment",
 		"pk": 25
@@ -274,7 +622,7 @@
 		"fields": {
 			"fromUser": 17,
 			"toUser": 16,
-			"comment": "Respuestaa"
+			"comment": "Una persona maja y fiable"
 		},
 		"model": "reviews.comment",
 		"pk": 27
@@ -283,10 +631,118 @@
 		"fields": {
 			"fromUser": 17,
 			"toUser": 16,
-			"rate": 3
+			"rate": 5
 		},
 		"model": "reviews.valoration",
 		"pk": 28
-	}
+	},
 
+	{
+		"fields": {
+			"fromUser": 10,
+			"toUser": 32,
+			"comment": "Todo perfecto, muy amable"
+		},
+		"model": "reviews.comment",
+		"pk": 59
+	},
+	{
+		"fields": {
+			"fromUser": 10,
+			"toUser": 32,
+			"rate": 4
+		},
+		"model": "reviews.valoration",
+		"pk": 60
+	},
+	{
+		"fields": {
+			"fromUser": 32,
+			"toUser": 10,
+			"comment": "Una persona maja y fiable"
+		},
+		"model": "reviews.comment",
+		"pk": 61
+	},
+	{
+		"fields": {
+			"fromUser": 32,
+			"toUser": 10,
+			"rate": 5
+		},
+		"model": "reviews.valoration",
+		"pk": 62
+	},
+		{
+		"fields": {
+			"fromUser": 10,
+			"toUser": 11,
+			"comment": "Muy bien todo"
+		},
+		"model": "reviews.comment",
+		"pk": 63
+	},
+	{
+		"fields": {
+			"fromUser": 10,
+			"toUser": 11,
+			"rate": 4
+		},
+		"model": "reviews.valoration",
+		"pk": 64
+	},
+	{
+		"fields": {
+			"fromUser": 11,
+			"toUser": 10,
+			"comment": "Muy agradecido por el juego"
+		},
+		"model": "reviews.comment",
+		"pk": 65
+	},
+	{
+		"fields": {
+			"fromUser": 11,
+			"toUser": 10,
+			"rate": 5
+		},
+		"model": "reviews.valoration",
+		"pk": 66
+	},
+		{
+		"fields": {
+			"fromUser": 10,
+			"toUser": 16,
+			"comment": "Una persona al maximo confiable"
+		},
+		"model": "reviews.comment",
+		"pk": 67
+	},
+	{
+		"fields": {
+			"fromUser": 10,
+			"toUser": 16,
+			"rate": 4
+		},
+		"model": "reviews.valoration",
+		"pk": 68
+	},
+	{
+		"fields": {
+			"fromUser": 16,
+			"toUser": 10,
+			"comment": "Esta persona es fiable al 100% y ademas my amable"
+		},
+		"model": "reviews.comment",
+		"pk": 69
+	},
+	{
+		"fields": {
+			"fromUser": 16,
+			"toUser": 10,
+			"rate": 5
+		},
+		"model": "reviews.valoration",
+		"pk": 70
+	}
 ]

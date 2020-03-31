@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Acme-Board/board.svg?branch=develop)](https://travis-ci.org/Acme-Board/board) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b879faad743f449a8af839ebb3c91b78)](https://www.codacy.com/gh/Acme-Board/board?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Acme-Board/board&amp;utm_campaign=Badge_Grade) [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/b879faad743f449a8af839ebb3c91b78)](https://www.codacy.com/gh/Acme-Board/board?utm_source=github.com&utm_medium=referral&utm_content=Acme-Board/board&utm_campaign=Badge_Coverage)
+
 Plataforma sobre alquiler de juegos de mesa
 ===========================================
 

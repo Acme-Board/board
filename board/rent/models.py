@@ -16,7 +16,7 @@ class Game(models.Model):
     name = models.CharField(max_length=50, default='')
     description = models.TextField(max_length=500, default='')
     status = models.CharField(max_length=20,choices=[(str(x),x.value) for x in Status])
-    price = models.FloatField(default=0.0)
+    price = models.FloatField(help_text="El precio del alquiler equivaldrá a 1 día", validators=[MinValueValidator(0.1,"No puede regalar un juego"),MinValueValidator(0.0,"No puedue ser negativo")])
     picture = models.CharField(max_length=500,validators=[URLValidator])
     address = models.CharField(max_length=100, default='')
     owner = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -38,6 +38,7 @@ class Rent(models.Model):
     ticker = models.CharField(max_length=8, default='ABC-1234')
     game = models.ForeignKey(Game,on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+    days = models.IntegerField(default=1, validators=[MinValueValidator(1, "No puedes alquilarlo menos de un dia")])
     rentable = models.BooleanField(default=True)
 
     @classmethod
@@ -49,3 +50,32 @@ class Rent(models.Model):
 
     def __str__(self):
         return self.ticker
+
+class OrderItem(models.Model):
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    is_ordered = models.BooleanField(default=False)
+    date_added = models.DateTimeField(auto_now=True)
+    days = models.IntegerField(default=1, validators=[MinValueValidator(1, "No puedes alquilarlo menos de un dia")])
+    date_ordered = models.DateTimeField(null=True)
+
+    def __str__(self):
+        return self.game.name
+
+class Order(models.Model):
+    ref_code = models.CharField(max_length=10, default='ABCD-12345')
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null= True)
+    items = models.ManyToManyField(OrderItem, blank=True)
+    actual = models.BooleanField(default=True) #Especifica si es el carrito actual o ya a sido pedido
+    date_ordered = models.DateTimeField(null=True)
+
+    def __str__(self):
+        return self.ref_code
+
+    def get_cart_items(self):
+        return self.items.all()
+    
+    def get_total_price(self):
+        sum = 0
+        for x in self.get_cart_items():
+            sum = sum + (x.game.price * x.days)
+        return sum

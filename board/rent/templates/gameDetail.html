@@ -42,7 +42,7 @@
       <h4> Precio: {{price}} &euro;</h4></br>
       <h5>Descripción:</h5>
       {{description}}
-    </div> <br/>
+    
     {% if request.user.is_authenticated %}
     <!--
     <div class="col-sm-4" style="background-color: #6D65D3;border-radius: 8px;">
@@ -97,20 +97,32 @@
       </form>
     </div>-->
     {% endif %}
-  </div>
-</div>
+
+
+  {% if request.user.is_authenticated %}
+<table>
+      <div style="margin-top: 10px;">Dias de Alquiler: <input type="number" id="days" name="days" value="1" min="1" max="100">
+        {% csrf_token %}</div>
+  <tr>
+    <td>
+      <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; color:black; font-weight: bold;">Volver</a>
+    </td>
+    <td>
+      <form action="/addCart/{{id}}" method="POST" style="margin-top: 16px; margin-left: 5px;">
+      <button type="submit" class="btn btn-info btn-sm" style="border-radius: 8px; color:black; font-weight: bold;">Añadir al carrito</button>
+      </form>
+    </td>
+  </tr>
+</table>
+
+  {% else %}
+  <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 45%;color:black; font-weight: bold;">Volver</a>
+  {% endif %}
 
 <br/>
-<ul class="pager">
-  {% if request.user.is_authenticated %}
-  <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 42%;">Volver</a>
-  <a href= "/rent/{{id}}" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 5%">Alquilar</a> 
-  {% else %}
-  <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 45%;">Volver</a>
-  {% endif %}
-</ul> 
-<!-- Solución temporal (Ya entraremos en margenes)-->
-</br></br></br>
+</div>
+</div>
+</div>
 
 {% endblock %}
 

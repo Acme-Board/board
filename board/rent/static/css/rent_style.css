@@ -20,3 +20,28 @@
   font-family: 'calibri';
   color: white;
 }
+
+
+.table-games{
+  background: #24303c;
+	padding: 10px;
+	margin: 5px;
+	margin-top: 10px;
+	border-radius: 8px;
+	font-family: 'calibri';
+  color: white;
+  transition: transform .5s;
+}
+
+.table-games:hover{
+  transform: scale(1.05);
+}
+
+.table-myGames{
+  background: #24303c;
+	padding: 10px;
+	margin-top: 10px;
+	border-radius: 8px;
+	font-family: 'calibri';
+  color: white;
+}

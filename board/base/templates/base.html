@@ -16,10 +16,10 @@
     <style>
 
     .container-fluid {
-        height: 20%;
+        height: 15%;
         background-size: cover;
         background-repeat: no-repeat;
-        background-image: url('{% static "img/header.png" %}');
+        background-image: url('{% static "img/header0.png" %}');
     }
 
     body {
@@ -46,12 +46,21 @@
                     <li class="nav-item px-5">
                         <a class="nav-link" href="/login"><b>Iniciar sesión</b></a>
                     </li>
+                    <li class="nav-item px-5">
+                      <a class="nav-link" href="/newuser"><b>Registrarse</b></a>
+                  </li>
                     {% else %}
                     <li class="nav-item px-5">
-                      <a class="nav-link" href="/profile/{{request.user.id}}"><b>Perfil</b></a>
-                    </li>
+                      <a class="nav-link" href="/myGames"><b>Mis juegos</b></a>
+                    </li>               
                     <li class="nav-item px-5">
                       <a class="nav-link" href="/rents/{{request.user.id}}"><b>Historial</b></a>
+                    </li>
+                    <li class="nav-item px-5">
+                      <a class="nav-link" href="/cart"><b>Carrito de compra</b></a>
+                    </li>
+                    <li class="nav-item px-5">
+                      <a class="nav-link" href="/profile/{{request.user.id}}"><b>Perfil</b></a>
                     </li>
                     <li class="nav-item px-5">
                         <a class="nav-link" href="/logout"><b>Cerrar sesión</b></a>
@@ -87,7 +96,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
  
-    <footer class="page-footer font-small">
+    <footer class="page-footer font-small" style="margin-top: 50px;">
       <!-- Copyright -->
       <div class="footer-copyright text-center py-3" style="background-color: #6D65D3 ;">
         <a target="_blank" href="https://twitter.com/Try_On_Board"> <i class="fab fa-twitter" style="color:white; size:50px;"></i></a>

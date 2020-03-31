@@ -1,0 +1,6 @@
+<!-- templates/home.html -->
+<form action="{% url 'charge' %}" method="post">
+    {% csrf_token %}
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    ></script>
+  </form>
