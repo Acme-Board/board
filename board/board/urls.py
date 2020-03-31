@@ -51,6 +51,8 @@ urlpatterns = [
     re_path(r'addCart/(?P<id_game>\d+)', rent_views.add_item_to_cart),
     re_path(r'deleteCart/(?P<id_item>\d+)', rent_views.delete_item_from_cart),
     re_path(r'deleteAll/', rent_views.empty_cart),
+    re_path(r'games/filterZona/(?P<zona>\d+)', rent_views.games_list_by_zona),
+    re_path(r'games/filterStatus/(?P<status>\d+)', rent_views.games_list_by_status),
 
     #User
     re_path(r'profile/(?P<id_user>\d+)',user_views.profile),

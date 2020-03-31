@@ -27,12 +27,12 @@ def games_list_by_user(request):
     return render(request,'myGames.html',{'myGames':games})
 
 def games_list_by_zona(request,zona):
-    games = Game.objects.filter(address=request.address)
-    return render(request,'myGames.html',{'myGames':games})
+    games = Game.objects.filter(zona=zona)
+    return render(request,'games.html',{'games':games})
 
 def games_list_by_status(request,status):
-    games = Game.objects.filter(status=request.status)
-    return render(request,'myGames.html',{'myGames':games})
+    games = Game.objects.filter(status=status)
+    return render(request,'games.html',{'games':games})
 
 def rents_list(request):
     rents  = Rent.objects.filter(user = request.user)
