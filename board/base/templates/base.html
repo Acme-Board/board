@@ -23,18 +23,17 @@
     }
 
     body {
-      background-size: cover;
-      background-image: url("{% static 'img/bg-masthead.jpg' %}");
-
-    }
-
+      height:100%;
+       background-size: cover;
+       background-image: url("{% static 'img/bg-masthead.jpg' %}");
+      }
     </style>
 
 <a href="/">
     <div class="container-fluid h-300 text-center py-3">
       </div>
     </a>
-      <nav id="myHeader" class="navbar navbar-expand-sm navbar-light navbar-fixed-top py-0"  style="background-color: #6D65D3;" data-toggle="affix">
+      <nav id="myHeader" class="navbar navbar-expand-sm navbar-light navbar-fixed-top py-0"  style="background-color: #BE9FE1;" data-toggle="affix">
         <div class="mx-auto">
             
             <div class="collapse navbar-collapse text-center" >
@@ -85,6 +84,7 @@
     {% block extrahead %}{% endblock %}
   </head>
   <body>
+    <div class="container" style="background-color:rgb(41, 41, 41); box-shadow: 0 0 20px rgb(41, 41, 41);">
       {% block content %}
       
       {% endblock %}
@@ -95,16 +95,17 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
- 
-    <footer class="page-footer font-small" style="margin-top: 50px;">
-      <!-- Copyright -->
-      <div class="footer-copyright text-center py-3" style="background-color: #6D65D3 ;">
-        <a target="_blank" href="https://twitter.com/Try_On_Board"> <i class="fab fa-twitter" style="color:white; size:50px;"></i></a>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
 
-        <a target="_blank" href="https://github.com/Acme-Board/board"><i class="fab fa-github" style="color:white;"></i></a> <br/>
-        <i style="color:white;">© 2020 Copyright: TryOnBoard</i>
+    </div>
+    <footer class="page-footer font-small" style="  position: relative; bottom: 0; width: 100%;">
+      <!-- Copyright -->
+      <div class="footer-copyright text-center py-3" style="background-color: #BE9FE1;">
+        <a target="_blank" href="https://twitter.com/Try_On_Board"> <i class="fab fa-twitter" style="color:rgb(41, 41, 41); size:50px;"></i></a>
+
+        <a target="_blank" href="https://github.com/Acme-Board/board"><i class="fab fa-github" style="color:rgb(41, 41, 41);"></i></a> <br/>
+        <i style="color:rgb(41, 41, 41);">© 2020 Copyright: TryOnBoard</i>
       </div>
-    
     </footer>
   </body>
 </html>

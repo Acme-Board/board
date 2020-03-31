@@ -10,14 +10,16 @@
 
 {% block content %}
 
-<div class="form-main">
-    <h2 class="form-title">Review del usuario</h2>
+<div class="form-main text-center py-3 mx-auto">
+    
+    <h2 class="form-title py-3">Review del usuario</h2>
     <form method="POST">
         {{ form.as_p }}
         {% csrf_token %}
         <br/>
-        <button type="submit" class="form-button">Crear review</button>
+        <button class="btn btn-primary my-1" type="submit">Crear review</button>
     </form>
+    </div>
 </div>
 {% endblock %}
 {% block vue %}

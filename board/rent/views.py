@@ -5,7 +5,7 @@ from datetime import date
 from django.shortcuts import render ,  get_object_or_404
 from rent.models import Game , Rent
 from django.conf import settings
-from rent.forms import NewGame
+from rent.forms import NewGame, editData, editPicture
 from django.shortcuts import redirect
 
 # Create your views here.
@@ -25,6 +25,15 @@ def games_list(request):
 def games_list_by_user(request):
     games = Game.objects.filter(owner=request.user)
     return render(request,'myGames.html',{'myGames':games})
+
+def games_list_by_zona(request,zona):
+    games = Game.objects.filter(zona=zona)
+    return render(request,'games.html',{'games':games})
+
+def games_list_by_status(request,status):
+    games = Game.objects.filter(status=status)
+    return render(request,'games.html',{'games':games})
+
 def rents_list(request):
     rents  = Rent.objects.filter(user = request.user)
     return render(request,'rents.html',{'rents':rents})
@@ -34,6 +43,7 @@ def games_detail(request,pk):
      dato = get_object_or_404(Game, pk=pk)
      return render(request,'gameDetail.html', {'name':dato.name, 'description':dato.description,'price': dato.price ,
       'status': dato.status,'picture' : dato.picture, 'id' : dato.id,'owner': dato.owner })
+
 def delete(request, pk):
     # Recuperamos la instancia de la persona y la borramos
     instancia = Game.objects.get(id=pk)
@@ -43,8 +53,11 @@ def delete(request, pk):
     return redirect('/')
 
 def new_game(request):
+    texto = "Subida de "
+    Alquilar = "Subir Juego"
     if request.method == "POST":
-        form = NewGame(request.POST)
+        form = NewGame(request.POST,request.FILES or None)
+        
         if form.is_valid():
 
             name = form.cleaned_data['name']
@@ -54,7 +67,16 @@ def new_game(request):
                 price = float(form.cleaned_data['price'])
             except ValueError:
                 form.add_error('price','Introduzca un dato numérico')
-                return render(request,"newgame.html",{"form":form})
+                return render(request,"newgame.html",{"form":form, 'texto': texto, 'Alquilar': Alquilar})
+
+            if (price < 0):
+                form.add_error('price','No puede ser un precio negativo')
+                return render(request,"newgame.html",{"form":form, 'texto': texto, 'Alquilar': Alquilar})
+            
+            if price==0:
+                form.add_error('price','No se puede regalar un juego')
+                return render(request,"newgame.html",{"form":form , 'texto': texto, 'Alquilar': Alquilar}) 
+
             picture = form.cleaned_data['picture']
             address = form.cleaned_data['address']
             owner = request.user
@@ -64,20 +86,68 @@ def new_game(request):
             return redirect('/gameDetail/{}'.format(game.id))
     else:
        form = NewGame()
-    return render(request, 'newgame.html', {'form': form})
+    return render(request, 'newgame.html', {'form': form, 'texto': texto, 'Alquilar': Alquilar})
     
 def edit_game(request, pk):
+    texto = "Editar "
+    Alquilar = "Actualizar"
     juego = get_object_or_404(Game, pk=pk)
+
     if request.method == "POST":
-        form = NewGame(request.POST, instance=juego)
+        form = editData(request.POST,request.FILES or None)
+
         if form.is_valid():
-            juego = form.save(commit=False)
+            name = form.cleaned_data['name']
+            description = form.cleaned_data['description']
+            status = form.cleaned_data['status']
+
+            try:
+                price = float(form.cleaned_data['price'])
+            except ValueError:
+                form.add_error('price','Introduzca un dato numérico')
+                return render(request,"newgame.html",{"form":form, 'texto': texto, 'Alquilar': Alquilar})
+
+            if (price < 0):
+                form.add_error('price','No puede ser un precio negativo')
+                return render(request,"newgame.html",{"form":form, 'texto': texto, 'Alquilar': Alquilar})
             
-            juego.save()
+            if price==0:
+                form.add_error('price','No se puede regalar un juego')
+                return render(request,"newgame.html",{"form":form, 'texto': texto, 'Alquilar': Alquilar}) 
+
+            address = form.cleaned_data['address']
+
+            Game.objects.filter(pk=pk).update(name=name,description=description,status=status,price=price,address=address)
+
             return redirect('/gameDetail/{}'.format(pk))
     else:
-        form = NewGame(instance=juego)
-    return render(request, 'newgame.html', {'form': form})
+        form = editData()
+        form.fields["name"].initial = juego.name
+        form.fields["description"].initial = juego.description
+        form.fields["status"].initial = juego.status
+        form.fields["price"].initial = juego.price
+        form.fields["address"].initial = juego.address
+    return render(request, 'newgame.html', {'form': form, 'texto': texto, 'Alquilar': Alquilar})
+
+def edit_pic(request, pk):
+    juego = get_object_or_404(Game, pk=pk)
+
+    if request.method == "POST":
+        form = editPicture(request.POST,request.FILES or None)
+
+        if form.is_valid():
+            
+            picture = form.cleaned_data['picture']
+
+            Game.objects.filter(pk=pk).update(picture=picture)
+
+            return redirect('/gameDetail/{}'.format(pk))
+    else:
+        form = editPicture()
+
+        form.fields["picture"].initial = juego.picture
+
+    return render(request, 'newgame.html', {'form': form, 'texto': texto, 'Alquilar': Alquilar})
 
 def rent_game(request, id_game, days):
     dato = get_object_or_404(Game, pk=id_game)
@@ -187,4 +257,4 @@ def empty_cart(request):
             for item in cart.items.all():
                 cart.items.remove(item)
                 item.delete()
-    #return render(request, 'orders.html', {'order': cart.items.all(), 'id':cart.id, 'mensaje': 'Carrito vaciado','sum':cart.get_total_price()})
+    return render(request, 'orders.html', {'order': cart.items.all(), 'id':cart.id, 'mensaje': 'Carrito vaciado','sum':cart.get_total_price()})

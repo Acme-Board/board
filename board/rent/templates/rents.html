@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
 
@@ -19,11 +18,9 @@
 
 <!-- Aqui hacer bucle por columna para hacer una buena vista-->
 
-<div class="container" style= "
-padding-block-end: 60px;
-margin: auto;">
+<div  style= "padding-block-end: 60px;margin: auto;">
 	
-	<h1 class = "container" style="color: black; background-color:powderblue; font-size:30px; border-radius: 8px; width: auto"> Lista de Alquileres </h1></br>
+	<h1 style="color: white; font-size:30px; border-radius: 8px; width: auto"> Lista de Alquileres </h1></br>
 	<!-- Boton de busqueda para un futuro
 
 	<form action="/action_page.php">
@@ -36,22 +33,22 @@ margin: auto;">
 
 
 
-	<div class="container" style= "
-	display: flex;
-	flex-wrap: wrap;">
+	<div  style= "display: flex; flex-wrap: wrap; ">
 
 	{% for dato in rents %}
 
-	<table style="margin: 10px;">
+	<table class="table"style="margin: 10px;">
 	<!-- Vamos a introducir  algunos juegos -->
 	<tr>
-		<td><img style="width:150px;height:150px; ; border-radius: 8px; padding: 5px;" src="{{dato.picture}} "/></td>
+		<td><img style="width:150px;height:150px; ; border-radius: 8px; padding: 5px;" src="{{dato.game.picture}} "/></td>
+	<td>
+	 <div style="color: white;"><h4 class=""> {{dato.ticker|capfirst}} </h4></div> 
 	
-	<br> <div><h4> {{dato.ticker|capfirst}} </h4></div> </br>
-		 Estado: {{dato.status}} </br>
-		Dias: {{dato.days}} </br>
-		 <a href= "gameDetail/{{dato.id}}" class="btn btn-info btn-sm" style="border-radius: 8px">Ver mas</a> </br></td>
-		
+		<p style="color: white;">Dias: {{dato.days}}</p>
+	
+		<a href= "/gameDetail/{{dato.game.id}}" class="btn btn-info btn-sm" style="border-radius: 8px">Ver mas</a></td> 
+	
+	</div>
 	</tr>
 	</table>
 	{% empty %}
@@ -71,19 +68,11 @@ margin: auto;">
 <!-- Una vista final de la vista para darle profesionalidad -->
 
 
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src= "prueba.js"></script>
   <script src= "../static/css/style.css"></script>
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 {% endblock %}
 

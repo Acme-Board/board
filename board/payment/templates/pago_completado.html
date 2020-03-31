@@ -9,6 +9,8 @@
      {% block extrahead %}
 
           <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css"> 
+          <meta charset="utf-8">
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
      {% endblock %}   
 
@@ -22,36 +24,13 @@
 
 <style>
 
-.index-main {
-
-     background-image: url("{% static 'img/bg-masthead.jpg' %}");
-
-}   
-
 </style>
 
 
-
-<div class="index-main">
-
-     <img class="index-icon" src="{% static 'img/icon.png' %}" />
-
-<h1 class="index-title">¡Pago completado! </h1>
-
-
-
-<img src="https://media.giphy.com/media/h0MTqLyvgG0Ss/giphy.gif" class="mx-auto d-block py-3">
-
-
-
-
-
-
-
-
-
-
-
+<div class="jumbotron text-center">
+     <h1> &#9989; Pago Completado!</h1>
+     <p>Muchas Gracias por confiar en <strong>TryOnBoard! </strong> Tu aplicación de Alquiler de confianza</p> 
+     <button type="button" class="btn btn-success btn-block"> Seguir Navegando!</button>
 </div>
 
 {% endblock %}

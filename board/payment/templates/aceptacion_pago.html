@@ -36,13 +36,11 @@
 
 </style>
 
-
 <div class="index-main" style="
 background: #e3d9c9;
 max-height: 90%;
 max-width: 45%;
 margin: auto;
-margin-top: 50px;
 margin-bottom: 50px;
 border-radius: 8px;
 color: black;">
@@ -51,7 +49,7 @@ color: black;">
 
 <h3 class="index-title" style="color: black; margin-top: 5px;">¿ Confirmar la comprar por {{total}}€ ?</h3> 
 
-<div>     
+<div>      
      <div  style=" margin-top: 15px; background: #f5f5dc; padding: 10px; margin: 10px; border-radius: 8px;">
      <table>
           <h5> Informacion de la compra: </h5></br>
@@ -67,7 +65,7 @@ color: black;">
                {% for dato in order %}
                <tbody>
                <tr>
-                   <div> <td> <img style="width:70px;height:70px; border-radius: 8px" src="{{dato.game.picture}}"/></td>
+                   <div> <td> <img style="width:70px;height:70px; border-radius: 8px" src="{{dato.game.picture.url}}"/></td>
                     <td> {{dato.game.owner}} </td>
                     <td> {{dato.game.status}} </td>
                     <td> {{dato.game.price}}&euro;</td>
@@ -89,8 +87,9 @@ color: black;">
      <div style="text-align:center; margin-top: 15px;">
 
           <div>
-
                <form action='/charge/{{id}}' method="POST">
+               <a class="btn btn-info btn-sm" href="/cart"
+               role="stripe-button" style='border-radius: 8px; margin-right: 5%'>Volver</a> 
                  {% csrf_token %}
                 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                  data-key="{{ key }}"
@@ -99,8 +98,7 @@ color: black;">
                 data-amount="{{cent}}"
                 data-locale="auto"
                 ></script>
-                <a class="btn btn-info btn-sm" href="/games"
-                role="stripe-button" style='border-radius: 8px; margin-left: 5%'>Volver</a> 
+               
                </form> 
 
          

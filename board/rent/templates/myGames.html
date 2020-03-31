@@ -12,62 +12,62 @@
           confirm("¿Estas seguro de Eliminar el juego?");
         }
         </script>
-    {% endblock %} 
 
+    {% endblock %} 
 
 </head>
 <body>
     {% block content %}
 
-    
-
-
-
-    <h3 class="container">Tus Juegos, {{user}}</h3>
+    <h3>Tus Juegos, {{user}}</h3>
     
     {% for dato in myGames %}
-<table class="container" >
-    <thead>
-        <tr>
-            <th style="width: 15%;"></th>
-            <th style="width: 20%;"></th>
-            <th style="width: 55%;"></th>
-            <th style="width: 10%"></th>
-        </tr>
-        </thead>
-        <tbody>
-    <tr class="table-myGames">
-        <td>
-        <img style="width: 150px;height: 150px; ;" src="{{dato.picture}} "/>
-        </td>
-        <td>
-        <h4>{{dato.name|capfirst}} - <i> {{dato.price}} €</i> </br></h4>
-		 Estado: {{dato.status}} </br>
-        </td>
-        <td> 
-            {{dato.description}}
-        </td>
-        <td>
-           <!-- <div><a href= "/gameDetail/{{dato.id}}" class="btn btn-info btn-sm"
-                style="border-radius: 8px; margin-top: 5px;">Ver mas</a></div>
-            -->
-                <!-- Sin funcionalidad aun -->
-            <a href= "/editGame/{{dato.id}}" class="btn btn-info btn-sm"
-                style="border-radius: 8px; margin-top: 5px; color:black; font-weight: bold;">Editar</a>
 
-                <!-- Sin funcionalidad aun href="/delete/{{dato.id}}" -->
+    
+    <table>
+            <thead>
+                    <tr>
+                        <th style="width: 15%;"></th>
+                        <th style="width: 20%;"></th>
+                        <th style="width: 55%;"></th>
+                        <th style="width: 10%"></th>
+                    </tr>
+            </thead>
+            <tbody>
+                <tr class="table-myGames">
+                  <td>
+                    <img  src="{{dato.picture.url}}" style="width: 150px;height: 150px;"/>
+                    <button href= "/gameDetail/{{dato.id}}/edit" type="button" class="btn btn-primary btn-sm"
+                    style="width: 150px; font-weight: bold">Editar Foto</button>
+                  </td>
 
-               <div> <a href="/delete/{{dato.id}}"
-                 style="border-radius: 8px; margin-top: 5px; background-color: #F93F42" 
-                 onclick="confirmar()"
-                 class="btn btn-primary">Borrar</a>
-                </div>
-            
-                  
-        </td>
-    </tr>
-</tbody>
-</table>
+                    <td>
+                        <h4>{{dato.name|capfirst}} - <i> {{dato.price}} €</i> </br></h4>
+                        Estado: {{dato.status}} </br>
+                    </td>
+                    <td> {{dato.description}} </td>
+                    <td>
+                    <!-- <div><a href= "/gameDetail/{{dato.id}}" class="btn btn-info btn-sm"
+                            style="border-radius: 8px; margin-top: 5px;">Ver mas</a></div>
+                        -->
+                            <!-- Sin funcionalidad aun -->
+                <a href= "/gameDetail/{{dato.id}}" class="btn btn-info btn-sm" 
+                style="border-radius: 8px; color:black; font-weight: bold;">Ver Mas</a>
+
+
+                            <!-- Sin funcionalidad aun href="/delete/{{dato.id}}" -->
+
+                    <!--    <div> 
+                            <a href="/delete/{{dato.id}}"
+                            style="border-radius: 8px; margin-top: 5px; background-color: #F93F42" 
+                            onclick="confirmar()"
+                            class="btn btn-primary">Borrar Windows.confirm</a>
+                        </div> -->
+                            
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     
     {% empty %}
 

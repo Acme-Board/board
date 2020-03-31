@@ -19,26 +19,30 @@
   background: #24303c;
   padding: 30px;
   margin: auto;
-  margin-top: 100px;
   border-radius: 8px;
   font-family: 'calibri';
   color: white;">
 
-    <div><h3  class ="well well-sm">Subida de Juego: </h3> </div>
-     <div>      
-            <form method="POST" class="NewGame" style=" margin: 20px;
+
+    <div><h3  class ="well well-sm"> {{texto}}Juego: </h3> </div>
+  
+    <div>      
+            <form method="POST" enctype="multipart/form-data" class="NewGame" style=" margin: 20px;
             padding: 5px">{% csrf_token %}
+         
                 {{ form.as_p }}
+
+              
                 <div style="text-align:center; margin: 15px">
-                <button type="submit" class="btn btn-primary disabled" ; style="border-radius: 8px">Alquilar</button>
+                <button type="submit" class="btn btn-primary" ; style="border-radius: 8px">{{Alquilar}}</button>
                 </div>
+
             </form>
+           
       </div>
 
     </section>
-    <!-- Fin Prueba-->
 
-</div>
 
 {% endblock %}
 

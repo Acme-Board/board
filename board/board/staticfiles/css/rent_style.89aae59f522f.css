@@ -1,0 +1,47 @@
+
+.container{
+  color:white;
+}
+
+.row {
+  color:white;
+}
+.container *{
+  color:white;
+}
+
+.form-register{
+  width:  400px;
+  background: #24303c;
+  padding: 30px;
+  margin: auto;
+  margin-top: 100px;
+  border-radius: 4px;
+  font-family: 'calibri';
+  color: white;
+}
+
+
+.table-games{
+  background: #24303c;
+	padding: 10px;
+	margin: 5px;
+	margin-top: 10px;
+	border-radius: 8px;
+	font-family: 'calibri';
+  color: white;
+  transition: transform .5s;
+}
+
+.table-games:hover{
+  transform: scale(1.05);
+}
+
+.table-myGames{
+  background: #24303c;
+	padding: 10px;
+	margin-top: 10px;
+	border-radius: 8px;
+	font-family: 'calibri';
+  color: white;
+}
