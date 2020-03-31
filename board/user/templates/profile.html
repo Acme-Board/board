@@ -41,7 +41,9 @@
         <td>
       <div style="color:white;">
         <img src="{{user.picture}}" style="width: 150px;"/>
+        {% if request.user.id == user.id and user.is_authenticated == True %} 
         <a role="button" href="/editPic/" class="btn btn-primary my-2">Editar foto</a>
+        {% endif %}
       </div>
     </td>
     <td>
@@ -53,14 +55,15 @@
         <h5>{{user.bio}}</h5>
         </br>
         <!-- Aqui viene el pop up-->
-        
+        {% if request.user.id == user.id and user.is_authenticated == True %} 
         <a role="button" href="/editProfile/" class="btn btn-primary my-2">Editar perfil</a>
-        <a role="button" href="/editAccount/" class="btn btn-primary my-2">Editar cuenta</a>
-       
+        <a role="button" href="/editAccount/" class="btn btn-primary my-2">Editar cuenta</a>       
       </br>
         <button type="button" class="btn btn-danger my-1" data-toggle="modal" data-target="#exampleModal">
           Borrar datos
         </button>
+
+        {% endif %}
 
       
         <!-- Modal -->
