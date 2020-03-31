@@ -236,4 +236,4 @@ def empty_cart(request):
             for item in cart.items.all():
                 cart.items.remove(item)
                 item.delete()
-    #return render(request, 'orders.html', {'order': cart.items.all(), 'id':cart.id, 'mensaje': 'Carrito vaciado','sum':cart.get_total_price()})
+    return render(request, 'orders.html', {'order': cart.items.all(), 'id':cart.id, 'mensaje': 'Carrito vaciado','sum':cart.get_total_price()})
