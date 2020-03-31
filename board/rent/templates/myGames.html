@@ -14,7 +14,6 @@
         </script>
     {% endblock %} 
 
-
 </head>
 <body>
     {% block content %}
@@ -33,7 +32,7 @@
             </thead>
             <tbody>
                 <tr class="table-myGames">
-                    <td> <img style="width: 150px;height: 150px; ;" src="{{dato.picture}} "/> </td>
+                    <td> <img class="img-responsive" src="{% static '' %}" style="width: 150px;height: 150px;"/> </td>
                    
                     <td>
                         <h4>{{dato.name|capfirst}} - <i> {{dato.price}} €</i> </br></h4>
@@ -45,8 +44,9 @@
                             style="border-radius: 8px; margin-top: 5px;">Ver mas</a></div>
                         -->
                             <!-- Sin funcionalidad aun -->
-                        <a href= "/editGame/{{dato.id}}" class="btn btn-info btn-sm"
-                            style="border-radius: 8px; margin-top: 5px; color:black; font-weight: bold;">Editar</a>
+                <a href= "/gameDetail/{{dato.id}}/edit" class="btn btn-info btn-sm" 
+                style="border-radius: 8px; color:black; font-weight: bold;">Editar</a>
+
 
                             <!-- Sin funcionalidad aun href="/delete/{{dato.id}}" -->
 

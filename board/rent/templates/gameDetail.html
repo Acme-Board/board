@@ -31,13 +31,16 @@
 
 <div id='games'>
   
-  <div >
+
+  <div>
     <div><h3  class ="well well-sm py-5" style="border-radius: 8px; color:white; margin-left:35%;">{{name}} - {{status}}</h3> </div>
-    
+
   <div class="row"style="margin-left:25%;">
-    <div> <img style="width:284px;height:300px; border-radius: 8px" src="{{picture}}"/> </div>
+
+   <div> <img style="width:284px;height:300px; border-radius: 8px" src="{{picture}}"/> </div>
    
     <div style="color:white; margin-left:15%;"> 
+
       <h4> Usuario: <a href="/profile/{{owner.id}}" style="color:white; text-decoration: underline;">{{owner}}</a> </h4>
       <h4> Precio: {{price}} &euro;</h4></br>
       <h5>Descripción:</h5>
@@ -100,24 +103,31 @@
 
 
   {% if request.user.is_authenticated %}
+
 <table>
-      <div style="margin-top: 10px;">Dias de Alquiler: <input type="number" id="days" name="days" value="1" min="1" max="100">
-        {% csrf_token %}</div>
   <tr>
     <td>
-      <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; color:black; font-weight: bold;">Volver</a>
+      <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 42%; color:black; font-weight: bold;">Volver</a>
     </td>
+      {% if request.user != owner %}
     <td>
       <form action="/addCart/{{id}}" method="POST" style="margin-top: 16px; margin-left: 5px;">
+        {% csrf_token %}
+        <div style="margin-top: 10px;">Dias de Alquiler: <input type="number" id="days" name="days" value="1" min="1" max="100">
+        </div>
       <button type="submit" class="btn btn-info btn-sm" style="border-radius: 8px; color:black; font-weight: bold;">Añadir al carrito</button>
       </form>
     </td>
+      {% endif %}
   </tr>
 </table>
 
   {% else %}
-  <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 45%;color:black; font-weight: bold;">Volver</a>
+  <a href= "/gameDetail/{{id}}/edit" class="btn btn-info btn-sm" 
+  style="border-radius: 8px; color:black; font-weight: bold;">Editar</a>
   {% endif %}
+
+  <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 45%;color:black; font-weight: bold;">Volver</a>
 
 <br/>
 </div>
