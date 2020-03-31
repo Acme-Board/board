@@ -16,7 +16,7 @@ def create_review(request, id_user):
         if form.is_valid():
             rate = form.cleaned_data['valoration']
             com = form.cleaned_data['comment']
-            if 0.0 <= rate <= 5.0:
+            if 0.0 <= float(rate) <= 5.0:
                 fromUser = get_object_or_404(User, pk=request.user.id)
                 toUser = get_object_or_404(User, pk=id_user)
                 rent_list_from = Rent.objects.filter(user=fromUser)
