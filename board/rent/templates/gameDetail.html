@@ -1,37 +1,16 @@
 <html>
 <head>
 {% extends "base.html" %}
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
-  <!-- Moment.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js" integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
-
-  <!-- Tempus Dominus Bootstrap 4 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css" integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js" integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
 
 </head>
 
 <body>
-  <style>
-    tr{padding: 1 !important;}
-    td{padding: 1 !important;}
-  </style>
-  <script>
-    $(function () {
-      $("#datetimepicker1").datetimepicker();
-
-      $("#datetimepicker2").datetimepicker();
-    });
-  </script>
+  
 {% block content %}
+<table class="container">
 
-<div id='games' style="margin-bottom: 100px;">
-  <div>
-    <div><h3  class ="well well-sm py-5" style="border-radius: 8px; color:white; margin-left:39%;">{{name}} - {{status}}</h3> </div>
+  
+  <div><h3  class ="well well-sm py-5" style="border-radius: 8px; color:white; margin-left:39%;">{{name}} - {{status}}</h3> </div>
 
   <div class="row"style="margin-left:25%;">
 
@@ -43,9 +22,100 @@
       <h4> Precio: {{price}} &euro;</h4></br>
       <h5>Descripción:</h5>
       {{description}}</br>
+
+      
+  {% if request.user.is_authenticated %}
+
+    {% if request.user != owner %}
+      
+       <form action="/addCart/{{id}}" method="POST" style="margin-top: 16px; margin-left: 5px; color: white;">
+         {% csrf_token %}
+        <div style="margin-top: 10px;">Dias de Alquiler:</br> <input type="number" id="days" name="days" value="1" min="1" max="100">
+         </div>
+       </br>
+       <button type="submit" class="btn btn-info btn-sm" style="border-radius: 8px; color:black; font-weight: bold;">Añadir al carrito</button>
+        </form>
+      
+
+    {% else %}
+        </br>
+        <a href= "/gameDetail/{{id}}/edit" class="btn btn-info btn-sm" 
+        style=" color:black; font-weight: bold; margin-right: 5px;">Editar</a>
     
-    {% if request.user.is_authenticated %}
-    <!--
+       <!-- Aqui viene el pop up-->
+            
+       <button type="button" class="btn btn-danger  btn-sm" data-toggle="modal" data-target="#exampleModal">
+        Borrar Juego
+      </button>
+    
+    
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-dark" id="popup">Advertencia</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h5 class="text-dark" id="popup">¿Estas seguro de que quieres borrar tus datos? {{name}}</h5>
+            </div>
+            <div class="modal-footer">
+              <a role="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
+              <a role="button" href="/delete/{{id}}" class="btn btn-primary">Si, continuar</a>
+            </div>
+          </div>
+        </div>
+      </div>   
+      <table>
+        <tr>         
+    {% endif %}
+    <table>
+      <tr>
+      <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 25%; margin-top: 30px;color:black; font-weight: bold;">Volver</a>
+  {% else %}
+     <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 25%; margin-top: 30px;color:black; font-weight: bold;">Volver</a>
+  {% endif %}
+</tr>
+</table>
+</div>
+</div>
+</table>
+{% endblock %}
+
+</body>
+</html>
+
+
+ <!--
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+  Moment.js
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js" integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
+
+  Tempus Dominus Bootstrap 4
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css" integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js" integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
+
+
+
+<style>
+    tr{padding: 1 !important;}
+    td{padding: 1 !important;}
+  </style>
+  <script>
+    $(function () {
+      $("#datetimepicker1").datetimepicker();
+
+      $("#datetimepicker2").datetimepicker();
+    });
+  </script>
+
     <div class="col-sm-4" style="background-color: #6D65D3;border-radius: 8px;">
   
       <form>
@@ -97,76 +167,3 @@
         </fieldset>
       </form>
     </div>-->
-    {% endif %}
-
-
-  {% if request.user.is_authenticated %}
-
-<table>
-  <tr>
-    {% if request.user != owner %}
-    <td>
-      <form action="/addCart/{{id}}" method="POST" style="margin-top: 16px; margin-left: 5px; color: white;">
-        {% csrf_token %}
-      <div style="margin-top: 10px;">Dias de Alquiler:</br> <input type="number" id="days" name="days" value="1" min="1" max="100">
-        </div>
-      </br>
-      <button type="submit" class="btn btn-info btn-sm" style="border-radius: 8px; color:black; font-weight: bold;">Añadir al carrito</button>
-      </form>
-    </td>
-
-      {% else %}
-  </br>
-      <a href= "/gameDetail/{{id}}/edit" class="btn btn-info btn-sm" 
-      style=" color:black; font-weight: bold; margin-right: 5px;">Editar</a>
-    
-       <!-- Aqui viene el pop up-->
-            
-       <button type="button" class="btn btn-danger  btn-sm" data-toggle="modal" data-target="#exampleModal">
-        Borrar Juego
-      </button>
-    
-    
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title text-dark" id="popup">Advertencia</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <h5 class="text-dark" id="popup">¿Estas seguro de que quieres borrar tus datos? {{name}}</h5>
-            </div>
-            <div class="modal-footer">
-              <a role="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
-              <a role="button" href="/delete/{{id}}" class="btn btn-primary">Si, continuar</a>
-            </div>
-          </div>
-        </div>
-                   
-      {% endif %}
-
-
-  {% else %}
-
-    
-
-  {% endif %}
-
-
-</tr>
-</table>
-
-</div>
-
-</div>
-<a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 25%; margin-top: 30px;color:black; font-weight: bold;">Volver</a>
-</div>
-
-{% endblock %}
-
-</body>
-</html>
