@@ -25,7 +25,7 @@ script:
 - python-codacy-coverage -r coverage.xml
 branches:
   only:
-  - develop
+  - master
 deploy:
   provider: heroku
   app: tryonboard-sprint2
