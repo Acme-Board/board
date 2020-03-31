@@ -29,5 +29,7 @@ class editProfile(forms.Form):
     last_name = forms.CharField(max_length=50,label="Apellidos")
     email = forms.CharField(max_length=50,label="email",validators=[EmailValidator(message="Email incorrecto")])
     bio = forms.CharField(max_length=200,label="Descripción",required=False,widget=forms.Textarea)
-    picture = forms.CharField(max_length=50,label="Foto",validators=[URLValidator],required=False)
+
+class editPic(forms.Form):
+    picture = forms.FileField( label="Foto",required=False)
 

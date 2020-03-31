@@ -45,6 +45,7 @@ urlpatterns = [
     path('gameDetail/<int:pk>/', rent_views.games_detail, name='games_detail'),
     path('newgame', rent_views.new_game),
     path('gameDetail/<int:pk>/edit/', rent_views.edit_game, name='new_game'),
+    path('gameDetail/<int:pk>/pic/', rent_views.edit_pic, name='new_game'),
     re_path(r'rent/(?P<id_game>\d+)',rent_views.rent_game),
     re_path(r'rents/(?P<id_user>\d+)',rent_views.rents_list),
     re_path(r'cart/',rent_views.view_cart),
@@ -61,6 +62,7 @@ urlpatterns = [
     path('delete/<int:pk>', rent_views.delete),
     path('editAccount/', user_views.edit_account),
     path('editProfile/', user_views.edit_profile),
+    path('editPic/', user_views.edit_pic),
 
     #Review
     re_path(r'review/(?P<id_user>\d+)',reviews_views.create_review),

@@ -7,7 +7,7 @@ from django.contrib.auth.hashers import check_password, make_password
 from django import forms
 
 from user.models import User
-from user.forms import Register, editAccount, editProfile
+from user.forms import Register, editAccount, editProfile, editPic
 
 from reviews.models import Valoration, Comment
 
@@ -164,7 +164,6 @@ def edit_profile(request):
             last_name = formulario.cleaned_data['last_name']
             email = formulario.cleaned_data['email']
             bio = formulario.cleaned_data['bio']
-            picture = formulario.cleaned_data['picture']
 
             User.objects.filter(id=request.user.id).update(first_name=name,last_name=last_name,email=email,bio=bio,picture=picture)
 
@@ -177,6 +176,24 @@ def edit_profile(request):
         formulario.fields["last_name"].initial = request.user.last_name
         formulario.fields["email"].initial = request.user.email
         formulario.fields["bio"].initial = request.user.bio
-        formulario.fields["picture"].initial = request.user.picture
 
     return render(request,"newuser.html",{"form":formulario})
+
+def edit_pic(request):
+
+    if request.method == "POST":
+        form = editPic(request.POST,request.FILES or None)
+
+        if form.is_valid():
+            
+            picture = form.cleaned_data['picture']
+
+            User.objects.filter(pk=request.user.id).update(picture=picture)
+
+            return redirect('/Profile/{}'.format(request.user.id))
+    else:
+        form = editPic()
+
+        form.fields["picture"].initial = request.user.picture
+
+    return render(request, 'newuser.html', {'form': form})
