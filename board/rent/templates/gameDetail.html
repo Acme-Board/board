@@ -105,8 +105,6 @@
   {% if request.user.is_authenticated %}
 
 <table>
-      <div style="margin-top: 10px;">Dias de Alquiler: <input type="number" id="days" name="days" value="1" min="1" max="100">
-        {% csrf_token %}</div>
   <tr>
     <td>
       <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 42%; color:black; font-weight: bold;">Volver</a>
@@ -114,6 +112,9 @@
       {% if request.user != owner %}
     <td>
       <form action="/addCart/{{id}}" method="POST" style="margin-top: 16px; margin-left: 5px;">
+        {% csrf_token %}
+        <div style="margin-top: 10px;">Dias de Alquiler: <input type="number" id="days" name="days" value="1" min="1" max="100">
+        </div>
       <button type="submit" class="btn btn-info btn-sm" style="border-radius: 8px; color:black; font-weight: bold;">Añadir al carrito</button>
       </form>
     </td>
