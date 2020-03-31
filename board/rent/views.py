@@ -5,7 +5,7 @@ from datetime import date
 from django.shortcuts import render ,  get_object_or_404
 from rent.models import Game , Rent
 from django.conf import settings
-from rent.forms import NewGame
+from rent.forms import NewGame, editData, editPicture
 from django.shortcuts import redirect
 
 # Create your views here.
@@ -81,7 +81,7 @@ def edit_game(request, pk):
     juego = get_object_or_404(Game, pk=pk)
 
     if request.method == "POST":
-        form = NewGame(request.POST,request.FILES or None)
+        form = editData(request.POST,request.FILES or None)
 
         if form.is_valid():
             name = form.cleaned_data['name']
@@ -93,21 +93,39 @@ def edit_game(request, pk):
             except ValueError:
                 form.add_error('price','Introduzca un dato numérico')
                 return render(request,"newgame.html",{"form":form})
-
-            picture = form.cleaned_data['picture']
+            
             address = form.cleaned_data['address']
 
-            Game.objects.filter(pk=pk).update(name=name,description=description,status=status,price=price,picture=picture,address=address)
+            Game.objects.filter(pk=pk).update(name=name,description=description,status=status,price=price,address=address)
 
             return redirect('/gameDetail/{}'.format(pk))
     else:
-        form = NewGame()
+        form = editData()
         form.fields["name"].initial = juego.name
         form.fields["description"].initial = juego.description
         form.fields["status"].initial = juego.status
         form.fields["price"].initial = juego.price
-        form.fields["picture"].initial = juego.picture
         form.fields["address"].initial = juego.address
+    return render(request, 'newgame.html', {'form': form})
+
+def edit_pic(request, pk):
+    juego = get_object_or_404(Game, pk=pk)
+
+    if request.method == "POST":
+        form = editPicture(request.POST,request.FILES or None)
+
+        if form.is_valid():
+            
+            picture = form.cleaned_data['picture']
+
+            Game.objects.filter(pk=pk).update(picture=picture)
+
+            return redirect('/gameDetail/{}'.format(pk))
+    else:
+        form = editPicture()
+
+        form.fields["picture"].initial = juego.picture
+
     return render(request, 'newgame.html', {'form': form})
 
 def rent_game(request, id_game, days):
