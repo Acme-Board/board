@@ -110,7 +110,7 @@ def edit_game(request, pk):
             if price==0:
                 form.add_error('price','No se puede regalar un juego')
                 return render(request,"newgame.html",{"form":form}) 
-                
+
             address = form.cleaned_data['address']
 
             Game.objects.filter(pk=pk).update(name=name,description=description,status=status,price=price,address=address)
@@ -253,6 +253,4 @@ def empty_cart(request):
             for item in cart.items.all():
                 cart.items.remove(item)
                 item.delete()
-    #return render(request, 'orders.html', {'order': cart.items.all(), 'id':cart.id, 'mensaje': 'Carrito vaciado','sum':cart.get_total_price()})
-
-
+    return render(request, 'orders.html', {'order': cart.items.all(), 'id':cart.id, 'mensaje': 'Carrito vaciado','sum':cart.get_total_price()})
