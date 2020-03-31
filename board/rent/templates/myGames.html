@@ -40,8 +40,12 @@
             </thead>
             <tbody>
                 <tr class="table-myGames">
-                    <td> <img class="img-responsive" src="{% static '' %}" style="width: 150px;height: 150px;"/> </td>
-                   
+                  <td>
+                    <img  src="{{dato.picture}}" style="width: 150px;height: 150px;"/>
+                    <button href= "/gameDetail/{{dato.id}}/edit" type="button" class="btn btn-primary btn-sm"
+                    style="width: 150px; font-weight: bold">Editar Foto</button>
+                  </td>
+
                     <td>
                         <h4>{{dato.name|capfirst}} - <i> {{dato.price}} €</i> </br></h4>
                         Estado: {{dato.status}} </br>
