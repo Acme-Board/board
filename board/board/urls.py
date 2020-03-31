@@ -51,12 +51,14 @@ urlpatterns = [
     re_path(r'addCart/(?P<id_game>\d+)', rent_views.add_item_to_cart),
     re_path(r'deleteCart/(?P<id_item>\d+)', rent_views.delete_item_from_cart),
     re_path(r'deleteAll/', rent_views.empty_cart),
+
     #User
     re_path(r'profile/(?P<id_user>\d+)',user_views.profile),
     path('newuser', user_views.new_user),
     path('deleteUser/<int:pk>', user_views.delete_myUSer),
     path('delete/<int:pk>', rent_views.delete),
-    path('editUser/<int:pk>', user_views.edit_user),
+    path('editAccount/', user_views.edit_account),
+    path('editProfile/', user_views.edit_profile),
 
     #Review
     re_path(r'review/(?P<id_user>\d+)',reviews_views.create_review),

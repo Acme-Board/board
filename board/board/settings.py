@@ -141,5 +141,6 @@ STRIPE_PUBLISHABLE_KEY = 'pk_test_RQqzBNd4chgHUGDPxZtwsKzU00X9dZcRvR'
 
 STATIC_ROOT ='staticfiles'
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
 django_heroku.settings(locals())

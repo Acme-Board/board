@@ -1,12 +1,9 @@
- .form-main{
+ .form-main, .col{
     width:  450px;
-  background: #24303c;
-  padding: 30px;
-  margin: auto;
-  margin-top: 50px;
-  border-radius: 8px;
-  font-family: 'calibri';
-  color: white;
+    background: #24303c;
+    border-radius: 8px;
+    font-family: 'calibri';
+    color: white;
   }
   
   .form-main .form-title{
@@ -23,7 +20,7 @@
   .d-inline-flex{
     background-color: #24303c; 
     margin-left: 30%;
-    width: 35%;
+    width: 45%;
   }
   
  .form-register{
@@ -31,7 +28,6 @@
   background: #24303c;
   padding: 30px;
   margin: auto;
-  margin-top: 100px;
   border-radius: 8px;
   font-family: 'calibri';
   color: white;
