@@ -3,8 +3,10 @@ import random
 from datetime import date, datetime
 
 from django.shortcuts import render ,  get_object_or_404
+
 from django.utils.dateparse import parse_date
-from rent.models import Game , Rent
+from rent.models import Game , Rent, Status
+
 from django.conf import settings
 from rent.forms import NewGame, editData, editPicture
 from django.shortcuts import redirect
@@ -32,8 +34,19 @@ def games_list_by_zona(request,zona):
     return render(request,'games.html',{'games':games})
 
 def games_list_by_status(request,status):
-    games = Game.objects.filter(status=status)
-    return render(request,'games.html',{'games':games})
+    games = []
+    filtro = True
+    
+    if (int(status)==1):
+        games = Game.objects.filter(status="Perfecto")
+    if (int(status)==2):
+        games = Game.objects.filter(status="Faltan piezas")
+    if (int(status)==3):
+        games = Game.objects.filter(status="Gastado")
+    if (int(status)==4):
+        games = Game.objects.filter(status="Injugable")
+    
+    return render(request,'games.html',{'games':games,'filter':filtro})
 
 def rents_list(request):
     rents  = Rent.objects.filter(user = request.user)
@@ -64,6 +77,19 @@ def new_game(request):
             name = form.cleaned_data['name']
             description = form.cleaned_data['description']
             status = form.cleaned_data['status']
+
+            if(status == "Status.PE"):
+                status = "Perfecto"
+            
+            if(status == "Status.FA"):
+                status = "Faltan piezas"
+            
+            if(status == "Status.GA"):
+                status = "Gastado"
+            
+            if(status == "Status.IN"):
+                status = "Injugable"
+
             try:
                 price = float(form.cleaned_data['price'])
             except ValueError:
@@ -101,6 +127,18 @@ def edit_game(request, pk):
             name = form.cleaned_data['name']
             description = form.cleaned_data['description']
             status = form.cleaned_data['status']
+
+            if(status == "Status.PE"):
+                status = "Perfecto"
+            
+            if(status == "Status.FA"):
+                status = "Faltan piezas"
+            
+            if(status == "Status.GA"):
+                status = "Gastado"
+            
+            if(status == "Status.IN"):
+                status = "Injugable"
 
             try:
                 price = float(form.cleaned_data['price'])
