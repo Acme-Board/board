@@ -1,9 +1,12 @@
 import string
 import random
-from datetime import date
+from datetime import date, datetime
 
 from django.shortcuts import render ,  get_object_or_404
+
+from django.utils.dateparse import parse_date
 from rent.models import Game , Rent, Status
+
 from django.conf import settings
 from rent.forms import NewGame, editData, editPicture
 from django.shortcuts import redirect
@@ -185,7 +188,7 @@ def edit_pic(request, pk):
 
     return render(request, 'newgame.html', {'form': form, 'texto': texto, 'Alquilar': Alquilar})
 
-def rent_game(request, id_game, days):
+def rent_game(request, id_game, days, initial):
     dato = get_object_or_404(Game, pk=id_game)
     user = get_object_or_404(User, pk=request.user.id)
     letters = string.ascii_uppercase
@@ -193,7 +196,7 @@ def rent_game(request, id_game, days):
     ramdomLetters = ''.join(random.choice(letters) for i in range(3))
     ramdomNumber = ''.join(random.choice(digits) for i in range(4))
     ticker = ramdomLetters + '-' + ramdomNumber
-    rent = Rent(ticker=ticker, game=dato,days = days, user= user, rentable=False)
+    rent = Rent(ticker=ticker, game=dato,days = days, initial_date=initial, user= user, rentable=False)
     rent.save()
 
 
@@ -222,6 +225,7 @@ def add_item_to_cart(request, id_game):
     user = get_object_or_404(User, pk=request.user.id)
     list_carts = Order.objects.filter(user=user)
     days = 1
+    initial = None
     if request.method == "POST":
         if request.POST.get("days") is None:
             dato = get_object_or_404(Game, pk=id_game)
@@ -234,6 +238,18 @@ def add_item_to_cart(request, id_game):
                           {'name': dato.name, 'description': dato.description, 'price': dato.price,
                            'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner})
         days = request.POST.get("days")
+        #Fecha inicio
+        if request.POST.get("initial") is None:
+            dato = get_object_or_404(Game, pk=id_game)
+            return render(request, 'gameDetail.html',
+                      {'name': dato.name, 'description': dato.description, 'price': dato.price,
+                       'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner})
+        if parse_date(request.POST.get("initial")) < datetime.date(datetime.now()):
+            dato = get_object_or_404(Game, pk=id_game)
+            return render(request, 'gameDetail.html',
+                          {'name': dato.name, 'description': dato.description, 'price': dato.price,
+                           'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner})
+        initial = parse_date(request.POST.get("initial"))
     if not list_carts:
         ramdomLetters = ''.join(random.choice(string.ascii_uppercase) for i in range(4))
         ramdomNumber = ''.join(random.choice(string.digits) for i in range(5))
@@ -246,7 +262,7 @@ def add_item_to_cart(request, id_game):
                 añadir = False
                 break
         if añadir:
-            item = OrderItem(game=dato, days=days, is_ordered=False, date_added=date.today())
+            item = OrderItem(game=dato, days=days, initial_date=initial, is_ordered=False, date_added=date.today())
             item.save()
             cart.items.add(item)
             cart.save()
@@ -264,7 +280,7 @@ def add_item_to_cart(request, id_game):
                         añadir = False
                         return render(request, 'orders.html', {'order': cart.items.all(), 'id':cart.id, 'mensaje': 'No puedes comprar tu propio juego','sum':cart.get_total_price()})
                 if añadir:
-                    item = OrderItem(game=dato, days=days, is_ordered=False, date_added=date.today())
+                    item = OrderItem(game=dato, days=days, initial_date=initial, is_ordered=False, date_added=date.today())
                     item.save()
                     cart.items.add(item)
                     cart.save()

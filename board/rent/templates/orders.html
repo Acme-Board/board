@@ -30,6 +30,7 @@
 			<tr style="color:white;">
 				<th style="width:50%">Producto</th>
 				<th style="width:10%">Precio</th>
+				<th style="width:10%">Fecha inicio</th>
 				<th style="width:22%" class="text-center">Opciones</th>
 				
 			</tr>
@@ -47,6 +48,7 @@
 				</div>
 			</td>
 			<td data-th="Precio" style="color:white;">{{dato.game.price}} x {{dato.days}} dias</td>
+			<td data-th="Fecha inicio" style="color:white;">{{dato.initial_date|date:'Y-m-d'}}</td>
 			<td data-th="Opciones"class="text-center">
 				<a role=button href="/gameDetail/{{dato.game.id}}" class="btn btn-info btn-sm" style="color:black; font-weight: bold;">Info</a>
 
