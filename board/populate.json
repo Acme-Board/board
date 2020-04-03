@@ -516,6 +516,7 @@
 		"fields": {
 			"ticker": "ABC-1234",
 			"rentable": true,
+			"initial_date": "2020-06-06T22:00:00Z",
 			"user": 16,
 			"days": 3,
 			"game": 22
@@ -527,6 +528,7 @@
 		"fields": {
 			"ticker": "ABC-2222",
 			"rentable": true,
+			"initial_date": "2020-06-06T22:00:00Z",
 			"user": 10,
 			"days": 1,
 			"game": 45
@@ -538,6 +540,7 @@
 		"fields": {
 			"ticker": "AFC-3333",
 			"rentable": true,
+			"initial_date": "2020-06-06T22:00:00Z",
 			"user": 32,
 			"days": 1,
 			"game": 44
@@ -549,6 +552,7 @@
 		"fields": {
 			"ticker": "GBC-3421",
 			"rentable": true,
+			"initial_date": "2020-06-06T22:00:00Z",
 			"user": 16,
 			"days": 4,
 			"game": 43
@@ -560,6 +564,7 @@
 		"fields": {
 			"ticker": "DBC-6234",
 			"rentable": true,
+			"initial_date": "2020-06-06T22:00:00Z",
 			"user": 10,
 			"days": 5,
 			"game": 42
@@ -571,6 +576,7 @@
 		"fields": {
 			"ticker": "ALC-1884",
 			"rentable": true,
+			"initial_date": "2020-06-06T22:00:00Z",
 			"days": 2,
 			"user": 16,
 			"game": 41
@@ -582,6 +588,7 @@
 		"fields": {
 			"ticker": "EBC-1214",
 			"rentable": true,
+			"initial_date": "2020-06-06T22:00:00Z",
 			"days": 1,
 			"user": 10,
 			"game": 40
@@ -593,6 +600,7 @@
 		"fields": {
 			"ticker": "AAA-1634",
 			"rentable": true,
+			"initial_date": "2020-06-06T22:00:00Z",
 			"days": 1,
 			"user": 11,
 			"game": 39
