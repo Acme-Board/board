@@ -51,7 +51,7 @@ def login(request):
 def delete_myUSer(request, pk):
     # Recuperamos la instancia del user y la borramos
     instancia = User.objects.get(id=pk)
-    if(instancia == request.user):
+    if(instancia == request.user or request.user.admin == True):
         instancia.delete()
         return redirect('/')
   
@@ -197,3 +197,10 @@ def edit_pic(request):
         form.fields["picture"].initial = request.user.picture
 
     return render(request, 'newuser.html', {'form': form})
+
+def user_list(request):
+    if(request.user.admin):
+        games = User.objects.exclude(pk=request.user.id)
+    else:
+        games = []
+    return render(request,'users.html',{'users':games})
