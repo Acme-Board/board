@@ -74,6 +74,19 @@ def new_game(request):
             name = form.cleaned_data['name']
             description = form.cleaned_data['description']
             status = form.cleaned_data['status']
+
+            if(status == "Status.PE"):
+                status = "Perfecto"
+            
+            if(status == "Status.FA"):
+                status = "Faltan piezas"
+            
+            if(status == "Status.GA"):
+                status = "Gastado"
+            
+            if(status == "Status.IN"):
+                status = "Injugable"
+
             try:
                 price = float(form.cleaned_data['price'])
             except ValueError:
@@ -111,6 +124,18 @@ def edit_game(request, pk):
             name = form.cleaned_data['name']
             description = form.cleaned_data['description']
             status = form.cleaned_data['status']
+
+            if(status == "Status.PE"):
+                status = "Perfecto"
+            
+            if(status == "Status.FA"):
+                status = "Faltan piezas"
+            
+            if(status == "Status.GA"):
+                status = "Gastado"
+            
+            if(status == "Status.IN"):
+                status = "Injugable"
 
             try:
                 price = float(form.cleaned_data['price'])
