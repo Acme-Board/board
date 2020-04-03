@@ -1,5 +1,28 @@
 [
-  {
+	{
+		"fields": {
+			"password": "pbkdf2_sha256$150000$40$mbu3EIOy+CJGurks5j21JugGIq6arcSgON2NUt0MTXM=",
+			"last_login": null,
+			"is_superuser": false,
+			"username": "Antonio",
+			"first_name": "Antonio",
+			"last_name": "Macías",
+			"email": "antmaczam@gmail.com",
+			"is_staff": false,
+			"is_active": true,
+			"date_joined": "2019-10-11T22:00:00Z",
+			"bio": "Hola, me llamo Antonio y me encantan los juegos de mesa",
+			"range": "noob",
+			"picture": "board/staticfiles/media/myfolder/alejandro_user.jpg",
+			"rate": "2",
+			"admin": true,
+			"groups": [],
+			"user_permissions": []
+		},
+		"model": "user.user",
+		"pk": 9
+	},
+	{
 		"fields": {
 			"password": "pbkdf2_sha256$150000$40$mbu3EIOy+CJGurks5j21JugGIq6arcSgON2NUt0MTXM=",
 			"last_login": null,

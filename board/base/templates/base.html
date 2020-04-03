@@ -27,6 +27,7 @@
        background-size: cover;
        background-image: url("{% static 'img/bg-masthead.jpg' %}");
       }
+
     </style>
 
 <a href="/">
@@ -58,6 +59,13 @@
                     <li class="nav-item px-5">
                       <a class="nav-link" href="/cart"><b>Carrito de compra</b></a>
                     </li>
+                    {% if request.user.admin %}
+                    <li class="nav-item px-5">Administración
+                      <ul>
+                        <li><a class="nav-link" href="/users"><b>Lista usuarios</b></a></li>
+                      </ul>
+                    </li>
+                    {% endif %}
                     <li class="nav-item px-5">
                       <a class="nav-link" href="/profile/{{request.user.id}}"><b>Perfil</b></a>
                     </li>
