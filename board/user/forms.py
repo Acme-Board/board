@@ -33,3 +33,6 @@ class editProfile(forms.Form):
 class editPic(forms.Form):
     picture = forms.FileField( label="Foto",required=False)
 
+class contact(forms.Form):
+    email = forms.EmailField(label="Correo electrónico")
+    message = forms.CharField(widget=forms.Textarea)

@@ -64,6 +64,7 @@ urlpatterns = [
     path('editProfile/', user_views.edit_profile),
     path('editPic/', user_views.edit_pic),
     path('users/', user_views.user_list),
+    path('contact/', user_views.contact_user),
 
     #Review
     re_path(r'review/(?P<id_user>\d+)',reviews_views.create_review),
