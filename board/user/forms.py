@@ -34,5 +34,8 @@ class editPic(forms.Form):
     picture = forms.FileField( label="Foto",required=False)
 
 class contact(forms.Form):
-    email = forms.EmailField(label="Correo electrónico")
+    
     message = forms.CharField(widget=forms.Textarea)
+class descargaDatos(forms.Form):
+    
+    message = forms.CharField(max_length=200,label="Message",required=False,widget=forms.Textarea)

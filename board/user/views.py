@@ -206,16 +206,48 @@ def user_list(request):
         games = []
     return render(request,'users.html',{'users':games})
 
-def contact_user(request):
+def contact_user(request,pk):
+    user = get_object_or_404(User, pk=pk)
+
     if request.method=='POST':
         form = contact(request.POST)
         if form.is_valid():
             title = 'Mensaje del administrador de TryOnBoard'
             body = form.cleaned_data['message'] + '\n'
-            body += 'Comunicarse a: '+ form.cleaned_data['email']
-            email = EmailMessage(title,body,to=[form.cleaned_data['email']])
+            body += 'Comunicarse a: '+ user.email
+            emailto = user.email
+
+            email = EmailMessage(title,body,to=[emailto])
             email.send()
             return redirect('/')
     else:
         form = contact()
     return render(request,'contact.html',{'form':form})
+def DescargaDatosUser(request,pk):
+    user = get_object_or_404(User, pk=pk)
+    if(not(request.user == user)):
+         return redirect('/')
+    else:
+
+        if request.method=='POST':
+            form = contact(request.POST)
+            if form.is_valid():
+                title = 'Mensaje del administrador de TryOnBoard' 
+                body = 'Aqui estan los datos que TRY ON BOARD tiene sobre usted:' + '\n'
+
+                body += 'Username:'+ user.username + '\n'
+                body += 'Password:'+ user.password + '\n'
+                body += 'Bio:'+ user.bio + '\n'        
+                body += 'Name:'+ user.first_name + '\n'
+                body += 'Last name :'+ user.last_name + '\n'
+                body += 'Email:'+ user.email + '\n'
+                emailto = user.email
+                
+
+                email = EmailMessage(title,body,to=[emailto])
+              #  email.attach_file(user.picture.url)
+                email.send()
+                return redirect('/')
+        else:
+            form = contact()
+    return render(request,'descargaDatos.html',{'form':form})

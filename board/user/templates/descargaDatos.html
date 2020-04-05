@@ -1,0 +1,12 @@
+
+
+{% block content %}
+    <form method="POST" action="" >
+        {% csrf_token %}
+        <p>¿Quiere  enviar algun mensaje adicional como una fecha antes de enviarle los datos del usuario?</p>
+        {{form.as_p}}      
+        <div style="margin: 15px; text-align: center;">
+            <button type="submit" class="btn btn-primary"  style="border-radius: 8px">Crear</button>              
+        </div>
+    </form>
+{% endblock %}
