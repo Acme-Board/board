@@ -56,9 +56,19 @@ function initMap() {
   var ubicacion = {lat: parseFloat(var2), lng: parseFloat(var1)};
   // The map, centered at ubicacion
   var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: ubicacion});
+      document.getElementById('map'), {zoom: 11, center: ubicacion});
   // The marker, positioned at ubicacion
-  var marker = new google.maps.Marker({position: ubicacion, map: map});
+    //var marker = new google.maps.Marker({position: ubicacion, map: map});
+    var cityCircle = new google.maps.Circle({
+            strokeColor: '#49abff',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#2496ff',
+            fillOpacity: 0.35,
+            map: map,
+            center: ubicacion,
+            radius: 120
+          });
 }
     </script>
 
