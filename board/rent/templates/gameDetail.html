@@ -22,23 +22,8 @@
       <h4> Precio: {{price}} &euro;</h4></br>
       <h5>Descripción:</h5>
       {{description}}</br>
-
-      
-  {% if request.user.is_authenticated %}
-
-    {% if request.user != owner %}
-      
-       <form action="/addCart/{{id}}" method="POST" style="margin-top: 16px; margin-left: 5px; color: white;">
-         {% csrf_token %}
-        <div style="margin-top: 10px;">Dias de Alquiler:</br> <input type="number" id="days" name="days" value="1" min="1" max="100" required>
-         </div>
-           <div style="margin-top: 10px;">Fecha inicio alquiler:</br> <input type="date" id="initial" name="initial" required>
-         </div>
-       </br>
-       <button type="submit" class="btn btn-info btn-sm" style="border-radius: 8px; color:black; font-weight: bold;">Añadir al carrito</button>
-        </form>
         <h5>Localizacion: </h5>
-<div id="map"></div>
+        <div id="map"></div>
         <div>
     <style>
        /* Set the size of the div element that contains the map */
@@ -56,7 +41,7 @@ function initMap() {
   var ubicacion = {lat: parseFloat(var2), lng: parseFloat(var1)};
   // The map, centered at ubicacion
   var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 11, center: ubicacion});
+      document.getElementById('map'), {zoom: 16, center: ubicacion});
   // The marker, positioned at ubicacion
     //var marker = new google.maps.Marker({position: ubicacion, map: map});
     var cityCircle = new google.maps.Circle({
@@ -67,15 +52,30 @@ function initMap() {
             fillOpacity: 0.35,
             map: map,
             center: ubicacion,
-            radius: 120
+            radius: 180
           });
 }
     </script>
 
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqVhn2_oLdi3dF7INvANSvN-jMsBPisME&callback=initMap">
+    <script type='text/javascript'
+    src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAqVhn2_oLdi3dF7INvANSvN-jMsBPisME&callback=initMap">
     </script>
 </div>
+      
+  {% if request.user.is_authenticated %}
+
+    {% if request.user != owner %}
+      
+       <form action="/addCart/{{id}}" method="POST" style="margin-top: 16px; margin-left: 5px; color: white;">
+         {% csrf_token %}
+        <div style="margin-top: 10px;">Dias de Alquiler:</br> <input type="number" id="days" name="days" value="1" min="1" max="100" required>
+         </div>
+           <div style="margin-top: 10px;">Fecha inicio alquiler:</br> <input type="date" id="initial" name="initial" required>
+         </div>
+       </br>
+       <button type="submit" class="btn btn-info btn-sm" style="border-radius: 8px; color:black; font-weight: bold;">Añadir al carrito</button>
+        </form>
+
     {% else %}
         </br>
         <a href= "/gameDetail/{{id}}/edit" class="btn btn-info btn-sm" 
