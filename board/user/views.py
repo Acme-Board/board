@@ -245,7 +245,7 @@ def DescargaDatosUser(request,pk):
                 
 
                 email = EmailMessage(title,body,to=[emailto])
-              #  email.attach_file(user.picture.url)
+                #email.attach_file(user.picture.url)
                 email.send()
                 return redirect('/')
         else:
