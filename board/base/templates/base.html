@@ -49,13 +49,7 @@
                     <li class="nav-item px-5">
                       <a class="nav-link" href="/newuser"><b>Registrarse</b></a>
                   </li>
-                    {% else %}
-                    <li class="nav-item px-5">
-                      <a class="nav-link" href="/myGames"><b>Mis juegos</b></a>
-                    </li>               
-                    <li class="nav-item px-5">
-                      <a class="nav-link" href="/rents/{{request.user.id}}"><b>Historial</b></a>
-                    </li>
+                    {% else %}         
                     <li class="nav-item px-5">
                       <a class="nav-link" href="/cart"><b>Carrito de compra</b></a>
                     </li>
@@ -66,8 +60,15 @@
                       </ul>
                     </li>
                     {% endif %}
-                    <li class="nav-item px-5">
-                      <a class="nav-link" href="/profile/{{request.user.id}}"><b>Perfil</b></a>
+                    <li class="nav-item px-5 dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <b>Cuenta</b>
+                      </a>
+                      <div class="dropdown-menu" style="background-color: #BE9FE1; text-align: center !important;" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="nav-link dropdown-item" href="/profile/{{request.user.id}}"><b>Mi perfil</b></a>
+                        <a class="nav-link dropdown-item" href="/myGames"><b>Mis juegos</b></a>
+                        <a class="nav-link dropdown-item" href="/rents/{{request.user.id}}"><b>Historial</b></a>
+                      </div>
                     </li>
                     <li class="nav-item px-5">
                         <a class="nav-link" href="/logout"><b>Cerrar sesión</b></a>
@@ -78,6 +79,11 @@
         </div>
     </nav>
     <script>
+      $('ul.nav li.dropdown').hover(function() {
+        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+      }, function() {
+        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+        });
       window.onscroll = function() {myFunction()};
       var header = document.getElementById("myHeader");
       var sticky = header.offsetTop;
