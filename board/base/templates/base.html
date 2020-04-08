@@ -34,50 +34,60 @@
     <div class="container-fluid h-300 text-center py-3">
       </div>
     </a>
-      <nav id="myHeader" class="navbar navbar-expand-sm navbar-light navbar-fixed-top py-0"  style="background-color: #BE9FE1;" data-toggle="affix">
-        <div class="mx-auto">
-            
-            <div class="collapse navbar-collapse text-center" >
-                <ul class="navbar-nav nav-fill">
-                    <li class="nav-item px-5">
-                        <a class="nav-link" href="/games/"><b>Juegos</b></a>
-                    </li>
-                    {% if not request.user.is_authenticated %}
-                    <li class="nav-item px-5">
-                        <a class="nav-link" href="/login"><b>Iniciar sesión</b></a>
-                    </li>
-                    <li class="nav-item px-5">
-                      <a class="nav-link" href="/newuser"><b>Registrarse</b></a>
-                  </li>
-                    {% else %}         
-                    <li class="nav-item px-5">
-                      <a class="nav-link" href="/cart"><b>Carrito de compra</b></a>
-                    </li>
-                    {% if request.user.admin %}
-                    <li class="nav-item px-5">Administración
-                      <ul>
-                        <li><a class="nav-link" href="/users"><b>Lista usuarios</b></a></li>
-                      </ul>
-                    </li>
-                    {% endif %}
-                    <li class="nav-item px-5 dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <b>Cuenta</b>
-                      </a>
-                      <div class="dropdown-menu" style="background-color: #BE9FE1; text-align: center !important;" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="nav-link dropdown-item" href="/profile/{{request.user.id}}"><b>Mi perfil</b></a>
-                        <a class="nav-link dropdown-item" href="/myGames"><b>Mis juegos</b></a>
-                        <a class="nav-link dropdown-item" href="/rents/{{request.user.id}}"><b>Historial</b></a>
-                      </div>
-                    </li>
-                    <li class="nav-item px-5">
-                        <a class="nav-link" href="/logout"><b>Cerrar sesión</b></a>
-                    </li>
-                    {% endif %}
+
+    <nav id="myHeader" class="navbar navbar-expand-sm navbar-light navbar-fixed-top scrolling-navbar py-0" style="background-color: #BE9FE1;" data-toggle="affix">
+      <div class="mx-auto">
+
+
+        <!-- Collapse -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse text-center"  id="navbarSupportedContent">
+          <ul class="navbar-nav nav-fill">
+              <li class="nav-item px-5">
+                  <a class="nav-link" href="/games/"><b>Juegos</b></a>
+              </li>
+              {% if not request.user.is_authenticated %}
+              <li class="nav-item px-5">
+                  <a class="nav-link" href="/login"><b>Iniciar sesión</b></a>
+              </li>
+              <li class="nav-item px-5">
+                <a class="nav-link" href="/newuser"><b>Registrarse</b></a>
+            </li>
+              {% else %}         
+              <li class="nav-item px-5">
+                <a class="nav-link" href="/cart"><b>Carrito de compra</b></a>
+              </li>
+              {% if request.user.admin %}
+              <li class="nav-item px-5">Administración
+                <ul>
+                  <li><a class="nav-link" href="/users"><b>Lista usuarios</b></a></li>
                 </ul>
-            </div>
-        </div>
+              </li>
+              {% endif %}
+              <li class="nav-item px-5 dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <b>Cuenta</b>
+                </a>
+                <div class="dropdown-menu" style="background-color: #BE9FE1; text-align: center !important;" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="nav-link dropdown-item" href="/profile/{{request.user.id}}"><b>Mi perfil</b></a>
+                  <a class="nav-link dropdown-item" href="/myGames"><b>Mis juegos</b></a>
+                  <a class="nav-link dropdown-item" href="/rents/{{request.user.id}}"><b>Historial</b></a>
+                </div>
+              </li>
+              <li class="nav-item px-5">
+                  <a class="nav-link" href="/logout"><b>Cerrar sesión</b></a>
+              </li>
+              {% endif %}
+          </ul>
+      </div>
+ 
+
+      </div>
     </nav>
+
     <script>
       $('ul.nav li.dropdown').hover(function() {
         $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
