@@ -35,6 +35,7 @@
 {% block content %}
 
 <!-- A ver puedes centrar esto Juan -->
+<div class="d-flex justify-content-center">
 <div class="d-inline-flex justify-content-center my-5 py-4 px-4" >
     <table>
       <tr>
@@ -93,7 +94,7 @@
     </tr>
     </table>
 </div>
-
+</div>
 <div id="app">
   {% if request.user.id != user.id and request.user.is_authenticated == True %} 
   <div class="row justify-content-center">
