@@ -3,7 +3,7 @@ import string
 import random
 import requests
 import math
-
+import itertools
 from datetime import date, datetime
 
 from django.shortcuts import render, get_object_or_404
@@ -364,5 +364,16 @@ def distancia(request, game):
     responseLoc = requests.get(
         'http://api.ipstack.com/' + ip + '?access_key=0dedc652d3afdb7b77a2e002da3c2703')
     geodataLoc = responseLoc.json()
-    distancia = math.sqrt(math.pow(float((geodataLoc['longitude']) - float(geodata[0]['lon'])), 2) + math.pow((float(geodataLoc['latitude']) - float(geodata[0]['lat'])), 2))
+    distancia = math.sqrt(math.pow(float((geodataLoc['longitude']) - float(geodata[0]['lon'])), 2) + math.pow(
+        (float(geodataLoc['latitude']) - float(geodata[0]['lat'])), 2))
     return distancia
+
+
+def games_list_by_distance(request):
+    if (request.user.is_authenticated):
+        games = Game.objects.exclude(owner=request.user)
+    else:
+        games = Game.objects.all()
+    games2 = sorted(games, key=lambda x: x.id)
+    games2.sort(key=lambda x: distancia(request, x))
+    return render(request, 'games.html', {'games': games2, 'filter': True})

@@ -16,7 +16,7 @@
 
 <!-- Aqui hacer bucle por columna para hacer una buena vista-->
 
-<div class="container py-5">
+<br class="container py-5">
 	
 	<h1> Lista de Juegos </h1>
 	{% if request.user.is_authenticated %}
@@ -34,7 +34,7 @@
 			</div>
 				
 	</div>-->
-
+</br><a href="/games/filterDistance/">Filtrar por distancia</a>
 	<h2> Filtrado por estado {{status}}</h2>
 	<a href="/games/filterStatus/1">Perfecto</a>
 	<a href="/games/filterStatus/2">Faltan piezas</a>
