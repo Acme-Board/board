@@ -34,12 +34,16 @@
 			</div>
 				
 	</div>-->
-</br><a href="/games/filterDistance/">Filtrar por distancia</a>
-	<h2> Filtrado por estado {{status}}</h2>
-	<a href="/games/filterStatus/1">Perfecto</a>
-	<a href="/games/filterStatus/2">Faltan piezas</a>
-	<a href="/games/filterStatus/3">Gastado</a>
-	<a href="/games/filterStatus/4">Injugable</a>
+</br><a type="button" class=" btn btn-primary " href="/games/filterDistance">Filtrar por distancia</a>
+		
+			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Filtrado por estado</button>
+			<div class ="dropdown-menu">
+				<a href="/games/filterStatus/1" class="dropdown-item" style="color: black;">Perfecto</a>
+				<a href="/games/filterStatus/2" class="dropdown-item" style="color: black;">Faltan piezas</a>
+				<a href="/games/filterStatus/3" class="dropdown-item" style="color: black;">Gastado</a>
+				<a href="/games/filterStatus/4" class="dropdown-item" style="color: black;">Injugable</a>
+			</div>	
+				
 	{% if filter %}
 	<a href="/games">Eliminar filtros</a>
 	{% endif %}
