@@ -16,13 +16,51 @@
 
    <div> <img style="width:284px;height:300px; border-radius: 8px" src="{{picture.url}}"/> </div>
    
-    <div style="color:white; margin-left:30px;"> 
+    <div style="color:white; margin-left:30px;">
 
       <h4> Usuario: <a href="/profile/{{owner.id}}" style="color:white; text-decoration: underline;">{{owner}}</a> </h4>
       <h4> Precio: {{price}} &euro;</h4></br>
       <h5>Descripción:</h5>
       {{description}}</br>
+        <h5>Localizacion: </h5>
+        <div id="map"></div>
+        <div>
+    <style>
+       /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+    <script>
+// Initialize and add the map
+var var1 = "{{ longitude }}";
+var var2 = "{{ latitude }}";
+function initMap() {
+  // The location of ubicacion
+  var ubicacion = {lat: parseFloat(var2), lng: parseFloat(var1)};
+  // The map, centered at ubicacion
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 16, center: ubicacion});
+  // The marker, positioned at ubicacion
+    //var marker = new google.maps.Marker({position: ubicacion, map: map});
+    var cityCircle = new google.maps.Circle({
+            strokeColor: '#49abff',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#2496ff',
+            fillOpacity: 0.35,
+            map: map,
+            center: ubicacion,
+            radius: 180
+          });
+}
+    </script>
 
+    <script type='text/javascript'
+    src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAqVhn2_oLdi3dF7INvANSvN-jMsBPisME&callback=initMap">
+    </script>
+</div>
       
   {% if request.user.is_authenticated %}
 
@@ -37,7 +75,6 @@
        </br>
        <button type="submit" class="btn btn-info btn-sm" style="border-radius: 8px; color:black; font-weight: bold;">Añadir al carrito</button>
         </form>
-      
 
     {% else %}
         </br>
@@ -81,11 +118,15 @@
      <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 25%; margin-top: 30px;color:black; font-weight: bold;">Volver</a>
   {% endif %}
 </tr>
+
 </table>
 </div>
+  </div>
+
 </div>
 </table>
 {% endblock %}
+
 
 </body>
 </html>
