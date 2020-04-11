@@ -1,4 +1,3 @@
-import logging
 import string
 import random
 import requests
@@ -8,7 +7,7 @@ from datetime import date, datetime
 from django.shortcuts import render, get_object_or_404
 
 from django.utils.dateparse import parse_date
-from rent.models import Game, Rent, Status
+from rent.models import Game
 
 from rent.forms import NewGame, editData, editPicture
 from django.shortcuts import redirect
