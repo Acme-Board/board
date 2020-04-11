@@ -94,7 +94,8 @@
 </tr>
 </tbody>
 </table>
-  <h5> Conoce mejor al Dueño del Juego </h5>
+{% if request.user != owner %}
+  <h5> Usuario: </h5>
   <!--  Hi -->
   <div style="max-width: 300px; margin-top: 20px;">
     <div style="background-color: #eee;; border-radius: 8px;"> 
@@ -177,11 +178,19 @@ src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAqVh
     });
   }
   </script>
+  {% endif %}
 
+  {% if request.user != owner %}
   <div>
     <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 50%; margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">Volver</a>
    </div>
   </div>
+  {% else %}
+  <div>
+    <a href= "/myGames" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 50%; margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">Volver</a>
+   </div>
+  </div>
+  {% endif %}
 {% endblock %}
 
 
