@@ -2,81 +2,52 @@
 <head>
 {% extends "base.html" %}
 
+{% load static %}
+
+	{% block extrahead %}
+	<link rel="stylesheet" href="{% static 'css/rent_style.css' %}" type="text/css"> 
+ 
+  {% endblock %} 
+
+
+
 </head>
 
 <body>
   
 {% block content %}
-<table class="container">
+<div class="container">
+<table>
+  <thead>     
+    <div><h3 style="border-radius: 8px; color:white; margin-left:39%; padding-top: 10px;">{{name}} - {{status}}</h3> </div>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+         <img style="width:300px;height:300px; border-radius: 8px" src="{{picture.url}}"/>
+      </td>
+      <td>
+        <div  style="color: #eee; margin-left: 15px; margin-top: 30px;">
 
-  
-  <div><h3  class ="well well-sm py-5" style="border-radius: 8px; color:white; margin-left:39%;">{{name}} - {{status}}</h3> </div>
+          <h4> Precio: {{price}} &euro;</h4></br>
+          <h5>Descripción:</h5> <div>{{description}}</div></br>
+        
+        {% if request.user != owner %}
 
-  <div class="row"style="margin-left:25%;">
+        <form action="/addCart/{{id}}" method="POST" style="margin-top: 5px; margin-left: 5px; color: #eee;">
+          {% csrf_token %}
+          <div style="margin-top: 5px;">Fecha inicio alquiler:</br> <input type="date" id="initial" name="initial" style="color: black;" required>
+          </div>
+          <div style="margin-top: 5px;">Dias de Alquiler:</br> <input type="number" id="days" name="days" value="1"   style="color: black;" min="1" max="100" required>
+          </div>
 
-   <div> <img style="width:284px;height:300px; border-radius: 8px" src="{{picture.url}}"/> </div>
-   
-    <div style="color:white; margin-left:30px;">
+        </br>
+        <button type="submit" class="btn btn-info btn-sm" style="border-radius: 8px; color:black; font-weight: bold;">Añadir al carrito</button>
+         </form>
+         {% endif %}
 
-      <h4> Usuario: <a href="/profile/{{owner.id}}" style="color:white; text-decoration: underline;">{{owner}}</a> </h4>
-      <h4> Precio: {{price}} &euro;</h4></br>
-      <h5>Descripción:</h5>
-      {{description}}</br>
-        <h5>Localizacion: </h5>
-        <div id="map"></div>
-        <div>
-    <style>
-       /* Set the size of the div element that contains the map */
-      #map {
-        height: 400px;  /* The height is 400 pixels */
-        width: 100%;  /* The width is the width of the web page */
-       }
-    </style>
-    <script>
-// Initialize and add the map
-var var1 = "{{ longitude }}";
-var var2 = "{{ latitude }}";
-function initMap() {
-  // The location of ubicacion
-  var ubicacion = {lat: parseFloat(var2), lng: parseFloat(var1)};
-  // The map, centered at ubicacion
-  var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 16, center: ubicacion});
-  // The marker, positioned at ubicacion
-    //var marker = new google.maps.Marker({position: ubicacion, map: map});
-    var cityCircle = new google.maps.Circle({
-            strokeColor: '#49abff',
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: '#2496ff',
-            fillOpacity: 0.35,
-            map: map,
-            center: ubicacion,
-            radius: 180
-          });
-}
-    </script>
-
-    <script type='text/javascript'
-    src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAqVhn2_oLdi3dF7INvANSvN-jMsBPisME&callback=initMap">
-    </script>
-</div>
-      
-  {% if request.user.is_authenticated %}
-
-    {% if request.user != owner %}
-      
-       <form action="/addCart/{{id}}" method="POST" style="margin-top: 16px; margin-left: 5px; color: white;">
-         {% csrf_token %}
-        <div style="margin-top: 10px;">Dias de Alquiler:</br> <input type="number" id="days" name="days" value="1" min="1" max="100" required>
-         </div>
-           <div style="margin-top: 10px;">Fecha inicio alquiler:</br> <input type="date" id="initial" name="initial" required>
-         </div>
-       </br>
-       <button type="submit" class="btn btn-info btn-sm" style="border-radius: 8px; color:black; font-weight: bold;">Añadir al carrito</button>
-        </form>
-
-    {% else %}
+         {% if request.user == owner %}
+    
         </br>
         <a href= "/gameDetail/{{id}}/edit" class="btn btn-info btn-sm" 
         style=" color:black; font-weight: bold; margin-right: 5px;">Editar</a>
@@ -89,6 +60,7 @@ function initMap() {
     
     
       <!-- Modal -->
+  
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -108,23 +80,117 @@ function initMap() {
           </div>
         </div>
       </div>   
-      <table>
-        <tr>         
-    {% endif %}
-    <table>
-      <tr>
-      <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 25%; margin-top: 30px;color:black; font-weight: bold;">Volver</a>
-  {% else %}
-     <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 25%; margin-top: 30px;color:black; font-weight: bold;">Volver</a>
   {% endif %}
-</tr>
 
+        </div>
+      </td>  
+    </tr>
+    <tr>
+      
+  
+</tr>
+<tr>
+
+</tr>
+</tbody>
 </table>
-</div>
+{% if request.user != owner %}
+  <h5> Usuario: </h5>
+  <!--  Hi -->
+  <div style="max-width: 300px; margin-top: 20px;">
+    <div style="background-color: #eee;; border-radius: 8px;"> 
+      <table>
+      <tr>
+      <td>
+       <img style="  width:100px;
+       height:100px;
+       border-radius:8px; margin-right: 5px" src="{{owner.picture.url}}"/>
+      </td>
+      <td>
+       <h5><a href="/profile/{{owner.id}}" style="text-decoration: underline; color: black;">{{owner}}</a> </h5>
+       <h5 style="color: black;">Valoracion: {{owner.rate}}⭐ </h5>
+      </td>
+    </tr>
+    </table>
+    </div>
   </div>
 
+  <!-- Hi -->  
+
+  <button class="accordion" style="text-align: center;">Mostrar Zona de Encuentro</button>
+  <div class="panel">
+  <!-- Vamos a ello -->
+  <div id="map"></div>
+  <div>
+<style>
+ /* Set the size of the div element that contains the map */
+#map {
+  height: 400px;  /* The height is 400 pixels */
+  width: 100%;  /* The width is the width of the web page */
+ }
+</style>
+<script>
+// Initialize and add the map
+var var1 = "{{ longitude }}";
+var var2 = "{{ latitude }}";
+function initMap() {
+// The location of ubicacion
+var ubicacion = {lat: parseFloat(var2), lng: parseFloat(var1)};
+// The map, centered at ubicacion
+var map = new google.maps.Map(
+document.getElementById('map'), {zoom: 16, center: ubicacion});
+// The marker, positioned at ubicacion
+//var marker = new google.maps.Marker({position: ubicacion, map: map});
+var cityCircle = new google.maps.Circle({
+      strokeColor: '#49abff',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#2496ff',
+      fillOpacity: 0.35,
+      map: map,
+      center: ubicacion,
+      radius: 180
+    });
+}
+</script>
+
+<script type='text/javascript'
+src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAqVhn2_oLdi3dF7INvANSvN-jMsBPisME&callback=initMap">
+</script>
 </div>
-</table>
+  <!-- Vamos a ello -->
+  </div>
+
+  
+<script>
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+  
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var panel = this.nextElementSibling;
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+    });
+  }
+  </script>
+  {% endif %}
+
+  {% if request.user != owner %}
+  <div>
+    <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 50%; margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">Volver</a>
+   </div>
+  </div>
+  {% else %}
+  <div>
+    <a href= "/myGames" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 50%; margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">Volver</a>
+   </div>
+  </div>
+  {% endif %}
 {% endblock %}
 
 
