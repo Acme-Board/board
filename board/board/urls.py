@@ -55,6 +55,8 @@ urlpatterns = [
     re_path(r'deleteAll/', rent_views.empty_cart),
     re_path(r'games/filterZona/(?P<zona>\d+)', rent_views.games_list_by_zona),
     re_path(r'games/filterStatus/(?P<status>\d+)', rent_views.games_list_by_status),
+    path('rents/deliver/<int:pk>/', rent_views.deliver),
+    path('gameDetail/<int:pk>/rents/', rent_views.game_rents),
 
     #User
     re_path(r'profile/(?P<id_user>\d+)',user_views.profile),
@@ -73,6 +75,8 @@ urlpatterns = [
     re_path(r'charge/(?P<id_cart>\d+)', stripe_views.charge),
     re_path(r'confirm/(?P<id_cart>\d+)/', stripe_views.confirm),
     path('success/', stripe_views.pago_completado),
+    path('contend/<int:pk>', stripe_views.new_contend),
+    path('contends/', stripe_views.contend_list),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += staticfiles_urlpatterns()

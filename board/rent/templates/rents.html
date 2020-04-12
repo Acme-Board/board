@@ -47,7 +47,15 @@
 		<p style="color: white;">Dias: {{dato.days}}</p>
 		<p style="color: white;">Fecha inicio: {{dato.initial_date|date:'Y-m-d'}}</p>
 
-		<a href= "/gameDetail/{{dato.game.id}}" class="btn btn-info btn-sm" style="border-radius: 8px">Ver mas</a></br> 
+		<a href= "/gameDetail/{{dato.game.id}}" class="btn btn-info btn-sm" style="border-radius: 8px">Ver mas</a></br>
+		{% if dato.deliver == False and dato.rentable == False and dato.user == request.user %}
+			<a href= "/rents/deliver/{{dato.id}}" class="btn btn-info btn-sm" style="border-radius: 8px">Entregado</a></br>
+		{% endif %}
+		{% if dato.deliver == True and dato.game.owner == request.user%}
+			<a href= "/rents/deliver/{{dato.id}}" class="btn btn-info btn-sm" style="border-radius: 8px">Recibido</a></br>
+		{% endif %}
+		<a href= "/contend/{{dato.id}}" class="btn btn-info btn-sm" style="border-radius: 8px">Abrir disputa</a></br> 
+		
 		<a href= "/review/{{dato.game.owner.id}}" class="btn btn-info btn-sm" style="border-radius: 8px">Comentar</a></td>
 
 	</div>
