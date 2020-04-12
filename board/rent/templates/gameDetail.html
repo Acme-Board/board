@@ -17,17 +17,24 @@
   
 {% block content %}
 <div class="container">
-<table>
-  <thead>     
-    <div><h3 style="border-radius: 8px; color:white; margin-left:39%; padding-top: 10px;">{{name}} - {{status}}</h3> </div>
+<div class="d-flex justify-content-center">
+<table style="text-align: center;">
+  <thead>
+    <tr>
+      <td>
+        <div><h3 style="border-radius: 8px; color:white; padding-top: 10px;">{{name}} - {{status}}</h3> </div>
+      </td>
+    </tr>
   </thead>
   <tbody>
     <tr>
       <td>
          <img style="width:300px;height:300px; border-radius: 8px" src="{{picture.url}}"/>
       </td>
+    </tr>
+    <tr>
       <td>
-        <div  style="color: #eee; margin-left: 15px; margin-top: 30px;">
+        <div  style="color: #eee; margin-top: 30px;">
 
           <h4> Precio: {{price}} &euro;</h4></br>
           <h5>Descripción:</h5> <div>{{description}}</div></br>
@@ -86,26 +93,28 @@
       </td>  
     </tr>
     <tr>
-      
-  
+
 </tr>
 <tr>
 
 </tr>
 </tbody>
 </table>
+</div>
 {% if request.user != owner %}
+<div style="text-align: center;">
   <h5> Usuario: </h5>
   <!--  Hi -->
-  <div style="max-width: 300px; margin-top: 20px;">
-    <div style="background-color: #eee;; border-radius: 8px;"> 
+  <div class="d-flex justify-content-center" >
+    <div class="d-flex justify-content-center" style="background-color: #eee; border-radius: 8px; width:500px"> 
       <table>
       <tr>
       <td>
-       <img style="  width:100px;
-       height:100px;
-       border-radius:8px; margin-right: 5px" src="{{owner.picture.url}}"/>
+       <img style=" width:150px; height: 150px;
+       border-radius:8px;" src="{{owner.picture.url}}"/>
       </td>
+    </tr>
+    <tr>
       <td>
        <h5><a href="/profile/{{owner.id}}" style="text-decoration: underline; color: black;">{{owner}}</a> </h5>
        <h5 style="color: black;">Valoracion: {{owner.rate}}⭐ </h5>
@@ -179,15 +188,16 @@ src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAqVh
   }
   </script>
   {% endif %}
+</div>
 
   {% if request.user != owner %}
-  <div>
-    <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 50%; margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">Volver</a>
+  <div style="text-align: center;">
+    <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">Volver</a>
    </div>
   </div>
   {% else %}
-  <div>
-    <a href= "/myGames" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 50%; margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">Volver</a>
+  <div style="text-align: center;">
+    <a href= "/myGames" class="btn btn-info btn-sm" style="border-radius: 8px;margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">Volver</a>
    </div>
   </div>
   {% endif %}
