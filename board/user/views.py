@@ -7,10 +7,11 @@ from django.contrib.auth.hashers import check_password, make_password
 from django import forms
 from django.core.mail import EmailMessage
 
+
 from user.models import User
 from user.forms import Register, editAccount, editProfile, editPic, contact
 
-from reviews.models import Valoration, Comment
+from reviews.models import Comment
 
 
 # Create your views here.
