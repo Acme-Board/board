@@ -3,6 +3,7 @@ import random
 from datetime import date, datetime , timedelta
 import requests
 import math
+import time
 
 from django.shortcuts import render, get_object_or_404
 
@@ -382,21 +383,15 @@ def game_rents(request,pk):
     rents = Rent.objects.filter(game=game)
     return render(request,'rents.html',{'rents':rents})
 
-def distancia(request, game):
+
+def distancia(game, responseLoc):
+    geodataLoc = responseLoc.json()
     ubicacion = game.address
+    time.sleep(0.4)
     response = requests.get(
         'https://eu1.locationiq.com/v1/search.php?key=pk.bfdfa73760621b89cf9e8435ffcf48df&q=' + ubicacion + '&format=json')
     geodata = response.json()
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-    if ip == "127.0.0.1":
-        return 0.0;
-    responseLoc = requests.get(
-        'http://api.ipstack.com/' + ip + '?access_key=0dedc652d3afdb7b77a2e002da3c2703')
-    geodataLoc = responseLoc.json()
+
     distancia = math.sqrt(math.pow(float((geodataLoc['longitude']) - float(geodata[0]['lon'])), 2) + math.pow(
         (float(geodataLoc['latitude']) - float(geodata[0]['lat'])), 2))
     return distancia
@@ -408,5 +403,15 @@ def games_list_by_distance(request):
     else:
         games = Game.objects.all()
     games2 = sorted(games, key=lambda x: x.id)
-    games2.sort(key=lambda x: distancia(request, x))
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    if ip == "127.0.0.1":
+        return render(request, 'games.html', {'games': games2, 'filter': True})
+    responseLoc = requests.get(
+        'http://api.ipstack.com/' + ip + '?access_key=0dedc652d3afdb7b77a2e002da3c2703')
+
+    games2.sort(key=lambda x: distancia(x, responseLoc))
     return render(request, 'games.html', {'games': games2, 'filter': True})
