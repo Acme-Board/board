@@ -1,0 +1,52 @@
+
+<html>
+    <head>
+         {% extends "base.html" %}
+         {% load static %}
+         {% block extrahead %}
+        <link rel="stylesheet" href="{% static 'css/style_user.css' %}" type="text/css"> 
+        {% endblock %}
+    
+    <style>
+    #popup{
+      text-decoration-color: black;
+    }
+    
+    .container{
+        padding:20%;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+    .container .img{
+        text-align:right;
+    }
+    .container .details{
+        border-left:3px solid #ded4da;
+    }
+    .container .details p{
+        font-size:15px;
+        font-weight:bold;
+    }
+    </style>    
+    </head>
+    
+    <body> 
+{% block content %}
+    <form method="POST" action="" >
+        {% csrf_token %}
+        <h5 class="text-center py-5" style="color: white;">¿Quiere  enviar algun mensaje adicional como una fecha antes de enviarle los datos del usuario?</h5>
+        <div class="text-center mx-auto">{{form.as_p}}</div>      
+        <div style="margin: 15px; text-align: center;">
+            <button type="submit" class="btn btn-primary"  style="border-radius: 8px">Crear</button>              
+        </div>
+    </form>
+{% endblock %}
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+{% block vue %}
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+{% endblock %}
+</body>
+
+</html>
