@@ -1,6 +1,8 @@
 from django.test import TestCase
 
 from user.models import User
+from user import views as user_views
+
 
 class UserModelTestCase(TestCase):
 
@@ -39,9 +41,16 @@ class UserModelTestCase(TestCase):
         self.assertEquals(self.user.range, 'Pro')   
 
     def test_get_rate(self):
-        self.assertEquals(self.user.rate, '2.5')               
+        self.assertEquals(self.user.rate, '2.5')     
+    def test_edit_user(self):
+        self.assertEquals(1,User.objects.count())
+        user_views.delete_myUSer(self,self.user.id)
+        
+        self.assertEqual(0,User.objects.count())
+        
+                
 
     #Borra los datos para terminar con los test ------------------------------------------------------
     
     def tearDown(self):
-        self.user.delete()    
+        self.user.delete()

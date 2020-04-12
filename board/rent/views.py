@@ -1,13 +1,14 @@
 import string
 import random
-from datetime import date, datetime
+from datetime import date, datetime , timedelta
+import requests
+import math
 
-from django.shortcuts import render ,  get_object_or_404
+from django.shortcuts import render, get_object_or_404
 
 from django.utils.dateparse import parse_date
-from rent.models import Game , Rent, Status
+from rent.models import Game
 
-from django.conf import settings
 from rent.forms import NewGame, editData, editPicture
 from django.shortcuts import redirect
 
@@ -19,44 +20,56 @@ from user.models import User
 
 
 def games_list(request):
-    if(request.user.is_authenticated):
+    if (request.user.is_authenticated):
         games = Game.objects.exclude(owner=request.user)
     else:
         games = Game.objects.all()
-    return render(request,'games.html',{'games':games})
+    return render(request, 'games.html', {'games': games})
+
 
 def games_list_by_user(request):
     games = Game.objects.filter(owner=request.user)
-    return render(request,'myGames.html',{'myGames':games})
+    return render(request, 'myGames.html', {'myGames': games})
 
-def games_list_by_zona(request,zona):
+
+def games_list_by_zona(request, zona):
     games = Game.objects.filter(zona=zona)
-    return render(request,'games.html',{'games':games})
+    return render(request, 'games.html', {'games': games})
 
-def games_list_by_status(request,status):
+
+def games_list_by_status(request, status):
     games = []
     filtro = True
-    
-    if (int(status)==1):
+
+    if (int(status) == 1):
         games = Game.objects.filter(status="Perfecto")
-    if (int(status)==2):
+    if (int(status) == 2):
         games = Game.objects.filter(status="Faltan piezas")
-    if (int(status)==3):
+    if (int(status) == 3):
         games = Game.objects.filter(status="Gastado")
-    if (int(status)==4):
+    if (int(status) == 4):
         games = Game.objects.filter(status="Injugable")
-    
-    return render(request,'games.html',{'games':games,'filter':filtro})
+
+    return render(request, 'games.html', {'games': games, 'filter': filtro})
+
 
 def rents_list(request):
-    rents  = Rent.objects.filter(user = request.user)
-    return render(request,'rents.html',{'rents':rents})
+    rents = Rent.objects.filter(user=request.user)
+    return render(request, 'rents.html', {'rents': rents})
 
 
-def games_detail(request,pk):
-     dato = get_object_or_404(Game, pk=pk)
-     return render(request,'gameDetail.html', {'name':dato.name, 'description':dato.description,'price': dato.price ,
-      'status': dato.status,'picture' : dato.picture, 'id' : dato.id,'owner': dato.owner })
+def games_detail(request, pk):
+    dato = get_object_or_404(Game, pk=pk)
+    ubicacion = dato.address
+    response = requests.get(
+        'https://eu1.locationiq.com/v1/search.php?key=pk.bfdfa73760621b89cf9e8435ffcf48df&q=' + ubicacion + '&format=json')
+    geodata = response.json()
+
+    return render(request, 'gameDetail.html', {'name': dato.name, 'description': dato.description, 'price': dato.price,
+                                               'status': dato.status, 'picture': dato.picture, 'id': dato.id,
+                                               'owner': dato.owner, 'longitude': geodata[0]['lon'],
+                                               'latitude': geodata[0]['lat']})
+
 
 def delete(request, pk):
     # Recuperamos la instancia de la persona y la borramos
@@ -66,97 +79,101 @@ def delete(request, pk):
     # Después redireccionamos de nuevo a la lista
     return redirect('/')
 
+
 def new_game(request):
     texto = "Subida de "
     Alquilar = "Subir Juego"
     if request.method == "POST":
-        form = NewGame(request.POST,request.FILES or None)
-        
+        form = NewGame(request.POST, request.FILES or None)
+
         if form.is_valid():
 
             name = form.cleaned_data['name']
             description = form.cleaned_data['description']
             status = form.cleaned_data['status']
 
-            if(status == "Status.PE"):
+            if (status == "Status.PE"):
                 status = "Perfecto"
-            
-            if(status == "Status.FA"):
+
+            if (status == "Status.FA"):
                 status = "Faltan piezas"
-            
-            if(status == "Status.GA"):
+
+            if (status == "Status.GA"):
                 status = "Gastado"
-            
-            if(status == "Status.IN"):
+
+            if (status == "Status.IN"):
                 status = "Injugable"
 
             try:
                 price = float(form.cleaned_data['price'])
             except ValueError:
-                form.add_error('price','Introduzca un dato numérico')
-                return render(request,"newgame.html",{"form":form, 'texto': texto, 'Alquilar': Alquilar})
+                form.add_error('price', 'Introduzca un dato numérico')
+                return render(request, "newgame.html", {"form": form, 'texto': texto, 'Alquilar': Alquilar})
 
             if (price < 0):
-                form.add_error('price','No puede ser un precio negativo')
-                return render(request,"newgame.html",{"form":form, 'texto': texto, 'Alquilar': Alquilar})
-            
-            if price==0:
-                form.add_error('price','No se puede regalar un juego')
-                return render(request,"newgame.html",{"form":form , 'texto': texto, 'Alquilar': Alquilar}) 
+                form.add_error('price', 'No puede ser un precio negativo')
+                return render(request, "newgame.html", {"form": form, 'texto': texto, 'Alquilar': Alquilar})
+
+            if price == 0:
+                form.add_error('price', 'No se puede regalar un juego')
+                return render(request, "newgame.html", {"form": form, 'texto': texto, 'Alquilar': Alquilar})
 
             picture = form.cleaned_data['picture']
             address = form.cleaned_data['address']
             owner = request.user
-            game = Game(name=name,description=description,status=status,price=price,picture=picture,address=address,owner=owner)
+            game = Game(name=name, description=description, status=status, price=price, picture=picture,
+                        address=address, owner=owner)
 
             game.save()
             return redirect('/gameDetail/{}'.format(game.id))
     else:
-       form = NewGame()
+        form = NewGame()
     return render(request, 'newgame.html', {'form': form, 'texto': texto, 'Alquilar': Alquilar})
-    
+
+
 def edit_game(request, pk):
     texto = "Editar "
     Alquilar = "Actualizar"
     juego = get_object_or_404(Game, pk=pk)
 
     if request.method == "POST":
-        form = editData(request.POST,request.FILES or None)
+        form = editData(request.POST, request.FILES or None)
 
         if form.is_valid():
             name = form.cleaned_data['name']
             description = form.cleaned_data['description']
             status = form.cleaned_data['status']
 
-            if(status == "Status.PE"):
+            if (status == "Status.PE"):
                 status = "Perfecto"
-            
-            if(status == "Status.FA"):
+
+            if (status == "Status.FA"):
                 status = "Faltan piezas"
-            
-            if(status == "Status.GA"):
+
+            if (status == "Status.GA"):
                 status = "Gastado"
-            
-            if(status == "Status.IN"):
+
+            if (status == "Status.IN"):
                 status = "Injugable"
 
             try:
                 price = float(form.cleaned_data['price'])
             except ValueError:
-                form.add_error('price','Introduzca un dato numérico')
-                return render(request,"newgame.html",{"form":form, 'texto': texto, 'Alquilar': Alquilar})
+                form.add_error('price', 'Introduzca un dato numérico')
+                return render(request, "newgame.html", {"form": form, 'texto': texto, 'Alquilar': Alquilar})
 
             if (price < 0):
-                form.add_error('price','No puede ser un precio negativo')
-                return render(request,"newgame.html",{"form":form, 'texto': texto, 'Alquilar': Alquilar})
-            
-            if price==0:
-                form.add_error('price','No se puede regalar un juego')
-                return render(request,"newgame.html",{"form":form, 'texto': texto, 'Alquilar': Alquilar}) 
+                form.add_error('price', 'No puede ser un precio negativo')
+                return render(request, "newgame.html", {"form": form, 'texto': texto, 'Alquilar': Alquilar})
+
+            if price == 0:
+                form.add_error('price', 'No se puede regalar un juego')
+                return render(request, "newgame.html", {"form": form, 'texto': texto, 'Alquilar': Alquilar})
 
             address = form.cleaned_data['address']
 
-            Game.objects.filter(pk=pk).update(name=name,description=description,status=status,price=price,address=address)
+            Game.objects.filter(pk=pk).update(name=name, description=description, status=status, price=price,
+                                              address=address)
 
             return redirect('/gameDetail/{}'.format(pk))
     else:
@@ -168,14 +185,14 @@ def edit_game(request, pk):
         form.fields["address"].initial = juego.address
     return render(request, 'newgame.html', {'form': form, 'texto': texto, 'Alquilar': Alquilar})
 
+
 def edit_pic(request, pk):
     juego = get_object_or_404(Game, pk=pk)
 
     if request.method == "POST":
-        form = editPicture(request.POST,request.FILES or None)
+        form = editPicture(request.POST, request.FILES or None)
 
         if form.is_valid():
-            
             picture = form.cleaned_data['picture']
 
             Game.objects.filter(pk=pk).update(picture=picture)
@@ -188,6 +205,7 @@ def edit_pic(request, pk):
 
     return render(request, 'newgame.html', {'form': form, 'texto': texto, 'Alquilar': Alquilar})
 
+
 def rent_game(request, id_game, days, initial):
     dato = get_object_or_404(Game, pk=id_game)
     user = get_object_or_404(User, pk=request.user.id)
@@ -196,13 +214,14 @@ def rent_game(request, id_game, days, initial):
     ramdomLetters = ''.join(random.choice(letters) for i in range(3))
     ramdomNumber = ''.join(random.choice(digits) for i in range(4))
     ticker = ramdomLetters + '-' + ramdomNumber
-    rent = Rent(ticker=ticker, game=dato,days = days, initial_date=initial, user= user, rentable=False)
+    rent = Rent(ticker=ticker, game=dato, days=days, initial_date=initial, user=user, rentable=False)
     rent.save()
 
 
-def rents_list(request,id_user):
+def rents_list(request, id_user):
     rents = Rent.objects.filter(user=request.user)
-    return render(request,'rents.html',{'rents':rents})
+    return render(request, 'rents.html', {'rents': rents})
+
 
 def view_cart(request):
     user = get_object_or_404(User, pk=request.user.id)
@@ -213,37 +232,54 @@ def view_cart(request):
         ref = ramdomLetters + '-' + ramdomNumber
         cart = Order(ref_code=ref, user=user, actual=True)
         cart.save()
-        return render(request, 'orders.html', {'order': cart.items.all(), 'sum':cart.get_total_price(), 'id':cart.id})
+        return render(request, 'orders.html', {'order': cart.items.all(), 'sum': cart.get_total_price(), 'id': cart.id})
     else:
         for c in list_carts:
             if c.actual:
                 cart = c
-                return render(request, 'orders.html', {'order': cart.items.all(),'sum':cart.get_total_price(), 'id':cart.id})
+                return render(request, 'orders.html',
+                              {'order': cart.items.all(), 'sum': cart.get_total_price(), 'id': cart.id})
+
 
 def add_item_to_cart(request, id_game):
     dato = get_object_or_404(Game, pk=id_game)
     user = get_object_or_404(User, pk=request.user.id)
     list_carts = Order.objects.filter(user=user)
+    all_carts  = Rent.objects.all()
     days = 1
     initial = None
+   
+    for item in all_carts:
+        
+
+        if(dato == item.game):                        
+
+                        i = item.initial_date 
+                        
+                        for i in  range((item.initial_date + timedelta(days= item.days)).day):
+                            if(parse_date(request.POST.get("initial")).day == i):
+                                return redirect('/')
+                                i = i+1
+
+
     if request.method == "POST":
         if request.POST.get("days") is None:
             dato = get_object_or_404(Game, pk=id_game)
             return render(request, 'gameDetail.html',
-                      {'name': dato.name, 'description': dato.description, 'price': dato.price,
-                       'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner})
-        if int(request.POST.get("days")) <=0:
+                          {'name': dato.name, 'description': dato.description, 'price': dato.price,
+                           'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner})
+        if int(request.POST.get("days")) <= 0:
             dato = get_object_or_404(Game, pk=id_game)
             return render(request, 'gameDetail.html',
                           {'name': dato.name, 'description': dato.description, 'price': dato.price,
                            'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner})
         days = request.POST.get("days")
-        #Fecha inicio
+        # Fecha inicio
         if request.POST.get("initial") is None:
             dato = get_object_or_404(Game, pk=id_game)
             return render(request, 'gameDetail.html',
-                      {'name': dato.name, 'description': dato.description, 'price': dato.price,
-                       'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner})
+                          {'name': dato.name, 'description': dato.description, 'price': dato.price,
+                           'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner})
         if parse_date(request.POST.get("initial")) < datetime.date(datetime.now()):
             dato = get_object_or_404(Game, pk=id_game)
             return render(request, 'gameDetail.html',
@@ -266,7 +302,8 @@ def add_item_to_cart(request, id_game):
             item.save()
             cart.items.add(item)
             cart.save()
-        return render(request, 'orders.html', {'order': cart.items.all(), 'id':cart.id, 'mensaje': 'Añadido con exito','sum':cart.get_total_price()})
+        return render(request, 'orders.html', {'order': cart.items.all(), 'id': cart.id, 'mensaje': 'Añadido con exito',
+                                               'sum': cart.get_total_price()})
     else:
         for c in list_carts:
             if c.actual:
@@ -275,16 +312,24 @@ def add_item_to_cart(request, id_game):
                 for item in cart.items.all():
                     if item.game == dato:
                         añadir = False
-                        return render(request, 'orders.html', {'order': cart.items.all(), 'id':cart.id, 'mensaje': 'Item ya incluido en el carrito','sum':cart.get_total_price()})
+                        return render(request, 'orders.html', {'order': cart.items.all(), 'id': cart.id,
+                                                               'mensaje': 'Item ya incluido en el carrito',
+                                                               'sum': cart.get_total_price()})
                     if item.game.owner == user:
                         añadir = False
-                        return render(request, 'orders.html', {'order': cart.items.all(), 'id':cart.id, 'mensaje': 'No puedes comprar tu propio juego','sum':cart.get_total_price()})
+                        return render(request, 'orders.html', {'order': cart.items.all(), 'id': cart.id,
+                                                               'mensaje': 'No puedes comprar tu propio juego',
+                                                               'sum': cart.get_total_price()})
                 if añadir:
-                    item = OrderItem(game=dato, days=days, initial_date=initial, is_ordered=False, date_added=date.today())
+                    item = OrderItem(game=dato, days=days, initial_date=initial, is_ordered=False,
+                                     date_added=date.today())
                     item.save()
                     cart.items.add(item)
                     cart.save()
-                return render(request, 'orders.html', {'order': cart.items.all(), 'id':cart.id, 'mensaje': 'Añadido con exito','sum':cart.get_total_price()})
+                return render(request, 'orders.html',
+                              {'order': cart.items.all(), 'id': cart.id, 'mensaje': 'Añadido con exito',
+                               'sum': cart.get_total_price()})
+
 
 def delete_item_from_cart(request, id_item):
     dato = get_object_or_404(OrderItem, pk=id_item)
@@ -297,8 +342,11 @@ def delete_item_from_cart(request, id_item):
                 if item == dato:
                     cart.items.remove(item)
                     dato.delete()
-                    return render(request, 'orders.html', {'order': cart.items.all(), 'id':cart.id, 'mensaje': 'Eliminado con exito','sum':cart.get_total_price()})
+                    return render(request, 'orders.html',
+                                  {'order': cart.items.all(), 'id': cart.id, 'mensaje': 'Eliminado con exito',
+                                   'sum': cart.get_total_price()})
     return redirect('/cart')
+
 
 def empty_cart(request):
     user = get_object_or_404(User, pk=request.user.id)
@@ -333,3 +381,32 @@ def game_rents(request,pk):
     game = get_object_or_404(Game, pk=pk)
     rents = Rent.objects.filter(game=game)
     return render(request,'rents.html',{'rents':rents})
+
+def distancia(request, game):
+    ubicacion = game.address
+    response = requests.get(
+        'https://eu1.locationiq.com/v1/search.php?key=pk.bfdfa73760621b89cf9e8435ffcf48df&q=' + ubicacion + '&format=json')
+    geodata = response.json()
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    if ip == "127.0.0.1":
+        return 0.0;
+    responseLoc = requests.get(
+        'http://api.ipstack.com/' + ip + '?access_key=0dedc652d3afdb7b77a2e002da3c2703')
+    geodataLoc = responseLoc.json()
+    distancia = math.sqrt(math.pow(float((geodataLoc['longitude']) - float(geodata[0]['lon'])), 2) + math.pow(
+        (float(geodataLoc['latitude']) - float(geodata[0]['lat'])), 2))
+    return distancia
+
+
+def games_list_by_distance(request):
+    if (request.user.is_authenticated):
+        games = Game.objects.exclude(owner=request.user)
+    else:
+        games = Game.objects.all()
+    games2 = sorted(games, key=lambda x: x.id)
+    games2.sort(key=lambda x: distancia(request, x))
+    return render(request, 'games.html', {'games': games2, 'filter': True})
