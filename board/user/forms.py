@@ -16,7 +16,7 @@ class Register(forms.Form):
     email = forms.CharField(max_length=50,label="Email",validators=[EmailValidator(message="Email incorrecto")])
     bio = forms.CharField(max_length=200,label="Descripción",required=False,widget=forms.Textarea)
     picture =  forms.FileField(label="Foto")
-    
+    check = forms.BooleanField(label="Acepto Términos y Condiciones de uso", required=True)
 
 class editAccount(forms.Form):
     username = forms.CharField(max_length=20,label="Nuevo usuario")
@@ -33,3 +33,9 @@ class editProfile(forms.Form):
 class editPic(forms.Form):
     picture = forms.FileField( label="Foto",required=False)
 
+class contact(forms.Form):
+    
+    message = forms.CharField(widget=forms.Textarea)
+class descargaDatos(forms.Form):
+    
+    message = forms.CharField(max_length=200,label="Message",required=False,widget=forms.Textarea)

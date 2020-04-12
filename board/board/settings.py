@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import django_heroku
-import dj_database_url
 
 # User model
 
@@ -145,5 +144,10 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'help.tryonboard@gmail.com'
+EMAIL_HOST_PASSWORD = 'AcmeBoard099'
+EMAIL_PORT = 587
 
 django_heroku.settings(locals())
