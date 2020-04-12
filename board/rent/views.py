@@ -357,9 +357,30 @@ def empty_cart(request):
             for item in cart.items.all():
                 cart.items.remove(item)
                 item.delete()
-    return render(request, 'orders.html', {'order': cart.items.all(), 'id': cart.id, 'mensaje': 'Carrito vaciado',
-                                           'sum': cart.get_total_price()})
+    return render(request, 'orders.html', {'order': cart.items.all(), 'id':cart.id, 'mensaje': 'Carrito vaciado','sum':cart.get_total_price()})
 
+def my_rents(request,pk):
+    game = get_object_or_404(Game,pk=pk)
+    rents = Rent.objects.filter(game=game)
+    return render(request,'rents.html',{'rents':rents})
+
+def deliver(request,pk):
+    rent = get_object_or_404(Rent,pk=pk)
+    """
+    actual = datetime.today()
+    end = actual + timedelta(days=rent.days)
+    """
+    if (rent.deliver == True and rent.game.owner == request.user):
+        Rent.objects.filter(id=pk).update(rentable=True, deliver=False)
+    else:
+        Rent.objects.filter(id=pk).update(deliver=True)
+
+    return redirect('/rents/{}'.format(request.user.id))
+
+def game_rents(request,pk):
+    game = get_object_or_404(Game, pk=pk)
+    rents = Rent.objects.filter(game=game)
+    return render(request,'rents.html',{'rents':rents})
 
 def distancia(request, game):
     ubicacion = game.address

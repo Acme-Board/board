@@ -42,6 +42,7 @@ class Rent(models.Model):
     initial_date = models.DateTimeField(null=False)
     days = models.IntegerField(default=1, validators=[MinValueValidator(1, "No puedes alquilarlo menos de un dia")])
     rentable = models.BooleanField(default=True)
+    deliver = models.BooleanField(default=False)
 
     @classmethod
     def get_by_id(cls, cid):
