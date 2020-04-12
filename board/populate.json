@@ -539,7 +539,7 @@
 		"fields": {
 			"ticker": "ABC-1234",
 			"rentable": true,
-			"initial_date": "2020-06-06T22:00:00Z",
+			"initial_date": "2020-06-30T22:00:00Z",
 			"user": 16,
 			"days": 3,
 			"game": 22

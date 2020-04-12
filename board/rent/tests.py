@@ -1,9 +1,9 @@
 import random
 from django.test import TestCase
 from django.utils.dateparse import parse_date
-
 from user.models import User
 from rent.models import Game, Status, Rent
+from datetime import date, datetime , timedelta
 
 
 class GameModelTestCase(TestCase):
@@ -18,6 +18,7 @@ class GameModelTestCase(TestCase):
         self.game.save()
 
         self.rent = Rent(ticker='ABC-1234', days=4, initial_date=parse_date("2020-07-13"), game=self.game, user=self.user, rentable=True)
+  
         self.rent.save()
     
     #Batería de test unitarios ------------------------------------------------------------------------

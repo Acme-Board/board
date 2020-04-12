@@ -1,8 +1,8 @@
 import string
 import random
+from datetime import date, datetime , timedelta
 import requests
 import math
-from datetime import date, datetime
 
 from django.shortcuts import render, get_object_or_404
 
@@ -245,8 +245,23 @@ def add_item_to_cart(request, id_game):
     dato = get_object_or_404(Game, pk=id_game)
     user = get_object_or_404(User, pk=request.user.id)
     list_carts = Order.objects.filter(user=user)
+    all_carts  = Rent.objects.all()
     days = 1
     initial = None
+   
+    for item in all_carts:
+        
+
+        if(dato == item.game):                        
+
+                        i = item.initial_date 
+                        
+                        for i in  range((item.initial_date + timedelta(days= item.days)).day):
+                            if(parse_date(request.POST.get("initial")).day == i):
+                                return redirect('/')
+                                i = i+1
+
+
     if request.method == "POST":
         if request.POST.get("days") is None:
             dato = get_object_or_404(Game, pk=id_game)
