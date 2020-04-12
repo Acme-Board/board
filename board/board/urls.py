@@ -77,6 +77,8 @@ urlpatterns = [
     path('success/', stripe_views.pago_completado),
     path('contend/<int:pk>', stripe_views.new_contend),
     path('contends/', stripe_views.contend_list),
+    path('contend/<int:pk>/detail', stripe_views.contend_detail),
+    path('compensation/<int:pk>/new/', stripe_views.new_compensation),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += staticfiles_urlpatterns()
