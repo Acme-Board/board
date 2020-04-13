@@ -27,6 +27,7 @@
     font-size:15px;
     font-weight:bold;
 }
+
 </style>    
 </head>
 
@@ -40,13 +41,14 @@
     <table>
       <tr>
         <td>
-      <div style="color:white;">
-        <img src="{{user.picture.url}}" style="width: 150px;"/>
+      <div style="color:white; border: double orange 1em;
+      border-image: url('../static/img/frame.png') 27 round stretch;">
+        <img class="rounded-circle" src="{{user.picture.url}}" style="width: 150px;"/>
+      </div>
         {% if request.user.id == user.id and request.user.is_authenticated == True %} 
         <a role="button" href="/editPic/" class="btn btn-primary my-2">Editar foto</a></br>
         <a role="button" href="/descargaDatos/{{user.id}}" class="btn btn-primary my-2">Descargar datos</a>   
         {% endif %}
-      </div>
     </td>
     <td>
       <div class="details text-left" style="color:whitesmoke; margin-left: 50px;">

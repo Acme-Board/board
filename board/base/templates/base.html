@@ -61,11 +61,14 @@
                 <a class="nav-link" href="/cart"><b>Carrito de compra</b></a>
               </li>
               {% if request.user.admin %}
-              <li class="nav-item px-5">Administración
-                <ul>
-                  <li><a class="nav-link" href="/users"><b>Lista usuarios</b></a></li>
-                  <li><a class="nav-link" href="/contends"><b>Disputas</b></a></li>
-                </ul>
+              <li class="nav-item px-5 dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <b>Administración</b>
+                </a>
+                <div class="dropdown-menu" style="background-color: #BE9FE1; text-align: center !important;" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="nav-link dropdown-item" href="/users"><b>Lista usuarios</b></a>
+                  <a class="nav-link dropdown-item" href="/contends"><b>Disputas</b></a>
+                </div>
               </li>
               {% endif %}
               <li class="nav-item px-5 dropdown">
