@@ -69,6 +69,7 @@ urlpatterns = [
     path('users/', user_views.user_list),
     path('contact/<int:pk>', user_views.contact_user),
     path('descargaDatos/<int:pk>', user_views.DescargaDatosUser),
+    path('premium/', user_views.premium),
 
     #Review
     re_path(r'review/(?P<id_user>\d+)',reviews_views.create_review),

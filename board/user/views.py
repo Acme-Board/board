@@ -6,20 +6,23 @@ from django.contrib.auth import login as do_login
 from django.contrib.auth.hashers import check_password, make_password
 from django import forms
 from django.core.mail import EmailMessage
-
+from datetime import date
+import calendar
+from django.conf import settings
+import stripe
 
 from user.models import User
 from user.forms import Register, editAccount, editProfile, editPic, contact
-
+from payment.views import charge
 from reviews.models import Comment
-
 
 # Create your views here.
 
 def profile(request, id_user):
-     user = get_object_or_404(User, pk=id_user)
-     list_comments = Comment.objects.filter(toUser=user)
-     return render(request,'profile.html', {'user':user, 'comments': list_comments})
+    user = get_object_or_404(User, pk=id_user)
+    list_comments = Comment.objects.filter(toUser=user)
+    key = settings.STRIPE_PUBLISHABLE_KEY
+    return render(request,'profile.html', {'user':user, 'comments': list_comments,'key':key})
 
 def logout(request):
      do_logout(request)
@@ -252,3 +255,28 @@ def DescargaDatosUser(request,pk):
         else:
             form = contact()
         return render(request,'descargaDatos.html',{'form':form})
+
+def monthdelta(date, delta):
+    m, y = (date.month+delta) % 12, date.year + ((date.month)+delta-1) // 12
+    if not m: 
+        m = 12
+    d = min(date.day, calendar.monthrange(y, m)[1])
+    return date.replace(day=d,month=m, year=y)
+
+def premium(request):
+
+    #Claculamos la fecha fin
+    months = int(request.POST.get('months')) 
+    end = monthdelta(date.today(), months)
+    
+    charge = stripe.Charge.create(
+        amount=int(3.99*months*100),
+        currency='eur',
+        description='A Django charge',
+        source=request.POST['stripeToken'],
+        api_key=settings.STRIPE_SECRET_KEY
+        )
+
+    User.objects.filter(pk=request.user.id).update(premium=True,end_date=end)
+
+    return redirect('/profile/{}'.format(request.user.id))

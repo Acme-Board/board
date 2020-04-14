@@ -66,6 +66,25 @@
         <button type="button" class="btn btn-danger my-1" data-toggle="modal" data-target="#exampleModal">
           Borrar datos
         </button>
+        
+          {% if request.user.premium == False%}
+            <form action="/premium/" method="POST" style="margin-top: 5px; margin-left: 5px; color: #eee;">
+              {% csrf_token %}
+              <div style="margin-top: 5px;">Meses:</br> <input type="number" id="months" name="months" value="1"   style="color: black;" min="1" max="12" required>
+                x 3.99€
+              </div>
+              </br>
+
+              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="{{ key }}"
+                data-description="Pago"
+                data-currency="eur"
+                data-amount=""
+                data-locale="auto"
+                ></script>
+
+            </form>
+          {% endif %}
 
         {% endif %}
 

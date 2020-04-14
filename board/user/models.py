@@ -10,6 +10,8 @@ class User(AbstractUser):
     picture = models.FileField(upload_to='board/staticfiles/media/myfolder/',blank=True,null = True )
     rate = models. CharField(max_length=10, validators=[validate_comma_separated_integer_list])
     admin = models.BooleanField(default=False)
+    premium = models.BooleanField(default=False)
+    end_date = models.DateTimeField(null=True)
     
     def __str__(self):
         return self.first_name
