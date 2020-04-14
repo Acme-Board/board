@@ -22,9 +22,9 @@ from user.models import User
 
 def games_list(request):
     if (request.user.is_authenticated):
-        games = Game.objects.exclude(owner=request.user)
+        games = Game.objects.exclude(owner=request.user).order_by('owner__premium').reverse()
     else:
-        games = Game.objects.all()
+        games = Game.objects.all().order_by('owner__premium').reverse()
     return render(request, 'games.html', {'games': games})
 
 
