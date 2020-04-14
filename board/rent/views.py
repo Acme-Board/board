@@ -61,7 +61,7 @@ def rents_list(request):
 
 def games_detail(request, pk):
     dato = get_object_or_404(Game, pk=pk)
-    ubicacion = dato.address
+    ubicacion = dato.owner.address
     response = requests.get(
         'https://eu1.locationiq.com/v1/search.php?key=pk.bfdfa73760621b89cf9e8435ffcf48df&q=' + ubicacion + '&format=json')
     geodata = response.json()
@@ -120,10 +120,8 @@ def new_game(request):
                 return render(request, "newgame.html", {"form": form, 'texto': texto, 'Alquilar': Alquilar})
 
             picture = form.cleaned_data['picture']
-            address = form.cleaned_data['address']
             owner = request.user
-            game = Game(name=name, description=description, status=status, price=price, picture=picture,
-                        address=address, owner=owner)
+            game = Game(name=name, description=description, status=status, price=price, picture=picture, owner=owner)
 
             game.save()
             return redirect('/gameDetail/{}'.format(game.id))
@@ -171,10 +169,8 @@ def edit_game(request, pk):
                 form.add_error('price', 'No se puede regalar un juego')
                 return render(request, "newgame.html", {"form": form, 'texto': texto, 'Alquilar': Alquilar})
 
-            address = form.cleaned_data['address']
 
-            Game.objects.filter(pk=pk).update(name=name, description=description, status=status, price=price,
-                                              address=address)
+            Game.objects.filter(pk=pk).update(name=name, description=description, status=status, price=price)
 
             return redirect('/gameDetail/{}'.format(pk))
     else:
@@ -183,7 +179,6 @@ def edit_game(request, pk):
         form.fields["description"].initial = juego.description
         form.fields["status"].initial = juego.status
         form.fields["price"].initial = juego.price
-        form.fields["address"].initial = juego.address
     return render(request, 'newgame.html', {'form': form, 'texto': texto, 'Alquilar': Alquilar})
 
 
@@ -386,7 +381,7 @@ def game_rents(request,pk):
 
 def distancia(game, responseLoc):
     geodataLoc = responseLoc.json()
-    ubicacion = game.address
+    ubicacion = game.owner.address
     time.sleep(0.4)
     response = requests.get(
         'https://eu1.locationiq.com/v1/search.php?key=pk.bfdfa73760621b89cf9e8435ffcf48df&q=' + ubicacion + '&format=json')
