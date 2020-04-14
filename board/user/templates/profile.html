@@ -68,22 +68,26 @@
         </button>
         
           {% if request.user.premium == False%}
-            <form action="/premium/" method="POST" style="margin-top: 5px; margin-left: 5px; color: #eee;">
+          <div id="app2">
+          <form action="/premium/" method="POST" style="margin-top: 5px; margin-left: 5px; color: #eee;">
               {% csrf_token %}
-              <div style="margin-top: 5px;">Meses:</br> <input type="number" id="months" name="months" value="1"   style="color: black;" min="1" max="12" required>
+              <div style="margin-top: 5px;">Meses:</br> 
+                <input type="number" v-model.number="meses" id="months" name="months" value="1" style="color: black;" min="1" max="12" required>
                 x 3.99€
               </div>
+              <p style="color: aqua;">Precio total: [[totalPremium]] €</p>
               </br>
 
               <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="{{ key }}"
                 data-description="Pago"
                 data-currency="eur"
-                data-amount=""
+                data-amount="[[totalPremium]]"
                 data-locale="auto"
                 ></script>
 
             </form>
+          </div>
           {% endif %}
 
         {% endif %}
@@ -154,12 +158,28 @@
   const app = new Vue({
 	el: '#app',
 	data: {
-		com: true
+    com: true,
 	},
 	methods: {
-
 	}
-
+})
+</script>
+<script>
+  const app2 = new Vue({
+  delimiters: ['[[', ']]'],
+	el: '#app2',
+	data: {
+    meses: '',
+    total:0
+	},
+	methods: {
+  },
+  computed: {
+        totalPremium(){
+            this.total = this.meses * 3.99;
+            return this.total;
+        }
+    }
 })
 </script>
 <div class="row justify-content-center">
