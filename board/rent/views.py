@@ -29,10 +29,11 @@ def games_list(request):
     return render(request, 'games.html', {'games': games})
 def juegosFav(request):
     if (request.user.is_authenticated):
-        favGames = JuegosFav.objects.filter(user= request.user)
+        jue = get_object_or_404(JuegosFav,user = request.user)
+  
     else:
         return redirect('/')
-    return render(request, 'gamesFav.html', {'favGames': favGames})
+    return render(request, 'gamesFav.html', {'favGames': jue.get_games()})
 
 
 def games_list_by_user(request):
@@ -266,7 +267,7 @@ def add_item_to_cart(request, id_game):
                         
                         for i in  range((item.initial_date + timedelta(days= item.days)).day):
                             if(parse_date(request.POST.get("initial")).day == i):
-                                return redirect('/')
+                                return render(request, 'gameDetail.html', {'error': "El juego ya esta alquuilado en esa fecha"})
                                 i = i+1
 
 
