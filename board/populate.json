@@ -561,6 +561,7 @@
 		"model": "rent.rent",
 		"pk": 52
 	},
+
 	{
 		"fields": {
 			"ticker": "AFC-3333",
