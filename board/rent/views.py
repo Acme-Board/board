@@ -267,7 +267,9 @@ def add_item_to_cart(request, id_game):
                         
                         for i in  range((item.initial_date + timedelta(days= item.days)).day):
                             if(parse_date(request.POST.get("initial")).day == i):
-                                return render(request, 'gameDetail.html', {'error': "El juego ya esta alquuilado en esa fecha"})
+                                return render(request, 'gameDetail.html',
+                          {'name': dato.name, 'description': dato.description, 'price': dato.price,
+                           'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner , 'mensaje': 'El juego esta alquilado en esa fecha'})
                                 i = i+1
 
 
