@@ -41,10 +41,14 @@
     <table>
       <tr>
         <td>
+          {% if request.user.premium == True %}
       <div style="color:white; border: double orange 1em;
       border-image: url('../static/img/frame.png') 27 round stretch;">
         <img class="rounded-circle" src="{{user.picture.url}}" style="width: 150px;"/>
       </div>
+      {% else %}
+      <img class="rounded-circle" src="{{user.picture.url}}" style="width: 150px;"/>
+      {% endif %}
         {% if request.user.id == user.id and request.user.is_authenticated == True %} 
         <a role="button" href="/editPic/" class="btn btn-primary my-2">Editar foto</a></br>
         <a role="button" href="/descargaDatos/{{user.id}}" class="btn btn-primary my-2">Descargar datos</a>   
@@ -68,26 +72,27 @@
         </button>
         
           {% if request.user.premium == False%}
-          <div id="app2">
           <form action="/premium/" method="POST" style="margin-top: 5px; margin-left: 5px; color: #eee;">
               {% csrf_token %}
+              <div id="app2">
               <div style="margin-top: 5px;">Meses:</br> 
                 <input type="number" v-model.number="meses" id="months" name="months" value="1" style="color: black;" min="1" max="12" required>
                 x 3.99€
               </div>
               <p style="color: aqua;">Precio total: [[totalPremium]] €</p>
               </br>
-
+            
               <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="{{ key }}"
                 data-description="Pago"
                 data-currency="eur"
-                data-amount="[[totalPremium]]"
+                data-amount=""
                 data-locale="auto"
                 ></script>
+              
+              </div>
 
             </form>
-          </div>
           {% endif %}
 
         {% endif %}
