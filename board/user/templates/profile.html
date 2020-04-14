@@ -41,10 +41,13 @@
     <table>
       <tr>
         <td>
-      <div style="color:white; border: double orange 1em;
-      border-image: url('../static/img/frame.png') 27 round stretch;">
-        <img class="rounded-circle" src="{{user.picture.url}}" style="width: 150px;"/>
-      </div>
+          <div style="position: relative;">
+            <div style=" color:white; border: double orange 1em;
+            border-image: url('../static/img/frame4.png') 20 round stretch;">
+              <img src="{% static 'img/tob.png' %}" style="width: 60px; position: absolute; bottom: 0px; left: 0px;"/>
+              <img src="{{user.picture.url}}" style="width: 150px;"/>             <!-- margin-top: 180px; left:510px -->
+            </div>
+          </div>
         {% if request.user.id == user.id and request.user.is_authenticated == True %} 
         <a role="button" href="/editPic/" class="btn btn-primary my-2">Editar foto</a></br>
         <a role="button" href="/descargaDatos/{{user.id}}" class="btn btn-primary my-2">Descargar datos</a>   
