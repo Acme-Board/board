@@ -128,6 +128,7 @@
 
   <button class="accordion" style="text-align: center;">Mostrar Zona de Encuentro</button>
   <div class="panel">
+    {% if error is None %}
   <!-- Vamos a ello -->
   <div id="map"></div>
   <div>
@@ -167,6 +168,9 @@ var cityCircle = new google.maps.Circle({
 src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAqVhn2_oLdi3dF7INvANSvN-jMsBPisME&callback=initMap">
 </script>
 </div>
+    {% else %}
+    <h5>No se ha podido encontrar la ubicacion</h5>
+    {% endif %}
   <!-- Vamos a ello -->
   </div>
 

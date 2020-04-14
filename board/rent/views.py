@@ -65,7 +65,13 @@ def games_detail(request, pk):
     response = requests.get(
         'https://eu1.locationiq.com/v1/search.php?key=pk.bfdfa73760621b89cf9e8435ffcf48df&q=' + ubicacion + '&format=json')
     geodata = response.json()
-
+    try:
+        prueba = geodata[0]['lat']
+    except:
+        return render(request, 'gameDetail.html',
+                      {'name': dato.name, 'description': dato.description, 'price': dato.price,
+                       'status': dato.status, 'picture': dato.picture, 'id': dato.id,
+                       'owner': dato.owner, 'error': True})
     return render(request, 'gameDetail.html', {'name': dato.name, 'description': dato.description, 'price': dato.price,
                                                'status': dato.status, 'picture': dato.picture, 'id': dato.id,
                                                'owner': dato.owner, 'longitude': geodata[0]['lon'],
