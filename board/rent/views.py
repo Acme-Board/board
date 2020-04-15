@@ -24,13 +24,19 @@ from user.models import User
 def games_list(request):
     if (request.user.is_authenticated):
         games = Game.objects.exclude(owner=request.user)
+        
     else:
         games = Game.objects.all()
     return render(request, 'games.html', {'games': games})
 def juegosFav(request):
     if (request.user.is_authenticated):
+        
+        fav = JuegosFav.objects.filter(user=request.user)  # Esto si retorna un QuerySet
+        if (not(fav.exists())):
+            fav = JuegosFav(user = request.user )
+            fav.save()
+        
         jue = get_object_or_404(JuegosFav,user = request.user)
-  
     else:
         return redirect('/')
     return render(request, 'gamesFav.html', {'favGames': jue.get_games()})
