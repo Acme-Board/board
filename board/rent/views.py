@@ -450,6 +450,24 @@ def add_juegos_fav(request, id_game):
     jue.save()
     
     return render(request, 'gamesFav.html', {'favGames': jue.get_games()})
+
+def delete_juegos_fav(request, id_game):
+    dato = get_object_or_404(Game, pk=id_game)
+    user = get_object_or_404(User, pk=request.user.id)
+    jue = JuegosFav.objects.filter(user=request.user)  # Esto si retorna un QuerySet
+    if (not(jue.exists())):
+        jue = JuegosFav(user = user )
+        jue.save()
+    
+    
+    
+    
+    jue = get_object_or_404(JuegosFav,user = request.user)
+    
+    jue.items.remove(dato)
+    jue.save()
+    
+    return render(request, 'gamesFav.html', {'favGames': jue.get_games()})
     
     
 
