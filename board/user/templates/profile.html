@@ -95,14 +95,13 @@
                 <div class="modal-body">
                   <form action="/premium/" method="POST" style="margin-top: 5px; margin-left: 5px; color:black; text-align: center;">
                     {% csrf_token %}
-                    <div id="app2">
+                    <div id="app3">
                     <div style="margin-top: 5px;">Meses:</br> 
                       <input type="number" v-model.number="meses" id="months" name="months" value="1" style="color: black;" min="1" max="12" required>
                       x 3.99€
                     </div>
                     <p style="color: black;">Precio total: [[totalPremium]] €</p>
-                    </br>
-                  
+
                     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                       data-key="{{ key }}"
                       data-description="Pago"
@@ -112,7 +111,8 @@
                       ></script>
                     
                     </div>
-      
+                    
+                    
                   </form>
                 </div>
               </div>
@@ -184,7 +184,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
 <script>
   const app = new Vue({
 	el: '#app',
@@ -196,14 +195,14 @@
 })
 </script>
 <script>
-  const app2 = new Vue({
+  const app3 = new Vue({
   delimiters: ['[[', ']]'],
-	el: '#app2',
-	data: {
+  el: '#app3',
+  data: {
     meses: '',
     total:0
-	},
-	methods: {
+  },
+  methods: {
   },
   computed: {
         totalPremium(){
