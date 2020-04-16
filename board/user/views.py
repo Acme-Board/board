@@ -21,8 +21,14 @@ from reviews.models import Comment
 def profile(request, id_user):
     user = get_object_or_404(User, pk=id_user)
     list_comments = Comment.objects.filter(toUser=user)
+    end = None
+
     key = settings.STRIPE_PUBLISHABLE_KEY
-    return render(request,'profile.html', {'user':user, 'comments': list_comments,'key':key})
+
+    if(request.user.premium == True):
+        end = request.user.end_date.strftime('%d/%m/%Y')
+
+    return render(request,'profile.html', {'user':user, 'comments': list_comments,'key':key,'premium_date':end})
 
 def logout(request):
      do_logout(request)
@@ -265,18 +271,38 @@ def monthdelta(date, delta):
 
 def premium(request):
 
-    #Claculamos la fecha fin
-    months = int(request.POST.get('months')) 
-    end = monthdelta(date.today(), months)
-    
-    charge = stripe.Charge.create(
-        amount=int(3.99*months*100),
-        currency='eur',
-        description='A Django charge',
-        source=request.POST['stripeToken'],
-        api_key=settings.STRIPE_SECRET_KEY
-        )
+    if(request.user.premium == False):
+        
+        #Claculamos la fecha fin
+        months = int(request.POST.get('months')) 
+        end = monthdelta(date.today(), months)
+        
+        #Realizamos el pago
+        charge = stripe.Charge.create(
+            amount=int(3.99*months*100),
+            currency='eur',
+            description='A Django charge',
+            source=request.POST['stripeToken'],
+            api_key=settings.STRIPE_SECRET_KEY) 
 
-    User.objects.filter(pk=request.user.id).update(premium=True,end_date=end)
+        #Actualizamos el usuario a usuario premium
+        User.objects.filter(pk=request.user.id).update(premium=True,end_date=end)
+
+    else:
+
+        #Claculamos la nueva fecha fin
+        months = int(request.POST.get('months')) 
+        end = monthdelta(request.user.end_date, months)
+
+        #Realizamos el pago
+        charge = stripe.Charge.create(
+            amount=int(3.99*months*100),
+            currency='eur',
+            description='A Django charge',
+            source=request.POST['stripeToken'],
+            api_key=settings.STRIPE_SECRET_KEY) 
+
+        #Actualizamos al usuario con la nueva fecha fin
+        User.objects.filter(pk=request.user.id).update(end_date=end)
 
     return redirect('/profile/{}'.format(request.user.id))
