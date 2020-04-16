@@ -36,7 +36,7 @@
                     <div style="margin: 15px; text-align: center;">
                         <button type="submit" class="btn btn-primary"  style="border-radius: 8px">Crear</button>              
                     </div>
-                <!--
+                
                 <div>
                     {% if form.errors %}
                         {% for field in form %}
@@ -53,7 +53,8 @@
                         {% endfor %}
 
                     {% endif %}
-                </div>-->
+                </div>
+                
                 {% if request.user.is_authenticated == False %}
                 <p style="text-align: center;">¿Ya tiene una cuenta? <a href="/login" style="padding: 5px;"> Inicie Sesión</a></p>
                 {% endif %}

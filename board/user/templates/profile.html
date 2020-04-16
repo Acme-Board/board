@@ -45,7 +45,15 @@
             <div style=" color:white; border: double orange 1em;
             border-image: url('../static/img/frame4.png') 20 round stretch;">
               <img src="{% static 'img/tob.png' %}" style="width: 60px; position: absolute; bottom: 0px; left: 0px;"/>
-              <img src="{{user.picture.url}}" style="width: 150px;"/>             <!-- margin-top: 180px; left:510px -->
+              
+              {% if user.picture == '' %}
+                <img src="{% static 'img/predefinida.png' %}" style="width: 150px;"/>             <!-- margin-top: 180px; left:510px -->
+              {% endif %}
+
+              {% if user.picture != '' %}
+                <img src="{{user.picture.url}}" style="width: 150px;"/>             <!-- margin-top: 180px; left:510px -->
+              {% endif %}
+
             </div>
           </div>
         {% if request.user.id == user.id and request.user.is_authenticated == True %} 
@@ -64,7 +72,7 @@
         <!-- Aqui viene el pop up-->
         {% if request.user.id == user.id and request.user.is_authenticated == True %} 
         <a role="button" href="/editProfile/" class="btn btn-primary my-2">Editar perfil</a>
-        <a role="button" href="/editAccount/" class="btn btn-primary my-2">Editar cuenta</a>       
+        <a role="button" href="/editAccount/" class="btn btn-primary my-2">{{user.picture}}</a>       
       </br>
         <button type="button" class="btn btn-danger my-1" data-toggle="modal" data-target="#exampleModal">
           Borrar datos
