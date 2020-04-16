@@ -215,7 +215,7 @@ def rent_game(request, id_game, days, initial):
     ramdomLetters = ''.join(random.choice(letters) for i in range(3))
     ramdomNumber = ''.join(random.choice(digits) for i in range(4))
     ticker = ramdomLetters + '-' + ramdomNumber
-    rent = Rent(ticker=ticker, game=dato, days=days, initial_date=initial, user=user, rentable=False)
+    rent = Rent(ticker=ticker, game=dato,days = days, initial_date=initial, user= user, rentable=False, deliver=False)
     rent.save()
 
 

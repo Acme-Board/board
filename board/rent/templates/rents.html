@@ -54,9 +54,11 @@
 		{% if dato.deliver == True and dato.game.owner == request.user%}
 			<a href= "/rents/deliver/{{dato.id}}" class="btn btn-info btn-sm" style="border-radius: 8px">Recibido</a></br>
 		{% endif %}
+
 		{% if dato.game.owner == request.user%}
 		<a href= "/contend/{{dato.id}}" class="btn btn-info btn-sm" style="border-radius: 8px">Abrir disputa</a></br> 
 		{% endif %}
+
 		<a href= "/review/{{dato.game.owner.id}}" class="btn btn-info btn-sm" style="border-radius: 8px">Comentar</a></td>
 
 	</div>
