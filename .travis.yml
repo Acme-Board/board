@@ -17,8 +17,8 @@ install:
 - pip install coverage
 script:
 - cd board
+- python ./manage.py flush --no-input
 - python ./manage.py makemigrations
-- python ./manage.py flush
 - python ./manage.py migrate --run-syncdb
 - python ./manage.py test --keepdb
 - coverage run --branch --source=. ./manage.py test --keepdb
