@@ -15,7 +15,10 @@ python:
 before_install:
   - pip install selenium
   - wget https://chromedriver.storage.googleapis.com/81.0.4044.69/chromedriver_win32.zip
-  - unzip chromedriver_win32.zip -d /home/travis/virtualenv/python3.6.7/bin/
+  - unzip chromedriver_win32.zip -d /home/travis/virtualenv/python3.6.7/
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 
 install:
 - pip install -r requirements.txt
 - pip install codacy-coverage
