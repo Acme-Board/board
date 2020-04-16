@@ -275,7 +275,8 @@ def add_item_to_cart(request, id_game):
                             if(parse_date(request.POST.get("initial")).day == i):
                                 return render(request, 'gameDetail.html',
                           {'name': dato.name, 'description': dato.description, 'price': dato.price,
-                           'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner , 'mensaje': 'El juego esta alquilado en esa fecha'})
+                           'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner ,
+                            'mensaje': 'El juego esta alquilado en esa fecha'})
                                 i = i+1
 
 
@@ -301,7 +302,8 @@ def add_item_to_cart(request, id_game):
             dato = get_object_or_404(Game, pk=id_game)
             return render(request, 'gameDetail.html',
                           {'name': dato.name, 'description': dato.description, 'price': dato.price,
-                           'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner})
+                           'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner,
+                           'mensaje': 'Vaya! Parece que la fecha es anterior a la actual'})
         initial = parse_date(request.POST.get("initial"))
     if not list_carts:
         ramdomLetters = ''.join(random.choice(string.ascii_uppercase) for i in range(4))
