@@ -7,15 +7,14 @@ from django.core.validators import EmailValidator, URLValidator
 #Forms here
 
 class Register(forms.Form):
-    username = forms.CharField(max_length=20,label="Usuario")
-    password1 = forms.CharField(max_length=32,widget=forms.PasswordInput, label="Contraseña")
-    password2 = forms.CharField(max_length=32,widget=forms.PasswordInput,label="Repetir contraseña")
-    name = forms.CharField(max_length=40,label="Nombre")
-    last_name = forms.CharField(max_length=50,label="Apellidos")
-    email = forms.CharField(max_length=50,label="Email",validators=[EmailValidator(message="Email incorrecto")])
+    username = forms.CharField(max_length=20,label="Usuario*")
+    password1 = forms.CharField(max_length=32,widget=forms.PasswordInput, label="Contraseña*")
+    password2 = forms.CharField(max_length=32,widget=forms.PasswordInput,label="Repetir contraseña*")
+    name = forms.CharField(max_length=40,label="Nombre*")
+    last_name = forms.CharField(max_length=50,label="Apellidos*")
+    email = forms.CharField(max_length=50,label="Email*",validators=[EmailValidator(message="Email incorrecto")])
     bio = forms.CharField(max_length=200,label="Descripción",required=False,widget=forms.Textarea)
-    #picture =  forms.FileField(label="Foto", required=False)
-    check = forms.BooleanField(label="Acepto Términos y Condiciones de uso", required=True)
+    check = forms.BooleanField(label="Acepto Términos y Condiciones de uso*", required=True)
 
 class editAccount(forms.Form):
     username = forms.CharField(max_length=20,label="Nuevo usuario")
