@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'rent',
     'reviews',
     'payment',
+    'stripe',
     'user',
 ]
 
