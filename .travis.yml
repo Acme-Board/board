@@ -12,12 +12,10 @@ before_script:
 language: python
 python:
 - '3.6'
-addons:
-  chrome: stable
 before_install:
   - pip install selenium
   - wget https://chromedriver.storage.googleapis.com/81.0.4044.69/chromedriver_win32.zip
-  - unzip chromedriver_win32.zip -d test/driver/
+  - unzip chromedriver_win32.zip -d /home/travis/virtualenv/python3.6.7/bin/
 install:
 - pip install -r requirements.txt
 - pip install codacy-coverage
