@@ -5,11 +5,13 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as do_login
 from django.contrib.auth.hashers import check_password, make_password
 from django import forms
+from django.core.mail import EmailMessage
+
 
 from user.models import User
-from user.forms import Register, editAccount, editProfile, editPic
+from user.forms import Register, editAccount, editProfile, editPic, contact
 
-from reviews.models import Valoration, Comment
+from reviews.models import Comment
 
 
 # Create your views here.
@@ -204,3 +206,49 @@ def user_list(request):
     else:
         games = []
     return render(request,'users.html',{'users':games})
+
+def contact_user(request,pk):
+    user = get_object_or_404(User, pk=pk)
+
+    if request.method=='POST':
+        form = contact(request.POST)
+        if form.is_valid():
+            title = 'Mensaje del administrador de TryOnBoard'
+            body = form.cleaned_data['message'] + '\n'
+            body += 'Comunicarse a: '+ user.email
+            emailto = user.email
+
+            email = EmailMessage(title,body,to=[emailto])
+            email.send()
+            return redirect('/')
+    else:
+        form = contact()
+    return render(request,'contact.html',{'form':form})
+def DescargaDatosUser(request,pk):
+    user = get_object_or_404(User, pk=pk)
+    if(not(request.user == user)):
+         return redirect('/')
+    else:
+
+        if request.method=='POST':
+            form = contact(request.POST)
+            if form.is_valid():
+                title = 'Mensaje del administrador de TryOnBoard' 
+                body = 'Aqui estan los datos que TRY ON BOARD tiene sobre usted:' + '\n'
+
+                body += 'Username:'+ user.username + '\n'
+                body += 'Password:'+ user.password + '\n'
+                body += 'Bio:'+ user.bio + '\n'        
+                body += 'Name:'+ user.first_name + '\n'
+                body += 'Last name :'+ user.last_name + '\n'
+                body += 'Email:'+ user.email + '\n'
+                emailto = user.email
+                
+
+                email = EmailMessage(title,body,to=[emailto])
+                #email.attach_file(user.picture.url)
+                email.send()
+                return redirect('/')
+        else:
+            form = contact()
+        return render(request,'descargaDatos.html',{'form':form})

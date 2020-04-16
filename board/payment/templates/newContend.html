@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!--<div class="container" style="width:600px;"> -->
+  <section class="form-register" style=" 
+  width:  600px;
+  background: #24303c;
+  padding: 30px;
+  margin: auto;
+  border-radius: 8px;
+  font-family: 'calibri';
+  color: white;">
+
+
+    <div><h3  class ="well well-sm"> Nueva disputa: </h3> </div>
+  
+    <div>      
+            <form method="POST" enctype="multipart/form-data" class="NewGame" style=" margin: 20px;
+            padding: 5px">{% csrf_token %}
+         
+                {{ form.as_p }}
+
+              
+                <div style="text-align:center; margin: 15px">
+                <button type="submit" class="btn btn-primary" ; style="border-radius: 8px">Enviar</button>
+                </div>
+
+            </form>
+           
+      </div>
+
+    </section>
+
+
+{% endblock %}

@@ -18,17 +18,17 @@ install:
 script:
 - cd board
 - python ./manage.py makemigrations
-- python ./manage.py migrate --run-syncdb
+- python ./manage.py migrate
 - python ./manage.py test --keepdb
 - coverage run --branch --source=. ./manage.py test --keepdb
 - coverage xml
 - python-codacy-coverage -r coverage.xml
 branches:
   only:
-  - master
+  - develop
 deploy:
   provider: heroku
-  app: tryonboard-sprint2
+  app: tryonboard-sprint3
   strategy: git
   api_key:
     secure: xmQUCBV2F929bmbcwuaOdeeqqAe4MpRYYYqDQr+bN6lgVmQrw1Sm+INnFXaS+TB/gHjJ497DcKon4hFX60aO3PpSOvT3n75P2nx/URwNVMNt0b/omGIzbBI6L0x23oNFL9ixK5WckpdxTJTbMVnPOvZEzx1VIy3mh/9eMgiX2U0y/AH9A++fY1um9n8Jt9/Sh7IYv0g03x+C9PHSM4GCNmICACQskgvfsPDkg93wF1phIl+eDvcuMlQNJKNQeCCfU9dqVwdFjaZZdSgAjSfh3noFQ/c7Ot8E68d1g+wHeds0QKCXMlOhA9gl0oXFlDfNG+vGmmnBKJ82znUOBpi9LnKJAm9ytOGIF83BQ0xSRzu55Dxo91Nmpo7l9dXMW6cMFu8FQYyEK1SXJnwpakWgxUnbSsHsUJulRIhlvkYoO2y4ZREfqLvfGlHi45YBMyjVi6cDriDFCGDgW7L152NsGQi0BLiWwGqs2c9oVFa7pgu6M7/Ddd+y7J0n9BadM4jecUc9qMcLsHNMQa4/spC1420FrnxOjonscLsS7GkHJXR9XOUIrop7g19m4sNsqlsbYvAIx3igH4pVgSN54fV1YlM75p0ny/K8kN7tUTBXCNWeLrA6q3crxEXZnTxlgn8RcwaVtZS0EkJA9wskYZ0KLZSdc3tNDDguML/+esVUmCM=
