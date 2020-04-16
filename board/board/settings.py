@@ -33,7 +33,7 @@ ALLOWED_HOSTS = []
 
 APIS={}
 
-BASEURL = 'https://tryonboard-sprint1.herokuapp.com/'
+BASEURL = 'https://tryonboard-sprint3.herokuapp.com/'
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',   
-    'tempus_dominus',
     'base',
     'rent',
     'reviews',
