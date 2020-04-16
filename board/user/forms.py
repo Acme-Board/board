@@ -18,9 +18,9 @@ class Register(forms.Form):
 
 class editAccount(forms.Form):
     username = forms.CharField(max_length=20,label="Nuevo usuario")
-    password3 = forms.CharField(max_length=32,widget=forms.PasswordInput, label="Contraseña actual")
-    password1 = forms.CharField(max_length=32,widget=forms.PasswordInput, label="Nueva contraseña")
-    password2 = forms.CharField(max_length=32,widget=forms.PasswordInput, label="Repetir nueva contraseña")
+    password3 = forms.CharField(max_length=32,widget=forms.PasswordInput, label="Contraseña actual*")
+    password1 = forms.CharField(max_length=32,widget=forms.PasswordInput, label="Nueva contraseña*")
+    password2 = forms.CharField(max_length=32,widget=forms.PasswordInput, label="Repetir nueva contraseña*")
 
 class editProfile(forms.Form):
     name = forms.CharField(max_length=40,label="Nombre")
