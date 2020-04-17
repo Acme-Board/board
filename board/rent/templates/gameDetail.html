@@ -29,7 +29,8 @@ border-radius: 8px;"> {{mensaje}} </p>
 <a href= "/gamesFavDelete/{{id}}" class="btn btn-info btn-sm" 
 style="border-radius: 8px;margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">
 Eliminar de Favoritos</a>
-  {% else %}
+{% endif %}
+{% if !juegosFav.get_games %}
   <a href= "/gamesFavAdd/{{id}}" class="btn btn-info btn-sm" 
   style="border-radius: 8px;margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">
   Añadir a Favoritos</a>
