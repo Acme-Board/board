@@ -75,8 +75,10 @@ def rents_list(request):
 def games_detail(request, pk):
     dato = get_object_or_404(Game, pk=pk)
     ubicacion = dato.owner.address
-    fav = JuegosFav.objects.filter(user=request.user)    
-    jue = get_object_or_404(JuegosFav,user = request.user)
+    if(request.user.is_authenticated):
+        fav = JuegosFav.objects.filter(user=request.user)    
+        jue = get_object_or_404(JuegosFav,user = request.user)
+    
     response = requests.get(
         'https://eu1.locationiq.com/v1/search.php?key=pk.bfdfa73760621b89cf9e8435ffcf48df&q=' + ubicacion + '&format=json')
     geodata = response.json()
@@ -87,7 +89,14 @@ def games_detail(request, pk):
                       {'game': dato, 'name': dato.name, 'description': dato.description, 'price': dato.price,
                        'status': dato.status, 'picture': dato.picture, 'id': dato.id,
                        'owner': dato.owner, 'error': True})
-    return render(request, 'gameDetail.html', {'favGames': jue.get_games(), 'game': dato, 'name': dato.name, 'description': dato.description, 'price': dato.price,
+
+    if(request.user.is_authenticated):
+        return render(request, 'gameDetail.html', {'favGames': jue.get_games(), 'game': dato, 'name': dato.name, 'description': dato.description, 'price': dato.price,
+                                               'status': dato.status, 'picture': dato.picture, 'id': dato.id,
+                                               'owner': dato.owner, 'longitude': geodata[0]['lon'],
+                                               'latitude': geodata[0]['lat']})
+    else:
+        return render(request, 'gameDetail.html', {'game': dato, 'name': dato.name, 'description': dato.description, 'price': dato.price,
                                                'status': dato.status, 'picture': dato.picture, 'id': dato.id,
                                                'owner': dato.owner, 'longitude': geodata[0]['lon'],
                                                'latitude': geodata[0]['lat']})
