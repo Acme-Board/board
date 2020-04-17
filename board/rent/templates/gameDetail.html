@@ -22,7 +22,7 @@
 <p style=" background-color: #ffa420 ; color: black; text-align: center;
 border-radius: 8px;"> {{mensaje}} </p>
 
-{% if request.user != owner %}
+{% if request.user.is_authenticated and request.user != owner %}
 
 {% if game in favGames %}
 
