@@ -17,6 +17,7 @@ from django.shortcuts import redirect
 from rent.models import Rent
 from rent.models import Order
 from rent.models import OrderItem
+from rent.models import JuegosFav
 from user.models import User
 
 
@@ -26,6 +27,18 @@ def games_list(request):
     else:
         games = Game.objects.all().order_by('owner__premium').reverse()
     return render(request, 'games.html', {'games': games})
+def juegosFav(request):
+    if (request.user.is_authenticated):
+        
+        fav = JuegosFav.objects.filter(user=request.user)  # Esto si retorna un QuerySet
+        if (not(fav.exists())):
+            fav = JuegosFav(user = request.user )
+            fav.save()
+        
+        jue = get_object_or_404(JuegosFav,user = request.user)
+    else:
+        return redirect('/')
+    return render(request, 'gamesFav.html', {'favGames': jue.get_games()})
 
 
 def games_list_by_user(request):
@@ -43,13 +56,13 @@ def games_list_by_status(request, status):
     filtro = True
 
     if (int(status) == 1):
-        games = Game.objects.filter(status="Perfecto")
+        games = Game.objects.filter(status="Perfecto").exclude(owner=request.user)
     if (int(status) == 2):
-        games = Game.objects.filter(status="Faltan piezas")
+        games = Game.objects.filter(status="Faltan piezas").exclude(owner=request.user)
     if (int(status) == 3):
-        games = Game.objects.filter(status="Gastado")
+        games = Game.objects.filter(status="Gastado").exclude(owner=request.user)
     if (int(status) == 4):
-        games = Game.objects.filter(status="Injugable")
+        games = Game.objects.filter(status="Injugable").exclude(owner=request.user)
 
     return render(request, 'games.html', {'games': games, 'filter': filtro})
 
@@ -61,11 +74,17 @@ def rents_list(request):
 
 def games_detail(request, pk):
     dato = get_object_or_404(Game, pk=pk)
-    ubicacion = dato.address
+    ubicacion = dato.owner.address
     response = requests.get(
         'https://eu1.locationiq.com/v1/search.php?key=pk.bfdfa73760621b89cf9e8435ffcf48df&q=' + ubicacion + '&format=json')
     geodata = response.json()
-
+    try:
+        prueba = geodata[0]['lat']
+    except:
+        return render(request, 'gameDetail.html',
+                      {'name': dato.name, 'description': dato.description, 'price': dato.price,
+                       'status': dato.status, 'picture': dato.picture, 'id': dato.id,
+                       'owner': dato.owner, 'error': True})
     return render(request, 'gameDetail.html', {'name': dato.name, 'description': dato.description, 'price': dato.price,
                                                'status': dato.status, 'picture': dato.picture, 'id': dato.id,
                                                'owner': dato.owner, 'longitude': geodata[0]['lon'],
@@ -120,10 +139,8 @@ def new_game(request):
                 return render(request, "newgame.html", {"form": form, 'texto': texto, 'Alquilar': Alquilar})
 
             picture = form.cleaned_data['picture']
-            address = form.cleaned_data['address']
             owner = request.user
-            game = Game(name=name, description=description, status=status, price=price, picture=picture,
-                        address=address, owner=owner)
+            game = Game(name=name, description=description, status=status, price=price, picture=picture, owner=owner)
 
             game.save()
             return redirect('/gameDetail/{}'.format(game.id))
@@ -171,10 +188,8 @@ def edit_game(request, pk):
                 form.add_error('price', 'No se puede regalar un juego')
                 return render(request, "newgame.html", {"form": form, 'texto': texto, 'Alquilar': Alquilar})
 
-            address = form.cleaned_data['address']
 
-            Game.objects.filter(pk=pk).update(name=name, description=description, status=status, price=price,
-                                              address=address)
+            Game.objects.filter(pk=pk).update(name=name, description=description, status=status, price=price)
 
             return redirect('/gameDetail/{}'.format(pk))
     else:
@@ -183,7 +198,6 @@ def edit_game(request, pk):
         form.fields["description"].initial = juego.description
         form.fields["status"].initial = juego.status
         form.fields["price"].initial = juego.price
-        form.fields["address"].initial = juego.address
     return render(request, 'newgame.html', {'form': form, 'texto': texto, 'Alquilar': Alquilar})
 
 
@@ -215,7 +229,7 @@ def rent_game(request, id_game, days, initial):
     ramdomLetters = ''.join(random.choice(letters) for i in range(3))
     ramdomNumber = ''.join(random.choice(digits) for i in range(4))
     ticker = ramdomLetters + '-' + ramdomNumber
-    rent = Rent(ticker=ticker, game=dato, days=days, initial_date=initial, user=user, rentable=False)
+    rent = Rent(ticker=ticker, game=dato,days = days, initial_date=initial, user= user, rentable=False, deliver=False)
     rent.save()
 
 
@@ -259,7 +273,10 @@ def add_item_to_cart(request, id_game):
                         
                         for i in  range((item.initial_date + timedelta(days= item.days)).day):
                             if(parse_date(request.POST.get("initial")).day == i):
-                                return redirect('/')
+                                return render(request, 'gameDetail.html',
+                          {'name': dato.name, 'description': dato.description, 'price': dato.price,
+                           'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner ,
+                            'mensaje': 'El juego esta alquilado en esa fecha'})
                                 i = i+1
 
 
@@ -285,7 +302,8 @@ def add_item_to_cart(request, id_game):
             dato = get_object_or_404(Game, pk=id_game)
             return render(request, 'gameDetail.html',
                           {'name': dato.name, 'description': dato.description, 'price': dato.price,
-                           'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner})
+                           'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner,
+                           'mensaje': 'Vaya! Parece que la fecha es anterior a la actual'})
         initial = parse_date(request.POST.get("initial"))
     if not list_carts:
         ramdomLetters = ''.join(random.choice(string.ascii_uppercase) for i in range(4))
@@ -386,7 +404,7 @@ def game_rents(request,pk):
 
 def distancia(game, responseLoc):
     geodataLoc = responseLoc.json()
-    ubicacion = game.address
+    ubicacion = game.owner.address
     time.sleep(0.4)
     response = requests.get(
         'https://eu1.locationiq.com/v1/search.php?key=pk.bfdfa73760621b89cf9e8435ffcf48df&q=' + ubicacion + '&format=json')
@@ -415,3 +433,47 @@ def games_list_by_distance(request):
 
     games2.sort(key=lambda x: distancia(x, responseLoc))
     return render(request, 'games.html', {'games': games2, 'filter': True})
+def add_juegos_fav(request, id_game):
+    dato = get_object_or_404(Game, pk=id_game)
+    user = get_object_or_404(User, pk=request.user.id)
+    jue = JuegosFav.objects.filter(user=request.user)  # Esto si retorna un QuerySet
+    if (not(jue.exists())):
+        jue = JuegosFav(user = user )
+        jue.save()
+    
+    
+    
+    jue = get_object_or_404(JuegosFav,user = request.user)
+  
+    
+    
+    
+    jue.items.add(dato)
+    jue.save()
+    
+    return render(request, 'gamesFav.html', {'favGames': jue.get_games()})
+
+def delete_juegos_fav(request, id_game):
+    dato = get_object_or_404(Game, pk=id_game)
+    user = get_object_or_404(User, pk=request.user.id)
+    jue = JuegosFav.objects.filter(user=request.user)  # Esto si retorna un QuerySet
+    if (not(jue.exists())):
+        jue = JuegosFav(user = user )
+        jue.save()
+    
+    
+    
+    
+    jue = get_object_or_404(JuegosFav,user = request.user)
+    
+    jue.items.remove(dato)
+    jue.save()
+    
+    return render(request, 'gamesFav.html', {'favGames': jue.get_games()})
+    
+    
+
+    
+    
+    
+    

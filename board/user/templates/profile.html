@@ -2,10 +2,12 @@
 <html>
 <head>
      {% extends "base.html" %}
+     
      {% load static %}
      {% block extrahead %}
     <link rel="stylesheet" href="{% static 'css/style_user.css' %}" type="text/css"> 
     {% endblock %}
+
 
 <style>
 #popup{
@@ -28,6 +30,7 @@
     font-weight:bold;
 }
 
+
 </style>    
 </head>
 
@@ -41,6 +44,11 @@
     <table>
       <tr>
         <td>
+          {% if user.picture == '' %}
+          <img src="{% static 'img/predefinida.png' %}" style="width: 150px;"/>             <!-- margin-top: 180px; left:510px -->
+      {% endif %}
+
+        {% if user.picture != '' %}
           {% if request.user.premium == True %}
       <div style="color:white; border: double orange 0.5em;
       border-image: url('../static/img/frame.png') 20 round stretch;">
@@ -51,7 +59,9 @@
       {% endif %}
         {% if request.user.id == user.id and request.user.is_authenticated == True %} 
         <a role="button" href="/editPic/" class="btn btn-primary my-2">Editar foto</a></br>
-        <a role="button" href="/descargaDatos/{{user.id}}" class="btn btn-primary my-2">Descargar datos</a>   
+        <a role="button" href="/descargaDatos/{{user.id}}" class="btn btn-primary my-2"><i class="fa fa-download"></i>  Descargar datos</a> 
+ 
+        {% endif %}
         {% endif %}
     </td>
     <td>
