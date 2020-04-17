@@ -82,3 +82,10 @@ class Order(models.Model):
         for x in self.get_cart_items():
             sum = sum + (x.game.price * x.days)
         return sum
+
+class JuegosFav(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null= True)
+    items = models.ManyToManyField(Game, blank=True)
+   
+    def get_games(self):
+        return self.items.all()

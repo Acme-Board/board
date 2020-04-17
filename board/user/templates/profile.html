@@ -2,10 +2,12 @@
 <html>
 <head>
      {% extends "base.html" %}
+     
      {% load static %}
      {% block extrahead %}
     <link rel="stylesheet" href="{% static 'css/style_user.css' %}" type="text/css"> 
     {% endblock %}
+
 
 <style>
 #popup{
@@ -27,6 +29,7 @@
     font-size:15px;
     font-weight:bold;
 }
+
 
 </style>    
 </head>
@@ -50,7 +53,9 @@
           </div>
         {% if request.user.id == user.id and request.user.is_authenticated == True %} 
         <a role="button" href="/editPic/" class="btn btn-primary my-2">Editar foto</a></br>
-        <a role="button" href="/descargaDatos/{{user.id}}" class="btn btn-primary my-2">Descargar datos</a>   
+        <a role="button" href="/descargaDatos/{{user.id}}" class="btn btn-primary my-2"><i class="fa fa-download"></i>  Descargar datos</a> 
+ 
+  
         {% endif %}
     </td>
     <td>

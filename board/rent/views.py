@@ -17,15 +17,29 @@ from django.shortcuts import redirect
 from rent.models import Rent
 from rent.models import Order
 from rent.models import OrderItem
+from rent.models import JuegosFav
 from user.models import User
 
 
 def games_list(request):
     if (request.user.is_authenticated):
         games = Game.objects.exclude(owner=request.user)
+        
     else:
         games = Game.objects.all()
     return render(request, 'games.html', {'games': games})
+def juegosFav(request):
+    if (request.user.is_authenticated):
+        
+        fav = JuegosFav.objects.filter(user=request.user)  # Esto si retorna un QuerySet
+        if (not(fav.exists())):
+            fav = JuegosFav(user = request.user )
+            fav.save()
+        
+        jue = get_object_or_404(JuegosFav,user = request.user)
+    else:
+        return redirect('/')
+    return render(request, 'gamesFav.html', {'favGames': jue.get_games()})
 
 
 def games_list_by_user(request):
@@ -259,7 +273,10 @@ def add_item_to_cart(request, id_game):
                         
                         for i in  range((item.initial_date + timedelta(days= item.days)).day):
                             if(parse_date(request.POST.get("initial")).day == i):
-                                return redirect('/')
+                                return render(request, 'gameDetail.html',
+                          {'name': dato.name, 'description': dato.description, 'price': dato.price,
+                           'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner ,
+                            'mensaje': 'El juego esta alquilado en esa fecha'})
                                 i = i+1
 
 
@@ -285,7 +302,8 @@ def add_item_to_cart(request, id_game):
             dato = get_object_or_404(Game, pk=id_game)
             return render(request, 'gameDetail.html',
                           {'name': dato.name, 'description': dato.description, 'price': dato.price,
-                           'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner})
+                           'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner,
+                           'mensaje': 'Vaya! Parece que la fecha es anterior a la actual'})
         initial = parse_date(request.POST.get("initial"))
     if not list_carts:
         ramdomLetters = ''.join(random.choice(string.ascii_uppercase) for i in range(4))
@@ -415,3 +433,47 @@ def games_list_by_distance(request):
 
     games2.sort(key=lambda x: distancia(x, responseLoc))
     return render(request, 'games.html', {'games': games2, 'filter': True})
+def add_juegos_fav(request, id_game):
+    dato = get_object_or_404(Game, pk=id_game)
+    user = get_object_or_404(User, pk=request.user.id)
+    jue = JuegosFav.objects.filter(user=request.user)  # Esto si retorna un QuerySet
+    if (not(jue.exists())):
+        jue = JuegosFav(user = user )
+        jue.save()
+    
+    
+    
+    jue = get_object_or_404(JuegosFav,user = request.user)
+  
+    
+    
+    
+    jue.items.add(dato)
+    jue.save()
+    
+    return render(request, 'gamesFav.html', {'favGames': jue.get_games()})
+
+def delete_juegos_fav(request, id_game):
+    dato = get_object_or_404(Game, pk=id_game)
+    user = get_object_or_404(User, pk=request.user.id)
+    jue = JuegosFav.objects.filter(user=request.user)  # Esto si retorna un QuerySet
+    if (not(jue.exists())):
+        jue = JuegosFav(user = user )
+        jue.save()
+    
+    
+    
+    
+    jue = get_object_or_404(JuegosFav,user = request.user)
+    
+    jue.items.remove(dato)
+    jue.save()
+    
+    return render(request, 'gamesFav.html', {'favGames': jue.get_games()})
+    
+    
+
+    
+    
+    
+    

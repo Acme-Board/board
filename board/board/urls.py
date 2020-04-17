@@ -41,6 +41,9 @@ urlpatterns = [
 
     #Rent
     path('games/', rent_views.games_list),
+    path('gamesFav/', rent_views.juegosFav),
+    re_path(r'gamesFavAdd/(?P<id_game>\d+)', rent_views.add_juegos_fav),
+    re_path(r'gamesFavDelete/(?P<id_game>\d+)', rent_views.delete_juegos_fav),
     path('delete/<int:pk>', rent_views.delete),
     path('myGames/', rent_views.games_list_by_user),
     path('gameDetail/<int:pk>/', rent_views.games_detail, name='games_detail'),
