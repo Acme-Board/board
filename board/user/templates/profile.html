@@ -72,7 +72,7 @@
         <!-- Aqui viene el pop up-->
         {% if request.user.id == user.id and request.user.is_authenticated == True %} 
         <a role="button" href="/editProfile/" class="btn btn-primary my-2">Editar perfil</a>
-        <a role="button" href="/editAccount/" class="btn btn-primary my-2">{{user.picture}}</a>       
+        <a role="button" href="/editAccount/" class="btn btn-primary my-2">Editar cuenta</a>       
       </br>
         <button type="button" class="btn btn-danger my-1" data-toggle="modal" data-target="#exampleModal">
           Borrar datos

@@ -51,12 +51,13 @@ def login(request):
     return render(request, "login.html", {'form': form})
 
 def delete_myUSer(request, pk):
+
     # Recuperamos la instancia del user y la borramos
     instancia = User.objects.get(id=pk)
+    
     if(instancia == request.user or request.user.admin == True):
         instancia.delete()
         return redirect('/')
-  
     
     return redirect('/')
 
@@ -111,7 +112,7 @@ def edit_account(request):
             user1 = authenticate(username=username, password=password1)
             
             if user1 is None:
-                formulario.add_error('password3','Contraseña incorrecta')
+                formulario.add_error('password3','Contraseña actual incorrecta')
 
             if(formulario.cleaned_data['password1']!=formulario.cleaned_data['password2']):
                 formulario.add_error('password2','No coinciden las contraseñas')
@@ -181,8 +182,6 @@ def edit_pic(request):
             return redirect('/profile/{}'.format(request.user.id))
     else:
         form = editPic()
-
-        form.fields["picture"].initial = request.user.picture
 
     return render(request, 'newuser.html', {'form': form})
 
