@@ -6,7 +6,7 @@ from django.contrib.auth import login as do_login
 from django.contrib.auth.hashers import check_password, make_password
 from django import forms
 from django.core.mail import EmailMessage
-
+from django.db import IntegrityError
 
 from user.models import User
 from user.forms import Register, editAccount, editProfile, editPic, contact
@@ -51,49 +51,23 @@ def login(request):
     return render(request, "login.html", {'form': form})
 
 def delete_myUSer(request, pk):
+
     # Recuperamos la instancia del user y la borramos
     instancia = User.objects.get(id=pk)
+    
     if(instancia == request.user or request.user.admin == True):
         instancia.delete()
         return redirect('/')
-  
     
     return redirect('/')
 
-  
-def edit_user(request, pk):
-    # Recuperamos la instancia de la persona
-    instancia = User.objects.get(id=pk)
-
-    # Creamos el formulario con los datos de la instancia
-    form = Register(instance=instancia)
-
-    # Comprobamos si se ha enviado el formulario
-    if request.method == "POST":
-        # Actualizamos el formulario con los datos recibidos
-        form = Register(request.POST, instance=instancia)
-        # Si el formulario es válido...
-        if form.is_valid():
-            # Guardamos el formulario pero sin confirmarlo,
-            # así conseguiremos una instancia para manejarla
-            instancia = form.save(commit=False)
-            # Podemos guardarla cuando queramos
-            instancia.save()
-            return  redirect('/profile/{}'.format(pk))
-
-    # Si llegamos al final renderizamos el formulario
-    return render(request, "newuser.html", {'form': form})
-
-
 def new_user(request):
+
     if(request.method=='POST'):
+
         formulario = Register(request.POST ,request.FILES or None)
         
-        if(formulario.is_valid()  ):
-            if (formulario.cleaned_data['password1']!=formulario.cleaned_data['password2']):
-                formulario.add_error('password2','no coinciden las contraseñas')
-                return render(request,"newuser.html",{"form":formulario})
-                
+        if(formulario.is_valid()):
                 
             username = formulario.cleaned_data['username']
             password = formulario.cleaned_data['password1']
@@ -101,15 +75,28 @@ def new_user(request):
             last_name = formulario.cleaned_data['last_name']
             email = formulario.cleaned_data['email']
             bio = formulario.cleaned_data['bio']
-            picture = formulario.cleaned_data['picture']
+            picture = ''
+            
+            if (password != formulario.cleaned_data['password2']):
+                formulario.add_error('password2','No coinciden las contraseñas')
 
-            user = User(username=username, password=password,first_name=name,last_name=last_name,email=email,bio=bio,picture=picture)
-            user.set_password(user.password)
-            user.save()
-            do_login(request, user)
+            try:
+                user = User(username=username, password=password,first_name=name,last_name=last_name,email=email,bio=bio,picture=picture)
+                user.set_password(user.password)
+                user.save()
+                do_login(request, user)
+            except IntegrityError:
+                formulario.add_error('username','Este nombre de usuario ya existe')
+
+            if(len(formulario.errors)!=0):
+                return render(request,"newuser.html",{"form":formulario})
+
             return redirect('/profile/{}'.format(user.id))
+
     else:
+
         formulario = Register()
+
     return render(request,"newuser.html",{"form":formulario})
 
 def edit_account(request):
@@ -125,7 +112,7 @@ def edit_account(request):
             user1 = authenticate(username=username, password=password1)
             
             if user1 is None:
-                formulario.add_error('password3','Contraseña incorrecta')
+                formulario.add_error('password3','Contraseña actual incorrecta')
 
             if(formulario.cleaned_data['password1']!=formulario.cleaned_data['password2']):
                 formulario.add_error('password2','No coinciden las contraseñas')
@@ -192,11 +179,9 @@ def edit_pic(request):
 
             User.objects.filter(pk=request.user.id).update(picture=picture)
 
-            return redirect('/Profile/{}'.format(request.user.id))
+            return redirect('/profile/{}'.format(request.user.id))
     else:
         form = editPic()
-
-        form.fields["picture"].initial = request.user.picture
 
     return render(request, 'newuser.html', {'form': form})
 

@@ -57,13 +57,13 @@ def games_list_by_status(request, status):
     filtro = True
 
     if (int(status) == 1):
-        games = Game.objects.filter(status="Perfecto")
+        games = Game.objects.filter(status="Perfecto").exclude(owner=request.user)
     if (int(status) == 2):
-        games = Game.objects.filter(status="Faltan piezas")
+        games = Game.objects.filter(status="Faltan piezas").exclude(owner=request.user)
     if (int(status) == 3):
-        games = Game.objects.filter(status="Gastado")
+        games = Game.objects.filter(status="Gastado").exclude(owner=request.user)
     if (int(status) == 4):
-        games = Game.objects.filter(status="Injugable")
+        games = Game.objects.filter(status="Injugable").exclude(owner=request.user)
 
     return render(request, 'games.html', {'games': games, 'filter': filtro})
 
