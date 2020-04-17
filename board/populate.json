@@ -302,7 +302,7 @@
 		"fields": {
 			"name": "Kitchnexus",
 			"description": "Se alquila juego Kitchnexus en perfecto estado, solo lo he usado una vez",
-			"status": "Perfecto",
+			"status": "Nuevo",
 			"price": 20,
 			"picture": "board/staticfiles/media/myfolder/kitchnexus.jpg",
 			"owner": 10
@@ -314,7 +314,7 @@
 		"fields": {
 			"name": "Tactics",
 			"description": "Alquilo juego de mesa Tactics, esta en perfecto estado y es un juego muy divertido",
-			"status": "Perfecto",
+			"status": "Nuevo",
 			"price": 10,
 			"picture": "board/staticfiles/media/myfolder/tactics.jpg",
 			"owner": 10
@@ -326,7 +326,7 @@
 		"fields": {
 			"name": "Preguntados",
 			"description": "Alquilo juego de preguntados, esta un poco gastado pero es jugable",
-			"status": "Gastado",
+			"status": "Desgastado",
 			"price": 5,
 			"picture": "board/staticfiles/media/myfolder/preguntados.jpg",
 			"owner": 11
@@ -338,7 +338,7 @@
 		"fields": {
 			"name": "Monopoli",
 			"description": "Alquilo juego de monopoli en perfecto estado con todas sus piezas y billetes",
-			"status": "Perfecto",
+			"status": "Nuevo",
 			"price": 5,
 			"picture": "board/staticfiles/media/myfolder/monopoli.jpeg",
 			"owner": 17
@@ -350,7 +350,7 @@
 		"fields": {
 			"name": "Fantasma",
 			"description": "Alquilo juego Fantasmas, perfecto para toda la familia",
-			"status": "Perfecto",
+			"status": "Nuevo",
 			"price": 20.3,
 			"picture": "board/staticfiles/media/myfolder/fantasma.jpeg",
 			"owner": 17
@@ -362,7 +362,7 @@
 		"fields": {
 			"name": "1000 nombres",
 			"description": "Alquilo juego 1000 Nombres, perfecto para toda la familia",
-			"status": "Gastado",
+			"status": "Desgastado",
 			"price": 7,
 			"picture": "board/staticfiles/media/myfolder/nombres.jpeg",
 			"owner": 17
@@ -374,7 +374,7 @@
 		"fields": {
 			"name": "Master Chezz",
 			"description": "Se alquila Master Chezz juego para jugar con otra persona",
-			"status": "Perfecto",
+			"status": "Usado",
 			"price": 7,
 			"picture": "board/staticfiles/media/myfolder/chess.jpeg",
 			"owner": 17
@@ -398,7 +398,7 @@
 		"fields": {
 			"name": "Mentiroso",
 			"description": "Alquilo juego Mentiroso, perfecto para toda la familia",
-			"status": "Perfecto",
+			"status": "Nuevo",
 			"price": 7,
 			"picture": "board/staticfiles/media/myfolder/mentiroso.jpeg",
 			"owner": 18
@@ -410,7 +410,7 @@
 		"fields": {
 			"name": "La Superclase",
 			"description": "Alquilo juego la Superclase, perfecto para toda la familia",
-			"status": "Perfecto",
+			"status": "Nuevo",
 			"price": 7,
 			"picture": "board/staticfiles/media/myfolder/superclase.jpeg",
 			"owner": 30
@@ -422,7 +422,7 @@
 		"fields": {
 			"name": "Chess Games",
 			"description": "El juego esta gastado pero es jugable y ademas muy divertido",
-			"status": "Gastado",
+			"status": "Desgastado",
 			"price": 7,
 			"picture": "board/staticfiles/media/myfolder/chessgames.jpeg",
 			"owner": 30
@@ -434,7 +434,7 @@
 		"fields": {
 			"name": "Juegos Reunidos",
 			"description": "Alquiilo Juegos reunidos, es un juego que incluye una gran variedad de juegos, aunque un poco gastado es jugable",
-			"status": "Gastado",
+			"status": "Desgastado",
 			"price": 7,
 			"picture": "board/staticfiles/media/myfolder/juegos.jpeg",
 			"owner": 31
@@ -446,7 +446,7 @@
 		"fields": {
 			"name": "Alto voltaje",
 			"description": "Juego alto voltaje, en perfecto estado",
-			"status": "Perfecto",
+			"status": "Nuevo",
 			"price": 7,
 			"picture": "board/staticfiles/media/myfolder/voltaje.jpeg",
 			"owner": 32
@@ -482,7 +482,7 @@
 		"fields": {
 			"name": "Juego de mesa de Bob Esponja",
 			"description": "Alquilo juego de mesa de bob esponja para que puedas jugar con tus hijos",
-			"status": "Perfecto",
+			"status": "Usado",
 			"price": 10,
 			"picture": "board/staticfiles/media/myfolder/esponja.jpeg",
 			"owner": 10
@@ -494,7 +494,7 @@
 		"fields": {
 			"name": "BackGammon",
 			"description": "Alquilo juego BackGammon un poco gastado, pero jugable",
-			"status": "Gastado",
+			"status": "Desgastado",
 			"price": 7,
 			"picture": "board/staticfiles/media/myfolder/backgammon.jpeg",
 			"owner": 16
@@ -506,7 +506,7 @@
 		"fields": {
 			"name": "El gran Reto",
 			"description": "Esta en perfecto estado y es un juego muy divertido",
-			"status": "Perfecto",
+			"status": "Nuevo",
 			"price": 7,
 			"picture": "board/staticfiles/media/myfolder/reto.jpeg",
 			"owner": 15
