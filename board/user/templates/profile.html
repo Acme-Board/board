@@ -42,12 +42,12 @@
       <tr>
         <td>
           {% if request.user.premium == True %}
-      <div style="color:white; border: double orange 1em;
-      border-image: url('../static/img/frame.png') 27 round stretch;">
-        <img class="rounded-circle" src="{{user.picture.url}}" style="width: 150px;"/>
+      <div style="color:white; border: double orange 0.5em;
+      border-image: url('../static/img/frame.png') 20 round stretch;">
+        <img src="{{user.picture.url}}" style="width: 150px;"/>
       </div>
       {% else %}
-      <img class="rounded-circle" src="{{user.picture.url}}" style="width: 150px;"/>
+      <img src="{{user.picture.url}}" style="width: 150px;"/>
       {% endif %}
         {% if request.user.id == user.id and request.user.is_authenticated == True %} 
         <a role="button" href="/editPic/" class="btn btn-primary my-2">Editar foto</a></br>
@@ -95,8 +95,21 @@
                 <div class="modal-body">
                   <form action="/premium/" method="POST" style="margin-top: 5px; margin-left: 5px; color:black; text-align: center;">
                     {% csrf_token %}
+                    <div class="text-center">
+                      <h2>¿Por qué elegir premium?</h2>
+                      <ul style="list-style-type:none; padding-left: 0;">
+                        <li><i class="fas fa-award fa-3x"></i><p style="font-weight: bold;">¡Destaca tus juegos!</p>
+                          <p>¡Con TryOnBoard Premium, los juegos que subas serán los primeros en visualizarse en la vista!</p></li>
+                      </br>
+                        <li><i class="fas fa-piggy-bank fa-3x"></i><p style="font-weight: bold;"> ¡Ahorra en comisiones!  </p>
+                        <p>Conseguirás más beneficio por cada juego que alquiles</p></li>
+                      </br>
+                        <li><i class="fas fa-handshake fa-3x"></i><p style="font-weight: bold;"> ¡Usuario de confianza!</p>
+                        <p>¡Podrás disfrutar de un marco dorado, el cual indicará a los usuarios que eres premium y será un símbolo de confianza!</p></li>
+                      </ul>
+                    </div>
                     <div id="app3">
-                    <div style="margin-top: 5px;">Meses:</br> 
+                    <div style="margin-top: 5px; text-decoration: solid;">Meses: 
                       <input type="number" v-model.number="meses" id="months" name="months" value="1" style="color: black;" min="1" max="12" required>
                       x 3.99€
                     </div>
@@ -110,18 +123,7 @@
                       data-locale="auto"
                       ></script>
                     
-                    </div>
-                    <div class="my-3 text-center">
-                      <h2>¿Porque elegir premium?</h2>
-                      <ul style="list-style-type:none; ">
-                        <li><i class="fas fa-award fa-3x"></i><p> Destaca tus juegos de los demás! </p></li>
-                      </br>
-                        <li><i class="fas fa-piggy-bank fa-3x"></i><p> Ahorra en comisiones!  </p></li>
-                      </br>
-                        <li><i class="fas fa-handshake fa-3x"></i><p> Más confianza para los demas usuarios!  </p></li>
-                      </ul>
-                    </div>
-                    
+                    </div>                   
                   </form>
                 </div>
               </div>
@@ -216,7 +218,7 @@
   computed: {
         totalPremium(){
             this.total = this.meses * 3.99;
-            return this.total;
+            return this.total.toFixed(2);
         }
     }
 })
