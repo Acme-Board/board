@@ -76,12 +76,14 @@ def new_user(request):
             email = formulario.cleaned_data['email']
             bio = formulario.cleaned_data['bio']
             picture = ''
-            
+            address = formulario.cleaned_data['address']
+            phone = formulario.cleaned_data['phone']
+      
             if (password != formulario.cleaned_data['password2']):
                 formulario.add_error('password2','No coinciden las contraseñas')
 
             try:
-                user = User(username=username, password=password,first_name=name,last_name=last_name,email=email,bio=bio,picture=picture)
+                user = User(username=username, password=password,first_name=name,last_name=last_name,email=email,bio=bio,picture=picture,phone=phone,address=address)
                 user.set_password(user.password)
                 user.save()
                 do_login(request, user)
@@ -153,8 +155,10 @@ def edit_profile(request):
             last_name = formulario.cleaned_data['last_name']
             email = formulario.cleaned_data['email']
             bio = formulario.cleaned_data['bio']
+            address = formulario.cleaned_data['address']
+            phone = formulario.cleaned_data['phone']
 
-            User.objects.filter(id=request.user.id).update(first_name=name,last_name=last_name,email=email,bio=bio)
+            User.objects.filter(id=request.user.id).update(first_name=name,last_name=last_name,email=email,bio=bio,phone=phone,address=address)
 
             return redirect('/profile/{}'.format(request.user.id))
 
@@ -165,6 +169,8 @@ def edit_profile(request):
         formulario.fields["last_name"].initial = request.user.last_name
         formulario.fields["email"].initial = request.user.email
         formulario.fields["bio"].initial = request.user.bio
+        formulario.fields["phone"].initial = request.user.phone
+        formulario.fields["address"].initial = request.user.address
 
     return render(request,"newuser.html",{"form":formulario})
 
