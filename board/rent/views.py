@@ -17,15 +17,29 @@ from django.shortcuts import redirect
 from rent.models import Rent
 from rent.models import Order
 from rent.models import OrderItem
+from rent.models import JuegosFav
 from user.models import User
 
 
 def games_list(request):
     if (request.user.is_authenticated):
         games = Game.objects.exclude(owner=request.user)
+        
     else:
         games = Game.objects.all()
     return render(request, 'games.html', {'games': games})
+def juegosFav(request):
+    if (request.user.is_authenticated):
+        
+        fav = JuegosFav.objects.filter(user=request.user)  # Esto si retorna un QuerySet
+        if (not(fav.exists())):
+            fav = JuegosFav(user = request.user )
+            fav.save()
+        
+        jue = get_object_or_404(JuegosFav,user = request.user)
+    else:
+        return redirect('/')
+    return render(request, 'gamesFav.html', {'favGames': jue.get_games()})
 
 
 def games_list_by_user(request):
@@ -43,13 +57,13 @@ def games_list_by_status(request, status):
     filtro = True
 
     if (int(status) == 1):
-        games = Game.objects.filter(status="Perfecto")
+        games = Game.objects.filter(status="Perfecto").exclude(owner=request.user)
     if (int(status) == 2):
-        games = Game.objects.filter(status="Faltan piezas")
+        games = Game.objects.filter(status="Faltan piezas").exclude(owner=request.user)
     if (int(status) == 3):
-        games = Game.objects.filter(status="Gastado")
+        games = Game.objects.filter(status="Gastado").exclude(owner=request.user)
     if (int(status) == 4):
-        games = Game.objects.filter(status="Injugable")
+        games = Game.objects.filter(status="Injugable").exclude(owner=request.user)
 
     return render(request, 'games.html', {'games': games, 'filter': filtro})
 
@@ -216,7 +230,7 @@ def rent_game(request, id_game, days, initial):
     ramdomLetters = ''.join(random.choice(letters) for i in range(3))
     ramdomNumber = ''.join(random.choice(digits) for i in range(4))
     ticker = ramdomLetters + '-' + ramdomNumber
-    rent = Rent(ticker=ticker, game=dato, days=days, initial_date=initial, user=user, rentable=False)
+    rent = Rent(ticker=ticker, game=dato,days = days, initial_date=initial, user= user, rentable=False, deliver=False)
     rent.save()
 
 
@@ -260,7 +274,10 @@ def add_item_to_cart(request, id_game):
                         
                         for i in  range((item.initial_date + timedelta(days= item.days)).day):
                             if(parse_date(request.POST.get("initial")).day == i):
-                                return redirect('/')
+                                return render(request, 'gameDetail.html',
+                          {'name': dato.name, 'description': dato.description, 'price': dato.price,
+                           'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner ,
+                            'mensaje': 'El juego esta alquilado en esa fecha'})
                                 i = i+1
 
 
@@ -286,7 +303,8 @@ def add_item_to_cart(request, id_game):
             dato = get_object_or_404(Game, pk=id_game)
             return render(request, 'gameDetail.html',
                           {'name': dato.name, 'description': dato.description, 'price': dato.price,
-                           'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner})
+                           'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner,
+                           'mensaje': 'Vaya! Parece que la fecha es anterior a la actual'})
         initial = parse_date(request.POST.get("initial"))
     if not list_carts:
         ramdomLetters = ''.join(random.choice(string.ascii_uppercase) for i in range(4))
@@ -416,3 +434,47 @@ def games_list_by_distance(request):
 
     games2.sort(key=lambda x: distancia(x, responseLoc))
     return render(request, 'games.html', {'games': games2, 'filter': True})
+def add_juegos_fav(request, id_game):
+    dato = get_object_or_404(Game, pk=id_game)
+    user = get_object_or_404(User, pk=request.user.id)
+    jue = JuegosFav.objects.filter(user=request.user)  # Esto si retorna un QuerySet
+    if (not(jue.exists())):
+        jue = JuegosFav(user = user )
+        jue.save()
+    
+    
+    
+    jue = get_object_or_404(JuegosFav,user = request.user)
+  
+    
+    
+    
+    jue.items.add(dato)
+    jue.save()
+    
+    return render(request, 'gamesFav.html', {'favGames': jue.get_games()})
+
+def delete_juegos_fav(request, id_game):
+    dato = get_object_or_404(Game, pk=id_game)
+    user = get_object_or_404(User, pk=request.user.id)
+    jue = JuegosFav.objects.filter(user=request.user)  # Esto si retorna un QuerySet
+    if (not(jue.exists())):
+        jue = JuegosFav(user = user )
+        jue.save()
+    
+    
+    
+    
+    jue = get_object_or_404(JuegosFav,user = request.user)
+    
+    jue.items.remove(dato)
+    jue.save()
+    
+    return render(request, 'gamesFav.html', {'favGames': jue.get_games()})
+    
+    
+
+    
+    
+    
+    

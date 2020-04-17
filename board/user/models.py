@@ -8,7 +8,7 @@ from django.core.validators import RegexValidator
 class User(AbstractUser):
     bio = models.TextField(max_length=500)
     range = models. CharField(max_length=10)
-    picture = models.FileField(upload_to='board/staticfiles/media/myfolder/',blank=True,null = True )
+    picture = models.FileField(upload_to='board/staticfiles/media/myfolder/',null=True)
     rate = models. CharField(max_length=10, validators=[validate_comma_separated_integer_list])
     address = models.TextField(max_length=500)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
