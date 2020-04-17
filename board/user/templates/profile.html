@@ -174,9 +174,7 @@
 </div>
 <div id="app">
   {% if request.user.id != user.id and request.user.is_authenticated == True %} 
-  <div class="row justify-content-center">
-  <a href= "/review/{{user.id}}" class="btn btn-primary btn-sm text-center my-3" style="border-radius: 8px;">Añadir comentarios</a> 
-  </div>
+
   {% endif %}
   <div class="row justify-content-center">
   <button class="btn btn-primary my-3" @click="com = !com" style="color:white;text-align: center;">Ver comentarios</button>
