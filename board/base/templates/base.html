@@ -84,6 +84,62 @@
               <li class="nav-item px-5">
                   <a class="nav-link" href="/logout"><b>Cerrar sesión</b></a>
               </li>
+              {% if request.user.premium == False %}
+              <li class="nav-item justify-content-right px-5">
+                <a class="nav-link bg-warning" style="border-radius: 20%;" href="" data-toggle="modal" data-target="#exampleModal"><b>Premium</b></a>
+              </li>
+              {% endif %}
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header"">
+                      <h5 class="modal-title text-dark" id="popup">Conseguir premium</h5>
+                      <!--
+                      {% if request.user.premium == True %}
+                      <h5 class="modal-title text-dark" id="popup">Renovar premium</h5>
+                      {% endif %}-->
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="/premium/" method="POST" style="margin-top: 5px; margin-left: 5px; color:black; text-align: center;">
+                        {% csrf_token %}
+                        <div class="text-center">
+                          <h2>¿Por qué elegir premium?</h2>
+                          <ul style="list-style-type:none; padding-left: 0;">
+                            <li><i class="fas fa-award fa-3x"></i><p style="font-weight: bold;">¡Destaca tus juegos!</p>
+                              <p>¡Con TryOnBoard Premium, los juegos que subas serán los primeros en visualizarse en la vista!</p></li>
+                          </br>
+                            <li><i class="fas fa-piggy-bank fa-3x"></i><p style="font-weight: bold;"> ¡Ahorra en comisiones!  </p>
+                            <p>Conseguirás más beneficio por cada juego que alquiles.</p></li>
+                          </br>
+                            <li><i class="fas fa-handshake fa-3x"></i><p style="font-weight: bold;"> ¡Usuario de confianza!</p>
+                            <p>¡Podrás disfrutar de un marco dorado, el cual indicará a los usuarios que eres premium y será un símbolo de confianza!</p></li>
+                          </ul>
+                        </div>
+                        <div id="app2">
+                        <div style="margin-top: 5px; text-decoration: solid;">Meses: 
+                          <input type="number" v-model.number="meses" id="months" name="months" value="1" style="color: black;" min="1" max="12" required>
+                          x 3.99€
+                        </div>
+                        <p style="color: black;">Precio total: [[totalPremium]] €</p>
+    
+                        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                          data-key="{{ key }}"
+                          data-description="Pago"
+                          data-currency="eur"
+                          data-amount=""
+                          data-locale="auto"
+                          ></script>
+                        
+                        </div>                   
+                      </form>
+    
+                    </div>
+                  </div>
+                </div>
+              </div>
               {% endif %}
           </ul>
       </div>
@@ -126,7 +182,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
+    <script>
+      const app2 = new Vue({
+      delimiters: ['[[', ']]'],
+      el: '#app2',
+      data: {
+        meses: '',
+        total:0
+      },
+      methods: {
+      },
+      computed: {
+            totalPremium(){
+                this.total = this.meses * 3.99;
+                return this.total.toFixed(2);
+            }
+        }
+    })
+    </script>
     </div>
     <footer class="page-footer font-small" style="  position: relative; bottom: 0; width: 100%;">
       <!-- Copyright -->

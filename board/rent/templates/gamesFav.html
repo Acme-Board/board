@@ -18,13 +18,8 @@
 
 <br class="container py-5">
 	
-	<h1> Lista de Juegos </h1>
-	{% if request.user.is_authenticated %}
-	<a href= "/newgame" type="button" class=" btn btn-primary ">Subir juego</a>
-	<a href= "/gamesFav" type="button" class=" btn btn-primary ">Tus Juegos Favoritos</a>	
-	</br>
-	{% endif %}
-
+	<h1> Tus Juegos Favoritos </h1>
+	
 	<!-- Aqui esta el buscador 
 	<div class="row">
 		
@@ -36,23 +31,11 @@
 			</div>
 				
 	</div>-->
-</br><a type="button" class=" btn btn-primary " href="/games/filterDistance">Filtrar por distancia</a>
-		
-			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Filtrado por estado</button>
-			<div class ="dropdown-menu">
-				<a href="/games/filterStatus/1" class="dropdown-item" style="color: black;">Perfecto</a>
-				<a href="/games/filterStatus/2" class="dropdown-item" style="color: black;">Faltan piezas</a>
-				<a href="/games/filterStatus/3" class="dropdown-item" style="color: black;">Gastado</a>
-				<a href="/games/filterStatus/4" class="dropdown-item" style="color: black;">Injugable</a>
-			</div>	
-				
-	{% if filter %}
-	<a href="/games">Eliminar filtros</a>
-	{% endif %}
+
 	
 	<div class="container" style= "display: flex; flex-wrap: wrap;">
 		
-	{% for dato in games %}
+	{% for dato in favGames %}
 
 	<table  class= "table-games" style="width: 245px;">
 	<!-- Vamos a introducir  algunos juegos -->
@@ -61,8 +44,8 @@
 	 <div><h4> {{dato.name|capfirst}} - <i> {{dato.price}} €</i> </br></h4>
 		 Estado: {{dato.status}} </br>
 		 <a href= "/gameDetail/{{dato.id}}" class="btn btn-info btn-sm"
-		  style="border-radius: 8px; margin-top: 10px;color:black; font-weight: bold;">Ver mas</a></br> </br></td>
-		
+		  style="border-radius: 8px; margin-top: 10px;color:black; font-weight: bold;">Ver mas</a></br> </br>
+		</td>
 	</tr>
 	</table>
 	{% empty %}
@@ -72,6 +55,9 @@
 	<li>Vaya, parece que no hay juegos</li>
 
 	{% endfor %}
+	
+	
+
 </div>
 
 

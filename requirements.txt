@@ -11,3 +11,4 @@ python-decouple==3.3
 stripe==2.23.0
 pillow==7.0.0
 request
+selenium==3.141.0

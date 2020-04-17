@@ -6,20 +6,30 @@ from django.contrib.auth import login as do_login
 from django.contrib.auth.hashers import check_password, make_password
 from django import forms
 from django.core.mail import EmailMessage
-
+from datetime import date
+import calendar
+from django.conf import settings
+import stripe
+from django.db import IntegrityError
 
 from user.models import User
 from user.forms import Register, editAccount, editProfile, editPic, contact
-
+from payment.views import charge
 from reviews.models import Comment
-
 
 # Create your views here.
 
 def profile(request, id_user):
-     user = get_object_or_404(User, pk=id_user)
-     list_comments = Comment.objects.filter(toUser=user)
-     return render(request,'profile.html', {'user':user, 'comments': list_comments})
+    user = get_object_or_404(User, pk=id_user)
+    list_comments = Comment.objects.filter(toUser=user)
+    end = None
+
+    key = settings.STRIPE_PUBLISHABLE_KEY
+
+    if(request.user.premium == True):
+        end = request.user.end_date.strftime('%d/%m/%Y')
+
+    return render(request,'profile.html', {'user':user, 'comments': list_comments,'key':key,'premium_date':end})
 
 def logout(request):
      do_logout(request)
@@ -51,49 +61,23 @@ def login(request):
     return render(request, "login.html", {'form': form})
 
 def delete_myUSer(request, pk):
+
     # Recuperamos la instancia del user y la borramos
     instancia = User.objects.get(id=pk)
+    
     if(instancia == request.user or request.user.admin == True):
         instancia.delete()
         return redirect('/')
-  
     
     return redirect('/')
 
-  
-def edit_user(request, pk):
-    # Recuperamos la instancia de la persona
-    instancia = User.objects.get(id=pk)
-
-    # Creamos el formulario con los datos de la instancia
-    form = Register(instance=instancia)
-
-    # Comprobamos si se ha enviado el formulario
-    if request.method == "POST":
-        # Actualizamos el formulario con los datos recibidos
-        form = Register(request.POST, instance=instancia)
-        # Si el formulario es válido...
-        if form.is_valid():
-            # Guardamos el formulario pero sin confirmarlo,
-            # así conseguiremos una instancia para manejarla
-            instancia = form.save(commit=False)
-            # Podemos guardarla cuando queramos
-            instancia.save()
-            return  redirect('/profile/{}'.format(pk))
-
-    # Si llegamos al final renderizamos el formulario
-    return render(request, "newuser.html", {'form': form})
-
-
 def new_user(request):
+
     if(request.method=='POST'):
+
         formulario = Register(request.POST ,request.FILES or None)
         
-        if(formulario.is_valid()  ):
-            if (formulario.cleaned_data['password1']!=formulario.cleaned_data['password2']):
-                formulario.add_error('password2','no coinciden las contraseñas')
-                return render(request,"newuser.html",{"form":formulario})
-                
+        if(formulario.is_valid()):
                 
             username = formulario.cleaned_data['username']
             password = formulario.cleaned_data['password1']
@@ -101,15 +85,30 @@ def new_user(request):
             last_name = formulario.cleaned_data['last_name']
             email = formulario.cleaned_data['email']
             bio = formulario.cleaned_data['bio']
-            picture = formulario.cleaned_data['picture']
+            picture = ''
+            address = formulario.cleaned_data['address']
+            phone = formulario.cleaned_data['phone']
+      
+            if (password != formulario.cleaned_data['password2']):
+                formulario.add_error('password2','No coinciden las contraseñas')
 
-            user = User(username=username, password=password,first_name=name,last_name=last_name,email=email,bio=bio,picture=picture)
-            user.set_password(user.password)
-            user.save()
-            do_login(request, user)
+            try:
+                user = User(username=username, password=password,first_name=name,last_name=last_name,email=email,bio=bio,picture=picture,phone=phone,address=address)
+                user.set_password(user.password)
+                user.save()
+                do_login(request, user)
+            except IntegrityError:
+                formulario.add_error('username','Este nombre de usuario ya existe')
+
+            if(len(formulario.errors)!=0):
+                return render(request,"newuser.html",{"form":formulario})
+
             return redirect('/profile/{}'.format(user.id))
+
     else:
+
         formulario = Register()
+
     return render(request,"newuser.html",{"form":formulario})
 
 def edit_account(request):
@@ -125,7 +124,7 @@ def edit_account(request):
             user1 = authenticate(username=username, password=password1)
             
             if user1 is None:
-                formulario.add_error('password3','Contraseña incorrecta')
+                formulario.add_error('password3','Contraseña actual incorrecta')
 
             if(formulario.cleaned_data['password1']!=formulario.cleaned_data['password2']):
                 formulario.add_error('password2','No coinciden las contraseñas')
@@ -166,8 +165,10 @@ def edit_profile(request):
             last_name = formulario.cleaned_data['last_name']
             email = formulario.cleaned_data['email']
             bio = formulario.cleaned_data['bio']
+            address = formulario.cleaned_data['address']
+            phone = formulario.cleaned_data['phone']
 
-            User.objects.filter(id=request.user.id).update(first_name=name,last_name=last_name,email=email,bio=bio)
+            User.objects.filter(id=request.user.id).update(first_name=name,last_name=last_name,email=email,bio=bio,phone=phone,address=address)
 
             return redirect('/profile/{}'.format(request.user.id))
 
@@ -178,6 +179,8 @@ def edit_profile(request):
         formulario.fields["last_name"].initial = request.user.last_name
         formulario.fields["email"].initial = request.user.email
         formulario.fields["bio"].initial = request.user.bio
+        formulario.fields["phone"].initial = request.user.phone
+        formulario.fields["address"].initial = request.user.address
 
     return render(request,"newuser.html",{"form":formulario})
 
@@ -192,11 +195,9 @@ def edit_pic(request):
 
             User.objects.filter(pk=request.user.id).update(picture=picture)
 
-            return redirect('/Profile/{}'.format(request.user.id))
+            return redirect('/profile/{}'.format(request.user.id))
     else:
         form = editPic()
-
-        form.fields["picture"].initial = request.user.picture
 
     return render(request, 'newuser.html', {'form': form})
 
@@ -252,3 +253,48 @@ def DescargaDatosUser(request,pk):
         else:
             form = contact()
         return render(request,'descargaDatos.html',{'form':form})
+
+def monthdelta(date, delta):
+    m, y = (date.month+delta) % 12, date.year + ((date.month)+delta-1) // 12
+    if not m: 
+        m = 12
+    d = min(date.day, calendar.monthrange(y, m)[1])
+    return date.replace(day=d,month=m, year=y)
+
+def premium(request):
+
+    if(request.user.premium == False):
+        
+        #Claculamos la fecha fin
+        months = int(request.POST.get('months')) 
+        end = monthdelta(date.today(), months)
+        
+        #Realizamos el pago
+        charge = stripe.Charge.create(
+            amount=int(3.99*months*100),
+            currency='eur',
+            description='A Django charge',
+            source=request.POST['stripeToken'],
+            api_key=settings.STRIPE_SECRET_KEY) 
+
+        #Actualizamos el usuario a usuario premium
+        User.objects.filter(pk=request.user.id).update(premium=True,end_date=end)
+
+    else:
+
+        #Claculamos la nueva fecha fin
+        months = int(request.POST.get('months')) 
+        end = monthdelta(request.user.end_date, months)
+
+        #Realizamos el pago
+        charge = stripe.Charge.create(
+            amount=int(3.99*months*100),
+            currency='eur',
+            description='A Django charge',
+            source=request.POST['stripeToken'],
+            api_key=settings.STRIPE_SECRET_KEY) 
+
+        #Actualizamos al usuario con la nueva fecha fin
+        User.objects.filter(pk=request.user.id).update(end_date=end)
+
+    return redirect('/profile/{}'.format(request.user.id))

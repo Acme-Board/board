@@ -16,6 +16,31 @@
 <body>
   
 {% block content %}
+
+
+<!-- Espero que vaia, alerta por si el juego ya esta alquilado en la fecha -->
+<p style=" background-color: #ffa420 ; color: black; text-align: center;
+border-radius: 8px;"> {{mensaje}} </p>
+
+{% if request.user != owner %}
+
+{% if juegosFav.get_games %}
+
+<a href= "/gamesFavDelete/{{id}}" class="btn btn-info btn-sm" 
+style="border-radius: 8px;margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">
+Eliminar de Favoritos</a>
+  {% else %}
+  <a href= "/gamesFavAdd/{{id}}" class="btn btn-info btn-sm" 
+  style="border-radius: 8px;margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">
+  Añadir a Favoritos</a>
+
+{% endif %}
+
+{%endif%}
+
+{% csrf_token %}
+
+
 <div class="container">
 <div class="d-flex justify-content-center">
 <table style="text-align: center;">
@@ -51,6 +76,7 @@
         </br>
         <button type="submit" class="btn btn-info btn-sm" style="border-radius: 8px; color:black; font-weight: bold;">Añadir al carrito</button>
          </form>
+
          {% endif %}
 
          {% if request.user == owner %}
@@ -128,6 +154,7 @@
 
   <button class="accordion" style="text-align: center;">Mostrar Zona de Encuentro</button>
   <div class="panel">
+    {% if error is None %}
   <!-- Vamos a ello -->
   <div id="map"></div>
   <div>
@@ -167,6 +194,9 @@ var cityCircle = new google.maps.Circle({
 src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAqVhn2_oLdi3dF7INvANSvN-jMsBPisME&callback=initMap">
 </script>
 </div>
+    {% else %}
+    <h5>No se ha podido encontrar la ubicacion</h5>
+    {% endif %}
   <!-- Vamos a ello -->
   </div>
 
@@ -206,83 +236,3 @@ src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAqVh
 
 </body>
 </html>
-
-
- <!--
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
-  Moment.js
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js" integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
-
-  Tempus Dominus Bootstrap 4
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css" integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js" integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
-
-
-
-<style>
-    tr{padding: 1 !important;}
-    td{padding: 1 !important;}
-  </style>
-  <script>
-    $(function () {
-      $("#datetimepicker1").datetimepicker();
-
-      $("#datetimepicker2").datetimepicker();
-    });
-  </script>
-
-    <div class="col-sm-4" style="background-color: #6D65D3;border-radius: 8px;">
-  
-      <form>
-        <fieldset>
-          <legend name="Alquilar"></legend>
-          <table style="margin: 15px;">
-          <tr>
-            <td style="color:white;">
-              <label for="description">Descripción: </label>
-            </td>
-            <td>
-              <textarea id="description" type="textarea" rows=3 cols=25 name="description" value="{{currentDescription}}" style=" margin: 3px; padding: 3px"></textarea>
-            </td>
-          </tr>
-          <tr>
-            <td style="color:white;">
-              <label style=" margin: 5px; padding: 5px">Fecha inicio: </label>
-            </td>
-            <td>
-              <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                <input type="text " class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
-                  <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                  </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td style="color:white;">
-              <label style=" margin: 5px; padding: 5px">Fecha fin: </label>
-            </td>
-            <td>
-              <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>
-                <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr class="pager">
-            <td>
-              {% if dato.is_rentable != False %}
-              <a href="/rent/{{id}}" type="button" class="btn btn-primary active" style="border-radius: 8px"> Alquilar</a></br> 
-              {% endif %} 
-            </td> 
-          </tr>
-          </table>
-        </fieldset>
-      </form>
-    </div>-->

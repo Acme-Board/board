@@ -11,7 +11,7 @@
     {% block content %}
 
 <section class="form-register">
-    {% if request.user.is_authenticated == false %} 
+    {% if request.user.is_authenticated == False %} 
     <div><h3  class ="well well-sm">Nuevo Usuario:</h3> </div>
     {% endif %}
     {% if request.user.is_authenticated %} 
@@ -20,6 +20,7 @@
     <div>      
 
             <div>      
+                <div><h6  class ="well well-sm">Los campos con * son obligatorios</h6> </div>
 
                 <form method="POST" enctype="multipart/form-data" class="NewUser" style=" margin: 5px; padding: 5px; border-radius: 8px;">
                     {% csrf_token %}
@@ -38,7 +39,7 @@
                         
                         <button type="submit" class="btn btn-primary"  style="border-radius: 8px">Crear</button>              
                     </div>
-                <!--
+                
                 <div>
                     {% if form.errors %}
                         {% for field in form %}
@@ -55,7 +56,8 @@
                         {% endfor %}
 
                     {% endif %}
-                </div>-->
+                </div>
+                
                 {% if request.user.is_authenticated == False %}
                 <p style="text-align: center;">¿Ya tiene una cuenta? <a href="/login" style="padding: 5px;"> Inicie Sesión</a></p>
                 {% endif %}
