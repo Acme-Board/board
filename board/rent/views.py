@@ -319,7 +319,7 @@ def add_item_to_cart(request, id_game):
             return render(request, 'gameDetail.html',
                           {'name': dato.name, 'description': dato.description, 'price': dato.price,
                            'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner,
-                           'mensaje': 'Vaya! Parece que la fecha es anterior a la actual'})
+                           'mensaje': ' Parece que la fecha es anterior a la actual'})
         initial = parse_date(request.POST.get("initial"))
     if not list_carts:
         ramdomLetters = ''.join(random.choice(string.ascii_uppercase) for i in range(4))
