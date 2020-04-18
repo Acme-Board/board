@@ -98,6 +98,10 @@ def new_user(request):
                 user = User(username=username, password=password,first_name=name,last_name=last_name,email=email,bio=bio,picture=picture,phone=phone,address=address)
                 user.set_password(user.password)
                 user.save()
+                favs = JuegosFav(user=user)
+                favs.save()
+                favs.items.set([])
+                favs.save()
                 do_login(request, user)
             except IntegrityError:
                 formulario.add_error('username','Este nombre de usuario ya existe')
