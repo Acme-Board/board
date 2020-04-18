@@ -13,7 +13,7 @@ import stripe
 from django.db import IntegrityError
 
 from user.models import User
-from user.forms import Register, editAccount, editProfile, editPic, contact
+from user.forms import Register, editAccount, editProfile, editPic, contact, descargaDatos
 from payment.views import charge
 from reviews.models import Comment
 
@@ -232,7 +232,7 @@ def DescargaDatosUser(request,pk):
     else:
 
         if request.method=='POST':
-            form = contact(request.POST)
+            form = descargaDatos(request.POST)
             if form.is_valid():
                 title = 'Mensaje del administrador de TryOnBoard' 
                 body = 'Aqui estan los datos que TRY ON BOARD tiene sobre usted:' + '\n'
@@ -251,7 +251,7 @@ def DescargaDatosUser(request,pk):
                 email.send()
                 return redirect('/')
         else:
-            form = contact()
+            form = descargaDatos()
         return render(request,'descargaDatos.html',{'form':form})
 
 def monthdelta(date, delta):

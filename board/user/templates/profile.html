@@ -45,20 +45,26 @@
       <tr>
         <td>
           {% if user.picture == '' %}
-          <img src="{% static 'img/predefinida.png' %}" style="width: 150px;"/>             <!-- margin-top: 180px; left:510px -->
-      {% endif %}
+          <img src="{% static 'img/predefinida.png' %}" style="width: 160px;"/></br>         <!-- margin-top: 180px; left:510px -->
+      
+          {% if request.user.id == user.id and request.user.is_authenticated == True %} 
+          <a role="button" style="width: 160px;" href="/editPic/" class="btn btn-primary my-2">Subir Foto</a></br>
+          <a role="button" href="/descargaDatos/{{user.id}}" class="btn btn-primary my-2"><i class="fa fa-download"></i>  Descargar datos</a> 
+   
+          {% endif %}
+          {% endif %}
 
         {% if user.picture != '' %}
           {% if request.user.premium == True %}
       <div style="color:white; border: double orange 0.5em;
       border-image: url('../static/img/frame.png') 20 round stretch;">
-        <img src="{{user.picture.url}}" style="width: 150px;"/>
+        <img src="{{user.picture.url}}" style="width: 160px;"/>
       </div>
       {% else %}
-      <img src="{{user.picture.url}}" style="width: 150px;"/>
+      <img src="{{user.picture.url}}" style="width: 160px;"/></br>
       {% endif %}
         {% if request.user.id == user.id and request.user.is_authenticated == True %} 
-        <a role="button" href="/editPic/" class="btn btn-primary my-2">Editar foto</a></br>
+        <a role="button" style="width: 160px;" href="/editPic/" class="btn btn-primary my-2">Editar foto</a></br>
         <a role="button" href="/descargaDatos/{{user.id}}" class="btn btn-primary my-2"><i class="fa fa-download"></i>  Descargar datos</a> 
  
         {% endif %}
@@ -77,7 +83,7 @@
         <a role="button" href="/editProfile/" class="btn btn-primary my-2">Editar perfil</a>
         <a role="button" href="/editAccount/" class="btn btn-primary my-2">Editar cuenta</a>       
       </br>
-        <button type="button" class="btn btn-danger my-1" data-toggle="modal" data-target="#exampleModal">
+        <button type="button" class="btn btn-danger my-1" data-toggle="modal" data-target="#Modal">
           Borrar datos
         </button>
         {% if request.user.premium == False %}
@@ -145,7 +151,7 @@
 
       
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
