@@ -67,6 +67,8 @@ def delete_myUSer(request, pk):
     
     if(instancia == request.user or request.user.admin == True):
         instancia.delete()
+        if request.user.admin == True:
+            return redirect('/users')
         return redirect('/')
     
     return redirect('/')
