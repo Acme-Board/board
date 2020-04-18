@@ -786,6 +786,102 @@
 			"rate": 5
 		},
 		"model": "reviews.valoration",
-		"pk": 70
+		"pk": 70  
+	},
+	{
+		"fields": {
+			"user": 9, 
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 110
+	},
+	{
+		"fields": {
+			"user": 10,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 111
+	},
+	{
+		"fields": {
+			"user": 11,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 112
+	},
+	{
+		"fields": {
+			"user": 15,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 113
+	},
+	{
+		"fields": {
+			"user": 16,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 114
+	},
+	{
+		"fields": {
+			"user": 50,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 115
+	},
+	{
+		"fields": {
+			"user": 17,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 116
+	},
+	{
+		"fields": {
+			"user": 18,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 117
+	},
+	{
+		"fields": {
+			"user": 29,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 118
+	},
+	{
+		"fields": {
+			"user": 30,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 119
+	},
+	{
+		"fields": {
+			"user": 31,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 120
+	},
+	{
+		"fields": {
+			"user": 32,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 121
 	}
 ]
