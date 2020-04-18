@@ -26,10 +26,11 @@ def games_list(request):
         games = Game.objects.exclude(owner=request.user).order_by('owner__premium').reverse()
         fav = JuegosFav.objects.filter(user=request.user)    
         jue = get_object_or_404(JuegosFav,user = request.user)
+        return render(request, 'games.html', {'games': games,'favGames': jue.get_games()})
+
     else:
         games = Game.objects.all().order_by('owner__premium').reverse()
-    
-    return render(request, 'games.html', {'games': games,'favGames': jue.get_games()})
+        return render(request, 'games.html', {'games': games})
 
 def juegosFav(request):
     if (request.user.is_authenticated):
