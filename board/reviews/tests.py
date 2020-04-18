@@ -74,6 +74,24 @@ class ReviewModelTestCase(TestCase):
 
         self.assertEquals(valoration.rate, 5.0)
 
+    def test_delete_comment(self):
+
+        self.comment2 = Comment(toUser=self.user1, fromUser=self.user2, comment='Buen juego, buen jugador')
+        self.comment2.save()
+
+        self.assertEquals(2, Comment.objects.count())
+        self.comment2.delete()
+        self.assertEquals(1, Comment.objects.count())
+
+    def test_delete_valoration(self):
+
+        self.valoration2 = Valoration(toUser=self.user1, fromUser=self.user2, rate=3.5)
+        self.valoration2.save()
+
+        self.assertEquals(2, Valoration.objects.count())
+        self.valoration2.delete()
+        self.assertEquals(1, Valoration.objects.count())
+
     #Borra los datos para terminar con los test ------------------------------------------------------
     
     def tearDown(self):
