@@ -24,9 +24,13 @@ from user.models import User
 def games_list(request):
     if (request.user.is_authenticated):
         games = Game.objects.exclude(owner=request.user).order_by('owner__premium').reverse()
+        fav = JuegosFav.objects.filter(user=request.user)    
+        jue = get_object_or_404(JuegosFav,user = request.user)
     else:
         games = Game.objects.all().order_by('owner__premium').reverse()
-    return render(request, 'games.html', {'games': games})
+    
+    return render(request, 'games.html', {'games': games,'favGames': jue.get_games()})
+
 def juegosFav(request):
     if (request.user.is_authenticated):
         
@@ -445,6 +449,8 @@ def games_list_by_distance(request):
     games2.sort(key=lambda x: distancia(x, responseLoc))
     return render(request, 'games.html', {'games': games2, 'filter': True})
 def add_juegos_fav(request, id_game):
+    if (request.user.is_authenticated):
+        games = Game.objects.exclude(owner=request.user).order_by('owner__premium').reverse()
     dato = get_object_or_404(Game, pk=id_game)
     user = get_object_or_404(User, pk=request.user.id)
     jue = JuegosFav.objects.filter(user=request.user)  # Esto si retorna un QuerySet
@@ -462,11 +468,13 @@ def add_juegos_fav(request, id_game):
     jue.items.add(dato)
     jue.save()
     
-    return render(request, 'gamesFav.html', {'favGames': jue.get_games()})
+    return render(request, 'games.html', {'games': games,'favGames': jue.get_games()})
 
 def delete_juegos_fav(request, id_game):
     dato = get_object_or_404(Game, pk=id_game)
     user = get_object_or_404(User, pk=request.user.id)
+    if (request.user.is_authenticated):
+        games = Game.objects.exclude(owner=request.user).order_by('owner__premium').reverse()
     jue = JuegosFav.objects.filter(user=request.user)  # Esto si retorna un QuerySet
     if (not(jue.exists())):
         jue = JuegosFav(user = user )
@@ -480,7 +488,7 @@ def delete_juegos_fav(request, id_game):
     jue.items.remove(dato)
     jue.save()
     
-    return render(request, 'gamesFav.html', {'favGames': jue.get_games()})
+    return render(request, 'games.html', {'games': games,'favGames': jue.get_games()})
     
     
 
