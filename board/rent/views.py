@@ -219,20 +219,23 @@ def edit_game(request, pk):
 
 def edit_pic(request, pk):
     juego = get_object_or_404(Game, pk=pk)
+    texto = 'Editar '
+    Alquilar = 'Actualizar'
 
     if request.method == "POST":
         form = editPicture(request.POST, request.FILES or None)
 
         if form.is_valid():
+            
             picture = form.cleaned_data['picture']
 
-            Game.objects.filter(pk=pk).update(picture=picture)
-
+            #Game.objects.filter(pk=pk).update(picture=picture)
+            juego.picture = picture
+            juego.save()
+          
             return redirect('/gameDetail/{}'.format(pk))
     else:
         form = editPicture()
-
-        form.fields["picture"].initial = juego.picture
 
     return render(request, 'newgame.html', {'form': form, 'texto': texto, 'Alquilar': Alquilar})
 

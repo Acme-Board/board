@@ -192,6 +192,8 @@ def edit_profile(request):
 
 def edit_pic(request):
 
+    user = get_object_or_404(User,pk=request.user.id)
+
     if request.method == "POST":
         form = editPic(request.POST,request.FILES or None)
 
@@ -199,7 +201,8 @@ def edit_pic(request):
             
             picture = form.cleaned_data['picture']
 
-            User.objects.filter(pk=request.user.id).update(picture=picture)
+            user.picture = picture
+            user.save()
 
             return redirect('/profile/{}'.format(request.user.id))
     else:
