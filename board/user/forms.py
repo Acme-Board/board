@@ -34,7 +34,7 @@ class editProfile(forms.Form):
 
 
 class editPic(forms.Form):
-    picture = forms.FileField(label="Foto", required=False)
+    picture = forms.FileField(label="Foto",required=False)
 
 
 class contact(forms.Form):

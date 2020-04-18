@@ -64,7 +64,8 @@ Eliminar de Favoritos</a>
           <h4> Precio: {{price}} &euro;</h4></br>
           <h5>Descripción:</h5> <div>{{description}}</div></br>
         
-        {% if request.user != owner %}
+        
+{% if request.user.is_authenticated and request.user != owner %}
 
         <form action="/addCart/{{id}}" method="POST" style="margin-top: 5px; margin-left: 5px; color: #eee;">
           {% csrf_token %}
