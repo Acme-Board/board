@@ -24,9 +24,14 @@ from user.models import User
 def games_list(request):
     if (request.user.is_authenticated):
         games = Game.objects.exclude(owner=request.user).order_by('owner__premium').reverse()
+        fav = JuegosFav.objects.filter(user=request.user)    
+        jue = get_object_or_404(JuegosFav,user = request.user)
+        return render(request, 'games.html', {'games': games,'favGames': jue.get_games()})
+
     else:
         games = Game.objects.all().order_by('owner__premium').reverse()
-    return render(request, 'games.html', {'games': games})
+        return render(request, 'games.html', {'games': games})
+
 def juegosFav(request):
     if (request.user.is_authenticated):
         
@@ -73,6 +78,10 @@ def rents_list(request):
 def games_detail(request, pk):
     dato = get_object_or_404(Game, pk=pk)
     ubicacion = dato.owner.address
+    if(request.user.is_authenticated):
+        fav = JuegosFav.objects.filter(user=request.user)    
+        jue = get_object_or_404(JuegosFav,user = request.user)
+    
     response = requests.get(
         'https://eu1.locationiq.com/v1/search.php?key=pk.bfdfa73760621b89cf9e8435ffcf48df&q=' + ubicacion + '&format=json')
     geodata = response.json()
@@ -80,10 +89,17 @@ def games_detail(request, pk):
         prueba = geodata[0]['lat']
     except:
         return render(request, 'gameDetail.html',
-                      {'name': dato.name, 'description': dato.description, 'price': dato.price,
+                      {'game': dato, 'name': dato.name, 'description': dato.description, 'price': dato.price,
                        'status': dato.status, 'picture': dato.picture, 'id': dato.id,
                        'owner': dato.owner, 'error': True})
-    return render(request, 'gameDetail.html', {'name': dato.name, 'description': dato.description, 'price': dato.price,
+
+    if(request.user.is_authenticated):
+        return render(request, 'gameDetail.html', {'favGames': jue.get_games(), 'game': dato, 'name': dato.name, 'description': dato.description, 'price': dato.price,
+                                               'status': dato.status, 'picture': dato.picture, 'id': dato.id,
+                                               'owner': dato.owner, 'longitude': geodata[0]['lon'],
+                                               'latitude': geodata[0]['lat']})
+    else:
+        return render(request, 'gameDetail.html', {'game': dato, 'name': dato.name, 'description': dato.description, 'price': dato.price,
                                                'status': dato.status, 'picture': dato.picture, 'id': dato.id,
                                                'owner': dato.owner, 'longitude': geodata[0]['lon'],
                                                'latitude': geodata[0]['lat']})
@@ -195,20 +211,23 @@ def edit_game(request, pk):
 
 def edit_pic(request, pk):
     juego = get_object_or_404(Game, pk=pk)
+    texto = 'Editar '
+    Alquilar = 'Actualizar'
 
     if request.method == "POST":
         form = editPicture(request.POST, request.FILES or None)
 
         if form.is_valid():
+            
             picture = form.cleaned_data['picture']
 
-            Game.objects.filter(pk=pk).update(picture=picture)
-
+            #Game.objects.filter(pk=pk).update(picture=picture)
+            juego.picture = picture
+            juego.save()
+          
             return redirect('/gameDetail/{}'.format(pk))
     else:
         form = editPicture()
-
-        form.fields["picture"].initial = juego.picture
 
     return render(request, 'newgame.html', {'form': form, 'texto': texto, 'Alquilar': Alquilar})
 
@@ -295,7 +314,7 @@ def add_item_to_cart(request, id_game):
             return render(request, 'gameDetail.html',
                           {'name': dato.name, 'description': dato.description, 'price': dato.price,
                            'status': dato.status, 'picture': dato.picture, 'id': dato.id, 'owner': dato.owner,
-                           'mensaje': 'Vaya! Parece que la fecha es anterior a la actual'})
+                           'mensaje': ' Parece que la fecha es anterior a la actual'})
         initial = parse_date(request.POST.get("initial"))
     if not list_carts:
         ramdomLetters = ''.join(random.choice(string.ascii_uppercase) for i in range(4))
@@ -426,6 +445,8 @@ def games_list_by_distance(request):
     games2.sort(key=lambda x: distancia(x, responseLoc))
     return render(request, 'games.html', {'games': games2, 'filter': True})
 def add_juegos_fav(request, id_game):
+    if (request.user.is_authenticated):
+        games = Game.objects.exclude(owner=request.user).order_by('owner__premium').reverse()
     dato = get_object_or_404(Game, pk=id_game)
     user = get_object_or_404(User, pk=request.user.id)
     jue = JuegosFav.objects.filter(user=request.user)  # Esto si retorna un QuerySet
@@ -443,11 +464,13 @@ def add_juegos_fav(request, id_game):
     jue.items.add(dato)
     jue.save()
     
-    return render(request, 'gamesFav.html', {'favGames': jue.get_games()})
+    return render(request, 'games.html', {'games': games,'favGames': jue.get_games()})
 
 def delete_juegos_fav(request, id_game):
     dato = get_object_or_404(Game, pk=id_game)
     user = get_object_or_404(User, pk=request.user.id)
+    if (request.user.is_authenticated):
+        games = Game.objects.exclude(owner=request.user).order_by('owner__premium').reverse()
     jue = JuegosFav.objects.filter(user=request.user)  # Esto si retorna un QuerySet
     if (not(jue.exists())):
         jue = JuegosFav(user = user )
@@ -461,7 +484,7 @@ def delete_juegos_fav(request, id_game):
     jue.items.remove(dato)
     jue.save()
     
-    return render(request, 'gamesFav.html', {'favGames': jue.get_games()})
+    return render(request, 'games.html', {'games': games,'favGames': jue.get_games()})
     
     
 

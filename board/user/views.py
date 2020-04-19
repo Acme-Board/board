@@ -13,7 +13,7 @@ import stripe
 from django.db import IntegrityError
 
 from user.models import User
-from user.forms import Register, editAccount, editProfile, editPic, contact
+from user.forms import Register, editAccount, editProfile, editPic, contact, descargaDatos
 from payment.views import charge
 from reviews.models import Comment
 
@@ -67,6 +67,8 @@ def delete_myUSer(request, pk):
     
     if(instancia == request.user or request.user.admin == True):
         instancia.delete()
+        if request.user.admin == True:
+            return redirect('/users')
         return redirect('/')
     
     return redirect('/')
@@ -96,6 +98,10 @@ def new_user(request):
                 user = User(username=username, password=password,first_name=name,last_name=last_name,email=email,bio=bio,picture=picture,phone=phone,address=address)
                 user.set_password(user.password)
                 user.save()
+                favs = JuegosFav(user=user)
+                favs.save()
+                favs.items.set([])
+                favs.save()
                 do_login(request, user)
             except IntegrityError:
                 formulario.add_error('username','Este nombre de usuario ya existe')
@@ -186,6 +192,8 @@ def edit_profile(request):
 
 def edit_pic(request):
 
+    user = get_object_or_404(User,pk=request.user.id)
+
     if request.method == "POST":
         form = editPic(request.POST,request.FILES or None)
 
@@ -193,7 +201,8 @@ def edit_pic(request):
             
             picture = form.cleaned_data['picture']
 
-            User.objects.filter(pk=request.user.id).update(picture=picture)
+            user.picture = picture
+            user.save()
 
             return redirect('/profile/{}'.format(request.user.id))
     else:
@@ -232,7 +241,7 @@ def DescargaDatosUser(request,pk):
     else:
 
         if request.method=='POST':
-            form = contact(request.POST)
+            form = descargaDatos(request.POST)
             if form.is_valid():
                 title = 'Mensaje del administrador de TryOnBoard' 
                 body = 'Aqui estan los datos que TRY ON BOARD tiene sobre usted:' + '\n'
@@ -251,7 +260,7 @@ def DescargaDatosUser(request,pk):
                 email.send()
                 return redirect('/')
         else:
-            form = contact()
+            form = descargaDatos()
         return render(request,'descargaDatos.html',{'form':form})
 
 def monthdelta(date, delta):

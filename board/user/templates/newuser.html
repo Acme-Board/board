@@ -34,7 +34,13 @@
                     </tr>
                     {% endfor %}
                     </table>
+                    {% if request.user.is_authenticated %} 
                     <div style="margin: 15px; text-align: center;">
+                        <a href="/profile/{{user.id}}" class="btn btn-primary"  style="border-radius: 8px"> Volver </a>
+                    {% else %}
+                    <div style="margin: 15px; text-align: center;">
+                    <a href="/" class="btn btn-primary"  style="border-radius: 8px"> Volver </a>
+                    {% endif %}
                         <button type="submit" class="btn btn-primary"  style="border-radius: 8px">Crear</button>              
                     </div>
                 

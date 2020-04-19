@@ -44,7 +44,7 @@
 				<a href="/games/filterStatus/2" class="dropdown-item" style="color: black;">Usado</a>
 				<a href="/games/filterStatus/3" class="dropdown-item" style="color: black;">Desgastado</a>
 			</div>	
-				
+			
 	{% if filter %}
 	<a href="/games">Eliminar filtros</a>
 	{% endif %}
@@ -60,7 +60,19 @@
 	 <div><h4> {{dato.name|capfirst}} - <i> {{dato.price}} €</i> </br></h4>
 		 Estado: {{dato.status}} </br>
 		 <a href= "/gameDetail/{{dato.id}}" class="btn btn-info btn-sm"
-		  style="border-radius: 8px; margin-top: 10px;color:black; font-weight: bold;">Ver mas</a></br> </br></td>
+		  style="border-radius: 8px; margin-top: 10px;color:black; font-weight: bold;">Ver mas</a>
+		  
+		  {% if request.user.is_authenticated %}
+
+		  {% if dato in favGames %}
+
+		  <a href="/gamesFavDelete/{{dato.id}}" type="button" class="btn btn-danger" style="margin-top: 10px;"><i class="fas fa-heart"></i></a></td>
+		  {% else %}
+		  
+		  <a href="/gamesFavAdd/{{dato.id}}" type="button" class="btn btn-danger" style="margin-top: 10px;"><i class="far fa-heart"></i></a></td>
+
+		   {% endif %}
+		   {%endif%}
 		
 	</tr>
 	</table>
@@ -73,11 +85,19 @@
 	{% endfor %}
 </div>
 
-
+</br></br>
 <!-- Solución Parcial, ver como solucionarlo -->
 
 </div>
 <!-- Una vista final de la vista para darle profesionalidad -->
+
+<script>
+
+$('.showhide').click(function() {
+    $(this).toggleClass('far fa-heart');
+    $(this).toggleClass('fas fa-heart');
+});
+</script>
 
 {% endblock %}
 
