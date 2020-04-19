@@ -16,6 +16,7 @@ from user.models import User
 from user.forms import Register, editAccount, editProfile, editPic, contact, descargaDatos
 from payment.views import charge
 from reviews.models import Comment
+from rent.models import JuegosFav
 
 # Create your views here.
 
