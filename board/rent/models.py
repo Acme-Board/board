@@ -7,10 +7,9 @@ from user.models import User
 # Create your models here.
 
 class Status(Enum):
-    PE = 'Perfecto'
-    FA = 'Faltan piezas'
-    GA = 'Gastado'
-    IN = 'Injugable'
+    NU = 'Nuevo'
+    US = 'Usado'
+    DE = 'Desgastado'
 
 class Game(models.Model):
     name = models.CharField(max_length=50, default='')

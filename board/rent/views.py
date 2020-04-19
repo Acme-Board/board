@@ -61,13 +61,11 @@ def games_list_by_status(request, status):
     filtro = True
 
     if (int(status) == 1):
-        games = Game.objects.filter(status="Perfecto").exclude(owner=request.user)
+        games = Game.objects.filter(status="Nuevo").exclude(owner=request.user)
     if (int(status) == 2):
-        games = Game.objects.filter(status="Faltan piezas").exclude(owner=request.user)
+        games = Game.objects.filter(status="Usado").exclude(owner=request.user)
     if (int(status) == 3):
-        games = Game.objects.filter(status="Gastado").exclude(owner=request.user)
-    if (int(status) == 4):
-        games = Game.objects.filter(status="Injugable").exclude(owner=request.user)
+        games = Game.objects.filter(status="Desgastado").exclude(owner=request.user)
 
     return render(request, 'games.html', {'games': games, 'filter': filtro})
 
@@ -128,17 +126,14 @@ def new_game(request):
             description = form.cleaned_data['description']
             status = form.cleaned_data['status']
 
-            if (status == "Status.PE"):
-                status = "Perfecto"
+            if (status == "Status.NU"):
+                status = "Nuevo"
 
-            if (status == "Status.FA"):
-                status = "Faltan piezas"
+            if (status == "Status.US"):
+                status = "Usado"
 
-            if (status == "Status.GA"):
-                status = "Gastado"
-
-            if (status == "Status.IN"):
-                status = "Injugable"
+            if (status == "Status.DE"):
+                status = "Desgastado"
 
             try:
                 price = float(form.cleaned_data['price'])
@@ -178,17 +173,14 @@ def edit_game(request, pk):
             description = form.cleaned_data['description']
             status = form.cleaned_data['status']
 
-            if (status == "Status.PE"):
-                status = "Perfecto"
+            if (status == "Status.NU"):
+                status = "Nuevo"
 
-            if (status == "Status.FA"):
-                status = "Faltan piezas"
+            if (status == "Status.US"):
+                status = "Usado"
 
-            if (status == "Status.GA"):
-                status = "Gastado"
-
-            if (status == "Status.IN"):
-                status = "Injugable"
+            if (status == "Status.DE"):
+                status = "Desgastado"
 
             try:
                 price = float(form.cleaned_data['price'])
