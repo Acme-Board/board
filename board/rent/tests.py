@@ -11,10 +11,12 @@ class GameModelTestCase(TestCase):
     #Prepara una bbdd default con los objetos que se van a testear en este TestCase -------------------
 
     def setUp(self):
-        self.user = User(username='prueba', password='prueba123')
+        self.user = User(username='prueba001', password='prueba123', first_name='Gonzalo', last_name='Aguilar', email='zalo@gmail.com', 
+        bio='Me gusta jugar a cosas entretenidas', picture='http://www.foto.com/foto.png', range='Pro', rate='2.5',
+        lat=2.5,lon=3.0)
         self.user.save()
         
-        self.game = Game(name='BANG', description='descripcion', status=Status.PE, price=2.5, picture='http://www.foto.com/foto.png', address='Los remedios', owner=self.user)
+        self.game = Game(name='BANG', description='descripcion', status='Nuevo', price=2.5, picture='http://www.foto.com/foto.png', owner=self.user)
         self.game.save()
 
         self.rent = Rent(ticker='ABC-1234', days=4, initial_date=parse_date("2020-07-13"), game=self.game, user=self.user, rentable=True)
@@ -33,16 +35,13 @@ class GameModelTestCase(TestCase):
         self.assertEquals(self.game.description,'descripcion')  
 
     def test_get_status(self):
-        self.assertEquals(self.game.status, Status.PE) 
+        self.assertEquals(self.game.status, 'Nuevo') 
 
     def test_get_price(self):
         self.assertEquals(self.game.price, 2.5)
 
     def test_get_picture(self):
         self.assertEquals(self.game.picture, 'http://www.foto.com/foto.png') 
-
-    def test_get_address(self):
-        self.assertEquals(self.game.address, 'Los remedios')
 
     def test_get_ticker(self):
         self.assertEquals(self.rent.ticker, 'ABC-1234')  
@@ -67,14 +66,18 @@ class GameModelTestCase(TestCase):
 class RentModelTestCase(TestCase):
 
     def setUp(self):
-        self.user = User(username='prueba001', password='prueba123')
+        self.user = User(username='prueba', password='prueba123', first_name='Gonzalo', last_name='Aguilar', email='zalo@gmail.com', 
+        bio='Me gusta jugar a cosas entretenidas', picture='http://www.foto.com/foto.png', range='Pro', rate='2.5',
+        lat=2.5,lon=3.0)
         self.user.save()
 
-        self.user2 = User(username='prueba002', password='prueba123')
+        self.user2 = User(username='prueba2', password='prueba123', first_name='Gonzalo', last_name='Aguilar', email='zalo@gmail.com', 
+        bio='Me gusta jugar a cosas entretenidas', picture='http://www.foto.com/foto.png', range='Pro', rate='2.5',
+        lat=2.5,lon=3.0)
         self.user2.save()
 
-        self.game = Game(name='BANG', description='descripcion', status=Status.PE, price=2.5,
-                         picture='http://www.foto.com/foto.png', address='Los remedios', owner=self.user)
+        self.game = Game(name='BANG', description='descripcion', status='Nuevo', price=2.5,
+                         picture='http://www.foto.com/foto.png', owner=self.user)
         self.game.save()
 
         self.rent = Rent(ticker='WWW-1234', game=self.game, days=4, initial_date=parse_date("2020-07-13"), user=self.user2, rentable=True)

@@ -14,7 +14,7 @@ import requests
 from django.db import IntegrityError
 
 from user.models import User
-from user.forms import Register, editAccount, editProfile, editPic, contact, descargaDatos
+from user.forms import Register, editAccount, editProfile, editPic, contact,descargaDatos
 from payment.views import charge
 from reviews.models import Comment
 from rent.models import JuegosFav
@@ -27,9 +27,9 @@ def profile(request, id_user):
     end = None
 
     key = settings.STRIPE_PUBLISHABLE_KEY
-
-    if(request.user.premium == True):
-        end = request.user.end_date.strftime('%d/%m/%Y')
+    if(not(request.user.is_anonymous)):
+        if(request.user.premium):
+            end = request.user.end_date.strftime('%d/%m/%Y')
 
     return render(request,'profile.html', {'user':user, 'comments': list_comments,'key':key,'premium_date':end})
 
