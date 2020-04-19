@@ -9,10 +9,14 @@ class ValorationModelTestCase(TestCase):
 
     def setUp(self):
 
-        self.user1 = User(username='prueba1',password='prueba123')
+        self.user1 = User(username='prueba', password='prueba123', first_name='Gonzalo', last_name='Aguilar', email='zalo@gmail.com', 
+        bio='Me gusta jugar a cosas entretenidas', picture='http://www.foto.com/foto.png', range='Pro', rate='2.5',
+        lat=2.5,lon=3.0)
         self.user1.save()
 
-        self.user2 = User(username='prueba2',password='prueba456')
+        self.user2 = User(username='prueba1', password='prueba123', first_name='Gonzalo', last_name='Aguilar', email='zalo@gmail.com', 
+        bio='Me gusta jugar a cosas entretenidas', picture='http://www.foto.com/foto.png', range='Pro', rate='2.5',
+        lat=2.5,lon=3.0)
         self.user2.save()
 
         self.valoration = Valoration(toUser=self.user1, fromUser=self.user2, rate=2.5)
