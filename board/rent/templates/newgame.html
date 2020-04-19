@@ -23,7 +23,7 @@
   font-family: 'calibri';
   color: white;">
 
-  <div><h3  class ="well well-sm"> {{texto}}Juego: </h3> </div>
+  <div><h3  class ="well well-sm"> {{texto}} </h3> </div>
   
     <div id="app">      
             <div><h6  class ="well well-sm">Los campos con * son obligatorios</h6> </div>
@@ -46,10 +46,13 @@
             </tr>
           {% endfor %}
         </table>
-              
+          
         <div style="text-align:center; margin: 15px">
+
           <p class="text-warning">Su beneficio con este juego será de [[totalPrecio]] €</p>
           <p class="text-warning">Consiguiendo suscripción premium, ganaría [[totalPremium]] €</p>
+
+        
           <button type="submit" class="btn btn-primary" style="border-radius: 8px">{{Alquilar}}</button>
         </div>
 

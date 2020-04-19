@@ -122,7 +122,7 @@ def delete(request, pk):
 
 
 def new_game(request):
-    texto = "Subida de "
+    texto = "Subida de Juego"
     Alquilar = "Subir Juego"
     if request.method == "POST":
         form = NewGame(request.POST, request.FILES or None)
@@ -168,7 +168,7 @@ def new_game(request):
 
 
 def edit_game(request, pk):
-    texto = "Editar "
+    texto = "Editar Juego"
     Alquilar = "Actualizar"
     juego = get_object_or_404(Game, pk=pk)
 
@@ -218,7 +218,7 @@ def edit_game(request, pk):
 
 def edit_pic(request, pk):
     juego = get_object_or_404(Game, pk=pk)
-    texto = 'Editar '
+    texto = 'Editar Foto Perfil'
     Alquilar = 'Actualizar'
 
     if request.method == "POST":
