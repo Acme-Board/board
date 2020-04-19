@@ -28,7 +28,14 @@
                       {% for field in form %}
                     <tr style="height: 40px; width: 40px;">
                         <div class="field">               
-                           <td style="color:white;"><label class="label">{{field.label}} </label></td>
+                            <td style="color:white;">
+                                {% if field.label == "Acepto Términos y Condiciones de uso*" %}
+                                <a target="_blank" href="/terms">
+                                    <label class="label" style="text-decoration: underline;">{{field.label}} </label></a>
+                                {% else %}
+                                    <label class="label">{{field.label}} </label>
+                                {% endif %}
+                            </td>
                             <td>{{field}}</td>
                         </div>
                     </tr>

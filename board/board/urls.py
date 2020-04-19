@@ -38,6 +38,8 @@ urlpatterns = [
     path('login', user_views.login),
     path('logout', user_views.logout),
     path('base/', views.base),
+    path('terms/', views.terms),
+    path('privacy/', views.privacy),
 
     #Rent
     path('games/', rent_views.games_list),
