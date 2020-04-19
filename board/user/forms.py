@@ -47,4 +47,4 @@ class contact(forms.Form):
 
 
 class descargaDatos(forms.Form):
-    message = forms.CharField(max_length=200, label="Mensaje", required=False, widget=forms.Textarea)
+    message = forms.CharField(min_length=0 ,max_length=200,label="Message",required=False,widget=forms.Textarea)
