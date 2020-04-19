@@ -59,13 +59,20 @@ def games_list_by_zona(request, zona):
 def games_list_by_status(request, status):
     games = []
     filtro = True
-
-    if (int(status) == 1):
-        games = Game.objects.filter(status="Nuevo").exclude(owner=request.user)
-    if (int(status) == 2):
-        games = Game.objects.filter(status="Usado").exclude(owner=request.user)
-    if (int(status) == 3):
-        games = Game.objects.filter(status="Desgastado").exclude(owner=request.user)
+    if (request.user.is_authenticated):
+        if (int(status) == 1):
+            games = Game.objects.filter(status="Nuevo").exclude(owner=request.user)
+        if (int(status) == 2):
+            games = Game.objects.filter(status="Usado").exclude(owner=request.user)
+        if (int(status) == 3):
+            games = Game.objects.filter(status="Desgastado").exclude(owner=request.user)
+    else:
+        if (int(status) == 1):
+            games = Game.objects.filter(status="Nuevo")
+        if (int(status) == 2):
+            games = Game.objects.filter(status="Usado")
+        if (int(status) == 3):
+            games = Game.objects.filter(status="Desgastado")
 
     return render(request, 'games.html', {'games': games, 'filter': filtro})
 
