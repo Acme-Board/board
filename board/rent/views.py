@@ -134,7 +134,7 @@ def new_game(request):
                 status = "Desgastado"
 
             try:
-                price = float(form.cleaned_data['price'])
+                price = float(request.POST.get('precio'))
             except ValueError:
                 form.add_error('price', 'Introduzca un dato numérico')
                 return render(request, "newgame.html", {"form": form, 'texto': texto, 'Alquilar': Alquilar})
@@ -211,6 +211,7 @@ def edit_pic(request, pk):
     juego = get_object_or_404(Game, pk=pk)
     texto = 'Editar Foto Perfil'
     Alquilar = 'Actualizar'
+    foto = True
 
     if request.method == "POST":
         form = editPicture(request.POST, request.FILES or None)
@@ -227,7 +228,7 @@ def edit_pic(request, pk):
     else:
         form = editPicture()
 
-    return render(request, 'newgame.html', {'form': form, 'texto': texto, 'Alquilar': Alquilar})
+    return render(request, 'newgame.html', {'form': form, 'texto': texto, 'Alquilar': Alquilar, 'foto': foto})
 
 
 def rent_game(request, id_game, days, initial):

@@ -35,11 +35,11 @@
             <tr style="height: 40px; width: 40px;">
               <div class="field">               
                 <td style="color:white;"><label class="label">{{field.label}} </label></td>
-                {% if field.label == "Precio (€/día)" %}
-                  <td><input type="number" v-model.number="precio"></td>
+                {% if field.label == "Precio (€/día)*" %}
+                  <td><input name="precio" id="precio" v-model="precio" required></td>
                 {% endif %}
 
-                {% if field.label != "Precio (€/día)" %}          
+                {% if field.label != "Precio (€/día)*" %}          
                   <td>{{field}}</td>
                 {% endif %}
               </div>
@@ -48,15 +48,33 @@
         </table>
           
         <div style="text-align:center; margin: 15px">
-
+          {% if foto != True %}
           <p class="text-warning">Su beneficio con este juego será de [[totalPrecio]] €</p>
           <p class="text-warning">Consiguiendo suscripción premium, ganaría [[totalPremium]] €</p>
-
+        
+        {% endif %}
         
           <button type="submit" class="btn btn-primary" style="border-radius: 8px">{{Alquilar}}</button>
         </div>
 
       </form>
+      <div>
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+
+        {% endif %}
+    </div>
     </div>        
   </div>
 </section>
@@ -73,11 +91,18 @@
         },
         computed: {
               totalPrecio(){
-                  this.total = this.precio - this.precio* 0.2;
+                  this.total = parseInt(this.precio) - parseInt(this.precio)* 0.2;
+                  if(isNaN(this.total)){
+                    this.total=0;
+                  }
                   return this.total;
+                  
               },
               totalPremium(){
-                  this.total = this.precio - this.precio* 0.15;
+                  this.total = parseInt(this.precio) - parseInt(this.precio)* 0.15;
+                  if(isNaN(this.total)){
+                    this.total=0;
+                  }
                   return this.total;
               }
           }

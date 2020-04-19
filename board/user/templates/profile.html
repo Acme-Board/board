@@ -45,7 +45,14 @@
       <tr>
         <td>
           {% if user.picture == '' %}
-            <img src="{% static 'img/predefinida.png' %}" style="width: 150px;"/>             <!-- margin-top: 180px; left:510px -->
+          {% if request.user.premium == True %}
+          <div style="color:white; border: double orange 0.5em;
+            border-image: url('../static/img/frame.png') 20 round stretch;">
+            <img src="{% static 'img/predefinida.png' %}" style="width: 150px;"/>          
+          </div>
+        {% else %}
+        <img src="{% static 'img/predefinida.png' %}" style="width: 150px;"/> 
+        {% endif %}
           {% endif %}
 
           {% if user.picture != '' %}
