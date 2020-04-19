@@ -84,32 +84,23 @@ def rents_list(request):
 
 def games_detail(request, pk):
     dato = get_object_or_404(Game, pk=pk)
-    ubicacion = dato.owner.address
     if(request.user.is_authenticated):
         fav = JuegosFav.objects.filter(user=request.user)    
         jue = get_object_or_404(JuegosFav,user = request.user)
-    
-    response = requests.get(
-        'https://eu1.locationiq.com/v1/search.php?key=pk.bfdfa73760621b89cf9e8435ffcf48df&q=' + ubicacion + '&format=json')
-    geodata = response.json()
-    try:
-        prueba = geodata[0]['lat']
-    except:
-        return render(request, 'gameDetail.html',
-                      {'game': dato, 'name': dato.name, 'description': dato.description, 'price': dato.price,
-                       'status': dato.status, 'picture': dato.picture, 'id': dato.id,
-                       'owner': dato.owner, 'error': True})
+
+    lat = dato.owner.lat
+    lon = dato.owner.lon
 
     if(request.user.is_authenticated):
         return render(request, 'gameDetail.html', {'favGames': jue.get_games(), 'game': dato, 'name': dato.name, 'description': dato.description, 'price': dato.price,
                                                'status': dato.status, 'picture': dato.picture, 'id': dato.id,
-                                               'owner': dato.owner, 'longitude': geodata[0]['lon'],
-                                               'latitude': geodata[0]['lat']})
+                                               'owner': dato.owner, 'longitude': lon,
+                                               'latitude': lat})
     else:
         return render(request, 'gameDetail.html', {'game': dato, 'name': dato.name, 'description': dato.description, 'price': dato.price,
                                                'status': dato.status, 'picture': dato.picture, 'id': dato.id,
-                                               'owner': dato.owner, 'longitude': geodata[0]['lon'],
-                                               'latitude': geodata[0]['lat']})
+                                               'owner': dato.owner, 'longitude': lon,
+                                               'latitude': lat})
 
 
 def delete(request, pk):
@@ -422,14 +413,11 @@ def game_rents(request,pk):
 
 def distancia(game, responseLoc):
     geodataLoc = responseLoc.json()
-    ubicacion = game.owner.address
-    time.sleep(0.4)
-    response = requests.get(
-        'https://eu1.locationiq.com/v1/search.php?key=pk.bfdfa73760621b89cf9e8435ffcf48df&q=' + ubicacion + '&format=json')
-    geodata = response.json()
 
-    distancia = math.sqrt(math.pow(float((geodataLoc['longitude']) - float(geodata[0]['lon'])), 2) + math.pow(
-        (float(geodataLoc['latitude']) - float(geodata[0]['lat'])), 2))
+    lat = game.owner.lat
+    lon = game.owner.lon
+    distancia = math.sqrt(math.pow(float((geodataLoc['longitude']) - lon), 2) + math.pow(
+        (float(geodataLoc['latitude']) - lat), 2))
     return distancia
 
 

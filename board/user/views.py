@@ -10,6 +10,7 @@ from datetime import date
 import calendar
 from django.conf import settings
 import stripe
+import requests
 from django.db import IntegrityError
 
 from user.models import User
@@ -90,20 +91,32 @@ def new_user(request):
             bio = formulario.cleaned_data['bio']
             picture = ''
             address = formulario.cleaned_data['address']
+            response = requests.get(
+                'https://eu1.locationiq.com/v1/search.php?key=pk.bfdfa73760621b89cf9e8435ffcf48df&q=' + address + '&format=json')
+            geodata = response.json()
+            try:
+                lat = float(geodata[0]['lat'])
+                lon = float(geodata[0]['lon'])
+            except:
+                formulario.add_error('address', 'La direccion no existe')
+                lat = 0.0
+                lon = 0.0
             phone = formulario.cleaned_data['phone']
+
       
             if (password != formulario.cleaned_data['password2']):
                 formulario.add_error('password2','No coinciden las contraseñas')
 
             try:
-                user = User(username=username, password=password,first_name=name,last_name=last_name,email=email,bio=bio,picture=picture,phone=phone,address=address)
-                user.set_password(user.password)
-                user.save()
-                favs = JuegosFav(user=user)
-                favs.save()
-                favs.items.set([])
-                favs.save()
-                do_login(request, user)
+                user = User(username=username, password=password,first_name=name,last_name=last_name,email=email,bio=bio,picture=picture,phone=phone,address=address,lat=lat,lon=lon)
+                if (len(formulario.errors) == 0):
+                    user.set_password(user.password)
+                    user.save()
+                    favs = JuegosFav(user=user)
+                    favs.save()
+                    favs.items.set([])
+                    favs.save()
+                    do_login(request, user)
             except IntegrityError:
                 formulario.add_error('username','Este nombre de usuario ya existe')
 
@@ -173,9 +186,22 @@ def edit_profile(request):
             email = formulario.cleaned_data['email']
             bio = formulario.cleaned_data['bio']
             address = formulario.cleaned_data['address']
+            response = requests.get(
+                'https://eu1.locationiq.com/v1/search.php?key=pk.bfdfa73760621b89cf9e8435ffcf48df&q=' + address + '&format=json')
+            geodata = response.json()
+            try:
+                lat = float(geodata[0]['lat'])
+                lon = float(geodata[0]['lon'])
+            except:
+                formulario.add_error('address', 'La direccion no existe')
+                lat = 0.0
+                lon = 0.0
             phone = formulario.cleaned_data['phone']
 
-            User.objects.filter(id=request.user.id).update(first_name=name,last_name=last_name,email=email,bio=bio,phone=phone,address=address)
+            if(len(formulario.errors)!=0):
+                return render(request,"newuser.html",{"form":formulario})
+
+            User.objects.filter(id=request.user.id).update(first_name=name,last_name=last_name,email=email,bio=bio,phone=phone,address=address,lat=lat,lon=lon)
 
             return redirect('/profile/{}'.format(request.user.id))
 

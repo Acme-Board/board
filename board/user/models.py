@@ -10,6 +10,8 @@ class User(AbstractUser):
     range = models. CharField(max_length=10)
     picture = models.FileField(upload_to='board/staticfiles/media/myfolder/',null=True)
     rate = models. CharField(max_length=10, validators=[validate_comma_separated_integer_list])
+    lat = models.FloatField()
+    lon = models.FloatField()
     address = models.TextField(max_length=500)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
                                  message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
