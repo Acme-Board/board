@@ -14,7 +14,7 @@
 
 {% block content %}
 <!--<div class="container" style="width:600px;"> -->
-  <section class="form-register" style=" 
+<section class="form-register" style=" 
   width:  600px;
   background: #24303c;
   padding: 30px;
@@ -23,26 +23,67 @@
   font-family: 'calibri';
   color: white;">
 
-
-    <div><h3  class ="well well-sm"> {{texto}}Juego: </h3> </div>
+  <div><h3  class ="well well-sm"> {{texto}} </h3> </div>
   
-    <div>      
+    <div id="app">      
+            <div><h6  class ="well well-sm">Los campos con * son obligatorios</h6> </div>
             <form method="POST" enctype="multipart/form-data" class="NewGame" style=" margin: 20px;
             padding: 5px">{% csrf_token %}
          
-                {{ form.as_p }}
+        <table>
+          {% for field in form %}
+            <tr style="height: 40px; width: 40px;">
+              <div class="field">               
+                <td style="color:white;"><label class="label">{{field.label}} </label></td>
+                {% if field.label == "Precio (€/día)" %}
+                  <td><input type="number" v-model.number="precio"></td>
+                {% endif %}
 
-              
-                <div style="text-align:center; margin: 15px">
-                <button type="submit" class="btn btn-primary" ; style="border-radius: 8px">{{Alquilar}}</button>
-                </div>
+                {% if field.label != "Precio (€/día)" %}          
+                  <td>{{field}}</td>
+                {% endif %}
+              </div>
+            </tr>
+          {% endfor %}
+        </table>
+          
+        <div style="text-align:center; margin: 15px">
 
-            </form>
-           
-      </div>
+          <p class="text-warning">Su beneficio con este juego será de [[totalPrecio]] €</p>
+          <p class="text-warning">Consiguiendo suscripción premium, ganaría [[totalPremium]] €</p>
 
-    </section>
+        
+          <button type="submit" class="btn btn-primary" style="border-radius: 8px">{{Alquilar}}</button>
+        </div>
 
+      </form>
+    </div>        
+  </div>
+</section>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+        const app = new Vue({
+        delimiters: ['[[', ']]'],
+        el: '#app',
+        data: {
+          precio: '',
+          total:0
+        },
+        methods: {
+        },
+        computed: {
+              totalPrecio(){
+                  this.total = this.precio - this.precio* 0.2;
+                  return this.total;
+              },
+              totalPremium(){
+                  this.total = this.precio - this.precio* 0.15;
+                  return this.total;
+              }
+          }
+      })
+    </script>
+ 
 
 {% endblock %}
 

@@ -4,6 +4,7 @@ services:
 addons:
   postgresql: '9.4'
 before_script:
+- export CHROME_BIN=chromium-browser
 - psql -U postgres -c "create user board password 'board'"
 - psql -U postgres -c "ALTER ROLE board superuser"
 - psql -U postgres -c "create database boardDB owner board"
@@ -18,7 +19,7 @@ install:
 script:
 - cd board
 - python ./manage.py makemigrations
-- python ./manage.py migrate --run-syncdb
+- python ./manage.py migrate
 - python ./manage.py test --keepdb
 - coverage run --branch --source=. ./manage.py test --keepdb
 - coverage xml

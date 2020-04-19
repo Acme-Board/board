@@ -27,7 +27,14 @@
 	<table  class= "table-games">
 
 	<tr style="text-align:center;">
-		<td><img style="width: 245px;height: 245px; ; border-radius: 8px;" src="{{dato.picture.url}} "/>
+		<td>
+			{% if dato.picture == '' %}
+            <img src="{% static 'img/predefinida.png' %}" style="width: 150px;"/>             <!-- margin-top: 180px; left:510px -->
+          {% endif %}
+
+          {% if dato.picture != '' %}
+              <img src="{{dato.picture.url}}" style="width: 150px;"/>
+          {% endif %}
 	 <div><h3> {{dato.first_name|capfirst}} {{dato.last_name}} </br></h3>
 		 <a href= "/deleteUser/{{dato.id}}" class="btn btn-info btn-sm"
 		  style="border-radius: 8px; margin-top: 10px;color:black; font-weight: bold;">Eliminar usuario</a></br> </br>

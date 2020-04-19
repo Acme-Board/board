@@ -17,19 +17,24 @@
   
 {% block content %}
 
+{% if mensaje %}
 
 <!-- Espero que vaia, alerta por si el juego ya esta alquilado en la fecha -->
-<p style=" background-color: #ffa420 ; color: black; text-align: center;
-border-radius: 8px;"> {{mensaje}} </p>
+ <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Vaya!</strong> {{mensaje}}.
+</div>
 
-{% if request.user != owner %}
+{% endif %}
 
-{% if juegosFav.get_games %}
+{% if request.user.is_authenticated and request.user != owner %}
+
+{% if game in favGames %}
 
 <a href= "/gamesFavDelete/{{id}}" class="btn btn-info btn-sm" 
 style="border-radius: 8px;margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">
 Eliminar de Favoritos</a>
-  {% else %}
+{% else %}
   <a href= "/gamesFavAdd/{{id}}" class="btn btn-info btn-sm" 
   style="border-radius: 8px;margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">
   Añadir a Favoritos</a>
@@ -64,7 +69,8 @@ Eliminar de Favoritos</a>
           <h4> Precio: {{price}} &euro;</h4></br>
           <h5>Descripción:</h5> <div>{{description}}</div></br>
         
-        {% if request.user != owner %}
+        
+{% if request.user.is_authenticated and request.user != owner %}
 
         <form action="/addCart/{{id}}" method="POST" style="margin-top: 5px; margin-left: 5px; color: #eee;">
           {% csrf_token %}
@@ -154,6 +160,7 @@ Eliminar de Favoritos</a>
 
   <button class="accordion" style="text-align: center;">Mostrar Zona de Encuentro</button>
   <div class="panel">
+    {% if error is None %}
   <!-- Vamos a ello -->
   <div id="map"></div>
   <div>
@@ -193,6 +200,9 @@ var cityCircle = new google.maps.Circle({
 src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAqVhn2_oLdi3dF7INvANSvN-jMsBPisME&callback=initMap">
 </script>
 </div>
+    {% else %}
+    <h5>No se ha podido encontrar la ubicacion</h5>
+    {% endif %}
   <!-- Vamos a ello -->
   </div>
 
