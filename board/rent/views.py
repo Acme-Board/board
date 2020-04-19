@@ -110,17 +110,14 @@ def new_game(request):
             description = form.cleaned_data['description']
             status = form.cleaned_data['status']
 
-            if (status == "Status.PE"):
-                status = "Perfecto"
+            if (status == "Status.NU"):
+                status = "Nuevo"
 
-            if (status == "Status.FA"):
-                status = "Faltan piezas"
+            if (status == "Status.US"):
+                status = "Usado"
 
-            if (status == "Status.GA"):
-                status = "Gastado"
-
-            if (status == "Status.IN"):
-                status = "Injugable"
+            if (status == "Status.DE"):
+                status = "Desgastado"
 
             try:
                 price = float(form.cleaned_data['price'])
@@ -160,17 +157,14 @@ def edit_game(request, pk):
             description = form.cleaned_data['description']
             status = form.cleaned_data['status']
 
-            if (status == "Status.PE"):
-                status = "Perfecto"
+            if (status == "Status.NU"):
+                status = "Nuevo"
 
-            if (status == "Status.FA"):
-                status = "Faltan piezas"
+            if (status == "Status.US"):
+                status = "Usado"
 
-            if (status == "Status.GA"):
-                status = "Gastado"
-
-            if (status == "Status.IN"):
-                status = "Injugable"
+            if (status == "Status.DE"):
+                status = "Desgastado"
 
             try:
                 price = float(form.cleaned_data['price'])
