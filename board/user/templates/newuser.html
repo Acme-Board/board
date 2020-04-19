@@ -33,7 +33,12 @@
                                 <a target="_blank" href="/terms">
                                     <label class="label" style="text-decoration: underline;">{{field.label}} </label></a>
                                 {% else %}
-                                    <label class="label">{{field.label}} </label>
+                                    {% if field.label == "Acepto la política de privacidad*" %}
+                                        <a target="_blank" href="/privacy">
+                                            <label class="label" style="text-decoration: underline;">{{field.label}} </label></a>
+                                    {% else %}
+                                      <label class="label">{{field.label}} </label>
+                                    {% endif %}
                                 {% endif %}
                             </td>
                             <td>{{field}}</td>

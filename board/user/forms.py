@@ -20,7 +20,8 @@ class Register(forms.Form):
     phone = forms.CharField(label='Teléfono*', validators=[RegexValidator(r'^\+?1?\d{9,15}$', 'Número de teléfono inválido debe seguir el siguiente patrón +999 999999999')], max_length=17, required=True,
     widget= forms.TextInput(attrs={'size': '25'}))
     address = forms.CharField(max_length=150, label="Dirección*", required=True,widget= forms.TextInput(attrs={'size': '25'}))
-    check = forms.BooleanField(label="Acepto Términos y Condiciones de uso*", required=True)
+    check_terms = forms.BooleanField(label="Acepto Términos y Condiciones de uso*", required=True)
+    check_privacy = forms.BooleanField(label="Acepto la política de privacidad*", required=True)
 
 class editAccount(forms.Form):
     username = forms.CharField(max_length=20,label="Usuario")
