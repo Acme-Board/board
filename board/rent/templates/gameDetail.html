@@ -17,10 +17,15 @@
   
 {% block content %}
 
+{% if mensaje %}
 
 <!-- Espero que vaia, alerta por si el juego ya esta alquilado en la fecha -->
-<p style=" background-color: #ffa420 ; color: black; text-align: center;
-border-radius: 8px;"> {{mensaje}} </p>
+ <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Vaya!</strong> {{mensaje}}.
+</div>
+
+{% endif %}
 
 {% if request.user.is_authenticated and request.user != owner %}
 
