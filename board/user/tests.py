@@ -1,12 +1,12 @@
 from django.test import TestCase
 
 from user.models import User
+from user.forms import editProfile
 from user import views as user_views
-
 
 class UserModelTestCase(TestCase):
 
-    #Prepara una bbdd default con los objetos que se van a testear en este TestCase -------------------
+    # Prepara una bbdd default con los objetos que se van a testear en este TestCase -------------------
 
     def setUp(self):
 
@@ -16,7 +16,7 @@ class UserModelTestCase(TestCase):
         
         self.user.save()       
 
-    #Batería de test unitarios ------------------------------------------------------------------------
+    # Batería de test unitarios ------------------------------------------------------------------------
 
     def test_get_username(self):
         self.assertEquals(self.user.username, 'prueba')
@@ -44,15 +44,38 @@ class UserModelTestCase(TestCase):
 
     def test_get_rate(self):
         self.assertEquals(self.user.rate, '2.5')     
-    def test_edit_user(self):
+
+    def test_delete_user(self):
         self.assertEquals(1,User.objects.count())
         user_views.delete_myUSer(self,self.user.id)
-        
-        self.assertEqual(0,User.objects.count())
-        
-                
+        self.assertEqual(0,User.objects.count()) 
 
-    #Borra los datos para terminar con los test ------------------------------------------------------
+    def test_edit_account(self):
+
+        User.objects.filter(id = self.user.id).update(username = 'username', password = 'password') 
+        user = User.objects.get(id = self.user.id)
+
+        self.assertEquals(user.username, 'username')
+        self.assertEquals(user.password, 'password')
+
+    def test_edit_profile(self):
+
+        User.objects.filter(id=self.user.id).update(first_name = 'Antonio', last_name = 'Macías', email = 'antmaczam@gmail.com', bio = 'Soy un chico divertido, extrovertido y graciosillo')
+        user = User.objects.get(id = self.user.id)
+
+        self.assertEquals(user.first_name, 'Antonio')
+        self.assertEquals(user.last_name, 'Macías')
+        self.assertEquals(user.email, 'antmaczam@gmail.com')
+        self.assertEquals(user.bio, 'Soy un chico divertido, extrovertido y graciosillo') 
+    
+    def test_edit_picture(self):
+
+        User.objects.filter(pk = self.user.id).update(picture = 'http://www.picture.com/picture.png')
+        user = User.objects.get(id = self.user.id)
+
+        self.assertEquals(user.picture, 'http://www.picture.com/picture.png')
+
+    # Borra los datos para terminar con los test ------------------------------------------------------
     
     def tearDown(self):
         self.user.delete()

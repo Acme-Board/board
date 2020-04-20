@@ -2,8 +2,9 @@ from django.test import TestCase
 
 from user.models import User
 from reviews.models import Valoration, Comment
+from reviews import views as reviews_views
 
-class ValorationModelTestCase(TestCase):
+class ReviewModelTestCase(TestCase):
     
     #Prepara una bbdd default con los objetos que se van a testear en este TestCase -------------------
 
@@ -43,7 +44,57 @@ class ValorationModelTestCase(TestCase):
         self.assertEquals(self.comment.fromUser, self.user2)
 
     def test_get_comment_comment(self):
-        self.assertEquals(self.comment.comment, 'Buen juego, mejor jugador')             
+        self.assertEquals(self.comment.comment, 'Buen juego, mejor jugador')
+
+    def test_list_comments(self):
+
+        self.assertEquals(1, Comment.objects.count())
+
+        self.comment = Comment(toUser=self.user2, fromUser=self.user1, comment='Amazing game')
+        self.comment.save()
+
+        self.assertEquals(2, Comment.objects.count())
+
+    def test_list_valorations(self):
+
+        self.assertEquals(1, Valoration.objects.count())
+
+        self.valoration = Valoration(toUser=self.user2, fromUser=self.user1, rate=2.5)
+        self.valoration.save()
+
+        self.assertEquals(2, Valoration.objects.count())
+
+    def test_edit_comment(self):
+
+        Comment.objects.filter(id = self.comment.id).update(comment='Bueno... resulta ameno sino tienes electricidad') 
+        comment = Comment.objects.get(id = self.comment.id)
+
+        self.assertEquals(comment.comment, 'Bueno... resulta ameno sino tienes electricidad')
+
+    def test_edit_valoration(self):
+
+        Valoration.objects.filter(id = self.valoration.id).update(rate=5.0) 
+        valoration = Valoration.objects.get(id = self.valoration.id)
+
+        self.assertEquals(valoration.rate, 5.0)
+
+    def test_delete_comment(self):
+
+        self.comment2 = Comment(toUser=self.user1, fromUser=self.user2, comment='Buen juego, buen jugador')
+        self.comment2.save()
+
+        self.assertEquals(2, Comment.objects.count())
+        self.comment2.delete()
+        self.assertEquals(1, Comment.objects.count())
+
+    def test_delete_valoration(self):
+
+        self.valoration2 = Valoration(toUser=self.user1, fromUser=self.user2, rate=3.5)
+        self.valoration2.save()
+
+        self.assertEquals(2, Valoration.objects.count())
+        self.valoration2.delete()
+        self.assertEquals(1, Valoration.objects.count())
 
     #Borra los datos para terminar con los test ------------------------------------------------------
     
