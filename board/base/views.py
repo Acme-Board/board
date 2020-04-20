@@ -1,9 +1,10 @@
 from django.shortcuts import render
-
+from django.conf import settings
 # Create your views here.
 
 def base(request):
-    return render(request,'base.html')
+    key = settings.STRIPE_PUBLISHABLE_KEY
+    return render(request,'base.html', {'key':key})
 
 def index(request):
     return render(request,'index.html') 
