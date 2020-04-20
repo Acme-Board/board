@@ -81,16 +81,7 @@
               <li class="nav-item px-4">
                 <a class="nav-link" href="/newgame"><b>Subir juego <i class="fas fa-upload"></i> </b></a>
               </li>      
-              <li class="nav-item px-4">
-                <a class="nav-link" href="/cart"><b>
-                  <i class="fa" style="font-size:24px">&#xf07a;</i>
-                  <span class='badge badge-warning' id='lblCartCount'> 
-                    {% if request.session.cart == None %} 0
-                    {% else %} {{request.session.cart}} 
-                    {% endif %} </span>
 
-                </b></a>
-              </li>
               {% if request.user.admin %}
               <li class="nav-item px-4 dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -110,10 +101,18 @@
                   <a class="nav-link dropdown-item" href="/profile/{{request.user.id}}"><b>Mi perfil</b></a>
                   <a class="nav-link dropdown-item" href="/myGames"><b>Mis juegos</b></a>
                   <a class="nav-link dropdown-item" href="/rents/{{request.user.id}}"><b>Historial</b></a>
+                  <a class="nav-link dropdown-item" href="/logout"><b>Cerrar sesión <i class="fas fa-sign-out-alt"></i></b></a>
                 </div>
               </li>
               <li class="nav-item px-4">
-                  <a class="nav-link" href="/logout"><b>Cerrar sesión <i class="fas fa-sign-out-alt"></i></b></a>
+                <a class="nav-link" href="/cart"><b>
+                  <i class="fa" style="font-size:24px">&#xf07a;</i>
+                  <span class='badge badge-warning' id='lblCartCount'> 
+                    {% if request.session.cart == None %} 0
+                    {% else %} {{request.session.cart}} 
+                    {% endif %} </span>
+
+                </b></a>
               </li>
               {% if request.user.premium == False %}
               <li class="nav-item justify-content-right px-4">
