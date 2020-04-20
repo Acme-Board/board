@@ -27,6 +27,27 @@
        background-size: cover;
        background-image: url("{% static 'img/bg-masthead.jpg' %}");
       }
+/*
+      .badge {
+        padding-left: 9px;
+        padding-right: 9px;
+        -webkit-border-radius: 9px;
+        -moz-border-radius: 9px;
+        border-radius: 9px;
+      }
+
+      .label-warning[href],
+      .badge-warning[href] {
+        background-color: #c67605;
+      }
+      #lblCartCount {
+          font-size: 12px;
+          background: #ff0000;
+          color: #fff;
+          padding: 0 5px;
+          vertical-align: top;
+          margin-left: -10px; 
+      }*/
 
     </style>
 
@@ -61,7 +82,14 @@
                 <a class="nav-link" href="/newgame"><b>Subir juego <i class="fas fa-upload"></i> </b></a>
               </li>      
               <li class="nav-item px-4">
-                <a class="nav-link" href="/cart"><b>Carrito de compra <i class="fas fa-shopping-cart"></i> </b></a>
+                <a class="nav-link" href="/cart"><b>Carrito de compra <i class="fas fa-shopping-cart"></i> 
+                <!--
+<i class="fa" style="font-size:24px">&#xf07a;</i>
+<span class='badge badge-warning' id='lblCartCount'> 5 </span>
+
+                -->
+                
+                </b></a>
               </li>
               {% if request.user.admin %}
               <li class="nav-item px-4 dropdown">
