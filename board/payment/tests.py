@@ -21,7 +21,24 @@ class PaymentModelTestCase(TestCase):
 
         self.contend = Contend(owner = self.user, rent = self.rent, status = 'Buen método de pago', description = 'El pago se efectua de forma segura', price = 55.75)
         self.contend.save()
-      
+    
+    #Batería de test unitarios ------------------------------------------------------------------------
+
+    def test_get_owner(self):
+        self.assertEquals(self.contend.owner, self.user)
+
+    def test_get_rent(self):
+        self.assertEquals(self.contend.rent, self.rent)
+
+    def test_get_description(self):
+        self.assertEquals(self.contend.description,'El pago se efectua de forma segura')
+
+    def test_get_status(self):
+        self.assertEquals(self.contend.status, 'Buen método de pago') 
+
+    def test_get_price(self):
+        self.assertEquals(self.contend.price, 55.75)
+        
     # Borra los datos para terminar con los test ------------------------------------------------------
     
     def tearDown(self):
