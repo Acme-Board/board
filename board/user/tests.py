@@ -11,7 +11,9 @@ class UserModelTestCase(TestCase):
     def setUp(self):
 
         self.user = User(username='prueba', password='prueba123', first_name='Gonzalo', last_name='Aguilar', email='zalo@gmail.com', 
-        bio='Me gusta jugar a cosas entretenidas', picture='http://www.foto.com/foto.png', range='Pro', rate='2.5')
+        bio='Me gusta jugar a cosas entretenidas', picture='http://www.foto.com/foto.png', range='Pro', rate='2.5',
+        lat=2.5,lon=3.0)
+        
         self.user.save()       
 
     # Batería de test unitarios ------------------------------------------------------------------------

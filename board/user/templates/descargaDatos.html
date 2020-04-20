@@ -34,10 +34,26 @@
 {% block content %}
     <form method="POST" action="" >
         {% csrf_token %}
-        <h5 class="text-center py-5" style="color: white;">¿Quiere  enviar algun mensaje adicional como una fecha antes de enviarle los datos del usuario?</h5>
-        <div class="text-center mx-auto">{{form.as_p}}</div>      
+        <div class="container">
+        <h5 class="text-center py-5" style="color: white; max-width: 50%; margin-left: 25%;">
+           En breves sus datos como usuario se descargaran, si lo desea, puede dar su opinión sobre 
+        la aplicación o la causa de la descarga. Muchas gracias por usar TryOnBoard </h5>
+       
+            {% for field in form %}
+          <div class="text-center py-5">
+              <div class="field">               
+                 <div style="color:white;"><label class="label">{{field.label}} </label></div>
+                  <div>{{field}}</div>
+              </div>
+            </div>
+          {% endfor %}
+        
+        </div>
+
+    
         <div style="margin: 15px; text-align: center;">
-            <button type="submit" class="btn btn-primary"  style="border-radius: 8px">Crear</button>              
+            <a href= "/profile/{{user.id}}" class="btn btn-primary" style="border-radius: 8px;">Volver</a>
+            <button type="submit" class="btn btn-primary"  style="border-radius: 8px;">Descargar</button>              
         </div>
     </form>
 {% endblock %}

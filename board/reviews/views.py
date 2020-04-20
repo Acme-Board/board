@@ -51,9 +51,10 @@ def create_review(request, id_user):
                     media = suma/numero
                     toUser.rate = media
                     toUser.save()
-                    return redirect('/')
+                    return redirect('/profile/{}'.format(toUser.id))
                 else:
-                    return render(request, "createReview.html", {'form': form})
+                    return render(request, "createReview.html", {'form': form, 'mensaje': 
+                    'Necesitas haber alquilado algun producto del Usuario para poder darle una valoración'})
 
             else:
                 return render(request, "createReview.html", {'form': form})

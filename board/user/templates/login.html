@@ -11,15 +11,28 @@
 {% block content %}
 <div class="row justify-content-md-center py-5">
 <div class="form-main">
-    <h2 class="form-title py-2">Iniciar sesión</h2></br> 
-    <form method="POST" style="text-align: center;">
-        {{ form.as_p }}
+    <h2 class="form-title py-2">Iniciar sesión</h2>
+    <form method="POST">
         {% csrf_token %}
-        <br/>
-        <div style="text-align:center; margin: 5px">
+        
+        <table style="margin-left: 80px;">
+            {% for field in form %}
+              <tr style="height: 40px; width: 40px;">
+                    {% if field.label == "Username" %}         
+                        <td style="color:white;"><label class="label">Usuario: </label></td>
+                    {% else %}
+                        <td style="color:white;"><label class="label">Contraseña: </label></td>
+                    {% endif %}
+  
+                    <td>{{field}}</td>
+              </tr>
+            {% endfor %}
+          </table>
+
+        <div style="text-align:center; margin-top: 10px;">
             <button type="submit" class="btn btn-primary"  style="border-radius: 8px">Entrar</button>
         </div>
-        <p>¿Aun no tienes cuenta? <a href="/newuser" style="padding: 5px;"> Registrate aquí</a></p>
+        <p style="text-align:center;">¿Aun no tienes cuenta? <a href="/newuser" style="padding: 5px;"> Registrate aquí</a></p>
     </form>
 </div>
 </div>

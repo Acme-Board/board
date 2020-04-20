@@ -1,8 +1,19 @@
-{% extends "base.html" %}
+<html>
+<head>
+     {% extends "base.html" %}
+     
+     {% load static %}
+     {% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css"> 
+    {% endblock %}
 
+  
+</head>
+
+<body>
 {% block content %}
 
-<div class="container py-5">
+<div class="container align-content-center py-5" style=" color:white;">
 	
 	<h1> Lista de disputas </h1>
 
@@ -12,7 +23,7 @@
 		
 		{% for dato in contends %}
 	
-		<table  class= "table-games">
+		<table  class= "table-games" style="color:white;">
 		
 			<tr style="text-align:center;">
 				<td><img style="width: 245px;height: 245px; ; border-radius: 8px;" src="{{dato.rent.game.picture.url}} "/>
@@ -23,9 +34,9 @@
 
 		</table>
 		{% empty %}
-	
-		<li>Vaya, parece que no hay disputas</li>
-	
+		<div class="justify-content-center">
+			<li>Vaya, parece que no hay disputas</li>
+		</div>
 		{% endfor %}
 	</div>
 
@@ -34,3 +45,4 @@
 </div>
 
 {% endblock %}
+</body>
