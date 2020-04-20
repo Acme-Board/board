@@ -84,7 +84,10 @@
               <li class="nav-item px-4">
                 <a class="nav-link" href="/cart"><b>
                   <i class="fa" style="font-size:24px">&#xf07a;</i>
-                  <span class='badge badge-warning' id='lblCartCount'> {{request.session.cart}} </span>
+                  <span class='badge badge-warning' id='lblCartCount'> 
+                    {% if request.session.cart == None %} 0
+                    {% else %} {{request.session.cart}} 
+                    {% endif %} </span>
 
                 </b></a>
               </li>
