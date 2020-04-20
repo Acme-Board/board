@@ -1,11 +1,19 @@
 from django.shortcuts import render
 
+from rent.models import Order
+
 # Create your views here.
 
 def base(request):
     return render(request,'base.html')
 
 def index(request):
+    if(request.user.is_authenticated):
+        list_carts = Order.objects.filter(user=request.user)
+        for c in list_carts:
+            if c.actual:
+                cart = c
+                request.session['cart'] = cart.items.count()
     return render(request,'index.html') 
 
 def terms(request):
