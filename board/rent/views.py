@@ -22,6 +22,7 @@ from user.models import User
 
 
 def games_list(request):
+    
     if (request.user.is_authenticated):
         games = Game.objects.exclude(owner=request.user).order_by('owner__premium').reverse()
         fav = JuegosFav.objects.filter(user=request.user)    
@@ -251,17 +252,22 @@ def rents_list(request, id_user):
 def view_cart(request):
     user = get_object_or_404(User, pk=request.user.id)
     list_carts = Order.objects.filter(user=user)
+    
     if not list_carts:
         ramdomLetters = ''.join(random.choice(string.ascii_uppercase) for i in range(4))
         ramdomNumber = ''.join(random.choice(string.digits) for i in range(5))
         ref = ramdomLetters + '-' + ramdomNumber
         cart = Order(ref_code=ref, user=user, actual=True)
         cart.save()
+        num = cart.items.count()
+        request.session['cart'] = num
         return render(request, 'orders.html', {'order': cart.items.all(), 'sum': cart.get_total_price(), 'id': cart.id})
     else:
         for c in list_carts:
             if c.actual:
                 cart = c
+                num = cart.items.count()
+                request.session['cart'] = num
                 return render(request, 'orders.html',
                               {'order': cart.items.all(), 'sum': cart.get_total_price(), 'id': cart.id})
 
@@ -331,6 +337,7 @@ def add_item_to_cart(request, id_game):
             item.save()
             cart.items.add(item)
             cart.save()
+            request.session['cart'] = cart.items.count()
         return render(request, 'orders.html', {'order': cart.items.all(), 'id': cart.id, 'mensaje': 'Añadido con exito',
                                                'sum': cart.get_total_price()})
     else:
@@ -355,6 +362,7 @@ def add_item_to_cart(request, id_game):
                     item.save()
                     cart.items.add(item)
                     cart.save()
+                    request.session['cart'] = cart.items.count()
                 return render(request, 'orders.html',
                               {'order': cart.items.all(), 'id': cart.id, 'mensaje': 'Añadido con exito',
                                'sum': cart.get_total_price()})
@@ -371,6 +379,7 @@ def delete_item_from_cart(request, id_item):
                 if item == dato:
                     cart.items.remove(item)
                     dato.delete()
+                    request.session['cart'] = cart.items.count()
                     return render(request, 'orders.html',
                                   {'order': cart.items.all(), 'id': cart.id, 'mensaje': 'Eliminado con exito',
                                    'sum': cart.get_total_price()})
@@ -386,6 +395,7 @@ def empty_cart(request):
             for item in cart.items.all():
                 cart.items.remove(item)
                 item.delete()
+            request.session['cart'] = cart.items.count()
     return render(request, 'orders.html', {'order': cart.items.all(), 'id':cart.id, 'mensaje': 'Carrito vaciado','sum':cart.get_total_price()})
 
 def my_rents(request,pk):
