@@ -217,3 +217,62 @@ class OrderItemModelTestCase(TestCase):
         self.user.delete()
         self.orderItem.delete()
 
+class OrderModelTestCase(TestCase):
+
+    # Prepara una bbdd default con los objetos que se van a testear en este TestCase -------------------
+
+    def setUp(self):
+
+        self.user = User(username='prueba001', password='prueba123')
+        self.user.save()
+
+        self.game = Game(name='BANG', description='Está muy entretenido', status=Status.PE, price=2.5, picture='http://www.foto.com/foto.png', owner=self.user)
+        self.game.save()
+
+        self.orderItem = OrderItem(game=self.game, is_ordered=False, days =10, initial_date=parse_date("2020-07-13"))
+        self.orderItem.save()
+
+        self.order = Order(ref_code= 'EFGH-12345', user = self.user, actual = True, date_ordered = parse_date("2020-07-13"))
+        self.order.save()
+
+    # Batería de test unitarios ------------------------------------------------------------------------
+
+    def test_get_ref_code(self):
+        self.assertEquals(self.order.ref_code, 'EFGH-12345')
+
+    def test_get_user(self):
+        self.assertEquals(self.order.user, self.user)
+
+    def test_get_actual(self):
+        self.assertEquals(self.order.actual, True)
+
+    def test_get_date_ordered(self):
+        self.assertEquals(self.order.date_ordered, parse_date("2020-07-13"))
+
+    def test_edit_order(self):
+
+        Order.objects.filter(id = self.order.id).update(ref_code= 'VBNM-12345', user = self.user, actual = False, date_ordered = parse_date("2020-10-10"))
+        order = Order.objects.get(id = self.order.id)
+
+        self.assertEquals(order.ref_code, 'VBNM-12345')
+        self.assertEquals(order.user, self.user)
+        self.assertEquals(order.actual, False)
+        # self.assertEquals(order.date_ordered, "2020-10-10")
+
+    def test_delete_order(self):
+
+        self.order2 = Order(ref_code= 'EFGH-12345', user = self.user, actual = True, date_ordered = parse_date("2020-07-13"))
+        self.order2.save()
+
+        self.assertEquals(2, Order.objects.count())
+        self.order2.delete()
+        self.assertEquals(1, Order.objects.count())
+
+    # Borra los datos para terminar con los test ------------------------------------------------------
+
+    def tearDown(self):
+
+        self.game.delete()
+        self.user.delete()
+        self.order.delete()
+        self.orderItem.delete()
