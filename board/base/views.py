@@ -10,10 +10,13 @@ def base(request):
 def index(request):
     if(request.user.is_authenticated):
         list_carts = Order.objects.filter(user=request.user)
-        for c in list_carts:
-            if c.actual:
-                cart = c
-                request.session['cart'] = cart.items.count()
+        if(not list_carts):
+            request.session['cart'] = 0
+        else:
+            for c in list_carts:
+                if c.actual:
+                    cart = c
+                    request.session['cart'] = cart.items.count()
     return render(request,'index.html') 
 
 def terms(request):
