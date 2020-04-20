@@ -34,6 +34,12 @@
 
 	
 	<h2 class="text-center" style="color:white;"> Carrito de alquileres </h1></br></h2>
+
+	<a href= "/confirm/{{id}}" class="btn btn-info btn-sm"
+	style="border-radius: 8px; margin: 5px; color:black; font-weight: bold;">Alquilar Juegos!</a>
+	<a href="/deleteAll" onclick="mensaje()"
+	class="btn btn-info btn-sm" style="border-radius: 8px;color:black; font-weight: bold; background-color: #F93F42">Borrar Todo</a></br> </br></td>
+
 	
 	
 	<table  class= "table table-hover table-condensed">
@@ -77,12 +83,7 @@
 					style="border-radius: 8px; margin-top: 10px;">Ver mas</a></br> </br></div></td>
 
 			</tr>
-			-->
-			<a href= "/confirm/{{id}}" class="btn btn-info btn-sm"
-			style="border-radius: 8px; margin: 5px; color:black; font-weight: bold;">Alquilar Juegos!</a>
-			<a href="/deleteAll" onclick="mensaje()"
-			class="btn btn-info btn-sm" style="border-radius: 8px;color:black; font-weight: bold; background-color: #F93F42">Borrar Todo</a></br> </br></td>
-				
+			-->			
 			{% empty %}
 
 			</tbody>
