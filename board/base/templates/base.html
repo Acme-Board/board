@@ -67,6 +67,11 @@
 
         <div class="collapse navbar-collapse text-center"  id="navbarSupportedContent">
           <ul class="navbar-nav nav-fill">
+            {% if request.user.premium == False %}
+            <li class="nav-item justify-content-right px-4">
+              <a class="nav-link bg-warning" style="border-radius: 20%;" href="" data-toggle="modal" data-target="#exampleModal"><b>Premium</b></a>
+            </li>
+            {% endif %}
               <li class="nav-item px-4">
                   <a class="nav-link" href="/games/"><b>Juegos <i class="fas fa-dice"></i></b></a>
               </li>
@@ -114,11 +119,6 @@
 
                 </b></a>
               </li>
-              {% if request.user.premium == False %}
-              <li class="nav-item justify-content-right px-4">
-                <a class="nav-link bg-warning" style="border-radius: 20%;" href="" data-toggle="modal" data-target="#exampleModal"><b>Premium</b></a>
-              </li>
-              {% endif %}
               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
