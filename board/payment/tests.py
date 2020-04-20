@@ -38,7 +38,35 @@ class PaymentModelTestCase(TestCase):
 
     def test_get_price(self):
         self.assertEquals(self.contend.price, 55.75)
-        
+    
+    def test_creation_contend(self):
+
+        Contend(owner = self.user, rent = self.rent, status = 'Buen método de pago', description = 'El pago se efectua de forma segura', price = 55.75).save()
+
+        contends = Contend.objects.all()
+        self.assertEquals(contends.count(), 2)
+
+    def test_edit_contend(self):
+
+        Contend.objects.filter(id = self.contend.id).update(owner = self.user, rent = self.rent, status = 'Transferencia', description = 'Sus millones están en camino', price = 65.95)
+        contend = Contend.objects.get(id = self.contend.id)
+
+        self.assertEquals(contend.owner, self.user)
+        self.assertEquals(contend.rent, self.rent)
+        self.assertEquals(contend.status, 'Transferencia')
+        self.assertEquals(contend.description, 'Sus millones están en camino')
+        self.assertEquals(contend.price, 65.95)
+
+    def test_delete_contend(self):
+
+        self.contend2 = Contend(owner = self.user, rent = self.rent, status = 'Transferencia', description = 'Sus millones están en camino', price = 65.95)
+        self.contend2.save()
+
+        self.assertEquals(2, Contend.objects.count())
+        self.contend2.delete()
+        self.assertEquals(1, Contend.objects.count())
+      
+    
     # Borra los datos para terminar con los test ------------------------------------------------------
     
     def tearDown(self):
