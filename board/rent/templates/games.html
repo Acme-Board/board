@@ -16,38 +16,54 @@
 
 <!-- Aqui hacer bucle por columna para hacer una buena vista-->
 
-<div class="container py-5">
+<br class="container py-5">
 	
 	<h1> Lista de Juegos </h1>
 	{% if request.user.is_authenticated %}
-	<a href= "/newgame" class="btn btn-info btn-sm; my-2" style="border-radius: 8px; margin-left: 3%; color:black; font-weight: bold;">Subir juego</a>
+	<a href= "/newgame" type="button" class=" btn btn-primary ">Subir juego</a>
+	<a href= "/gamesFav" type="button" class=" btn btn-primary ">Tus Juegos Favoritos</a>	
+	</br>
+	{% endif %}</br>
+
+	{% if request.user.is_authenticated %}
+		<a type="button" class=" btn btn-primary " href="/games/filterDistance">Filtrar por cercanía</a>
 	{% endif %}
 
-	<!-- Aqui esta el buscador
-	<div class="row">
-		
-			<div class="col-4">
-				<input class="form-control mx-4 my-2" type="text" placeholder="Search" aria-label="Search">
-			</div>
-			<div class="col-8">
-				<button class="btn btn-primary my-2" type="submit">Buscar</button>
-			</div>
-				
-	</div>-->
-	
+	<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Filtrado por estado</button>
+	<div class ="dropdown-menu">
+		<a href="/games/filterStatus/1" class="dropdown-item" style="color: black;">Nuevo</a>
+		<a href="/games/filterStatus/2" class="dropdown-item" style="color: black;">Usado</a>
+		<a href="/games/filterStatus/3" class="dropdown-item" style="color: black;">Desgastado</a>
+	</div>	
+			
+	{% if filter %}
+	<a href="/games">Eliminar filtros</a>
+	{% endif %}
 	
 	<div class="container" style= "display: flex; flex-wrap: wrap;">
 		
 	{% for dato in games %}
 
-	<table  class= "table-games">
+	<table  class= "table-games" style="width: 245px;">
 	<!-- Vamos a introducir  algunos juegos -->
 	<tr style="text-align:center;">
-		<td><img style="width: 245px;height: 245px; ; border-radius: 8px;" src="{{dato.picture.url}} "/>
-	 <div><h3> {{dato.name|capfirst}} - <i> {{dato.price}} €</i> </br></h3>
+		<td><img style="width: 245px; height: 245px; border-radius: 8px;" src="{{dato.picture.url}} "/>
+	 <div><h4> {{dato.name|capfirst}} - <i> {{dato.price}} €/día</i> </br></h4>
 		 Estado: {{dato.status}} </br>
 		 <a href= "/gameDetail/{{dato.id}}" class="btn btn-info btn-sm"
-		  style="border-radius: 8px; margin-top: 10px;color:black; font-weight: bold;">Ver mas</a></br> </br></td>
+		  style="border-radius: 8px; margin-top: 10px;color:black; font-weight: bold;">Ver más</a>
+		  
+		  {% if request.user.is_authenticated %}
+
+		  {% if dato in favGames %}
+
+		  <a href="/gamesFavDelete/{{dato.id}}" type="button" class="btn btn-danger" style="margin-top: 10px;"><i class="fas fa-heart"></i></a></td>
+		  {% else %}
+		  
+		  <a href="/gamesFavAdd/{{dato.id}}" type="button" class="btn btn-danger" style="margin-top: 10px;"><i class="far fa-heart"></i></a></td>
+
+		   {% endif %}
+		   {%endif%}
 		
 	</tr>
 	</table>
@@ -60,11 +76,19 @@
 	{% endfor %}
 </div>
 
-
+</br></br>
 <!-- Solución Parcial, ver como solucionarlo -->
 
 </div>
 <!-- Una vista final de la vista para darle profesionalidad -->
+
+<script>
+
+$('.showhide').click(function() {
+    $(this).toggleClass('far fa-heart');
+    $(this).toggleClass('fas fa-heart');
+});
+</script>
 
 {% endblock %}
 

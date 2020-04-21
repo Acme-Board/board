@@ -2,55 +2,105 @@
 <head>
 {% extends "base.html" %}
 
+{% load static %}
+
+	{% block extrahead %}
+	<link rel="stylesheet" href="{% static 'css/rent_style.css' %}" type="text/css"> 
+ 
+  {% endblock %} 
+
+
+
 </head>
 
 <body>
   
 {% block content %}
-<table class="container">
 
-  
-  <div><h3  class ="well well-sm py-5" style="border-radius: 8px; color:white; margin-left:39%;">{{name}} - {{status}}</h3> </div>
+{% if mensaje %}
 
-  <div class="row"style="margin-left:25%;">
+<!-- Espero que vaia, alerta por si el juego ya esta alquilado en la fecha -->
+ <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  <strong>Vaya!</strong> {{mensaje}}.
+</div>
 
-   <div> <img style="width:284px;height:300px; border-radius: 8px" src="{{picture.url}}"/> </div>
-   
-    <div style="color:white; margin-left:30px;"> 
+{% endif %}
 
-      <h4> Usuario: <a href="/profile/{{owner.id}}" style="color:white; text-decoration: underline;">{{owner}}</a> </h4>
-      <h4> Precio: {{price}} &euro;</h4></br>
-      <h5>Descripción:</h5>
-      {{description}}</br>
+{% if request.user.is_authenticated and request.user != owner %}
 
-      
-  {% if request.user.is_authenticated %}
+{% if game in favGames %}
 
-    {% if request.user != owner %}
-      
-       <form action="/addCart/{{id}}" method="POST" style="margin-top: 16px; margin-left: 5px; color: white;">
-         {% csrf_token %}
-        <div style="margin-top: 10px;">Dias de Alquiler:</br> <input type="number" id="days" name="days" value="1" min="1" max="100">
-         </div>
-       </br>
-       <button type="submit" class="btn btn-info btn-sm" style="border-radius: 8px; color:black; font-weight: bold;">Añadir al carrito</button>
-        </form>
-      
+<a href= "/gamesFavDelete/{{id}}" class="btn btn-info btn-sm" 
+style="border-radius: 8px;margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">
+Eliminar de Favoritos</a>
+{% else %}
+  <a href= "/gamesFavAdd/{{id}}" class="btn btn-info btn-sm" 
+  style="border-radius: 8px;margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">
+  Añadir a Favoritos</a>
 
-    {% else %}
+{% endif %}
+
+{%endif%}
+
+{% csrf_token %}
+
+
+<div class="container">
+<div class="d-flex justify-content-center">
+<table style="text-align: center;">
+  <thead>
+    <tr>
+      <td>
+        <div><h3 style="border-radius: 8px; color:white; padding-top: 10px;">{{name}} - {{status}}</h3> </div>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+         <img style="width:300px;height:300px; border-radius: 8px" src="{{picture.url}}"/>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div  style="color: #eee; margin-top: 30px;">
+
+          <h4> Precio: {{price|floatformat:2}} &euro;</h4></br>
+          <h5>Descripción:</h5> <div>{{description}}</div></br>
+        
+        
+{% if request.user.is_authenticated and request.user != owner %}
+
+        <form action="/addCart/{{id}}" method="POST" style="margin-top: 5px; margin-left: 5px; color: #eee;">
+          {% csrf_token %}
+          <div style="margin-top: 5px;">Fecha inicio alquiler:</br> <input type="date" id="initial" name="initial" style="color: black;" required>
+          </div>
+          <div style="margin-top: 5px;">Dias de Alquiler:</br> <input type="number" id="days" name="days" value="1"   style="color: black;" min="1" max="100" required>
+          </div>
+
+        </br>
+        <button type="submit" class="btn btn-info btn-sm" style="border-radius: 8px; color:black; font-weight: bold;">Añadir al carrito</button>
+         </form>
+
+         {% endif %}
+
+         {% if request.user == owner %}
+    
         </br>
         <a href= "/gameDetail/{{id}}/edit" class="btn btn-info btn-sm" 
         style=" color:black; font-weight: bold; margin-right: 5px;">Editar</a>
     
        <!-- Aqui viene el pop up-->
             
-       <button type="button" class="btn btn-danger  btn-sm" data-toggle="modal" data-target="#exampleModal">
+       <button type="button" class="btn btn-danger  btn-sm" data-toggle="modal" data-target="#exampleModal10">
         Borrar Juego
       </button>
     
     
       <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+      <div class="modal fade" id="exampleModal10" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -69,101 +119,139 @@
           </div>
         </div>
       </div>   
-      <table>
-        <tr>         
-    {% endif %}
-    <table>
-      <tr>
-      <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 25%; margin-top: 30px;color:black; font-weight: bold;">Volver</a>
-  {% else %}
-     <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-left: 25%; margin-top: 30px;color:black; font-weight: bold;">Volver</a>
   {% endif %}
+
+        </div>
+      </td>  
+    </tr>
+    <tr>
+
 </tr>
+<tr>
+
+</tr>
+</tbody>
 </table>
 </div>
+{% if request.user != owner %}
+<div style="text-align: center;">
+  <h5> Usuario: </h5>
+  <!--  Hi -->
+  <div class="d-flex justify-content-center" >
+    <div class="d-flex justify-content-center" style="background-color: #eee; border-radius: 8px; width:500px"> 
+      <table>
+      <tr>
+      <td>
+        {% if game.owner.picture == '' %}
+        <img src="{% static 'img/predefinida.png' %}" style="width: 150px;"/>             <!-- margin-top: 180px; left:510px -->
+      {% endif %}
+
+      {% if game.owner.picture != '' %}
+        {% if game.owner.premium == True %}
+          <div style="color:white; border: double orange 0.5em;
+            border-image: url('../static/img/frame.png') 20 round stretch;">
+            <img src="{{game.owner.picture.url}}" style="width: 150px;"/>
+          </div>
+        {% else %}
+          <img src="{{game.owner.picture.url}}" style="width: 150px;"/>
+        {% endif %}
+      {% endif %}
+
+      </td>
+    </tr>
+    <tr>
+      <td>
+       <h5><a href="/profile/{{owner.id}}" style="text-decoration: underline; color: black;">{{owner}}</a> </h5>
+       <h5 style="color: black;">Valoracion: {{owner.rate}}⭐ </h5>
+      </td>
+    </tr>
+    </table>
+    </div>
+  </div>
+
+  <!-- Hi -->  
+
+  <button class="accordion" style="text-align: center;">Mostrar Zona de Encuentro</button>
+  <div class="panel">
+    {% if error is None %}
+  <!-- Vamos a ello -->
+  <div id="map"></div>
+  <div>
+<style>
+ /* Set the size of the div element that contains the map */
+#map {
+  height: 400px;  /* The height is 400 pixels */
+  width: 100%;  /* The width is the width of the web page */
+ }
+</style>
+<script>
+// Initialize and add the map
+var var1 = "{{ longitude }}";
+var var2 = "{{ latitude }}";
+function initMap() {
+// The location of ubicacion
+var ubicacion = {lat: parseFloat(var2), lng: parseFloat(var1)};
+// The map, centered at ubicacion
+var map = new google.maps.Map(
+document.getElementById('map'), {zoom: 16, center: ubicacion});
+// The marker, positioned at ubicacion
+//var marker = new google.maps.Marker({position: ubicacion, map: map});
+var cityCircle = new google.maps.Circle({
+      strokeColor: '#49abff',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#2496ff',
+      fillOpacity: 0.35,
+      map: map,
+      center: ubicacion,
+      radius: 180
+    });
+}
+</script>
+
+<script type='text/javascript'
+src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAqVhn2_oLdi3dF7INvANSvN-jMsBPisME&callback=initMap">
+</script>
 </div>
-</table>
+    {% else %}
+    <h5>No se ha podido encontrar la ubicacion</h5>
+    {% endif %}
+  <!-- Vamos a ello -->
+  </div>
+
+  
+<script>
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+  
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var panel = this.nextElementSibling;
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+    });
+  }
+  </script>
+  {% endif %}
+</div>
+
+  {% if request.user != owner %}
+  <div style="text-align: center;">
+    <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">Volver</a>
+   </div>
+  </div>
+  {% else %}
+  <div style="text-align: center;">
+    <a href= "/myGames" class="btn btn-info btn-sm" style="border-radius: 8px;margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">Volver</a>
+   </div>
+  </div>
+  {% endif %}
 {% endblock %}
+
 
 </body>
 </html>
-
-
- <!--
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
-  Moment.js
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js" integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
-
-  Tempus Dominus Bootstrap 4
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css" integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js" integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
-
-
-
-<style>
-    tr{padding: 1 !important;}
-    td{padding: 1 !important;}
-  </style>
-  <script>
-    $(function () {
-      $("#datetimepicker1").datetimepicker();
-
-      $("#datetimepicker2").datetimepicker();
-    });
-  </script>
-
-    <div class="col-sm-4" style="background-color: #6D65D3;border-radius: 8px;">
-  
-      <form>
-        <fieldset>
-          <legend name="Alquilar"></legend>
-          <table style="margin: 15px;">
-          <tr>
-            <td style="color:white;">
-              <label for="description">Descripción: </label>
-            </td>
-            <td>
-              <textarea id="description" type="textarea" rows=3 cols=25 name="description" value="{{currentDescription}}" style=" margin: 3px; padding: 3px"></textarea>
-            </td>
-          </tr>
-          <tr>
-            <td style="color:white;">
-              <label style=" margin: 5px; padding: 5px">Fecha inicio: </label>
-            </td>
-            <td>
-              <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                <input type="text " class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
-                  <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                  </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td style="color:white;">
-              <label style=" margin: 5px; padding: 5px">Fecha fin: </label>
-            </td>
-            <td>
-              <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>
-                <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr class="pager">
-            <td>
-              {% if dato.is_rentable != False %}
-              <a href="/rent/{{id}}" type="button" class="btn btn-primary active" style="border-radius: 8px"> Alquilar</a></br> 
-              {% endif %} 
-            </td> 
-          </tr>
-          </table>
-        </fieldset>
-      </form>
-    </div>-->

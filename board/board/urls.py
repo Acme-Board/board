@@ -38,9 +38,15 @@ urlpatterns = [
     path('login', user_views.login),
     path('logout', user_views.logout),
     path('base/', views.base),
+    path('terms/', views.terms),
+    path('privacy/', views.privacy),
 
     #Rent
     path('games/', rent_views.games_list),
+    path('gamesFav/', rent_views.juegosFav),
+    re_path(r'gamesFavAdd/(?P<id_game>\d+)', rent_views.add_juegos_fav),
+    re_path(r'gamesFavDelete/(?P<id_game>\d+)', rent_views.delete_juegos_fav),
+    path('delete/<int:pk>', rent_views.delete),
     path('myGames/', rent_views.games_list_by_user),
     path('gameDetail/<int:pk>/', rent_views.games_detail, name='games_detail'),
     path('newgame', rent_views.new_game),
@@ -54,15 +60,21 @@ urlpatterns = [
     re_path(r'deleteAll/', rent_views.empty_cart),
     re_path(r'games/filterZona/(?P<zona>\d+)', rent_views.games_list_by_zona),
     re_path(r'games/filterStatus/(?P<status>\d+)', rent_views.games_list_by_status),
+    path('rents/deliver/<int:pk>/', rent_views.deliver),
+    path('gameDetail/<int:pk>/rents/', rent_views.game_rents),
+    re_path(r'games/filterDistance/', rent_views.games_list_by_distance),
 
     #User
     re_path(r'profile/(?P<id_user>\d+)',user_views.profile),
     path('newuser', user_views.new_user),
     path('deleteUser/<int:pk>', user_views.delete_myUSer),
-    path('delete/<int:pk>', rent_views.delete),
     path('editAccount/', user_views.edit_account),
     path('editProfile/', user_views.edit_profile),
     path('editPic/', user_views.edit_pic),
+    path('users/', user_views.user_list),
+    path('contact/<int:pk>', user_views.contact_user),
+    path('descargaDatos/<int:pk>', user_views.DescargaDatosUser),
+    path('premium/', user_views.premium),
 
     #Review
     re_path(r'review/(?P<id_user>\d+)',reviews_views.create_review),
@@ -72,6 +84,10 @@ urlpatterns = [
     re_path(r'charge/(?P<id_cart>\d+)', stripe_views.charge),
     re_path(r'confirm/(?P<id_cart>\d+)/', stripe_views.confirm),
     path('success/', stripe_views.pago_completado),
+    path('contend/<int:pk>', stripe_views.new_contend),
+    path('contends/', stripe_views.contend_list),
+    path('contend/<int:pk>/detail', stripe_views.contend_detail),
+    path('compensation/<int:pk>/new/', stripe_views.new_compensation),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += staticfiles_urlpatterns()

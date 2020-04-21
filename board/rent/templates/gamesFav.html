@@ -1,0 +1,72 @@
+<html>
+<head>
+
+	{% extends "base.html" %}
+	{% load static %}
+	{% block extrahead %}
+	<link rel="stylesheet" href="{% static 'css/rent_style.css' %}" type="text/css"> 
+	{% endblock %} 
+
+</head>
+<body>
+<!-- No se por que no va esto -->
+	
+
+{% block content %}
+
+<!-- Aqui hacer bucle por columna para hacer una buena vista-->
+
+<br class="container py-5">
+	
+	<h1> Tus Juegos Favoritos </h1>
+	
+	<!-- Aqui esta el buscador 
+	<div class="row">
+		
+			<div class="col-4">
+				<input class="form-control mx-4 my-2" type="text" placeholder="Search" aria-label="Search">
+			</div>
+			<div class="col-8">
+				<button class="btn btn-primary my-2" type="submit">Buscar</button>
+			</div>
+				
+	</div>-->
+
+	
+	<div class="container" style= "display: flex; flex-wrap: wrap;">
+		
+	{% for dato in favGames %}
+
+	<table  class= "table-games" style="width: 245px;">
+	<!-- Vamos a introducir  algunos juegos -->
+	<tr style="text-align:center;">
+		<td><img style="width: 245px; height: 245px; border-radius: 8px;" src="{{dato.picture.url}} "/>
+	 <div><h4> {{dato.name|capfirst}} - <i> {{dato.price}} €</i> </br></h4>
+		 Estado: {{dato.status}} </br>
+		 <a href= "/gameDetail/{{dato.id}}" class="btn btn-info btn-sm"
+		  style="border-radius: 8px; margin-top: 10px;color:black; font-weight: bold;">Ver mas</a></br> </br>
+		</td>
+	</tr>
+	</table>
+	{% empty %}
+
+<!-- Hacer Visible esta pagina. -->
+
+	<li>Vaya, parece que no hay juegos</li>
+
+	{% endfor %}
+	
+	
+
+</div>
+
+
+<!-- Solución Parcial, ver como solucionarlo -->
+
+</div>
+<!-- Una vista final de la vista para darle profesionalidad -->
+
+{% endblock %}
+
+</body>
+</html>

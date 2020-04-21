@@ -1,0 +1,48 @@
+<html>
+<head>
+     {% extends "base.html" %}
+     
+     {% load static %}
+     {% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css"> 
+    {% endblock %}
+
+  
+</head>
+
+<body>
+{% block content %}
+
+<div class="container align-content-center py-5" style=" color:white;">
+	
+	<h1> Lista de disputas </h1>
+
+	{% if request.user.admin == True %}
+	
+		<div class="container" style= "display: flex; flex-wrap: wrap;">
+		
+		{% for dato in contends %}
+	
+		<table  class= "table-games" style="color:white;">
+		
+			<tr style="text-align:center;">
+				<td><img style="width: 245px;height: 245px; ; border-radius: 8px;" src="{{dato.rent.game.picture.url}} "/>
+			<div><h3> {{dato.owner.username}} - <i>[ {{dato.rent}} ]</i> </br></h3>
+				Estado: {{dato.status}} </br>
+				<a href= "/contend/{{dato.id}}/detail" class="btn btn-info btn-sm" style="border-radius: 8px; margin-top: 10px;color:black; font-weight: bold;">Detalles</a></br> </br></td>
+			</tr>
+
+		</table>
+		{% empty %}
+		<div class="justify-content-center">
+			<li>Vaya, parece que no hay disputas</li>
+		</div>
+		{% endfor %}
+	</div>
+
+	{% endif %}
+
+</div>
+
+{% endblock %}
+</body>

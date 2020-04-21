@@ -1,5 +1,32 @@
 [
-  {
+	{
+		"fields": {
+			"password": "pbkdf2_sha256$150000$40$mbu3EIOy+CJGurks5j21JugGIq6arcSgON2NUt0MTXM=",
+			"last_login": null,
+			"is_superuser": false,
+			"username": "Antonio",
+			"first_name": "Antonio",
+			"last_name": "Macías",
+			"email": "antmaczam@gmail.com",
+			"address": "Calle J, Sevilla",
+			"lat": 37.2315018,
+			"lon": -4.900497,
+			"phone": "666666666",
+			"is_staff": false,
+			"is_active": true,
+			"date_joined": "2019-10-11T22:00:00Z",
+			"bio": "Hola, me llamo Antonio y me encantan los juegos de mesa",
+			"range": "noob",
+			"picture": "board/staticfiles/media/myfolder/alejandro_user.jpg",
+			"rate": "2",
+			"admin": true,
+			"groups": [],
+			"user_permissions": []
+		},
+		"model": "user.user",
+		"pk": 9
+	},
+	{
 		"fields": {
 			"password": "pbkdf2_sha256$150000$40$mbu3EIOy+CJGurks5j21JugGIq6arcSgON2NUt0MTXM=",
 			"last_login": null,
@@ -8,6 +35,10 @@
 			"first_name": "Alejandro",
 			"last_name": "Rodrigez",
 			"email": "alero@gmail.com",
+			"address": "Calle lisboa, Sevilla",
+			"lat": 37.3727168,
+			"lon": -5.9575983,
+			"phone": "666666666",
 			"is_staff": false,
 			"is_active": true,
 			"date_joined": "2019-10-11T22:00:00Z",
@@ -31,6 +62,10 @@
 			"first_name": "Luis",
 			"last_name": "Molinares",
 			"email": "luMo@gmail.com",
+			"address": "Calle del leon, Madrid",
+			"lat": 40.4133531,
+			"lon": -3.6991122,
+			"phone": "666666666",
 			"is_staff": false,
 			"is_active": true,
 			"date_joined": "2019-11-11T22:00:00Z",
@@ -54,6 +89,10 @@
 			"first_name": "Rocio",
 			"last_name": "Lopez",
 			"email": "RoLo@gmail.com",
+			"address": "Calle de Segovia, Madrid",
+			"lat": 40.4139959,
+			"lon": -3.7216055,
+			"phone": "666666666",
 			"is_staff": false,
 			"is_active": true,
 			"date_joined": "2019-11-11T22:00:00Z",
@@ -77,6 +116,10 @@
 			"first_name": "Juan",
 			"last_name": "Ro",
 			"email": "juan@gmail.com",
+			"address": "Avenida de la Constitucion, Sevilla",
+			"lat": 37.4632789,
+			"lon": -6.0123552,
+			"phone": "666666666",
 			"is_staff": false,
 			"is_active": true,
 			"date_joined": "2019-11-11T22:00:00Z",
@@ -100,6 +143,10 @@
 			"first_name": "Pedro",
 			"last_name": "Jimenez",
 			"email": "Pedro@algo.algo",
+			"address": "Cuesta de las calesas, Cadiz",
+			"lat": 36.5299009,
+			"lon": -6.2902208,
+			"phone": "666666666",
 			"is_staff": false,
 			"is_active": true,
 			"date_joined": "2019-11-11T22:00:00Z",
@@ -123,6 +170,10 @@
 			"first_name": "Maria",
 			"last_name": "Repollo",
 			"email": "Maria@algo.algo",
+			"address": "Pedro Fernandez Moreno, Sevilla",
+			"lat": 37.365379,
+			"lon": -5.987466,
+			"phone": "666666666",
 			"is_staff": false,
 			"is_active": true,
 			"date_joined": "2019-11-11T22:00:00Z",
@@ -146,6 +197,10 @@
 			"first_name": "Paco",
 			"last_name": "Saenz",
 			"email": "Paco@algo.algo",
+			"address": "Calle ancha, Cadiz",
+			"lat": 36.5335746,
+			"lon": -6.2976799,
+			"phone": "666666666",
 			"is_staff": false,
 			"is_active": true,
 			"date_joined": "2019-11-11T22:00:00Z",
@@ -169,6 +224,10 @@
 			"first_name": "Rafael",
 			"last_name": "Jimenez",
 			"email": "Raji@algo.algo",
+			"address": "Calle algaida k, Sanlucar de Barrameda",
+			"lat": 36.778636,
+			"lon": -6.348714,
+			"phone": "666666666",
 			"is_staff": false,
 			"is_active": true,
 			"date_joined": "2019-11-11T22:00:00Z",
@@ -192,6 +251,10 @@
 			"first_name": "Rodolfo",
 			"last_name": "Rios",
 			"email": "Rori@algo.algo",
+			"address": "Avenida de la Constitucion, Sevilla",
+			"lat": 37.4632789,
+			"lon": -6.0123552,
+			"phone": "666666666",
 			"is_staff": false,
 			"is_active": true,
 			"date_joined": "2019-11-11T22:00:00Z",
@@ -215,6 +278,10 @@
 			"first_name": "Adrian",
 			"last_name": "Roldan",
 			"email": "adrian98rr@algo.algo",
+			"address": "Avenida del Cid, Sevilla",
+			"lat": 37.380241,
+			"lon": -5.989016,
+			"phone": "666666666",
 			"is_staff": false,
 			"is_active": true,
 			"date_joined": "2019-11-11T22:00:00Z",
@@ -238,6 +305,10 @@
 			"first_name": "David",
 			"last_name": "Cuevas",
 			"email": "david@algo.algo",
+			"address": "Sor gregoria, Sevilla",
+			"lat": 37.3634195,
+			"lon": -5.9873174,
+			"phone": "666666666",
 			"is_staff": false,
 			"is_active": true,
 			"date_joined": "2019-11-11T22:00:00Z",
@@ -256,10 +327,9 @@
 		"fields": {
 			"name": "Kitchnexus",
 			"description": "Se alquila juego Kitchnexus en perfecto estado, solo lo he usado una vez",
-			"status": "Perfecto",
+			"status": "Nuevo",
 			"price": 20,
 			"picture": "board/staticfiles/media/myfolder/kitchnexus.jpg",
-			"address": "Calle algarrobo",
 			"owner": 10
 		},
 		"model": "rent.game",
@@ -269,10 +339,9 @@
 		"fields": {
 			"name": "Tactics",
 			"description": "Alquilo juego de mesa Tactics, esta en perfecto estado y es un juego muy divertido",
-			"status": "Perfecto",
+			"status": "Nuevo",
 			"price": 10,
 			"picture": "board/staticfiles/media/myfolder/tactics.jpg",
-			"address": "Calle algarrobo",
 			"owner": 10
 		},
 		"model": "rent.game",
@@ -282,10 +351,9 @@
 		"fields": {
 			"name": "Preguntados",
 			"description": "Alquilo juego de preguntados, esta un poco gastado pero es jugable",
-			"status": "Gastado",
+			"status": "Desgastado",
 			"price": 5,
 			"picture": "board/staticfiles/media/myfolder/preguntados.jpg",
-			"address": "Calle algarrobo",
 			"owner": 11
 		},
 		"model": "rent.game",
@@ -295,10 +363,9 @@
 		"fields": {
 			"name": "Monopoli",
 			"description": "Alquilo juego de monopoli en perfecto estado con todas sus piezas y billetes",
-			"status": "Perfecto",
+			"status": "Nuevo",
 			"price": 5,
 			"picture": "board/staticfiles/media/myfolder/monopoli.jpeg",
-			"address": "Calle Dos",
 			"owner": 17
 		},
 		"model": "rent.game",
@@ -308,10 +375,9 @@
 		"fields": {
 			"name": "Fantasma",
 			"description": "Alquilo juego Fantasmas, perfecto para toda la familia",
-			"status": "Perfecto",
+			"status": "Nuevo",
 			"price": 20.3,
 			"picture": "board/staticfiles/media/myfolder/fantasma.jpeg",
-			"address": "Calle Dos",
 			"owner": 17
 		},
 		"model": "rent.game",
@@ -321,10 +387,9 @@
 		"fields": {
 			"name": "1000 nombres",
 			"description": "Alquilo juego 1000 Nombres, perfecto para toda la familia",
-			"status": "Gastado",
+			"status": "Desgastado",
 			"price": 7,
 			"picture": "board/staticfiles/media/myfolder/nombres.jpeg",
-			"address": "Calle Dos",
 			"owner": 17
 		},
 		"model": "rent.game",
@@ -334,10 +399,9 @@
 		"fields": {
 			"name": "Master Chezz",
 			"description": "Se alquila Master Chezz juego para jugar con otra persona",
-			"status": "Perfecto",
+			"status": "Usado",
 			"price": 7,
 			"picture": "board/staticfiles/media/myfolder/chess.jpeg",
-			"address": "Calle de Madrid, Sevilla",
 			"owner": 17
 		},
 		"model": "rent.game",
@@ -350,7 +414,6 @@
 			"status": "Usado",
 			"price": 7,
 			"picture": "board/staticfiles/media/myfolder/gestos.jpg",
-			"address": "Calle Roja 14, Sevilla",
 			"owner": 17
 		},
 		"model": "rent.game",
@@ -360,10 +423,9 @@
 		"fields": {
 			"name": "Mentiroso",
 			"description": "Alquilo juego Mentiroso, perfecto para toda la familia",
-			"status": "Perfecto",
+			"status": "Nuevo",
 			"price": 7,
 			"picture": "board/staticfiles/media/myfolder/mentiroso.jpeg",
-			"address": "Calle Azafran, Sevilla",
 			"owner": 18
 		},
 		"model": "rent.game",
@@ -373,10 +435,9 @@
 		"fields": {
 			"name": "La Superclase",
 			"description": "Alquilo juego la Superclase, perfecto para toda la familia",
-			"status": "Perfecto",
+			"status": "Nuevo",
 			"price": 7,
 			"picture": "board/staticfiles/media/myfolder/superclase.jpeg",
-			"address": "Calle Juan Carlos, Sevilla",
 			"owner": 30
 		},
 		"model": "rent.game",
@@ -386,10 +447,9 @@
 		"fields": {
 			"name": "Chess Games",
 			"description": "El juego esta gastado pero es jugable y ademas muy divertido",
-			"status": "Gastado",
+			"status": "Desgastado",
 			"price": 7,
 			"picture": "board/staticfiles/media/myfolder/chessgames.jpeg",
-			"address": "Calle de las Rosas, Sevilla",
 			"owner": 30
 		},
 		"model": "rent.game",
@@ -399,10 +459,9 @@
 		"fields": {
 			"name": "Juegos Reunidos",
 			"description": "Alquiilo Juegos reunidos, es un juego que incluye una gran variedad de juegos, aunque un poco gastado es jugable",
-			"status": "Gastado",
+			"status": "Desgastado",
 			"price": 7,
 			"picture": "board/staticfiles/media/myfolder/juegos.jpeg",
-			"address": "Calle Amapolas 12, Sevilla",
 			"owner": 31
 		},
 		"model": "rent.game",
@@ -412,10 +471,9 @@
 		"fields": {
 			"name": "Alto voltaje",
 			"description": "Juego alto voltaje, en perfecto estado",
-			"status": "Perfecto",
+			"status": "Nuevo",
 			"price": 7,
 			"picture": "board/staticfiles/media/myfolder/voltaje.jpeg",
-			"address": "Calle los pajaros, Sevilla",
 			"owner": 32
 		},
 		"model": "rent.game",
@@ -428,7 +486,6 @@
 			"status": "Usado",
 			"price": 3,
 			"picture": "board/staticfiles/media/myfolder/segundos.jpeg",
-			"address": "Calle Arrozal, Sevilla",
 			"owner": 10
 		},
 		"model": "rent.game",
@@ -441,7 +498,6 @@
 			"status": "Nuevo",
 			"price": 12,
 			"picture": "board/staticfiles/media/myfolder/mad.jpeg",
-			"address": "Calle Pedro Fernandez, Sevilla",
 			"owner": 11
 		},
 		"model": "rent.game",
@@ -451,10 +507,9 @@
 		"fields": {
 			"name": "Juego de mesa de Bob Esponja",
 			"description": "Alquilo juego de mesa de bob esponja para que puedas jugar con tus hijos",
-			"status": "Perfecto",
+			"status": "Usado",
 			"price": 10,
 			"picture": "board/staticfiles/media/myfolder/esponja.jpeg",
-			"address": "Calle la macarena, Sevilla",
 			"owner": 10
 		},
 		"model": "rent.game",
@@ -464,10 +519,9 @@
 		"fields": {
 			"name": "BackGammon",
 			"description": "Alquilo juego BackGammon un poco gastado, pero jugable",
-			"status": "Gastado",
+			"status": "Desgastado",
 			"price": 7,
 			"picture": "board/staticfiles/media/myfolder/backgammon.jpeg",
-			"address": "Calle Maracas, Sevilla",
 			"owner": 16
 		},
 		"model": "rent.game",
@@ -477,10 +531,9 @@
 		"fields": {
 			"name": "El gran Reto",
 			"description": "Esta en perfecto estado y es un juego muy divertido",
-			"status": "Perfecto",
+			"status": "Nuevo",
 			"price": 7,
 			"picture": "board/staticfiles/media/myfolder/reto.jpeg",
-			"address": "Calle los Cisnes, Sevilla",
 			"owner": 15
 		},
 		"model": "rent.game",
@@ -493,7 +546,6 @@
 			"status": "Usado",
 			"price": 5,
 			"picture": "board/staticfiles/media/myfolder/profesiones.jpeg",
-			"address": "Calle Azucena, Sevilla",
 			"owner": 10
 		},
 		"model": "rent.game",
@@ -506,7 +558,6 @@
 			"status": "Usado",
 			"price": 6,
 			"picture": "board/staticfiles/media/myfolder/cranium.jpeg",
-			"address": "Calle Sor Gregoria, Sevilla",
 			"owner": 32
 		},
 		"model": "rent.game",
@@ -515,7 +566,9 @@
 	{
 		"fields": {
 			"ticker": "ABC-1234",
-			"rentable": true,
+			"rentable": false,
+			"deliver":false,
+			"initial_date": "2020-06-06T22:00:00Z",
 			"user": 16,
 			"days": 3,
 			"game": 22
@@ -526,7 +579,9 @@
 	{
 		"fields": {
 			"ticker": "ABC-2222",
-			"rentable": true,
+			"rentable": false,
+			"deliver":false,
+			"initial_date": "2020-06-06T22:00:00Z",
 			"user": 10,
 			"days": 1,
 			"game": 45
@@ -534,10 +589,13 @@
 		"model": "rent.rent",
 		"pk": 52
 	},
+
 	{
 		"fields": {
 			"ticker": "AFC-3333",
-			"rentable": true,
+			"rentable": false,
+			"deliver":false,
+			"initial_date": "2020-06-06T22:00:00Z",
 			"user": 32,
 			"days": 1,
 			"game": 44
@@ -548,7 +606,9 @@
 	{
 		"fields": {
 			"ticker": "GBC-3421",
-			"rentable": true,
+			"rentable": false,
+			"deliver":false,
+			"initial_date": "2020-06-06T22:00:00Z",
 			"user": 16,
 			"days": 4,
 			"game": 43
@@ -559,7 +619,9 @@
 	{
 		"fields": {
 			"ticker": "DBC-6234",
-			"rentable": true,
+			"rentable": false,
+			"deliver":false,
+			"initial_date": "2020-06-06T22:00:00Z",
 			"user": 10,
 			"days": 5,
 			"game": 42
@@ -570,7 +632,9 @@
 	{
 		"fields": {
 			"ticker": "ALC-1884",
-			"rentable": true,
+			"rentable": false,
+			"deliver":false,
+			"initial_date": "2020-06-06T22:00:00Z",
 			"days": 2,
 			"user": 16,
 			"game": 41
@@ -581,7 +645,9 @@
 	{
 		"fields": {
 			"ticker": "EBC-1214",
-			"rentable": true,
+			"rentable": false,
+			"deliver":false,
+			"initial_date": "2020-06-06T22:00:00Z",
 			"days": 1,
 			"user": 10,
 			"game": 40
@@ -592,7 +658,9 @@
 	{
 		"fields": {
 			"ticker": "AAA-1634",
-			"rentable": true,
+			"rentable": false,
+			"deliver":false,
+			"initial_date": "2020-06-06T22:00:00Z",
 			"days": 1,
 			"user": 11,
 			"game": 39
@@ -743,6 +811,102 @@
 			"rate": 5
 		},
 		"model": "reviews.valoration",
-		"pk": 70
+		"pk": 70  
+	},
+	{
+		"fields": {
+			"user": 9, 
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 110
+	},
+	{
+		"fields": {
+			"user": 10,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 111
+	},
+	{
+		"fields": {
+			"user": 11,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 112
+	},
+	{
+		"fields": {
+			"user": 15,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 113
+	},
+	{
+		"fields": {
+			"user": 16,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 114
+	},
+	{
+		"fields": {
+			"user": 50,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 115
+	},
+	{
+		"fields": {
+			"user": 17,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 116
+	},
+	{
+		"fields": {
+			"user": 18,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 117
+	},
+	{
+		"fields": {
+			"user": 29,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 118
+	},
+	{
+		"fields": {
+			"user": 30,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 119
+	},
+	{
+		"fields": {
+			"user": 31,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 120
+	},
+	{
+		"fields": {
+			"user": 32,
+			"items": []
+		},
+		"model": "rent.juegosFav",
+		"pk": 121
 	}
 ]

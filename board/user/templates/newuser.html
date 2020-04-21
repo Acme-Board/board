@@ -11,7 +11,7 @@
     {% block content %}
 
 <section class="form-register">
-    {% if request.user.is_authenticated == false %} 
+    {% if request.user.is_authenticated == False %} 
     <div><h3  class ="well well-sm">Nuevo Usuario:</h3> </div>
     {% endif %}
     {% if request.user.is_authenticated %} 
@@ -20,6 +20,7 @@
     <div>      
 
             <div>      
+                <div><h6  class ="well well-sm">Los campos con * son obligatorios</h6> </div>
 
                 <form method="POST" enctype="multipart/form-data" class="NewUser" style=" margin: 5px; padding: 5px; border-radius: 8px;">
                     {% csrf_token %}
@@ -27,16 +28,35 @@
                       {% for field in form %}
                     <tr style="height: 40px; width: 40px;">
                         <div class="field">               
-                           <td style="color:white;"><label class="label">{{field.label}} </label></td>
-                            <td>{{field}}</td>
+                            <td style="color:white;">
+                                {% if field.label == "Acepto Términos y Condiciones de uso*" %}
+                                <a target="_blank" href="/terms">
+                                    <label class="label" style="text-decoration: underline;"  style="color:white;">{{field.label}} </label></a>
+                                {% else %}
+                                    {% if field.label == "Acepto la política de privacidad*" %}
+                                        <a target="_blank" href="/privacy">
+                                            <label class="label" style="text-decoration: underline;"  style="color:white;">{{field.label}} </label></a>
+                                    {% else %}
+                                      <label class="label"  style="color:white;">{{field.label}} </label>
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                            <td style="color:white;">{{field}}</td>
                         </div>
                     </tr>
                     {% endfor %}
                     </table>
+                    {% if request.user.is_authenticated %} 
                     <div style="margin: 15px; text-align: center;">
-                        <button type="submit" class="btn btn-primary"  style="border-radius: 8px">Crear</button>              
+                        <a href="/profile/{{user.id}}" class="btn btn-primary"  style="border-radius: 8px"> Volver </a>
+                        <button type="submit" class="btn btn-primary"  style="border-radius: 8px">Actualizar</button>              
+                    {% else %}
+                    <div style="margin: 15px; text-align: center;">
+                        <a href="/" class="btn btn-primary"  style="border-radius: 8px"> Volver </a>
+                    <button type="submit" class="btn btn-primary"  style="border-radius: 8px">Crear</button> 
+                    {% endif %}
                     </div>
-                <!--
+                
                 <div>
                     {% if form.errors %}
                         {% for field in form %}
@@ -53,7 +73,8 @@
                         {% endfor %}
 
                     {% endif %}
-                </div>-->
+                </div>
+                
                 {% if request.user.is_authenticated == False %}
                 <p style="text-align: center;">¿Ya tiene una cuenta? <a href="/login" style="padding: 5px;"> Inicie Sesión</a></p>
                 {% endif %}

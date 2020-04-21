@@ -10,15 +10,15 @@
 
      {% block content %}
      <section class="page-section">
-          <div class="index-main py-5">
+          <div class="index-main py-5" style="text-align: center;">
                <img class="index-icon" src="{% static 'img/icon.png' %}" />
-               <h1 class="index-title">¡Bienvenido a la plataforma Try On Board{% if request.user.username != '' %}, {{request.user.username}} {% endif %}!</h1> 
+               <h1 class="index-title">¡Bienvenido a la plataforma Try On Board{% if request.user.is_authenticated %}, {{request.user}} {% endif %}!</h1> 
 
                <p class="index-description">
-                    ¡Aquí podrás encontrar juegos de mesa que otra gente alquile o venda cerca de tu zona!
+                    ¡Aquí podrás encontrar juegos de mesa que otra gente alquile cerca de tu zona!
                </p>
 
-               <a href= "/games" class="btn btn-info btn-sm;" style="border-radius: 8px; margin-left: 35%; color:black; font-weight: bold;">¡Empezar!</a>
+               <a href= "/games" class="btn btn-info btn-sm;" style="border-radius: 8px; color:black; font-weight: bold;">¡Empezar!</a>
                <a class="btn btn-light btn-xl js-scroll-trigger" href= "#about" style="border-radius: 8px; margin-left: 5%; color:black; font-weight: bold;">¿Quiénes somos?</a>
           </div>
      </section>
@@ -89,10 +89,10 @@
                <tr>
                     <td>
                     </td>
-                    <td>
+                    <td> 
                          <div style="text-align: center;">
                               <img src="{% static 'img/team/david.png' %}" style="height: 100px;"><br>
-                              David Cuevas <br> Project Manager 
+                              David Cuevas <br> Jefe de Proyecto 
                          </div>
                     </td>
                </tr>
@@ -112,7 +112,7 @@
                     <td>
                          <div style="text-align: center;">
                               <img src="{% static 'img/team/felix.png' %}" style="height: 100px;"><br>
-                              Félix Jiménez Gonzalez <br> Documentation Leader 
+                              Félix Jiménez Gonzalez <br> Full Stack
                          </div>
                     </td>
                </tr>
@@ -132,7 +132,7 @@
                     <td>
                          <div style="text-align: center;">
                               <img src="{% static 'img/team/gonzalo a.png' %}" style="height: 100px;"><br>
-                              Gonzalo Aguilar Hermoso <br> Documentation 
+                              Gonzalo Aguilar Hermoso <br> Backend
                          </div> 
                     </td>
                </tr>
@@ -152,10 +152,12 @@
                     <td>
                          <div style="text-align: center;">
                               <img src="{% static 'img/team/luis.png' %}" style="height: 100px;"><br>
-                              Luis Manuel Sánchez <br> Documentation 
+                              Luis Manuel Sánchez <br> Frontend
                          </div>   
                     </td>
+               
                </tr>
+          
           </table>
           <!--
           <div class="container">
