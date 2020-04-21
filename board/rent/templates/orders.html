@@ -27,7 +27,7 @@
 <!-- Espero que vaia, alerta por si el juego ya esta alquilado en la fecha -->
  <div class="alert" style="background-color: #2196F3;">
   <span class="closebtn"  onclick="this.parentElement.style.display='none';">&times;</span> 
-  <strong>Info! </strong> {{mensaje}}.
+  <strong>¡Atención! </strong> {{mensaje}}.
 </div>
 
 {% endif %}
@@ -37,9 +37,9 @@
 
 	{% if order %}
 	<a href= "/confirm/{{id}}" class="btn btn-info btn-sm"
-	style="border-radius: 8px; margin: 5px; color:black; font-weight: bold;">Alquilar Juegos!</a>
+	style="border-radius: 8px; margin: 5px; color:black; font-weight: bold;">¡Alquilar juegos!</a>
 	<a href="/deleteAll" onclick="mensaje()"
-	class="btn btn-info btn-sm" style="border-radius: 8px;color:black; font-weight: bold; background-color: #F93F42">Borrar Todo</a></br> </br></td>
+	class="btn btn-info btn-sm" style="border-radius: 8px;color:black; font-weight: bold; background-color: #F93F42">Borrar todo</a></br> </br></td>
 	{% endif %}
 	
 	
@@ -65,7 +65,7 @@
 					</div>
 				</div>
 			</td>
-			<td data-th="Precio" style="color:white;">{{dato.game.price}} x {{dato.days}} dias</td>
+			<td data-th="Precio" style="color:white;">{{dato.game.price}} x {{dato.days}} días</td>
 			<td data-th="Fecha inicio" style="color:white;">{{dato.initial_date|date:'Y-m-d'}}</td>
 			<td data-th="Opciones"class="text-center">
 				<a role=button href="/gameDetail/{{dato.game.id}}" class="btn btn-info btn-sm" style="color:black; font-weight: bold;">Info</a>
@@ -90,11 +90,11 @@
 			</tbody>
 			</table>
 
-			<li class="text-center" style="color:white;">Vaya, parece que no hay articulos en su carrito, ¿Por que no le 
-			echas un ojo al Catálogo?</li></br>
+			<li class="text-center" style="color:white;">Vaya, parece que no hay artículos en su carrito, ¿Por qué no le 
+			echas un ojo al catálogo?</li></br>
 
 			<a href= "/games" class="btn btn-info btn-sm"
-			style="border-radius: 8px; margin: 10px; color:black; font-weight: bold;">Ir al Catalogo</a></br> </br>
+			style="border-radius: 8px; margin: 10px; color:black; font-weight: bold;">Ir al catálogo</a></br> </br>
 			{% endfor %}
 
 		</tbody>
@@ -117,7 +117,6 @@
   {% block vue %}
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   {% endblock %}
-  <script src= "prueba.js"></script>
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

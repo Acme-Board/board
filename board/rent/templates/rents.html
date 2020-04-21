@@ -20,7 +20,7 @@
 
 <div  style= "padding-block-end: 60px;margin: auto;">
 	
-	<h1 style="color: white; font-size:30px; border-radius: 8px; width: auto"> Lista de Alquileres </h1></br>
+	<h1 style="color: white; font-size:30px; border-radius: 8px; width: auto"> Lista de alquileres </h1></br>
 	<!-- Boton de busqueda para un futuro
 
 	<form action="/action_page.php">
@@ -44,10 +44,10 @@
 	<td>
 	 <div style="color: white;"><h4 class=""> {{dato.game.name}} - {{dato.ticker|capfirst}} </h4></div> 
 		<p style="color: white;"> <b>Teléfono: {{dato.user.phone}}</b></p>
-		<p style="color: white;">Dias: {{dato.days}}</p>
+		<p style="color: white;">Días: {{dato.days}}</p>
 		<p style="color: white;">Fecha inicio: {{dato.initial_date|date:'Y-m-d'}}</p>
 
-		<a href= "/gameDetail/{{dato.game.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Ver mas</a></br>
+		<a href= "/gameDetail/{{dato.game.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Ver más</a></br>
 		{% if dato.deliver == False and dato.rentable == False and dato.user == request.user %}
 			<a href= "/rents/deliver/{{dato.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Entregado</a></br>
 		{% endif %}
@@ -68,7 +68,7 @@
 
 <!-- Hacer Visible esta pagina. -->
 
-	<li>Vaya, parece que no hay Alquileres</li>
+	<li>Vaya, parece que no hay alquileres</li>
 
 	{% endfor %}
 
