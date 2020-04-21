@@ -36,7 +36,7 @@
 			</div>
 				
 	</div>-->
-</br><a type="button" class=" btn btn-primary " href="/games/filterDistance">Filtrar por distancia</a>
+</br><a type="button" class=" btn btn-primary " href="/games/filterDistance">Filtrar por cercanía</a>
 		
 			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Filtrado por estado</button>
 			<div class ="dropdown-menu">
@@ -57,7 +57,7 @@
 	<!-- Vamos a introducir  algunos juegos -->
 	<tr style="text-align:center;">
 		<td><img style="width: 245px; height: 245px; border-radius: 8px;" src="{{dato.picture.url}} "/>
-	 <div><h4> {{dato.name|capfirst}} - <i> {{dato.price}} €</i> </br></h4>
+	 <div><h4> {{dato.name|capfirst}} - <i> {{dato.price}} €/día</i> </br></h4>
 		 Estado: {{dato.status}} </br>
 		 <a href= "/gameDetail/{{dato.id}}" class="btn btn-info btn-sm"
 		  style="border-radius: 8px; margin-top: 10px;color:black; font-weight: bold;">Ver mas</a>

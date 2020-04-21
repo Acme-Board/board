@@ -42,7 +42,7 @@
 	<tr>
 		<td><img style="width:150px;height:150px; ; border-radius: 8px; padding: 5px;" src="{{dato.game.picture.url}} "/></td>
 	<td>
-	 <div style="color: white;"><h4 class=""> {{dato.ticker|capfirst}} </h4></div> 
+	 <div style="color: white;"><h4 class=""> {{dato.game.name}} - {{dato.ticker|capfirst}} </h4></div> 
 		<p style="color: white;"> <b>Teléfono: {{dato.user.phone}}</b></p>
 		<p style="color: white;">Dias: {{dato.days}}</p>
 		<p style="color: white;">Fecha inicio: {{dato.initial_date|date:'Y-m-d'}}</p>
@@ -81,7 +81,6 @@
 <!-- Una vista final de la vista para darle profesionalidad -->
 
 
-  <script src= "prueba.js"></script>
   <script src= "../static/css/style.css"></script>
   
   <meta charset="utf-8">
