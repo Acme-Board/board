@@ -55,7 +55,7 @@ class GameModelTestCase(TestCase):
 
     def test_edit_game(self):
 
-        Game.objects.filter(id = self.game.id).update(name = 'Party', description = 'Muy entretenido', status = Status.PE, price = 1.5, picture = 'http://www.party.com/party.png', owner = self.user)
+        Game.objects.filter(id = self.game.id).update(name = 'Party', description = 'Muy entretenido', status = 'Nuevo', price = 1.5, picture = 'http://www.party.com/party.png', owner = self.user)
         game = Game.objects.get(id = self.game.id)
 
         self.assertEquals(game.name, 'Party')
@@ -66,7 +66,7 @@ class GameModelTestCase(TestCase):
 
     def test_delete_game(self):
 
-        self.game2 = Game(name = 'Party', description = 'Muy entretenido', status = Status.PE, price = 1.5, picture = 'http://www.party.com/party.png', owner = self.user)
+        self.game2 = Game(name = 'Party', description = 'Muy entretenido', status = 'Nuevo', price = 1.5, picture = 'http://www.party.com/party.png', owner = self.user)
         self.game2.save()
 
         self.assertEquals(2, Game.objects.count())
@@ -167,7 +167,7 @@ class OrderItemModelTestCase(TestCase):
         self.user = User(username='prueba001', password='prueba123')
         self.user.save()
 
-        self.game = Game(name='BANG', description='Está muy entretenido', status=Status.PE, price=2.5, picture='http://www.foto.com/foto.png', owner=self.user)
+        self.game = Game(name='BANG', description='Está muy entretenido', status='Nuevo', price=2.5, picture='http://www.foto.com/foto.png', owner=self.user)
         self.game.save()
 
         self.orderItem = OrderItem(game=self.game, is_ordered=False, date_added = parse_date("2020-07-13"), days =10, initial_date = parse_date("2020-07-13"))
@@ -189,7 +189,7 @@ class OrderItemModelTestCase(TestCase):
 
     def test_edit_orderItem(self):
 
-        self.game2 = Game(name = 'Cluedo', description = 'Resulta muy chulo', status = Status.PE, price = 4.5, picture = 'http://www.foto.com/foto.png', owner = self.user)
+        self.game2 = Game(name = 'Cluedo', description = 'Resulta muy chulo', status = 'Nuevo¡, price = 4.5, picture = 'http://www.foto.com/foto.png', owner = self.user)
         self.game2.save()
 
         OrderItem.objects.filter(id = self.orderItem.id).update(game = self.game2, date_added = parse_date("2020-09-20"), days =15, initial_date = parse_date("2020-11-25"))
@@ -226,7 +226,7 @@ class OrderModelTestCase(TestCase):
         self.user = User(username='prueba001', password='prueba123')
         self.user.save()
 
-        self.game = Game(name='BANG', description='Está muy entretenido', status=Status.PE, price=2.5, picture='http://www.foto.com/foto.png', owner=self.user)
+        self.game = Game(name='BANG', description='Está muy entretenido', status='Nuevo', price=2.5, picture='http://www.foto.com/foto.png', owner=self.user)
         self.game.save()
 
         self.orderItem = OrderItem(game=self.game, is_ordered=False, days =10, initial_date=parse_date("2020-07-13"))
