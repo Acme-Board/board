@@ -189,7 +189,7 @@ class OrderItemModelTestCase(TestCase):
 
     def test_edit_orderItem(self):
 
-        self.game2 = Game(name = 'Cluedo', description = 'Resulta muy chulo', status = 'Nuevo¡, price = 4.5, picture = 'http://www.foto.com/foto.png', owner = self.user)
+        self.game2 = Game(name = 'Cluedo', description = 'Resulta muy chulo', status = 'Nuevo', price = 4.5, picture = 'http://www.foto.com/foto.png', owner = self.user)
         self.game2.save()
 
         OrderItem.objects.filter(id = self.orderItem.id).update(game = self.game2, date_added = parse_date("2020-09-20"), days =15, initial_date = parse_date("2020-11-25"))
