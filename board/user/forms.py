@@ -34,7 +34,7 @@ class editProfile(forms.Form):
     last_name = forms.CharField(max_length=50, label="Apellidos")
     email = forms.CharField(max_length=50, label="Email", validators=[EmailValidator(message="Email incorrecto")])
     bio = forms.CharField(max_length=200, label="Biografía", required=False, widget=forms.Textarea)
-    phone = forms.CharField(validators=[RegexValidator(r'^\+?1?\d{9,15}$', 'Número de teléfono inválido debe seguir el siguiente patrón +999 999999999')], max_length=17, required=True)
+    phone = forms.CharField(label='Teléfono*', validators=[RegexValidator(r'^[0-9].{8,}$', 'El numero de telefono deben ser entre 9 y 10 digitos')], max_length=10, required=True, widget=forms.TextInput(attrs={'size': '25'}))
     address = forms.CharField(max_length=150, label="Dirección", required=True)
 
 
