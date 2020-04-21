@@ -155,7 +155,7 @@ class RentModelTestCase(TestCase):
 
         self.rent.delete()
         self.game.delete()
-        self.user1.delete()
+        self.user.delete()
         self.user2.delete()
 
 class OrderItemModelTestCase(TestCase):
