@@ -50,7 +50,11 @@ def create_review(request, id_user):
                         numero = numero + 1
                     media = suma/numero
                     toUser.rate = media
-                    toUser.save()
+                    try:
+                        toUser.save()
+                    except DataError:
+                        return redirect('/profile/{}'.format(toUser.id))  
+                    
                     return redirect('/profile/{}'.format(toUser.id))
                 else:
                     return render(request, "createReview.html", {'form': form, 'mensaje': 
