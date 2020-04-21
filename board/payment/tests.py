@@ -13,7 +13,7 @@ class PaymentModelTestCase(TestCase):
         self.user = User(username = 'prueba', password = 'prueba123')
         self.user.save()
         
-        self.game = Game(name = 'BANG', description = 'Juego de mesa extremadamente satisfactorio', status = Status.PE, price = 22.5, picture = 'http://www.foto.com/foto.png', address = 'Los remedios', owner = self.user)
+        self.game = Game(name = 'BANG', description = 'Juego de mesa extremadamente satisfactorio', status = "Nuevo", price = 22.5, picture = 'http://www.foto.com/foto.png', address = 'Los remedios', owner = self.user)
         self.game.save()
 
         self.rent = Rent(ticker = 'ABC-1234', days = 4, initial_date = parse_date("2020-07-13"), game = self.game, user = self.user, rentable = True)
