@@ -182,7 +182,7 @@ def edit_game(request, pk):
                 status = "Desgastado"
 
             try:
-                price = float(form.cleaned_data['price'])
+                price = float(request.POST.get('precio'))
             except ValueError:
                 form.add_error('price', 'Introduzca un dato numérico')
                 return render(request, "newgame.html", {"form": form, 'texto': texto, 'Alquilar': Alquilar})
