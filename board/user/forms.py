@@ -16,7 +16,7 @@ class Register(forms.Form):
                            (attrs={'size': '25'}))
     email = forms.CharField(max_length=50, widget= forms.TextInput
                            (attrs={'size': '25','placeholder':'correo@servidor.com'}) ,label="Email*", validators=[EmailValidator(message="Email incorrecto")])
-    bio = forms.CharField(max_length=200, label="Biografía*", required=False, widget=forms.Textarea)
+    bio = forms.CharField(max_length=200, label="Biografía", required=False, widget=forms.Textarea)
     phone = forms.CharField(label='Teléfono*', validators=[RegexValidator(r'^\+?1?\d{9,15}$', 'Número de teléfono inválido debe seguir el siguiente patrón +999 999999999')], max_length=17, required=True,
     widget= forms.TextInput(attrs={'size': '25'}))
     address = forms.CharField(max_length=150, label="Dirección*", required=True,widget= forms.TextInput(attrs={'size': '25'}))

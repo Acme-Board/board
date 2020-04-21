@@ -49,11 +49,21 @@
           
         <div style="text-align:center; margin: 15px">
           {% if foto != True %}
+          {% if request.user.premium == True %}
+          <p class="text-warning">Su beneficio con este juego será de [[totalPremium]] €</p>
+          <p class="text-warning">Sin Premium, ganaría [[totalPrecio]] €</p>
+          {% else %}
           <p class="text-warning">Su beneficio con este juego será de [[totalPrecio]] €</p>
           <p class="text-warning">Consiguiendo suscripción premium, ganaría [[totalPremium]] €</p>
-        
+          {% endif %}
+
+          <a href= "/games" class="btn btn-info btn-sm" style=" color: white; border-radius: 8px; margin-bottom: 30px; margin-top: 30px; font-weight: bold;">Volver</a>
+ 
+          {% else %}
+          <a href= "/myGames" class="btn btn-info btn-sm" style=" color: white; border-radius: 8px; margin-bottom: 30px; margin-top: 30px; font-weight: bold;">Volver</a>
+ 
         {% endif %}
-        
+          
           <button type="submit" class="btn btn-primary" style="border-radius: 8px">{{Alquilar}}</button>
         </div>
 
