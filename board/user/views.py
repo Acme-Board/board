@@ -279,6 +279,14 @@ def DescargaDatosUser(request,pk):
                 body += 'Name:'+ user.first_name + '\n'
                 body += 'Last name :'+ user.last_name + '\n'
                 body += 'Email:'+ user.email + '\n'
+                body += 'Dirección:'+ user.address + '\n'
+                body += 'Teléfono:'+ user.phone + '\n'
+                x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+                if x_forwarded_for:
+                    ip = x_forwarded_for.split(',')[0]
+                else:
+                     ip = request.META.get('REMOTE_ADDR')
+                body += 'Direccion ip:'+ ip + '\n'
                 emailto = user.email
                 
 
