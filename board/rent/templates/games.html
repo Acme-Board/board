@@ -23,27 +23,18 @@
 	<a href= "/newgame" type="button" class=" btn btn-primary ">Subir juego</a>
 	<a href= "/gamesFav" type="button" class=" btn btn-primary ">Tus Juegos Favoritos</a>	
 	</br>
+	{% endif %}</br>
+
+	{% if request.user.is_authenticated %}
+		<a type="button" class=" btn btn-primary " href="/games/filterDistance">Filtrar por cercanía</a>
 	{% endif %}
 
-	<!-- Aqui esta el buscador 
-	<div class="row">
-		
-			<div class="col-4">
-				<input class="form-control mx-4 my-2" type="text" placeholder="Search" aria-label="Search">
-			</div>
-			<div class="col-8">
-				<button class="btn btn-primary my-2" type="submit">Buscar</button>
-			</div>
-				
-	</div>-->
-</br><a type="button" class=" btn btn-primary " href="/games/filterDistance">Filtrar por cercanía</a>
-		
-			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Filtrado por estado</button>
-			<div class ="dropdown-menu">
-				<a href="/games/filterStatus/1" class="dropdown-item" style="color: black;">Nuevo</a>
-				<a href="/games/filterStatus/2" class="dropdown-item" style="color: black;">Usado</a>
-				<a href="/games/filterStatus/3" class="dropdown-item" style="color: black;">Desgastado</a>
-			</div>	
+	<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Filtrado por estado</button>
+	<div class ="dropdown-menu">
+		<a href="/games/filterStatus/1" class="dropdown-item" style="color: black;">Nuevo</a>
+		<a href="/games/filterStatus/2" class="dropdown-item" style="color: black;">Usado</a>
+		<a href="/games/filterStatus/3" class="dropdown-item" style="color: black;">Desgastado</a>
+	</div>	
 			
 	{% if filter %}
 	<a href="/games">Eliminar filtros</a>
