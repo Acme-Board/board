@@ -17,12 +17,12 @@ class Register(forms.Form):
     email = forms.CharField(max_length=50, widget= forms.TextInput
                            (attrs={'size': '25','placeholder':'correo@servidor.com'}) ,label="Email*", validators=[EmailValidator(message="Email incorrecto")])
     bio = forms.CharField(max_length=200, label="Biografía", required=False, widget=forms.Textarea)
-    phone = forms.CharField(label='Teléfono*', validators=[RegexValidator(r'^[0-9].{8,}$', 'El numero de telefono deben ser entre 9 y 10 digitos')], max_length=10, required=True,
+    phone = forms.CharField(label='Teléfono*', validators=[RegexValidator(r'^[0-9].{8,}$', 'El número de teléfono deben ser entre 9 y 10 dígitos')], max_length=10, required=True,
     widget= forms.TextInput(attrs={'size': '25'}))
     address = forms.CharField(max_length=150, label="Dirección*", required=True,widget= forms.TextInput(attrs={'size': '25'}))
     check_terms = forms.BooleanField(label="Acepto Términos y Condiciones de uso*", required=True)
     check_privacy = forms.BooleanField(label="Acepto la política de privacidad*", required=True)
-
+    
 class editAccount(forms.Form):
     username = forms.CharField(max_length=20,label="Usuario")
     password3 = forms.CharField(max_length=32,widget=forms.PasswordInput, label="Contraseña actual*")
