@@ -14,7 +14,7 @@ import requests
 from django.db import IntegrityError
 
 from user.models import User
-from user.forms import Register, editAccount, editProfile, editPic, contact,descargaDatos
+from user.forms import Register, editAccount, editProfile, editPic, contact,descargaDatos, LoginForm
 from payment.views import charge
 from reviews.models import Comment
 from rent.models import JuegosFav
@@ -39,10 +39,10 @@ def logout(request):
 
 def login(request):
     # Creamos el formulario de autenticación vacío
-    form = AuthenticationForm()
+    form = LoginForm()
     if request.method == "POST":
         # Añadimos los datos recibidos al formulario
-        form = AuthenticationForm(data=request.POST)
+        form = LoginForm(data=request.POST)
         # Si el formulario es válido...
         if form.is_valid():
             # Recuperamos las credenciales validadas
@@ -58,6 +58,8 @@ def login(request):
                 do_login(request, user)
                 # Y le redireccionamos a la portada
                 return redirect('/')
+
+            form.add_error('username','El nombre de usuario o la contraseña no existen')
 
     # Si llegamos al final renderizamos el formulario
     return render(request, "login.html", {'form': form})

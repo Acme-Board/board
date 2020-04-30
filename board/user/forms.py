@@ -48,3 +48,8 @@ class contact(forms.Form):
 
 class descargaDatos(forms.Form):
     message = forms.CharField(min_length=0 ,max_length=200,label="Mensaje",required=False,widget=forms.Textarea)
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(label='Usuario',widget=forms.TextInput(attrs={'autofocus': True}))
+    password = forms.CharField(label='Contraseña', strip=False, widget=forms.PasswordInput)
