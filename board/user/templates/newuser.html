@@ -48,11 +48,12 @@
                     </table>
                     {% if request.user.is_authenticated %} 
                     <div style="margin: 15px; text-align: center;">
-                        <a href="/profile/{{user.id}}" class="btn btn-primary"  style="border-radius: 8px"> Volver </a>
-                        <button type="submit" class="btn btn-primary"  style="border-radius: 8px">Actualizar</button>              
+                        <a href= "/profile/{{user.id}}" class="btn btn-info btn-sm" style=" color: white; border-radius: 8px; margin-bottom: 30px; margin-top: 30px;">Volver</a>
+                        <button type="submit" class="btn btn-primary"  style="border-radius: 8px">Actualizar</button>   
+                    </div>           
                     {% else %}
                     <div style="margin: 15px; text-align: center;">
-                        <a href="/" class="btn btn-primary"  style="border-radius: 8px"> Volver </a>
+                        <a href= "/" class="btn btn-info btn-sm" style=" color: white; border-radius: 8px; margin-bottom: 30px; margin-top: 30px;">Volver</a>
                     <button type="submit" class="btn btn-primary"  style="border-radius: 8px">Crear</button> 
                     {% endif %}
                     </div>

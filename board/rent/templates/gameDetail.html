@@ -31,12 +31,12 @@
 
 {% if game in favGames %}
 
-<a href= "/gamesFavDelete/{{id}}" class="btn btn-info btn-sm" 
-style="border-radius: 8px;margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">
+<a href= "/gamesFavDelete/{{id}}" class="btn btn-danger btn-sm" 
+style="border-radius: 8px;margin-bottom: 30px; margin-top: 30px;color:white;">
 Eliminar de Favoritos</a>
 {% else %}
   <a href= "/gamesFavAdd/{{id}}" class="btn btn-info btn-sm" 
-  style="border-radius: 8px;margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">
+  style="border-radius: 8px;margin-bottom: 30px; margin-top: 30px;color:white;">
   Añadir a Favoritos</a>
 
 {% endif %}
@@ -80,7 +80,7 @@ Eliminar de Favoritos</a>
           </div>
 
         </br>
-        <button type="submit" class="btn btn-info btn-sm" style="border-radius: 8px; color:black; font-weight: bold;">Añadir al carrito</button>
+        <button type="submit" class="btn btn-info btn-sm" style="border-radius: 8px; color:white;">Añadir al carrito</button>
          </form>
 
          {% endif %}
@@ -89,7 +89,7 @@ Eliminar de Favoritos</a>
     
         </br>
         <a href= "/gameDetail/{{id}}/edit" class="btn btn-info btn-sm" 
-        style=" color:black; font-weight: bold; margin-right: 5px;">Editar</a>
+        style=" color:white; font-weight: bold; margin-right: 5px;">Editar</a>
     
        <!-- Aqui viene el pop up-->
             
@@ -241,8 +241,8 @@ src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAqVh
 
   {% if request.user != owner %}
   <div style="text-align: center;">
-    <a href= "/games" class="btn btn-info btn-sm" style="border-radius: 8px; margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">Volver</a>
-   </div>
+    <a href= "/games" class="btn btn-info btn-sm" style=" color: white; border-radius: 8px; margin-bottom: 30px; margin-top: 30px;">Volver</a>
+  </div>
   </div>
   {% else %}
   <div style="text-align: center;">
