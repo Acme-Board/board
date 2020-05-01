@@ -27,6 +27,27 @@
        background-size: cover;
        background-image: url("{% static 'img/bg-masthead.jpg' %}");
       }
+/*
+      .badge {
+        padding-left: 9px;
+        padding-right: 9px;
+        -webkit-border-radius: 9px;
+        -moz-border-radius: 9px;
+        border-radius: 9px;
+      }
+
+      .label-warning[href],
+      .badge-warning[href] {
+        background-color: #c67605;
+      }
+      #lblCartCount {
+          font-size: 12px;
+          background: #ff0000;
+          color: #fff;
+          padding: 0 5px;
+          vertical-align: top;
+          margin-left: -10px; 
+      }*/
 
     </style>
 
@@ -46,58 +67,67 @@
 
         <div class="collapse navbar-collapse text-center"  id="navbarSupportedContent">
           <ul class="navbar-nav nav-fill">
-              <li class="nav-item px-5">
-                  <a class="nav-link" href="/games/"><b>Juegos</b></a>
+            {% if request.user.premium == False %}
+            <li class="nav-item justify-content-right px-4">
+              <a class="nav-link bg-warning" style="border-radius: 20%;" href="" data-toggle="modal" data-target="#exampleModal"><b>Premium</b></a>
+            </li>
+            {% endif %}
+              <li class="nav-item px-4">
+                  <a class="nav-link" href="/games/"><b>Juegos <i class="fas fa-dice"></i></b></a>
               </li>
               {% if not request.user.is_authenticated %}
-              <li class="nav-item px-5">
-                  <a class="nav-link" href="/login"><b>Iniciar sesión</b></a>
+              <li class="nav-item px-4">
+                  <a class="nav-link" href="/login"><b>Iniciar sesión <i class="fas fa-sign-in-alt"></i></b></a>
               </li>
-              <li class="nav-item px-5">
-                <a class="nav-link" href="/newuser"><b>Registrarse</b></a>
+              <li class="nav-item px-4">
+                <a class="nav-link" href="/newuser"><b>Registrarse <i class="fas fa-user-plus"></i></b></a>
             </li>
-              {% else %}         
-              <li class="nav-item px-5">
-                <a class="nav-link" href="/cart"><b>Carrito de compra</b></a>
-              </li>
+              {% else %} <!--   <i class="fas fa-upload"></i>-->
+              <li class="nav-item px-4">
+                <a class="nav-link" href="/newgame"><b>Subir juego <i class="fas fa-upload"></i> </b></a>
+              </li>      
+
               {% if request.user.admin %}
-              <li class="nav-item px-5 dropdown">
+              <li class="nav-item px-4 dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <b>Administración</b>
+                  <b>Administración <i class="fas fa-user-lock"></i> </b>
                 </a>
-                <div class="dropdown-menu" style="background-color: #87CED9; text-align: center !important;" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="nav-link dropdown-item" href="/users"><b>Lista usuarios</b></a>
+                <div class="dropdown-menu" style="background-color: #BE9FE1; text-align: center !important;" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="nav-link dropdown-item" href="/users"><b>Lista usuarios </b></a>
                   <a class="nav-link dropdown-item" href="/contends"><b>Disputas</b></a>
                 </div>
               </li>
               {% endif %}
-              <li class="nav-item px-5 dropdown">
+              <li class="nav-item px-4 dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <b>Cuenta</b>
+                  <b>Cuenta <i class="fas fa-user"></i></b>
                 </a>
                 <div class="dropdown-menu" style="background-color: #87CED9; text-align: center !important;" aria-labelledby="navbarDropdownMenuLink">
                   <a class="nav-link dropdown-item" href="/profile/{{request.user.id}}"><b>Mi perfil</b></a>
                   <a class="nav-link dropdown-item" href="/myGames"><b>Mis juegos</b></a>
                   <a class="nav-link dropdown-item" href="/rents/{{request.user.id}}"><b>Historial</b></a>
+                  <a class="nav-link dropdown-item" href="/logout"><b>Cerrar sesión <i class="fas fa-sign-out-alt"></i></b></a>
                 </div>
               </li>
-              <li class="nav-item px-5">
-                  <a class="nav-link" href="/logout"><b>Cerrar sesión</b></a>
+              <li class="nav-item px-4">
+                <a class="nav-link" href="/cart"><b>
+                  <i class="fa" style="font-size:24px">&#xf07a;</i>
+                  <span class='badge badge-warning' id='lblCartCount'> 
+                    {% if request.session.cart == None %} 0
+                    {% else %} {{request.session.cart}} 
+                    {% endif %} </span>
+
+                </b></a>
               </li>
-              {% if request.user.premium == False %}
-              <li class="nav-item justify-content-right px-5">
-                <a class="nav-link bg-warning" style="border-radius: 20%;" href="" data-toggle="modal" data-target="#exampleModal"><b>Premium</b></a>
-              </li>
-              {% endif %}
               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header"">
                       <h5 class="modal-title text-dark" id="popup">Conseguir premium</h5>
-                      <!--
+                      
                       {% if request.user.premium == True %}
                       <h5 class="modal-title text-dark" id="popup">Renovar premium</h5>
-                      {% endif %}-->
+                      {% endif %}
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -126,7 +156,7 @@
                         <p style="color: black;">Precio total: [[totalPremium]] €</p>
     
                         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                          data-key="{{ key }}"
+                          data-key="pk_test_RQqzBNd4chgHUGDPxZtwsKzU00X9dZcRvR"
                           data-description="Pago"
                           data-currency="eur"
                           data-amount=""
@@ -170,7 +200,10 @@
     {% block extrahead %}{% endblock %}
   </head>
   <body>
-    <div class="container" style="background-color: #37474F; box-shadow: 0 0 20px #37474F;">
+
+    
+
+    <div class="container" style="background-color:rgb(41, 41, 41); box-shadow: 0 0 20px rgb(41, 41, 41);">
       {% block content %}
       
       {% endblock %}

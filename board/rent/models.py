@@ -87,3 +87,5 @@ class JuegosFav(models.Model):
    
     def get_games(self):
         return self.items.all()
+   
+        

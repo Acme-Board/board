@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-
+from django.db import DataError
 # Create your views here.
 from reviews.forms import ReviewForm
 from reviews.models import Valoration, Comment
@@ -50,7 +50,11 @@ def create_review(request, id_user):
                         numero = numero + 1
                     media = suma/numero
                     toUser.rate = media
-                    toUser.save()
+                    try:
+                        toUser.save()
+                    except DataError:
+                        return redirect('/profile/{}'.format(toUser.id))  
+                    
                     return redirect('/profile/{}'.format(toUser.id))
                 else:
                     return render(request, "createReview.html", {'form': form, 'mensaje': 

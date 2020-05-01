@@ -66,7 +66,7 @@ Eliminar de Favoritos</a>
       <td>
         <div  style="color: #eee; margin-top: 30px;">
 
-          <h4> Precio: {{price}} &euro;</h4></br>
+          <h4> Precio: {{price|floatformat:2}} &euro;</h4></br>
           <h5>Descripción:</h5> <div>{{description}}</div></br>
         
         
@@ -93,14 +93,14 @@ Eliminar de Favoritos</a>
     
        <!-- Aqui viene el pop up-->
             
-       <button type="button" class="btn btn-danger  btn-sm" data-toggle="modal" data-target="#exampleModal">
+       <button type="button" class="btn btn-danger  btn-sm" data-toggle="modal" data-target="#exampleModal10">
         Borrar Juego
       </button>
     
     
       <!-- Modal -->
   
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="exampleModal10" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -142,8 +142,21 @@ Eliminar de Favoritos</a>
       <table>
       <tr>
       <td>
-       <img style=" width:150px; height: 150px;
-       border-radius:8px;" src="{{owner.picture.url}}"/>
+        {% if game.owner.picture == '' %}
+        <img src="{% static 'img/predefinida.png' %}" style="width: 150px;"/>             <!-- margin-top: 180px; left:510px -->
+      {% endif %}
+
+      {% if game.owner.picture != '' %}
+        {% if game.owner.premium == True %}
+          <div style="color:white; border: double orange 0.5em;
+            border-image: url('../static/img/frame.png') 20 round stretch;">
+            <img src="{{game.owner.picture.url}}" style="width: 150px;"/>
+          </div>
+        {% else %}
+          <img src="{{game.owner.picture.url}}" style="width: 150px;"/>
+        {% endif %}
+      {% endif %}
+
       </td>
     </tr>
     <tr>

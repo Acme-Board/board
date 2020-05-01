@@ -14,7 +14,7 @@ import requests
 from django.db import IntegrityError
 
 from user.models import User
-from user.forms import Register, editAccount, editProfile, editPic, contact, descargaDatos
+from user.forms import Register, editAccount, editProfile, editPic, contact,descargaDatos
 from payment.views import charge
 from reviews.models import Comment
 from rent.models import JuegosFav
@@ -27,9 +27,9 @@ def profile(request, id_user):
     end = None
 
     key = settings.STRIPE_PUBLISHABLE_KEY
-
-    if(request.user.premium == True):
-        end = request.user.end_date.strftime('%d/%m/%Y')
+    if(not(request.user.is_anonymous)):
+        if(request.user.premium):
+            end = request.user.end_date.strftime('%d/%m/%Y')
 
     return render(request,'profile.html', {'user':user, 'comments': list_comments,'key':key,'premium_date':end})
 
@@ -279,6 +279,14 @@ def DescargaDatosUser(request,pk):
                 body += 'Name:'+ user.first_name + '\n'
                 body += 'Last name :'+ user.last_name + '\n'
                 body += 'Email:'+ user.email + '\n'
+                body += 'Dirección:'+ user.address + '\n'
+                body += 'Teléfono:'+ user.phone + '\n'
+                x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+                if x_forwarded_for:
+                    ip = x_forwarded_for.split(',')[0]
+                else:
+                     ip = request.META.get('REMOTE_ADDR')
+                body += 'Direccion ip:'+ ip + '\n'
                 emailto = user.email
                 
 

@@ -45,7 +45,14 @@
       <tr>
         <td>
           {% if user.picture == '' %}
-            <img src="{% static 'img/predefinida.png' %}" style="width: 150px;"/>             <!-- margin-top: 180px; left:510px -->
+          {% if request.user.premium == True %}
+          <div style="color:white; border: double orange 0.5em;
+            border-image: url('../static/img/frame.png') 20 round stretch;">
+            <img src="{% static 'img/predefinida.png' %}" style="width: 150px;"/>          
+          </div>
+        {% else %}
+        <img src="{% static 'img/predefinida.png' %}" style="width: 150px;"/> 
+        {% endif %}
           {% endif %}
 
           {% if user.picture != '' %}
@@ -70,6 +77,7 @@
 
         <h5 class="text-left">{{user.first_name}} {{user.last_name}}</h5>
         <small>{{user.range}}</small>
+        <h5>Usuario: {{user.username}}</h5>
         <h5>Valoración: {{user.rate}}</h5>
         <h5>{{user.bio}}</h5>
         </br>
@@ -81,24 +89,24 @@
         <button type="button" class="btn btn-danger my-1" data-toggle="modal" data-target="#exampleModal221">
           Borrar datos
         </button>
-        {% if request.user.premium == False %}
+
+        {% if request.user.premium == True %}
+        <div class="p-3 mb-2 bg-info text-white" style="opacity: 80%;">Su suscripción premium acabará el día: {{ premium_date }}</div>
+        {% else %}
         <button type="button" class="btn btn-warning my-1 black" data-toggle="modal" data-target="#exampleModal1">
           Premium
         </button>
         {% endif %}
-        {% if request.user.premium == True %}
-        <div class="p-3 mb-2 bg-info text-white" style="opacity: 80%;">Su suscripción premium acabará el día: {{ user.end_date }}</div>
-        {% endif %}
-          {% if request.user.premium == False%}
           <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
+                  {% if request.user.premium == False %}
                   <h5 class="modal-title text-dark" id="popup">Conseguir premium</h5>
-                  <!--
-                  {% if request.user.premium == True %}
+                  
+                  {% else %}
                   <h5 class="modal-title text-dark" id="popup">Renovar premium</h5>
-                  {% endif %}-->
+                  {% endif %}
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -140,7 +148,6 @@
               </div>
             </div>
           </div>
-          {% endif %}
 
         {% endif %}
 
