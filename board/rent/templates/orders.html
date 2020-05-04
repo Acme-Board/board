@@ -37,10 +37,12 @@
 	<h2 class="text-center" style="color:white;"> Carrito de alquileres </h1></br></h2>
 
 	{% if order %}
+
 	<div style="text-align: center;">
 		<a href="/deleteAll" onclick="mensaje()"
 		class="btn btn-danger btn-sm">Borrar todo</a></br> </br></td>
 	</div>
+
 	{% endif %}
 	
 	
@@ -69,10 +71,12 @@
 			<td data-th="Precio" style="color:white;">{{dato.game.price}} x {{dato.days}} días</td>
 			<td data-th="Fecha inicio" style="color:white;">{{dato.initial_date|date:'Y-m-d'}}</td>
 			<td data-th="Opciones"class="text-center">
+
 				<a role=button href="/gameDetail/{{dato.game.id}}" class="btn btn-info btn-sm">Info</a>
 
 				<a href="/deleteCart/{{dato.id}}"
 					class="btn btn-danger btn-sm">Borrar</a>
+
 			</td>
 			<!-- -->
 			
@@ -88,14 +92,13 @@
 			-->			
 			{% empty %}
 
-			</tbody>
-			</table>
-
 			<li class="text-center" style="color:white;">Vaya, parece que no hay artículos en su carrito, ¿Por qué no le 
 			echas un ojo al catálogo?</li></br>
 
 			<a href= "/games" class="btn btn-info btn-sm"
+
 			style="border-radius: 8px; margin: 10px;">Ir al catálogo</a></br> </br>
+
 			{% endfor %}
 
 		</tbody>
@@ -106,6 +109,7 @@
 
 		<a href= "/confirm/{{id}}" class="btn btn-info btn-sm"
 		style="border-radius: 8px; margin: 5px;">¡Alquilar juegos!</a>
+
 
 	</div>
 

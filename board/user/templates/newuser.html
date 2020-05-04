@@ -34,6 +34,7 @@
                                         {% if field.label == "Acepto Términos y Condiciones de uso*" %}
                                         <a target="_blank" href="/terms">
                                             <label class="label" style="text-decoration: underline;"  style="color:white;">{{field.label}} </label></a>
+
                                         {% else %}
                                             {% if field.label == "Acepto la política de privacidad*" %}
                                                 <a target="_blank" href="/privacy">
@@ -44,6 +45,7 @@
                                         {% endif %}
                                     </td>
                                     <td style="color:white;">{{field}}</td>
+
                                 </div>
                             </tr>
                             {% endfor %}
