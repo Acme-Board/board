@@ -23,7 +23,7 @@
     
     {% for dato in myGames %}
 
-    
+    <div>
     <table>
             <thead>
                     <tr>
@@ -34,11 +34,11 @@
                     </tr>
             </thead>
             <tbody>
-                <tr class="table-myGames">
+                <tr class="table-myGames" >
                   <td>
                     <img  src="{{dato.picture.url}}" style="width: 150px;height: 150px;"/>
                     <a href= "/gameDetail/{{dato.id}}/pic/" type="button" class="btn btn-primary btn-sm"
-                    style="width: 150px; font-weight: bold">Editar Foto</a>
+                    style="width: 150px; font-weight: bold">Editar foto</a>
                   </td>
 
                     <td>
@@ -52,10 +52,10 @@
                         -->
                             <!-- Sin funcionalidad aun -->
                 <a href= "/gameDetail/{{dato.id}}" class="btn btn-info btn-sm" 
-                style="border-radius: 8px; color:black; font-weight: bold;">Ver Mas</a>
+                style="border-radius: 8px;">Ver más</a>
 
                 <a href= "/gameDetail/{{dato.id}}/rents" class="btn btn-info btn-sm" 
-                style="border-radius: 8px; color:black; font-weight: bold;">Historial</a>
+                style="margin-top: 10px; border-radius: 8px;">Historial</a>
 
                             <!-- Sin funcionalidad aun href="/delete/{{dato.id}}" -->
 
@@ -71,6 +71,7 @@
             </tbody>
         </table>
     
+    </div>
     {% empty %}
 
     <!-- Hacer Visible esta pagina. -->

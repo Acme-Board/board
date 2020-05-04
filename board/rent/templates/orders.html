@@ -19,8 +19,9 @@
 
 {% block content %}
 
+<div class="py-5">
 
-<div  style=" background: #24303c;">
+<div style=" background: #3e5e7e; border-radius: 8px;">
 	
 	{% if mensaje %}
 
@@ -36,10 +37,10 @@
 	<h2 class="text-center" style="color:white;"> Carrito de alquileres </h1></br></h2>
 
 	{% if order %}
-	<a href= "/confirm/{{id}}" class="btn btn-info btn-sm"
-	style="border-radius: 8px; margin: 5px; color:black; font-weight: bold;">¡Alquilar juegos!</a>
-	<a href="/deleteAll" onclick="mensaje()"
-	class="btn btn-info btn-sm" style="border-radius: 8px;color:black; font-weight: bold; background-color: #F93F42">Borrar todo</a></br> </br></td>
+	<div style="text-align: center;">
+		<a href="/deleteAll" onclick="mensaje()"
+		class="btn btn-danger btn-sm">Borrar todo</a></br> </br></td>
+	</div>
 	{% endif %}
 	
 	
@@ -68,10 +69,10 @@
 			<td data-th="Precio" style="color:white;">{{dato.game.price}} x {{dato.days}} días</td>
 			<td data-th="Fecha inicio" style="color:white;">{{dato.initial_date|date:'Y-m-d'}}</td>
 			<td data-th="Opciones"class="text-center">
-				<a role=button href="/gameDetail/{{dato.game.id}}" class="btn btn-info btn-sm" style="color:black; font-weight: bold;">Info</a>
+				<a role=button href="/gameDetail/{{dato.game.id}}" class="btn btn-info btn-sm">Info</a>
 
 				<a href="/deleteCart/{{dato.id}}"
-					class="btn btn-info btn-sm" style="color:black; font-weight: bold; background-color: #F93F42">Borrar</a>
+					class="btn btn-danger btn-sm">Borrar</a>
 			</td>
 			<!-- -->
 			
@@ -94,13 +95,19 @@
 			echas un ojo al catálogo?</li></br>
 
 			<a href= "/games" class="btn btn-info btn-sm"
-			style="border-radius: 8px; margin: 10px; color:black; font-weight: bold;">Ir al catálogo</a></br> </br>
+			style="border-radius: 8px; margin: 10px;">Ir al catálogo</a></br> </br>
 			{% endfor %}
 
 		</tbody>
 	</table>
-	<li class="text-center" style="color:white;">Total: {{sum}}</li>
 
+	<div style="text-align: center;">
+		Total: {{sum}} €<br>
+
+		<a href= "/confirm/{{id}}" class="btn btn-info btn-sm"
+		style="border-radius: 8px; margin: 5px;">¡Alquilar juegos!</a>
+
+	</div>
 
 	<!-- <a href= "/games" class="btn btn-info btn-sm"
 	style="border-radius: 8px; margin-top: 10px; color:black; font-weight: bold;">Seguir Alquilando</a></br> -->
@@ -109,11 +116,10 @@
 
 		{% empty %}
 	{%  endfor %}
-		</tbody>
-	</table>
 		
 </div>
 
+</div>
   {% block vue %}
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   {% endblock %}
