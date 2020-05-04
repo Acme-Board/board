@@ -1,11 +1,20 @@
  .form-main, .col{
     width:  450px;
-    background: #24303c;
+    background: #3e5e7e;
     border-radius: 8px;
     font-family: 'calibri';
     color: white;
   }
   
+
+  a:link {
+    color: rgb(255, 255, 255);
+  }
+
+  a:hover {
+    color: rgb(107, 149, 167);
+  }
+
   .form-main .form-title{
     display: flex;
     justify-content: center;
@@ -24,7 +33,7 @@
   
  .form-register{
   width:  600px;
-  background: #24303c;
+  background: #3e5e7e;
   padding: 30px;
   margin: auto;
   border-radius: 8px;
