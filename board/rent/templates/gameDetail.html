@@ -22,7 +22,7 @@
 <!-- Espero que vaia, alerta por si el juego ya esta alquilado en la fecha -->
  <div class="alert">
   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  <strong>Vaya!</strong> {{mensaje}}.
+  <strong>¡Vaya!</strong> {{mensaje}}.
 </div>
 
 {% endif %}
@@ -32,12 +32,12 @@
 {% if game in favGames %}
 
 <a href= "/gamesFavDelete/{{id}}" class="btn btn-danger btn-sm" 
-style="border-radius: 8px;margin-bottom: 30px; margin-top: 30px;color:white;">
-Eliminar de Favoritos</a>
+style="border-radius: 8px;margin-bottom: 30px; margin-top: 30px;">
+Eliminar de favoritos</a>
 {% else %}
   <a href= "/gamesFavAdd/{{id}}" class="btn btn-info btn-sm" 
-  style="border-radius: 8px;margin-bottom: 30px; margin-top: 30px;color:white;">
-  Añadir a Favoritos</a>
+  style="border-radius: 8px;margin-bottom: 30px; margin-top: 30px;">
+  Añadir a favoritos</a>
 
 {% endif %}
 
@@ -80,7 +80,9 @@ Eliminar de Favoritos</a>
           </div>
 
         </br>
+
         <button type="submit" class="btn btn-info btn-sm" style="border-radius: 8px; color:white;">Añadir al carrito</button>
+
          </form>
 
          {% endif %}
@@ -89,7 +91,9 @@ Eliminar de Favoritos</a>
     
         </br>
         <a href= "/gameDetail/{{id}}/edit" class="btn btn-info btn-sm" 
-        style=" color:white; font-weight: bold; margin-right: 5px;">Editar</a>
+
+        style="margin-right: 5px;">Editar</a>
+
     
        <!-- Aqui viene el pop up-->
             
@@ -110,7 +114,7 @@ Eliminar de Favoritos</a>
               </button>
             </div>
             <div class="modal-body">
-              <h5 class="text-dark" id="popup">¿Estas seguro de que quieres borrar tus datos? {{name}}</h5>
+              <h5 class="text-dark" id="popup">¿Estás seguro de que quieres borrar tus datos? {{name}}</h5>
             </div>
             <div class="modal-footer">
               <a role="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
@@ -171,7 +175,7 @@ Eliminar de Favoritos</a>
 
   <!-- Hi -->  
 
-  <button class="accordion" style="text-align: center;">Mostrar Zona de Encuentro</button>
+  <button class="accordion" style="text-align: center;">Mostrar zona de encuentro</button>
   <div class="panel">
     {% if error is None %}
   <!-- Vamos a ello -->
@@ -241,12 +245,14 @@ src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAqVh
 
   {% if request.user != owner %}
   <div style="text-align: center;">
+
     <a href= "/games" class="btn btn-info btn-sm" style=" color: white; border-radius: 8px; margin-bottom: 30px; margin-top: 30px;">Volver</a>
   </div>
+
   </div>
   {% else %}
   <div style="text-align: center;">
-    <a href= "/myGames" class="btn btn-info btn-sm" style="border-radius: 8px;margin-bottom: 30px; margin-top: 30px;color:black; font-weight: bold;">Volver</a>
+    <a href= "/myGames" class="btn btn-info btn-sm" style="border-radius: 8px;margin-bottom: 30px; margin-top: 30px;">Volver</a>
    </div>
   </div>
   {% endif %}
