@@ -9,9 +9,12 @@
 <body>
 
 {% block content %}
+
+<div class="py-5">
+
 <p style=" background-color: #ffa420 ; color: black; text-align: center;
 border-radius: 8px;"> {{mensaje}} </p>
-<div class="form-main text-center py-3 mx-auto">
+<div class="form-main text-center mx-auto">
     
     <h2 class="form-title py-3">Haz tu review, {{user}}</h2>
     <form method="POST">
@@ -24,6 +27,9 @@ border-radius: 8px;"> {{mensaje}} </p>
     </form>
     </div>
 </div>
+
+
+</div
 {% endblock %}
 {% block vue %}
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

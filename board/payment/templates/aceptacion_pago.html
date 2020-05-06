@@ -36,6 +36,8 @@
 
 </style>
 
+<div class="py-5">
+
 <div class="index-main" style="
 background: #e3d9c9;
 max-height: 90%;
@@ -44,9 +46,9 @@ margin: auto;
 margin-bottom: 50px;
 border-radius: 8px;
 color: black;">
-
-     <img class="index-icon" src="{% static 'img/icon.png' %}"/>
-
+     <div style="text-align: center;">
+     <img class="index-icon" style="align-items: center;" src="{% static 'img/icon.png' %}"/>
+</div>
 <h3 class="index-title" style="color: black; margin-top: 5px;">¿ Confirmar la comprar por {{total}}€ ?</h3> 
 
 <div>      
@@ -88,11 +90,12 @@ color: black;">
 
           <div>
                <form action='/charge/{{id}}' method="POST">
-               <a class="btn btn-info btn-sm" href="/cart"
-               role="stripe-button" style='border-radius: 8px; margin-right: 5%'>Volver</a> 
+                    <a class="btn btn-info btn-sm" href="/cart"
+                         role="stripe-button" style='border-radius: 8px; margin-right: 5%'>Volver</a> 
                  {% csrf_token %}
                 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                  data-key="{{ key }}"
+                 data-label="Pagar con tarjeta"
                 data-description="Pago"
                  data-currency="eur"
                 data-amount="{{cent}}"
@@ -107,6 +110,8 @@ color: black;">
 
      </div>
 </div>
+</div>
+
 </div>
 {% endblock %}
 

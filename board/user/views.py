@@ -14,7 +14,7 @@ import requests
 from django.db import IntegrityError
 
 from user.models import User
-from user.forms import Register, editAccount, editProfile, editPic, contact,descargaDatos
+from user.forms import Register, editAccount, editProfile, editPic, contact,descargaDatos, LoginForm
 from payment.views import charge
 from reviews.models import Comment
 from rent.models import JuegosFav
@@ -39,10 +39,10 @@ def logout(request):
 
 def login(request):
     # Creamos el formulario de autenticación vacío
-    form = AuthenticationForm()
+    form = LoginForm()
     if request.method == "POST":
         # Añadimos los datos recibidos al formulario
-        form = AuthenticationForm(data=request.POST)
+        form = LoginForm(data=request.POST)
         # Si el formulario es válido...
         if form.is_valid():
             # Recuperamos las credenciales validadas
@@ -58,6 +58,8 @@ def login(request):
                 do_login(request, user)
                 # Y le redireccionamos a la portada
                 return redirect('/')
+
+            form.add_error('username','El nombre de usuario o la contraseña no existen')
 
     # Si llegamos al final renderizamos el formulario
     return render(request, "login.html", {'form': form})
@@ -94,16 +96,16 @@ def new_user(request):
             response = requests.get(
                 'https://eu1.locationiq.com/v1/search.php?key=pk.bfdfa73760621b89cf9e8435ffcf48df&q=' + address + '&format=json')
             geodata = response.json()
+            
             try:
                 lat = float(geodata[0]['lat'])
                 lon = float(geodata[0]['lon'])
             except:
-                formulario.add_error('address', 'La direccion no existe')
+                formulario.add_error('address', 'La dirección no existe')
                 lat = 0.0
                 lon = 0.0
             phone = formulario.cleaned_data['phone']
 
-      
             if (password != formulario.cleaned_data['password2']):
                 formulario.add_error('password2','No coinciden las contraseñas')
 
@@ -124,6 +126,46 @@ def new_user(request):
                 return render(request,"newuser.html",{"form":formulario})
 
             return redirect('/profile/{}'.format(user.id))
+
+        else:
+
+            username = formulario.cleaned_data['username']
+            password = formulario.cleaned_data['password1']
+            name = formulario.cleaned_data['name']
+            last_name = formulario.cleaned_data['last_name']
+            bio = formulario.cleaned_data['bio']
+            picture = ''
+            address = formulario.cleaned_data['address']
+            response = requests.get(
+                'https://eu1.locationiq.com/v1/search.php?key=pk.bfdfa73760621b89cf9e8435ffcf48df&q=' + address + '&format=json')
+            geodata = response.json()
+            
+            try:
+                lat = float(geodata[0]['lat'])
+                lon = float(geodata[0]['lon'])
+            except:
+                formulario.add_error('address', 'La dirección no existe')
+                lat = 0.0
+                lon = 0.0
+
+            if (password != formulario.cleaned_data['password2']):
+                formulario.add_error('password2','No coinciden las contraseñas')
+
+            try:
+                user = User(username=username, password=password,first_name=name,last_name=last_name,bio=bio,picture=picture,address=address,lat=lat,lon=lon)
+                if (len(formulario.errors) == 0):
+                    user.set_password(user.password)
+                    user.save()
+                    favs = JuegosFav(user=user)
+                    favs.save()
+                    favs.items.set([])
+                    favs.save()
+                    do_login(request, user)
+            except IntegrityError:
+                formulario.add_error('username','Este nombre de usuario ya existe')
+
+            if(len(formulario.errors)!=0):
+                return render(request,"newuser.html",{"form":formulario})
 
     else:
 
