@@ -15,4 +15,4 @@ class editData(forms.Form):
    status = forms.ChoiceField(choices=[(str(x),x.value) for x in Status], label="Estado*")
 
 class editPicture(forms.Form):
-   picture = forms.FileField( label="Foto*")
+   picture = forms.ImageField( label="Foto*")
