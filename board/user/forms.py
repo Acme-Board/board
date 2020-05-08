@@ -2,11 +2,11 @@ from django import forms
 
 from .models import User
 from django import forms
-from django.core.validators import EmailValidator, URLValidator, RegexValidator
+from django.core.validators import EmailValidator, URLValidator, RegexValidator, validate_image_file_extension
 
 #Forms here
 
-phone_regex = RegexValidator(regex=r'^([+][3][4]|[+][3][4][ ]){0,1}[0-9]{9}$', message="El número de teléfono es incorrecto. Ej: 666666666")
+phone_regex = RegexValidator(regex=r'^[0-9]{9}$', message="El número de teléfono es incorrecto. Deben ser 9 números consecutivos. Ej: 966966966")
 
 class Register(forms.Form):
     username = forms.CharField(max_length=20, label="Usuario*", widget= forms.TextInput(attrs={'size': '25'}))
@@ -20,7 +20,7 @@ class Register(forms.Form):
                            (attrs={'size': '25','placeholder':'correo@servidor.com'}) ,label="Email*", validators=[EmailValidator(message="Email incorrecto")])
     bio = forms.CharField(max_length=200, label="Biografía", required=False, widget=forms.Textarea)
     phone = forms.CharField(label='Teléfono*', validators=[phone_regex], max_length=10, required=True,
-    widget= forms.TextInput(attrs={'size': '25','placeholder':'666666666'}))
+    widget= forms.TextInput(attrs={'size': '25','placeholder':'966966966'}))
     address = forms.CharField(max_length=150, label="Dirección*", required=True,widget= forms.TextInput(attrs={'size': '25'}))
     check_terms = forms.BooleanField(label="Acepto Términos y Condiciones de uso*", required=True)
     check_privacy = forms.BooleanField(label="Acepto la política de privacidad*", required=True)
@@ -41,7 +41,8 @@ class editProfile(forms.Form):
 
 
 class editPic(forms.Form):
-    picture = forms.FileField(label="Foto",required=False)
+    picture = forms.ImageField(label="Foto",required=False)
+
 
 
 class contact(forms.Form):
