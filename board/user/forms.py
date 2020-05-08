@@ -8,6 +8,10 @@ from django.core.validators import EmailValidator, URLValidator, RegexValidator,
 
 phone_regex = RegexValidator(regex=r'^[0-9]{9}$', message="El número de teléfono es incorrecto. Deben ser 9 números consecutivos. Ej: 966966966")
 
+my_default_errors = {
+    'invalid_image':'Selecciona una imagen correcta. El fichero seleccionado no pertenece a un formato correcto o está corrupto.'
+}
+
 class Register(forms.Form):
     username = forms.CharField(max_length=20, label="Usuario*", widget= forms.TextInput(attrs={'size': '25'}))
     password1 = forms.CharField(max_length=32, widget=forms.PasswordInput(attrs={'size': '25'}), label="Contraseña*")
@@ -41,7 +45,7 @@ class editProfile(forms.Form):
 
 
 class editPic(forms.Form):
-    picture = forms.ImageField(label="Foto",required=False)
+    picture = forms.ImageField(label="Foto",required=False,error_messages=my_default_errors)
 
 
 
