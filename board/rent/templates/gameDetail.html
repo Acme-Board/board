@@ -76,7 +76,7 @@ Eliminar de favoritos</a>
           {% csrf_token %}
           <div style="margin-top: 5px;">Fecha inicio alquiler:</br> <input type="date" id="initial" name="initial" style="color: black;" required>
           </div>
-          <div style="margin-top: 5px;">Dias de Alquiler:</br> <input type="number" id="days" name="days" value="1"   style="color: black;" min="1" max="100" required>
+          <div style="margin-top: 5px;">Días de alquiler:</br> <input type="number" id="days" name="days" value="1"   style="color: black;" min="1" max="100" required>
           </div>
 
         </br>
@@ -114,7 +114,7 @@ Eliminar de favoritos</a>
               </button>
             </div>
             <div class="modal-body">
-              <h5 class="text-dark" id="popup">¿Estás seguro de que quieres borrar tus datos? {{name}}</h5>
+              <h5 class="text-dark" id="popup">¿Estás seguro de que quieres borrar tu juego: {{name}}?</h5>
             </div>
             <div class="modal-footer">
               <a role="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
@@ -166,7 +166,7 @@ Eliminar de favoritos</a>
     <tr>
       <td>
        <h5><a href="/profile/{{owner.id}}" style="text-decoration: underline; color: black;">{{owner}}</a> </h5>
-       <h5 style="color: black;">Valoracion: {{owner.rate}}⭐ </h5>
+       <h5 style="color: black;">Valoración: {{owner.rate}}⭐ </h5>
       </td>
     </tr>
     </table>

@@ -9,29 +9,29 @@
     {% endblock %}
 
 
-<style>
-#popup{
-  text-decoration-color: black;
-}
+  <style>
+  #popup{
+    text-decoration-color: black;
+  }
 
-.container{
-    padding:20%;
-    margin-left: 20%;
-    margin-right: 20%;
-}
-.container .img{
-    text-align:right;
-}
-.container .details{
-    border-left:3px solid #ded4da;
-}
-.container .details p{
-    font-size:15px;
-    font-weight:bold;
-}
+  .container{
+      padding:20%;
+      margin-left: 20%;
+      margin-right: 20%;
+  }
+  .container .img{
+      text-align:right;
+  }
+  .container .details{
+      border-left:3px solid #ded4da;
+  }
+  .container .details p{
+      font-size:15px;
+      font-weight:bold;
+  }
 
 
-</style>    
+  </style>    
 </head>
 
 <body> 
@@ -39,209 +39,224 @@
 {% block content %}
 
 <!-- A ver puedes centrar esto Juan -->
-<div class="d-flex justify-content-center">
-<div class="d-inline-flex justify-content-center my-5 py-4 px-4" style="border-radius: 8px;">
-    <table>
-      <tr>
-        <td>
-          {% if user.picture == '' %}
-          {% if request.user.premium == True %}
-          <div style="color:white; border: double orange 0.5em;
-            border-image: url('../static/img/frame.png') 20 round stretch;">
-            <img src="{% static 'img/predefinida.png' %}" style="width: 150px;"/>          
-          </div>
-        {% else %}
-        <img src="{% static 'img/predefinida.png' %}" style="width: 150px;"/> 
-        {% endif %}
-          {% endif %}
+  <div class="d-flex justify-content-center">
+    <div class="d-inline-flex justify-content-center my-5 py-4 px-4" style="border-radius: 8px;">
+        <table>
+          <tr>
+            <td>
+              {% if user.picture == '' %}
+                {% if request.user.premium == True %}
+                  <div style="color:white; border: double orange 0.5em;
+                    border-image: url('../static/img/frame.png') 20 round stretch;">
+                    <img src="{% static 'img/predefinida.png' %}" style="width: 150px;"/>          
+                  </div>
+                {% else %}
+                  <img src="{% static 'img/predefinida.png' %}" style="width: 150px;"/> 
+                {% endif %}
+              {% endif %}
 
-          {% if user.picture != '' %}
-            {% if request.user.premium == True %}
-              <div style="color:white; border: double orange 0.5em;
-                border-image: url('../static/img/frame.png') 20 round stretch;">
-                <img src="{{user.picture.url}}" style="width: 150px;"/>
-              </div>
-            {% else %}
-              <img src="{{user.picture.url}}" style="width: 150px;"/>
-            {% endif %}
-          {% endif %}
-            {% if request.user.id == user.id and request.user.is_authenticated == True %}
-              <a role="button" href="/editPic/" class="btn btn-primary my-2">Editar foto</a></br>
-              <a role="button" href="/descargaDatos/{{user.id}}" class="btn btn-primary my-2"><i class="fa fa-download"></i>  Descargar datos</a> 
-            {% endif %}
-  
+              {% if user.picture != '' %}
+                {% if request.user.premium == True %}
+                  <div style="color:white; border: double orange 0.5em;
+                    border-image: url('../static/img/frame.png') 20 round stretch;">
+                    <img src="{{user.picture.url}}" style="width: 150px;"/>
+                  </div>
+                {% else %}
+                  <img src="{{user.picture.url}}" style="width: 150px;"/>
+                {% endif %}
+              {% endif %}
+              {% if request.user.id == user.id and request.user.is_authenticated == True %}
+                <a role="button" href="/editPic/" class="btn btn-primary my-2">Editar foto</a></br>
+                <a role="button" href="/descargaDatos/{{user.id}}" class="btn btn-primary my-2"><i class="fa fa-download"></i>  Descargar datos</a> 
+              {% endif %}  
+            </td>
 
-    </td>
-    <td>
-      <div class="details text-left" style="color:whitesmoke; margin-left: 50px;">
+            <td>
+              <div class="details text-left" style="color:whitesmoke; margin-left: 50px;">
 
-        <h5 class="text-left">{{user.first_name}} {{user.last_name}}</h5>
-        <small>{{user.range}}</small>
-        <h5>Usuario: {{user.username}}</h5>
-        <h5>Valoración: {{user.rate}}</h5>
-        <h5>{{user.bio}}</h5>
-        </br>
-        <!-- Aqui viene el pop up-->
-        {% if request.user.id == user.id and request.user.is_authenticated == True %} 
-        <a role="button" href="/editProfile/" class="btn btn-primary my-2">Editar información</a>
-        <a role="button" href="/editAccount/" class="btn btn-primary my-2">Cambiar Contraseña</a>       
-      </br>
-        <button type="button" class="btn btn-danger my-1" data-toggle="modal" data-target="#exampleModal221">
-          Borrar datos
-        </button>
-
-        {% if request.user.premium == True %}
-        <div class="p-3 mb-2 bg-info text-white" style="opacity: 80%;">Su suscripción premium acabará el día: {{ premium_date }}</div>
-        {% else %}
-        <button type="button" class="btn btn-warning my-1 black" data-toggle="modal" data-target="#exampleModal1">
-          Premium
-        </button>
-        {% endif %}
-          <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  {% if request.user.premium == False %}
-                  <h5 class="modal-title text-dark" id="popup">Conseguir premium</h5>
-                  
-                  {% else %}
-                  <h5 class="modal-title text-dark" id="popup">Renovar premium</h5>
-                  {% endif %}
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <h5 class="text-left">{{user.first_name}} {{user.last_name}}</h5>
+                <small>{{user.range}}</small>
+                <h5>Usuario: {{user.username}}</h5>
+                <h5>Valoración: {{user.rate}}</h5>
+                <h5>{{user.bio}}</h5>
+                </br>
+            
+                <!-- Aqui viene el pop up-->
+    
+                {% if request.user.id == user.id and request.user.is_authenticated == True %} 
+                  <a role="button" href="/editProfile/" class="btn btn-primary my-2">Editar información</a>
+                  <a role="button" href="/editAccount/" class="btn btn-primary my-2">Cambiar usuario</a>  
+                  <a role="button" href="/editAccount/" class="btn btn-primary my-2">Cambiar contraseña</a>       
+                  </br>
+                  <button type="button" class="btn btn-danger my-1" data-toggle="modal" data-target="#exampleModal221">
+                    Borrar datos
                   </button>
-                </div>
-                <div class="modal-body">
-                  <form action="/premium/" method="POST" style="margin-top: 5px; margin-left: 5px; color:black; text-align: center;">
-                    {% csrf_token %}
-                    <div class="text-center">
-                      <h2>¿Por qué elegir premium?</h2>
-                      <ul style="list-style-type:none; padding-left: 0;">
-                        <li><i class="fas fa-award fa-3x"></i><p style="font-weight: bold;">¡Destaca tus juegos!</p>
-                          <p>¡Con TryOnBoard Premium, los juegos que subas serán los primeros en visualizarse en la vista!</p></li>
-                      </br>
-                        <li><i class="fas fa-piggy-bank fa-3x"></i><p style="font-weight: bold;"> ¡Ahorra en comisiones!  </p>
-                        <p>Conseguirás más beneficio por cada juego que alquiles</p></li>
-                      </br>
-                        <li><i class="fas fa-handshake fa-3x"></i><p style="font-weight: bold;"> ¡Usuario de confianza!</p>
-                        <p>¡Podrás disfrutar de un marco dorado, el cual indicará a los usuarios que eres premium y será un símbolo de confianza!</p></li>
-                      </ul>
-                    </div>
-                    <div id="app3">
-                    <div style="margin-top: 5px; text-decoration: solid;">Meses: 
-                      <input type="number" v-model.number="meses" id="months" name="months" value="1" style="color: black;" min="1" max="12" required>
-                      x 3.99€
-                    </div>
-                    <p style="color: black;">Precio total: [[totalPremium]] €</p>
 
-                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                      data-key="{{ key }}"
-                      data-description="Pago"
-                      data-currency="eur"
-                      data-amount=""
-                      data-locale="auto"
-                      ></script>
-                    
-                    </div>                   
-                  </form>
+                  {% if request.user.premium == True %}
+                    <div class="p-3 mb-2 bg-info text-white" style="opacity: 80%;">
+                      Su suscripción premium acabará el día: {{ premium_date }}
+                    </div>
+                  {% else %}
+                    <button type="button" class="btn btn-warning my-1 black" data-toggle="modal" data-target="#exampleModal1">
+                    Premium
+                    </button>
+                  {% endif %}
+              
+                  <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          {% if request.user.premium == False %}
+                            <h5 class="modal-title text-dark" id="popup">Conseguir premium</h5>
+                          
+                          {% else %}
+                            <h5 class="modal-title text-dark" id="popup">Renovar premium</h5>
+                          {% endif %}
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form action="/premium/" method="POST" style="margin-top: 5px; margin-left: 5px; color:black; text-align: center;">
+                            {% csrf_token %}
+                            <div class="text-center">
+                              <h2>¿Por qué elegir premium?</h2>
+                              <ul style="list-style-type:none; padding-left: 0;">
+                                <li><i class="fas fa-award fa-3x"></i><p style="font-weight: bold;">¡Destaca tus juegos!</p>
+                                  <p>¡Con TryOnBoard Premium, los juegos que subas serán los primeros en visualizarse en la vista!</p></li>
+                              </br>
+                                <li><i class="fas fa-piggy-bank fa-3x"></i><p style="font-weight: bold;"> ¡Ahorra en comisiones!  </p>
+                                <p>Conseguirás más beneficio por cada juego que alquiles</p></li>
+                              </br>
+                                <li><i class="fas fa-handshake fa-3x"></i><p style="font-weight: bold;"> ¡Usuario de confianza!</p>
+                                <p>¡Podrás disfrutar de un marco dorado, el cual indicará a los usuarios que eres premium y será un símbolo de confianza!</p></li>
+                              </ul>
+                            </div>
+                            <div id="app3">
+                            <div style="margin-top: 5px; text-decoration: solid;">Meses: 
+                              <input type="number" v-model.number="meses" id="months" name="months" value="1" style="color: black;" min="1" max="12" required>
+                              x 3.99€
+                            </div>
+                            <p style="color: black;">Precio total: [[totalPremium]] €</p>
+
+                            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                              data-key="{{ key }}"
+                              data-label="Pagar con tarjeta"
+                              data-description="Pago"
+                              data-currency="eur"
+                              data-amount=""
+                              data-locale="auto"
+                              ></script>
+                            
+                            </div>                   
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+            {% endif %}
+
+          
+            <!-- Modal -->
+              <div class="modal fade" id="exampleModal221" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title text-dark" id="popup">Advertencia</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <h5 class="text-dark" id="popup">¿Estas seguro de que quieres borrar tus datos?</h5>
+                    </div>
+                    <div class="modal-footer">
+                      <a role="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
+                      <a role="button" href="/deleteUser/{{user.id}}" class="btn btn-primary">Si, continuar</a>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            
+            </td>
+          </tr>
+        </table>
+    </div>
+  </div>
 
-        {% endif %}
+
+  <div id="app">
+    {% if request.user.id != user.id and request.user.is_authenticated == True %} 
+
+    {% endif %}
+    <div class="row justify-content-center">
+    <button class="btn btn-primary my-3" @click="com = !com" style="color:white;text-align: center;">Ver comentarios</button>
+  </div>
+    <div :class="{'d-none' : com}">
+    <div style="background-color: rgb(90, 159, 170); color:white; justify-content: center;">
 
       
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal221" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title text-dark" id="popup">Advertencia</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <h5 class="text-dark" id="popup">¿Estas seguro de que quieres borrar tus datos?</h5>
-              </div>
-              <div class="modal-footer">
-                <a role="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
-                <a role="button" href="/deleteUser/{{user.id}}" class="btn btn-primary">Si, continuar</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        
-      </div>
-      </td>
-    </tr>
-    </table>
-</div>
-</div>
-<div id="app">
-  {% if request.user.id != user.id and request.user.is_authenticated == True %} 
+    <table class="table text-center">
+    {% for dato in comments %}
 
-  {% endif %}
-  <div class="row justify-content-center">
-  <button class="btn btn-primary my-3" @click="com = !com" style="color:white;text-align: center;">Ver comentarios</button>
-</div>
-  <div :class="{'d-none' : com}">
-  <div style="background-color: #24303c; color:white; justify-content: center;">
+      <tr style="align-content: center; text-align: left;">
+        <td style="width:15%; text-align: center;">
+          <img src="{{dato.fromUser.picture.url}}" style="width:120px;"/>
+        </td>
+        <td style="background-color: rgb(59, 116, 124)">  
+          <em>Usuario: {{dato.fromUser}}</em>
+          <div style="color:white;">
+            <h5>" {{dato.comment}} "</h5>
+          </div> </br>
+         </td>
+      </tr>
+    <br/>
+    {% empty %}
 
-	  
-	<table class="table text-center">
-	{% for dato in comments %}
+  <!-- Hacer Visible esta pagina. -->
 
-		<tr style="align-content: center; text-align: left;">
-            <td style="background-color: rgb(78, 90, 104)">  <em>Usuario: {{dato.fromUser}}</em><div style="color:white;"><h5>" {{dato.comment}} "</h5></div> </br> </td>
-    </tr>
-  <br/>
-	{% empty %}
+    <li class="text-center" style="color:white;">Vaya, parece que no hay comentarios</li>
 
-<!-- Hacer Visible esta pagina. -->
+    {% endfor %}
+  </table>
+  </div>
+  </div>
+  </div>
 
-	<li class="text-center" style="color:white;">Vaya, parece que no hay comentarios</li>
-
-	{% endfor %}
-</table>
-</div>
-</div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script>
-  const app = new Vue({
-	el: '#app',
-	data: {
-    com: true,
-	},
-	methods: {
-	}
-})
-</script>
-<script>
-  const app3 = new Vue({
-  delimiters: ['[[', ']]'],
-  el: '#app3',
-  data: {
-    meses: '',
-    total:0
-  },
-  methods: {
-  },
-  computed: {
-        totalPremium(){
-            this.total = this.meses * 3.99;
-            return this.total.toFixed(2);
-        }
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+    el: '#app',
+    data: {
+      com: true,
+    },
+    methods: {
     }
-})
-</script>
-<div class="row justify-content-center">
-<a href= "/" class="btn btn-info btn-sm text-center my-3" style="border-radius: 8px;">Volver</a> </br>
-</div>
+  })
+  </script>
+  <script>
+    const app3 = new Vue({
+    delimiters: ['[[', ']]'],
+    el: '#app3',
+    data: {
+      meses: '',
+      total:0
+    },
+    methods: {
+    },
+    computed: {
+          totalPremium(){
+              this.total = this.meses * 3.99;
+              return this.total.toFixed(2);
+          }
+      }
+  })
+  </script>
+
+  <div class="row justify-content-center">
+    <a href= "/" class="btn btn-info btn-sm text-center my-3" style="border-radius: 8px;">Volver</a> </br>
+  </div>
 {% endblock %}
 
 {% block vue %}
