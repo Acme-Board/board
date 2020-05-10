@@ -41,10 +41,7 @@
 	<div style="text-align: center;">
 		<a href="/deleteAll" onclick="mensaje()"
 		class="btn btn-danger btn-sm">Borrar todo</a></br> </br></td>
-	</div>
-
-	{% endif %}
-	
+	</div>	
 	
 	<table  class= "table table-hover table-condensed">
 		<thead>
@@ -90,26 +87,34 @@
 
 			</tr>
 			-->			
-			{% empty %}
-
-			<li class="text-center" style="color:white;">Vaya, parece que no hay artículos en su carrito, ¿Por qué no le 
-			echas un ojo al catálogo?</li></br>
-
-			<a href= "/games" class="btn btn-info btn-sm"
-
-			style="border-radius: 8px; margin: 10px;">Ir al catálogo</a></br> </br>
-
 			{% endfor %}
 
 		</tbody>
 	</table>
 
+
+	
 	<div style="text-align: center;">
 		Total: {{sum}} €<br>
 
+		{% endif %}
+		
+		{% if order %}
+	
 		<a href= "/confirm/{{id}}" class="btn btn-info btn-sm"
 		style="border-radius: 8px; margin: 5px;">¡Alquilar juegos!</a>
 
+		{% else %}
+
+		<li class="text-center" style="color:white;">Vaya, parece que no hay artículos en su carrito, ¿Por qué no le 
+			echas un ojo al catálogo?</li></br>
+		
+			<div style="text-align: center;">
+			<a href= "/games" class="btn btn-info btn-sm"
+
+			style="border-radius: 8px; margin: 10px;">Ir al catálogo</a></br> </br>
+		</div>
+		{% endif %}
 
 	</div>
 
