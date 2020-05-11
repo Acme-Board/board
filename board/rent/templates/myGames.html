@@ -19,7 +19,7 @@
 <body>
     {% block content %}
 
-    <h3>Tus Juegos, {{user}}</h3>
+    <h3>Tus juegos, {{user}}</h3>
     
     {% for dato in myGames %}
 
@@ -45,7 +45,7 @@
                         <h4>{{dato.name|capfirst}} - <i> {{dato.price}} €</i> </br></h4>
                         Estado: {{dato.status}} </br>
                     </td>
-                    <td> {{dato.description}} </td>
+                    <td style="word-break: break-all"> {{dato.description}} </td>
                     <td>
                     <!-- <div><a href= "/gameDetail/{{dato.id}}" class="btn btn-info btn-sm"
                             style="border-radius: 8px; margin-top: 5px;">Ver mas</a></div>

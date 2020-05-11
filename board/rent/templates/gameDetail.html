@@ -67,7 +67,7 @@ Eliminar de favoritos</a>
         <div  style="color: #eee; margin-top: 30px;">
 
           <h4> Precio: {{price|floatformat:2}} &euro;</h4></br>
-          <h5>Descripción:</h5> <div>{{description}}</div></br>
+          <h5>Descripción:</h5> <div style="word-break: break-all;">{{description}}</div></br>
         
         
 {% if request.user.is_authenticated and request.user != owner %}
