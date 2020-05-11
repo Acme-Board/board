@@ -196,18 +196,18 @@
     <div :class="{'d-none' : com}">
     <div style="background-color: rgb(90, 159, 170); color:white; justify-content: center;">
 
-      
-    <table class="table text-center">
+    
+    <table class="table text-center" style="width:50px;">
     {% for dato in comments %}
 
       <tr style="align-content: center; text-align: left;">
         <td style="width:15%; text-align: center;">
           <img src="{{dato.fromUser.picture.url}}" style="width:120px;"/>
         </td>
-        <td style="background-color: rgb(59, 116, 124)">  
+        <td style="background-color: rgb(59, 116, 124);">  
           <em>Usuario: {{dato.fromUser}}</em>
-          <div style="color:white;">
-            <h5>" {{dato.comment}} "</h5>
+          <div class="container" style="color:white; width:930px; word-break: break-all;">
+            " {{dato.comment}} "
           </div> </br>
          </td>
       </tr>
