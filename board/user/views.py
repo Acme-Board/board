@@ -14,7 +14,7 @@ import requests
 from django.db import IntegrityError
 
 from user.models import User
-from user.forms import Register, editAccount, editProfile, editPic, contact,descargaDatos, LoginForm
+from user.forms import Register, editPass, editUsername, editProfile, editPic, contact,descargaDatos, LoginForm
 from payment.views import charge
 from reviews.models import Comment
 from rent.models import JuegosFav
@@ -129,10 +129,10 @@ def new_user(request):
 
         else:
 
-            username = formulario.cleaned_data['username']
+            #username = formulario.cleaned_data['username']
             password = formulario.cleaned_data['password1']
-            name = formulario.cleaned_data['name']
-            last_name = formulario.cleaned_data['last_name']
+            #name = formulario.cleaned_data['name']
+            #last_name = formulario.cleaned_data['last_name']
             bio = formulario.cleaned_data['bio']
             picture = ''
             address = formulario.cleaned_data['address']
@@ -152,7 +152,7 @@ def new_user(request):
                 formulario.add_error('password2','No coinciden las contraseñas')
 
             try:
-                user = User(username=username, password=password,first_name=name,last_name=last_name,bio=bio,picture=picture,address=address,lat=lat,lon=lon)
+                user = User(password=password,bio=bio,picture=picture,address=address,lat=lat,lon=lon)
                 if (len(formulario.errors) == 0):
                     user.set_password(user.password)
                     user.save()
@@ -173,10 +173,10 @@ def new_user(request):
 
     return render(request,"newuser.html",{"form":formulario})
 
-def edit_account(request):
+def edit_pass(request):
     
     if(request.method=='POST'):
-        formulario = editAccount(request.POST)
+        formulario = editPass(request.POST)
 
 
         if(formulario.is_valid()):
@@ -194,10 +194,9 @@ def edit_account(request):
             if(formulario.errors):
                 return render(request,"newuser.html",{"form":formulario})
 
-            username = formulario.cleaned_data['username']
             password = make_password(formulario.cleaned_data['password1'])
 
-            User.objects.filter(id=request.user.id).update(username=username, password=password)
+            User.objects.filter(id=request.user.id).update(password=password)
             user = get_object_or_404(User,pk=request.user.id)
 
             do_logout(request)
@@ -206,7 +205,41 @@ def edit_account(request):
             return redirect('/profile/{}'.format(user.id))
 
     else:
-        formulario = editAccount()
+        formulario = editPass()
+
+    return render(request,"newuser.html",{"form":formulario})
+
+def edit_username(request):
+    
+    if(request.method=='POST'):
+        formulario = editUsername(request.POST)
+
+
+        if(formulario.is_valid()):
+
+            username1 = request.user.username
+
+            username = formulario.cleaned_data['username']
+            password = formulario.cleaned_data['password']
+
+            user1 = authenticate(username=username1, password=password)
+            
+            if user1 is None:
+                formulario.add_error('password','Contraseña actual incorrecta')
+
+            if(formulario.errors):
+                return render(request,"newuser.html",{"form":formulario})
+
+            User.objects.filter(id=request.user.id).update(username=username)
+            user = get_object_or_404(User,pk=request.user.id)
+
+            do_logout(request)
+            do_login(request, user)
+
+            return redirect('/profile/{}'.format(user.id))
+
+    else:
+        formulario = editUsername()
         
         formulario.fields["username"].initial = request.user.username
 
