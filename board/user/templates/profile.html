@@ -67,7 +67,7 @@
               {% endif %}
               {% if request.user.id == user.id and request.user.is_authenticated == True %}
                 <a role="button" href="/editPic/" class="btn btn-primary my-2">Editar foto</a></br>
-                <a role="button" href="/descargaDatos/{{user.id}}" class="btn btn-primary my-2"><i class="fa fa-download"></i>  Descargar datos</a> 
+                <a role="button" href="/obtenerDatos/{{user.id}}" class="btn btn-primary my-2"><i class="fa fa-download"></i>Obtener datos</a> 
               {% endif %}  
             </td>
 

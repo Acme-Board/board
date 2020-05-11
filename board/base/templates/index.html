@@ -9,6 +9,17 @@
 <body>
 
      {% block content %}
+
+     {% if mensaje %}
+
+     <!-- Espero que vaia, alerta por si el juego ya esta alquilado en la fecha -->
+      <div class="alert">
+       <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+       {{mensaje}}
+     </div>
+     
+     {% endif %}
+
      <section class="page-section">
           <div class="index-main py-5" style="text-align: center;">
                <img class="index-icon" src="{% static 'img/icon.png' %}" />
@@ -231,6 +242,23 @@
      <section class="py-4"></section>
      <section class="py-4"></section>
      <section class="py-4"></section>
+
+     <script>
+          var acc = document.getElementsByClassName("accordion");
+          var i;
+          
+          for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+              this.classList.toggle("active");
+              var panel = this.nextElementSibling;
+              if (panel.style.display === "block") {
+                panel.style.display = "none";
+              } else {
+                panel.style.display = "block";
+              }
+            });
+          }
+          </script>
 <script src="{% static 'js/jquery/jquery.min.js' %}"></script>
 <script src="{% static 'js/jquery-easing/jquery.easing.min.js' %}"></script>
 <script src="{% static 'js/creative.min.js' %}"></script>

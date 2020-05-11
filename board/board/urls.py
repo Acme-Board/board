@@ -73,7 +73,7 @@ urlpatterns = [
     path('editPic/', user_views.edit_pic),
     path('users/', user_views.user_list),
     path('contact/<int:pk>', user_views.contact_user),
-    path('descargaDatos/<int:pk>', user_views.DescargaDatosUser),
+    path('obtenerDatos/<int:pk>', user_views.DescargaDatosUser),
     path('premium/', user_views.premium),
 
     #Review

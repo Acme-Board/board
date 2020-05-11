@@ -303,6 +303,7 @@ def contact_user(request,pk):
     else:
         form = contact()
     return render(request,'contact.html',{'form':form})
+
 def DescargaDatosUser(request,pk):
     user = get_object_or_404(User, pk=pk)
     if(not(request.user == user)):
@@ -313,13 +314,13 @@ def DescargaDatosUser(request,pk):
             form = descargaDatos(request.POST)
             if form.is_valid():
                 title = 'Mensaje del administrador de TryOnBoard' 
-                body = 'Aqui estan los datos que TRY ON BOARD tiene sobre usted:' + '\n'
+                body = 'Aquí están los datos que TRY ON BOARD tiene sobre usted:' + '\n'
 
-                body += 'Username:'+ user.username + '\n'
-                body += 'Password:'+ user.password + '\n'
-                body += 'Bio:'+ user.bio + '\n'        
-                body += 'Name:'+ user.first_name + '\n'
-                body += 'Last name :'+ user.last_name + '\n'
+                body += 'Usuario:'+ user.username + '\n'
+                body += 'Contraseña:'+ user.password + '\n'
+                body += 'Biografía:'+ user.bio + '\n'        
+                body += 'Nombre:'+ user.first_name + '\n'
+                body += 'Apellidos :'+ user.last_name + '\n'
                 body += 'Email:'+ user.email + '\n'
                 body += 'Dirección:'+ user.address + '\n'
                 body += 'Teléfono:'+ user.phone + '\n'
@@ -335,7 +336,7 @@ def DescargaDatosUser(request,pk):
                 email = EmailMessage(title,body,to=[emailto])
                 #email.attach_file(user.picture.url)
                 email.send()
-                return redirect('/')
+                return render(request,'index.html',{'mensaje': 'Se ha enviado correctamente el correo con sus datos. ¡Gracias por confiar en Try on Board!'})
         else:
             form = descargaDatos()
         return render(request,'descargaDatos.html',{'form':form})
