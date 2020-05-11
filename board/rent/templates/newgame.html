@@ -38,10 +38,17 @@
                 <td style="color:white;"><label class="label">{{field.label}} </label></td>
                 {% if field.label == "Precio (€/día)*" %}
                   <td><input name="precio" id="precio" v-model="precio" required></td>
+                  <div style="color:rgb(241, 101, 101) !important">
+                    {{ field.errors }}
+                </div>
                 {% endif %}
 
                 {% if field.label != "Precio (€/día)*" %}          
-                  <td>{{field}}</td>
+                  <td>{{field}}
+                    <div style="color:rgb(241, 101, 101) !important">
+                      {{ field.errors }}
+                  </div>
+                  </td>
                 {% endif %}
               </div>
             </tr>

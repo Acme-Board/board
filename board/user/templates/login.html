@@ -24,7 +24,11 @@
                         <td style="color:white;"><label class="label">Contraseña: </label></td>
                     {% endif %}
   
-                    <td>{{field}}</td>
+                    <td>{{field}}
+                        <div style="color:rgb(241, 101, 101) !important">
+                            {{ field.errors }}
+                        </div>
+                    </td>
               </tr>
             {% endfor %}
           </table>
