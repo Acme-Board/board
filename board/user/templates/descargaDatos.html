@@ -20,9 +20,10 @@
     <form method="POST" action="" >
         {% csrf_token %}
         <div>
-        <h5 class="text-center py-5" style="color: white; max-width: 50%; margin-left: 25%;">
-           En breves sus datos como usuario se descargaran, si lo desea, puede dar su opinión sobre 
-        la aplicación o la causa de la descarga. Muchas gracias por usar TryOnBoard </h5>
+        <h5 class="py-5" style="text-align: justify; color: white; max-width: 50%; margin-left: 25%;">
+           En breves recibirá un correo a su dirección email con los datos que tenemos de usted. 
+           Si lo desea, puede dar su opinión sobre 
+        la aplicación o la causa de la petición. Muchas gracias por usar Try On Board. </h5>
        
             {% for field in form %}
           <div class="text-center">
@@ -38,7 +39,7 @@
     
         <div style="margin: 15px; text-align: center;">
             <a href= "/profile/{{user.id}}" class="btn btn-info btn-sm" style=" color: white; border-radius: 8px; margin-bottom: 30px; margin-top: 30px;">Volver</a>
-            <button type="submit" class="btn btn-primary"  style="border-radius: 8px;">Descargar</button>              
+            <button type="submit" class="btn btn-primary"  style="border-radius: 8px;">Recibir datos</button>              
         </div>
     </form>
 {% endblock %}

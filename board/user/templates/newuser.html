@@ -44,7 +44,11 @@
                                             {% endif %}
                                         {% endif %}
                                     </td>
-                                    <td style="color:white;">{{field}}</td>
+                                    <td style="color:white;">{{field}}
+                                        <div style="color:rgb(241, 101, 101) !important">
+                                            {{ field.errors }}
+                                        </div>
+                                    </td>
 
                                 </div>
                             </tr>
@@ -59,25 +63,7 @@
                                 <a href="/" class="btn btn-info btn-sm"  style="border-radius: 8px"> Volver </a>
                             <button type="submit" class="btn btn-primary"  style="border-radius: 8px">Crear</button> 
                             {% endif %}
-                            </div>
-                        
-                        <div>
-                            {% if form.errors %}
-                                {% for field in form %}
-                                    {% for error in field.errors %}
-                                        <div class="alert alert-danger">
-                                            <strong>{{ error|escape }}</strong>
-                                        </div>
-                                    {% endfor %}
-                                {% endfor %}
-                                {% for error in form.non_field_errors %}
-                                    <div class="alert alert-danger">
-                                        <strong>{{ error|escape }}</strong>
-                                    </div>
-                                {% endfor %}
-        
-                            {% endif %}
-                        </div>
+                            </div>                   
                         
                         {% if request.user.is_authenticated == False %}
                         <p style="text-align: center;">¿Ya tiene una cuenta? <a href="/login" style="padding: 5px;"> Inicie Sesión</a></p>
