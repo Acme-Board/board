@@ -56,7 +56,7 @@ class editPic(forms.Form):
 
 
 class contact(forms.Form):
-    message = forms.CharField(widget=forms.Textarea)
+    message = forms.CharField(label="Mensaje",widget=forms.Textarea)
 
 
 class descargaDatos(forms.Form):
