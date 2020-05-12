@@ -45,11 +45,6 @@ class UserModelTestCase(TestCase):
     def test_get_rate(self):
         self.assertEquals(self.user.rate, '2.5')     
 
-    def test_delete_user(self):
-        self.assertEquals(1,User.objects.count())
-        user_views.delete_myUSer(self,self.user.id)
-        self.assertEqual(0,User.objects.count()) 
-
     def test_edit_account(self):
 
         User.objects.filter(id = self.user.id).update(username = 'username', password = 'password') 
