@@ -68,12 +68,13 @@ urlpatterns = [
     re_path(r'profile/(?P<id_user>\d+)',user_views.profile),
     path('newuser', user_views.new_user),
     path('deleteUser/<int:pk>', user_views.delete_myUSer),
-    path('editAccount/', user_views.edit_account),
+    path('editPassword/', user_views.edit_pass),
+    path('editUsername/', user_views.edit_username),
     path('editProfile/', user_views.edit_profile),
     path('editPic/', user_views.edit_pic),
     path('users/', user_views.user_list),
     path('contact/<int:pk>', user_views.contact_user),
-    path('descargaDatos/<int:pk>', user_views.DescargaDatosUser),
+    path('obtenerDatos/<int:pk>', user_views.DescargaDatosUser),
     path('premium/', user_views.premium),
 
     #Review

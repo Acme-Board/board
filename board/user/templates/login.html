@@ -18,26 +18,23 @@
         <table style="margin-left: 80px;">
             {% for field in form %}
               <tr style="height: 40px; width: 40px;">
-                    {% if field.label == "Username" %}         
+                    {% if field.label == "Usuario" %}         
                         <td style="color:white;"><label class="label">Usuario: </label></td>
                     {% else %}
                         <td style="color:white;"><label class="label">Contraseña: </label></td>
                     {% endif %}
   
-                    <td>{{field}}</td>
+                    <td>{{field}}
+                        <div style="color:rgb(241, 101, 101) !important">
+                            {{ field.errors }}
+                        </div>
+                    </td>
               </tr>
             {% endfor %}
           </table>
          
          <div>
                {% if form.errors %}
-                   {% for field in form %}
-                       {% for error in field.errors %}
-                           <div class="alert alert-danger">
-                               <strong>{{ error|escape }}</strong>
-                           </div>
-                       {% endfor %}
-                   {% endfor %}
                    {% for error in form.non_field_errors %}
                        <div class="alert alert-danger">
                            <strong>{{ error|escape }}</strong>
@@ -50,7 +47,7 @@
         <div style="text-align:center; margin-top: 10px;">
             <button type="submit" class="btn btn-primary"  style="border-radius: 8px">Entrar</button>
         </div>
-        <p style="text-align:center;">¿Aun no tienes cuenta? <a href="/newuser" style="padding: 5px;"> Registrate aquí</a></p>
+        <p style="text-align:center;">¿Aún no tienes cuenta? <a href="/newuser" style="padding: 5px;"> Regístrate aquí</a></p>
     </form>
 </div>
 </div>

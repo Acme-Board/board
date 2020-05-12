@@ -1,11 +1,38 @@
-{% extends "base.html" %}
+<html>
+    <head>
+         {% extends "base.html" %}
+         {% load static %}
+         {% block extrahead %}
+        <link rel="stylesheet" href="{% static 'css/style_user.css' %}" type="text/css"> 
+        {% endblock %}
+    
+        <style>
+            #popup{
+            text-decoration-color: black;
+            }
+        </style>    
+    </head>
+    
+    <body> 
+        {% block content %}
+            <div class="text-center">
+                <h5 class="py-5" style="color: white; max-width: 50%; margin-left: 25%;">
+                Contactar con el usuario </h5>
+                            
+                <form method="POST" action="" style="color:white">
+                    {% csrf_token %}
+                    {{form.as_p}}      
+                    <div style="margin: 15px; text-align: center;">
+                        <button type="submit" class="btn btn-primary"  style="border-radius: 8px">Crear</button>              
+                    </div>
+                </form>
+            </div>
+        {% endblock %}
 
-{% block content %}
-    <form method="POST" action="" >
-        {% csrf_token %}
-        {{form.as_p}}      
-        <div style="margin: 15px; text-align: center;">
-            <button type="submit" class="btn btn-primary"  style="border-radius: 8px">Crear</button>              
-        </div>
-    </form>
-{% endblock %}
+
+        {% block vue %}
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        {% endblock %}
+    
+    </body>
+</html>
