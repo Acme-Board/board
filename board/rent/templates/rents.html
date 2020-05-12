@@ -31,40 +31,44 @@
 	  </form> -->
 	
 
-
-
-	<div  style= "display: flex; flex-wrap: wrap; ">
-
 	{% for dato in rents %}
 
-	<table class="table"style="margin: 10px;">
+	<table class="table" style="margin: 10px;">
+		<thead>
+			<th style="width: 10%;"></th>
+			<th style="width: 40%"></th>
+			<th style="width: 20%;"></th>
+		</thead>
 	<!-- Vamos a introducir  algunos juegos -->
 	<tr style="margin-top: 5px; background-color: #3e5e7e;">
-		<td><img style="width:150px;height:150px; ; border-radius: 8px; padding: 5px;" src="{{dato.game.picture.url}} "/></td>
-	<td>
-	 <div style="color: white;"><h4 class=""> {{dato.game.name}} - {{dato.ticker|capfirst}} </h4></div> 
-		<p style="color: white;"> <b>Teléfono: {{dato.user.phone}}</b></p>
-		<p style="color: white;">Días: {{dato.days}}</p>
-		<p style="color: white;">Fecha inicio: {{dato.initial_date|date:'Y-m-d'}}</p>
-
-		<a href= "/gameDetail/{{dato.game.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Ver más</a></br>
-		{% if dato.deliver == False and dato.rentable == False and dato.user == request.user %}
+		<td>
+			<img style="width:150px;height:150px; ; border-radius: 8px; padding: 5px;" src="{{dato.game.picture.url}} "/>
+		</td>
+		<td>
+			<div style="color: white;"><h4> {{dato.game.name}} - {{dato.ticker|capfirst}} </h4></div> 
+			<p style="color: white;"> <b>Teléfono: {{dato.user.phone}}</b></p>
+			<p style="color: white;">Días: {{dato.days}}</p>
+			<p style="color: white;">Fecha inicio: {{dato.initial_date|date:'Y-m-d'}}</p>
+		</td>
+		<td>
+			<a href= "/gameDetail/{{dato.game.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Ver más</a></br>
+			{% if dato.deliver == False and dato.rentable == False and dato.user == request.user %}
 			<a href= "/rents/deliver/{{dato.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Entregado</a></br>
-		{% endif %}
-		{% if dato.deliver == True and dato.game.owner == request.user%}
-			<a href= "/rents/deliver/{{dato.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Recibido</a></br>
-		{% endif %}
+			{% endif %}
+			{% if dato.deliver == True and dato.game.owner == request.user%}
+				<a href= "/rents/deliver/{{dato.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Recibido</a></br>
+			{% endif %}
 
-		{% if dato.game.owner == request.user%}
-		<a href= "/contend/{{dato.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Abrir disputa</a></br> 
-		{% else %}
-		<a href= "/review/{{dato.game.owner.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Comentar</a>
-	</td>
+			{% if dato.game.owner == request.user%}
+			<a href= "/contend/{{dato.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Abrir disputa</a></br> 
+			{% else %}
+			<a href= "/review/{{dato.game.owner.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Comentar</a>
+		</td>
 
 		{% endif %}
 	</tr>
 	</table>
-	</div>
+
 	{% empty %}
 
 <!-- Hacer Visible esta pagina. -->
@@ -80,9 +84,6 @@
 </div>
 
 
-<!-- Solución Parcial, ver como solucionarlo -->
-
-</div>
 <!-- Una vista final de la vista para darle profesionalidad -->
 
 
