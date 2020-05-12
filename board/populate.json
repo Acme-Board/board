@@ -497,7 +497,7 @@
 			"description": "Alquilo juego Exit la cabaña abandonada",
 			"status": "Nuevo",
 			"price": 3,
-			"picture": "board/staticfiles/media/myfolder/mad.jpeg",
+			"picture": "board/staticfiles/media/myfolder/exit.jpg",
 			"owner": 11
 		},
 		"model": "rent.game",
