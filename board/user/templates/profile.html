@@ -172,15 +172,20 @@
                       </button>
                     </div>
                     <div class="modal-body">
-                      <h5 class="text-dark" id="popup">¿Estas seguro de que quieres borrar tus datos?</h5>
+                      <h5 class="text-dark" id="popup">¿Estás seguro de que quieres borrar tus datos?</h5>
                     </div>
-                    <div class="modal-footer">
-                      {% if request.session.drop == False %}
-                        TIENES PENDIENTES ALQUILERES PENDEJO</br>
-                        <a role="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
+                    <div class="modal-footer" style="text-align: center;">
+                      <div style="text-align: center;">
+                      {% if request.session.drop == False %}                     
+                       <p style="margin-right: 30px ;color:rgb(207, 60, 60)">
+                        No puede borrar su usuario si tiene alquileres pendientes
+                      </p><br>
+                        <a role="button" class="btn btn-secondary" style="text-align: center;" data-dismiss="modal">Cerrar</a>
                       {% else %}
+                        <a role="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
                         <a role="button" href="/deleteUser/{{user.id}}" class="btn btn-primary">Si, continuar</a>
                       {% endif %}
+                    </div>
                     </div>
                   </div>
                 </div>
