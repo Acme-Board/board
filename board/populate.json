@@ -74,6 +74,8 @@
 			"picture": "board/staticfiles/media/myfolder/luis_user.jpg",
 			"rate": "4",
 			"admin": false,
+			"premium": true,
+			"end_date": "2020-11-11T22:00:00Z",
 			"groups": [],
 			"user_permissions": []
 		},
@@ -317,6 +319,8 @@
 			"picture": "board/staticfiles/media/myfolder/david_user.jpeg",
 			"rate": "2",
 			"admin": false,
+			"premium": true,
+			"end_date": "2020-11-11T22:00:00Z",
 			"groups": [],
 			"user_permissions": []
 		},
