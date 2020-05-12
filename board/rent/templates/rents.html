@@ -18,7 +18,7 @@
 
 <!-- Aqui hacer bucle por columna para hacer una buena vista-->
 
-<div  style= "padding-block-end: 60px;margin: auto;">
+<div class="py-3"  style= "padding-block-end: 60px;margin: auto;">
 	
 	<h1 style="color: white; font-size:30px; border-radius: 8px; width: auto"> Lista de alquileres </h1></br>
 	<!-- Boton de busqueda para un futuro
@@ -39,7 +39,7 @@
 
 	<table class="table"style="margin: 10px;">
 	<!-- Vamos a introducir  algunos juegos -->
-	<tr>
+	<tr style="margin-top: 5px; background-color: #3e5e7e;">
 		<td><img style="width:150px;height:150px; ; border-radius: 8px; padding: 5px;" src="{{dato.game.picture.url}} "/></td>
 	<td>
 	 <div style="color: white;"><h4 class=""> {{dato.game.name}} - {{dato.ticker|capfirst}} </h4></div> 
@@ -58,25 +58,23 @@
 		{% if dato.game.owner == request.user%}
 		<a href= "/contend/{{dato.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Abrir disputa</a></br> 
 		{% else %}
-		<a href= "/review/{{dato.game.owner.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Comentar</a></td>
+		<a href= "/review/{{dato.game.owner.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Comentar</a>
+	</td>
 
 		{% endif %}
-
-		
-	</div>
 	</tr>
 	</table>
+	</div>
 	{% empty %}
 
 <!-- Hacer Visible esta pagina. -->
-<div>
-<li class="text-center" style="color:white;">Vaya, parece que no has alquilado ningun Juego, ¿Por qué no le 
-	echas un ojo al catálogo?</li>
-</br>
-	<a href= "/games" class="btn btn-info btn-sm"
-	style="border-radius: 8px; margin: 10px; color:black; font-weight: bold;">Ir al catálogo</a></br> </br>
-</div>
-</table>
+	<div style="text-align: center;">
+		<li class="text-center" style="color:white;">Vaya, parece que no ha habido ningún alquiler.</li>
+		</br>
+		<a href= "/games" class="btn btn-info btn-sm"
+			style="border-radius: 8px; margin: 10px;">Ir al catálogo</a></br> </br>
+	</div>
+
 	{% endfor %}
 
 </div>

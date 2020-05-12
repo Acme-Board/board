@@ -9,7 +9,7 @@
 
     <script>
         function confirmar() {
-          confirm("¿Estas seguro de Eliminar el juego?");
+          confirm("¿Estás seguro de eliminar el juego?");
         }
         </script>
 
@@ -19,11 +19,11 @@
 <body>
     {% block content %}
 
-    <h3>Tus Juegos, {{user}}</h3>
+    <h3>Tus juegos, {{user}}</h3>
     
     {% for dato in myGames %}
 
-    
+    <div>
     <table>
             <thead>
                     <tr>
@@ -34,28 +34,30 @@
                     </tr>
             </thead>
             <tbody>
-                <tr class="table-myGames">
+                <tr class="table-myGames" >
                   <td>
                     <img  src="{{dato.picture.url}}" style="width: 150px;height: 150px;"/>
                     <a href= "/gameDetail/{{dato.id}}/pic/" type="button" class="btn btn-primary btn-sm"
-                    style="width: 150px; font-weight: bold">Editar Foto</a>
+                    style="width: 150px; font-weight: bold">Editar foto</a>
                   </td>
 
                     <td>
                         <h4>{{dato.name|capfirst}} - <i> {{dato.price}} €</i> </br></h4>
                         Estado: {{dato.status}} </br>
                     </td>
-                    <td> {{dato.description}} </td>
+                    <td style="word-break: break-all"> {{dato.description}} </td>
                     <td>
                     <!-- <div><a href= "/gameDetail/{{dato.id}}" class="btn btn-info btn-sm"
                             style="border-radius: 8px; margin-top: 5px;">Ver mas</a></div>
                         -->
                             <!-- Sin funcionalidad aun -->
                 <a href= "/gameDetail/{{dato.id}}" class="btn btn-info btn-sm" 
-                style="border-radius: 8px; color:black; font-weight: bold;">Ver Mas</a>
+
+                style="border-radius: 8px; color:white;">Ver más</a>
 
                 <a href= "/gameDetail/{{dato.id}}/rents" class="btn btn-info btn-sm" 
-                style="border-radius: 8px; color:black; font-weight: bold;">Historial</a>
+                style="border-radius: 8px; margin-top:10px; color:white;">Historial</a>
+
 
                             <!-- Sin funcionalidad aun href="/delete/{{dato.id}}" -->
 
@@ -71,11 +73,12 @@
             </tbody>
         </table>
     
+    </div>
     {% empty %}
 
     <!-- Hacer Visible esta pagina. -->
     
-    <li>Vaya, parece que no has subido ningun juego</li>
+    <li>Vaya, parece que no has subido ningún juego.</li>
     
     {% endfor %}
 
