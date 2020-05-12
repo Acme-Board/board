@@ -26,6 +26,27 @@ def profile(request, id_user):
     list_comments = Comment.objects.filter(toUser=user)
     end = None
 
+    # Comprobamos que no tiene alquileres pendientes antes de borrar sus datos
+    rents = Rent.objects.filter(user=request.user)
+    games = Game.objects.filter(owner=request.user)
+
+    drop = True
+
+    for x in rents:
+        if(x.rentable == False):
+            drop = False
+            break
+    
+    for x in games:
+        rents1 = Rent.objects.filter(game=x)
+
+        for y in rents1:
+            if(y.rentable == False):
+                drop = False
+                break
+    
+    request.session['drop'] = drop
+
     key = settings.STRIPE_PUBLISHABLE_KEY
     if(not(request.user.is_anonymous)):
         if(request.user.premium):
@@ -69,30 +90,12 @@ def delete_myUSer(request, pk):
     # Recuperamos la instancia del user y la borramos
     instancia = User.objects.get(id=pk)
 
-    # Comprobamos que no tiene alquileres pendientes antes de borrar sus datos
-    rents = Rent.objects.filter(user=request.user)
-    games = Game.objects.filter(owner=request.user)
-
-    drop = True
-
-    for x in rents:
-        if(x.rentable == False):
-            drop = False
-            break
-    
-    for x in games:
-        rents1 = Rent.objects.filter(game=x)
-
-        for y in rents1:
-            if(y.rentable == False):
-                drop = False
-                break
+    drop = request.session['drop']
 
     # Comprobamos que está logueado el usuario o el administrador para poder borrar sus datos
     if(instancia == request.user or request.user.admin == True):
         
         if(drop == False):
-            request.session['drop'] = False
             return profile(request,request.user.id)
 
         request.session['drop'] = True
