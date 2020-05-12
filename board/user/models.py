@@ -9,7 +9,7 @@ class User(AbstractUser):
     bio = models.TextField(max_length=500)
     range = models. CharField(max_length=10)
     picture = models.FileField(upload_to='board/staticfiles/media/myfolder/',null=True)
-    rate = models. CharField(max_length=10, validators=[validate_comma_separated_integer_list])
+    rate = models. CharField(max_length=10, default=0, validators=[validate_comma_separated_integer_list])
     lat = models.FloatField(null=True)
     lon = models.FloatField(null=True)
     address = models.TextField(max_length=500)

@@ -17,7 +17,7 @@ from user.models import User
 from user.forms import Register, editPass, editUsername, editProfile, editPic, contact,descargaDatos, LoginForm
 from payment.views import charge
 from reviews.models import Comment
-from rent.models import JuegosFav
+from rent.models import JuegosFav, Game
 
 # Create your views here.
 
@@ -363,6 +363,15 @@ def DescargaDatosUser(request,pk):
                 else:
                      ip = request.META.get('REMOTE_ADDR')
                 body += 'Direccion ip:'+ ip + '\n'
+                body += '----------------------------------' + '\n'
+                body += 'Mis juegos: ' + '\n'
+                games = Game.objects.filter(owner=request.user)
+
+                for x in games:
+                    body += x.name + ' - ' + '['+ str(x.price) +']' + '\n'
+                    body += 'Descripción: ' + x.description + '\n'
+                    body += '\n'
+
                 emailto = user.email
                 
 

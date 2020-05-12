@@ -7,8 +7,8 @@ from django.core.validators import EmailValidator, URLValidator, RegexValidator,
 #Forms here
 
 phone_regex = RegexValidator(regex=r'^[0-9]{9}$', message="El número de teléfono es incorrecto. Deben ser 9 números consecutivos. Ej: 966966966")
-name_regex = RegexValidator(regex=r'^[a-zA-Z ]+$', message="El nombre debe contener carácteres del alfabeto y/o espacios")
-last_name_regex = RegexValidator(regex=r'^[a-zA-Z ]+$', message="Los apellidos deben contener carácteres del alfabeto y/o espacios")
+name_regex = RegexValidator(regex=r'^[a-zA-Z ]\S+\s*', message="El nombre debe contener carácteres del alfabeto y/o espacios")
+last_name_regex = RegexValidator(regex=r'^[a-zA-Z ]\S+\s*', message="Los apellidos deben contener carácteres del alfabeto y/o espacios")
 username_regex = RegexValidator(regex=r'.*([a-zA-Z]{1,}).*([a-zA-Z]{1,}).*([a-zA-Z]{1,}).*', message="El nombre de usuario debe contener al menos 3 letras")
 
 my_default_errors = {
@@ -42,8 +42,8 @@ class editUsername(forms.Form):
     password = forms.CharField(max_length=32,widget=forms.PasswordInput, label="Contraseña actual*")
 
 class editProfile(forms.Form):
-    name = forms.CharField(max_length=40, label="Nombre")
-    last_name = forms.CharField(max_length=50, label="Apellidos")
+    name = forms.CharField(max_length=40, validators=[name_regex], label="Nombre")
+    last_name = forms.CharField(max_length=50, validators=[last_name_regex], label="Apellidos")
     email = forms.CharField(max_length=50, label="Email", validators=[EmailValidator(message="Email incorrecto")])
     bio = forms.CharField(max_length=200, label="Biografía", required=False, widget=forms.Textarea)
     phone = forms.CharField(label='Teléfono*', validators=[phone_regex], max_length=9, required=True, widget=forms.TextInput(attrs={'size': '25','placeholder':'666666666'}))

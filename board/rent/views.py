@@ -154,6 +154,10 @@ def new_game(request):
                 form.add_error('price', 'No se puede regalar un juego')
                 return render(request, "newgame.html", {"form": form, 'texto': texto, 'Alquilar': Alquilar})
 
+            if (round(price,2) == 0):
+                form.add_error('price', 'No se permite un precio tan bajo')
+                return render(request, "newgame.html", {"form": form, 'texto': texto, 'Alquilar': Alquilar})
+
             picture = form.cleaned_data['picture']
             owner = request.user
             game = Game(name=name, description=description, status=status, price=price, picture=picture, owner=owner)
@@ -201,6 +205,9 @@ def edit_game(request, pk):
                 form.add_error('price', 'No se puede regalar un juego')
                 return render(request, "newgame.html", {"form": form, 'texto': texto, 'Alquilar': Alquilar})
 
+            if (round(price,2) == 0):
+                form.add_error('price', 'No se permite un precio tan bajo')
+                return render(request, "newgame.html", {"form": form, 'texto': texto, 'Alquilar': Alquilar})
 
             Game.objects.filter(pk=pk).update(name=name, description=description, status=status, price=price)
 
