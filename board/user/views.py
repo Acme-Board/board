@@ -87,14 +87,15 @@ def delete_myUSer(request, pk):
 
     # Recuperamos la instancia del user y la borramos
     instancia = User.objects.get(id=pk)
-
-    drop = request.session['drop']
+    if request.user.admin==False:
+        drop = request.session['drop']
 
     # Comprobamos que está logueado el usuario o el administrador para poder borrar sus datos
     if(instancia == request.user or request.user.admin == True):
         
-        if(drop == False):
-            return profile(request,request.user.id)
+        if request.user.admin==False:
+            if(drop == False):
+                return profile(request,request.user.id)
 
         request.session['drop'] = True
         instancia.delete()
