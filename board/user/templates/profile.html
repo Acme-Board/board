@@ -94,16 +94,16 @@
                   <button type="button" class="btn btn-danger my-1" data-toggle="modal" data-target="#exampleModal221">
                     Borrar datos
                   </button>
+                  <button type="button" class="btn btn-warning my-1 black" data-toggle="modal" data-target="#exampleModal1">
+                    Premium
+                    </button>
 
                   {% if request.user.premium == True %}
                     <div class="p-3 mb-2 bg-info text-white" style="opacity: 80%;">
                       Su suscripción premium acabará el día: {{ premium_date }}
                     </div>
-                  {% else %}
-                    <button type="button" class="btn btn-warning my-1 black" data-toggle="modal" data-target="#exampleModal1">
-                    Premium
-                    </button>
                   {% endif %}
+     
               
                   <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
