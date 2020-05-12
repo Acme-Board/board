@@ -7,8 +7,8 @@ from django.core.validators import EmailValidator, URLValidator, RegexValidator,
 #Forms here
 
 phone_regex = RegexValidator(regex=r'^[0-9]{9}$', message="El número de teléfono es incorrecto. Deben ser 9 números consecutivos. Ej: 966966966")
-name_regex = RegexValidator(regex=r'^[a-zA-Z ]\S+\s*', message="El nombre debe contener carácteres del alfabeto y/o espacios")
-last_name_regex = RegexValidator(regex=r'^[a-zA-Z ]\S+\s*', message="Los apellidos deben contener carácteres del alfabeto y/o espacios")
+name_regex = RegexValidator(regex=r'^([^<>!¡¿?|#~€·$%&/\'.\:;,_ªº()=+*1234567890])+$', message="El nombre debe contener carácteres del alfabeto y/o espacios")
+last_name_regex = RegexValidator(regex=r'^^([^<>!¡¿?|#~€·$%&/\'.:;,_ªº()=+*1234567890])+$', message="Los apellidos deben contener carácteres del alfabeto y/o espacios")
 username_regex = RegexValidator(regex=r'.*([a-zA-Z]{1,}).*([a-zA-Z]{1,}).*([a-zA-Z]{1,}).*', message="El nombre de usuario debe contener al menos 3 letras")
 
 my_default_errors = {

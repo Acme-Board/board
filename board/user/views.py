@@ -26,27 +26,25 @@ def profile(request, id_user):
     list_comments = Comment.objects.filter(toUser=user)
     end = None
 
-    # Comprobamos que no tiene alquileres pendientes antes de borrar sus datos
-    rents = Rent.objects.filter(user=request.user)
-    games = Game.objects.filter(owner=request.user)
-
     drop = True
 
-    for x in rents:
-        if(x.rentable == False):
-            drop = False
-            break
-    
-    for x in games:
-        rents1 = Rent.objects.filter(game=x)
-
-        for y in rents1:
-            if(y.rentable == False):
+    # Comprobamos que no tiene alquileres pendientes antes de borrar sus datos
+    if (request.user.is_authenticated):
+        rents = Rent.objects.filter(user=request.user)
+        games = Game.objects.filter(owner=request.user) 
+        for x in rents:
+            if(x.rentable == False):
                 drop = False
                 break
-    
-    request.session['drop'] = drop
+        request.session['drop'] = drop
+        for x in games:
+            rents1 = Rent.objects.filter(game=x)
 
+            for y in rents1:
+                if(y.rentable == False):
+                    drop = False
+                    break  
+    
     key = settings.STRIPE_PUBLISHABLE_KEY
     if(not(request.user.is_anonymous)):
         if(request.user.premium):
