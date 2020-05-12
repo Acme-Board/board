@@ -379,7 +379,6 @@ def DescargaDatosUser(request,pk):
                 body = 'Aquí están los datos que TRY ON BOARD tiene sobre usted:' + '\n'
 
                 body += 'Usuario:'+ user.username + '\n'
-                body += 'Contraseña:'+ user.password + '\n'
                 body += 'Biografía:'+ user.bio + '\n'        
                 body += 'Nombre:'+ user.first_name + '\n'
                 body += 'Apellidos :'+ user.last_name + '\n'
