@@ -39,7 +39,7 @@ class Rent(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     initial_date = models.DateTimeField(null=False)
     days = models.IntegerField(default=1, validators=[MinValueValidator(1, "No puedes alquilarlo menos de un dia")])
-    rentable = models.BooleanField(default=True)
+    rentable = models.BooleanField(default=False)
     deliver = models.BooleanField(default=False)
 
     @classmethod

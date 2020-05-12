@@ -1,10 +1,10 @@
 [
 	{
 		"fields": {
-			"password": "pbkdf2_sha256$150000$40$mbu3EIOy+CJGurks5j21JugGIq6arcSgON2NUt0MTXM=",
+			"password": "pbkdf2_sha256$150000$NkJYhIaHlBxQ$oaUY2Qf8hNbNC41FCxM3QdiX+I7zIe/KYHOLh7A6Xjc=",
 			"last_login": null,
 			"is_superuser": false,
-			"username": "Antonio",
+			"username": "admin-ant",
 			"first_name": "Antonio",
 			"last_name": "Macías",
 			"email": "antmaczam@gmail.com",
@@ -58,9 +58,9 @@
 			"password": "pbkdf2_sha256$150000$40$mbu3EIOy+CJGurks5j21JugGIq6arcSgON2NUt0MTXM=",
 			"last_login": null,
 			"is_superuser": false,
-			"username": "Luis",
-			"first_name": "Luis",
-			"last_name": "Molinares",
+			"username": "gonferde",
+			"first_name": "Gonzalo",
+			"last_name": "Fernández",
 			"email": "luMo@gmail.com",
 			"address": "Calle del leon, Madrid",
 			"lat": 40.4133531,
@@ -69,11 +69,13 @@
 			"is_staff": false,
 			"is_active": true,
 			"date_joined": "2019-11-11T22:00:00Z",
-			"bio": "Hola, me llamo Luis y me encantan los juegos de mesa",
+			"bio": "Hola, me llamo Gonzalo y me encantan los juegos de mesa",
 			"range": "Pro",
 			"picture": "board/staticfiles/media/myfolder/luis_user.jpg",
 			"rate": "4",
 			"admin": false,
+			"premium": true,
+			"end_date": "2020-11-11T22:00:00Z",
 			"groups": [],
 			"user_permissions": []
 		},
@@ -166,7 +168,7 @@
 			"password": "pbkdf2_sha256$150000$40$mbu3EIOy+CJGurks5j21JugGIq6arcSgON2NUt0MTXM=",
 			"last_login": "2019-11-11T22:00:00Z",
 			"is_superuser": false,
-			"username": "Maria",
+			"username": "mariarp",
 			"first_name": "Maria",
 			"last_name": "Repollo",
 			"email": "Maria@algo.algo",
@@ -314,9 +316,11 @@
 			"date_joined": "2019-11-11T22:00:00Z",
 			"bio": "Holaaap, soy David y me encantan los juegos de mesa",
 			"range": "Noob",
-			"picture": "board/staticfiles/media/myfolder/david_user.jpg",
+			"picture": "board/staticfiles/media/myfolder/david_user.jpeg",
 			"rate": "2",
 			"admin": false,
+			"premium": true,
+			"end_date": "2020-11-11T22:00:00Z",
 			"groups": [],
 			"user_permissions": []
 		},
@@ -325,11 +329,11 @@
 	},
 	{
 		"fields": {
-			"name": "Kitchnexus",
-			"description": "Se alquila juego Kitchnexus en perfecto estado, solo lo he usado una vez",
+			"name": "Catan",
+			"description": "Se alquila juego Catan en perfecto estado, solo lo he usado una vez",
 			"status": "Nuevo",
-			"price": 20,
-			"picture": "board/staticfiles/media/myfolder/kitchnexus.jpg",
+			"price": 4,
+			"picture": "board/staticfiles/media/myfolder/catan.jpg",
 			"owner": 10
 		},
 		"model": "rent.game",
@@ -337,11 +341,11 @@
 	},
 	{
 		"fields": {
-			"name": "Tactics",
-			"description": "Alquilo juego de mesa Tactics, esta en perfecto estado y es un juego muy divertido",
+			"name": "Exploding kittens",
+			"description": "Alquilo juego de mesa, esta en perfecto estado y es un juego muy divertido",
 			"status": "Nuevo",
-			"price": 10,
-			"picture": "board/staticfiles/media/myfolder/tactics.jpg",
+			"price": 1,
+			"picture": "board/staticfiles/media/myfolder/exploding_kittens.jpg",
 			"owner": 10
 		},
 		"model": "rent.game",
@@ -352,7 +356,7 @@
 			"name": "Preguntados",
 			"description": "Alquilo juego de preguntados, esta un poco gastado pero es jugable",
 			"status": "Desgastado",
-			"price": 5,
+			"price": 2,
 			"picture": "board/staticfiles/media/myfolder/preguntados.jpg",
 			"owner": 11
 		},
@@ -361,10 +365,10 @@
 	},
 	{
 		"fields": {
-			"name": "Monopoli",
+			"name": "Monopoly",
 			"description": "Alquilo juego de monopoli en perfecto estado con todas sus piezas y billetes",
 			"status": "Nuevo",
-			"price": 5,
+			"price": 2,
 			"picture": "board/staticfiles/media/myfolder/monopoli.jpeg",
 			"owner": 17
 		},
@@ -373,11 +377,11 @@
 	},
 	{
 		"fields": {
-			"name": "Fantasma",
-			"description": "Alquilo juego Fantasmas, perfecto para toda la familia",
+			"name": "Bang",
+			"description": "Edición con todos las expansiones",
 			"status": "Nuevo",
-			"price": 20.3,
-			"picture": "board/staticfiles/media/myfolder/fantasma.jpeg",
+			"price": 2.5,
+			"picture": "board/staticfiles/media/myfolder/bang.jpg",
 			"owner": 17
 		},
 		"model": "rent.game",
@@ -385,11 +389,11 @@
 	},
 	{
 		"fields": {
-			"name": "1000 nombres",
-			"description": "Alquilo juego 1000 Nombres, perfecto para toda la familia",
+			"name": "Munchkin",
+			"description": "Alquilo juego de cartas, perfecto para toda la familia",
 			"status": "Desgastado",
-			"price": 7,
-			"picture": "board/staticfiles/media/myfolder/nombres.jpeg",
+			"price": 2,
+			"picture": "board/staticfiles/media/myfolder/munchkin.jpg",
 			"owner": 17
 		},
 		"model": "rent.game",
@@ -397,11 +401,11 @@
 	},
 	{
 		"fields": {
-			"name": "Master Chezz",
-			"description": "Se alquila Master Chezz juego para jugar con otra persona",
+			"name": "Time's Up",
+			"description": "Se alquila juego para jugar con otras persona",
 			"status": "Usado",
-			"price": 7,
-			"picture": "board/staticfiles/media/myfolder/chess.jpeg",
+			"price": 1.5,
+			"picture": "board/staticfiles/media/myfolder/times_up.jpg",
 			"owner": 17
 		},
 		"model": "rent.game",
@@ -412,7 +416,7 @@
 			"name": "Gestos",
 			"description": "Se slquila juego Gestos, esta un poco usado, pero se puede jugar sin problemas",
 			"status": "Usado",
-			"price": 7,
+			"price": 1.4,
 			"picture": "board/staticfiles/media/myfolder/gestos.jpg",
 			"owner": 17
 		},
@@ -424,7 +428,7 @@
 			"name": "Mentiroso",
 			"description": "Alquilo juego Mentiroso, perfecto para toda la familia",
 			"status": "Nuevo",
-			"price": 7,
+			"price": 1,
 			"picture": "board/staticfiles/media/myfolder/mentiroso.jpeg",
 			"owner": 18
 		},
@@ -433,11 +437,11 @@
 	},
 	{
 		"fields": {
-			"name": "La Superclase",
-			"description": "Alquilo juego la Superclase, perfecto para toda la familia",
+			"name": "Virus",
+			"description": "Alquilo juego virus, perfecto para toda la familia",
 			"status": "Nuevo",
-			"price": 7,
-			"picture": "board/staticfiles/media/myfolder/superclase.jpeg",
+			"price": 2.2,
+			"picture": "board/staticfiles/media/myfolder/virus.jpg",
 			"owner": 30
 		},
 		"model": "rent.game",
@@ -448,7 +452,7 @@
 			"name": "Chess Games",
 			"description": "El juego esta gastado pero es jugable y ademas muy divertido",
 			"status": "Desgastado",
-			"price": 7,
+			"price": 1.3,
 			"picture": "board/staticfiles/media/myfolder/chessgames.jpeg",
 			"owner": 30
 		},
@@ -457,11 +461,11 @@
 	},
 	{
 		"fields": {
-			"name": "Juegos Reunidos",
-			"description": "Alquiilo Juegos reunidos, es un juego que incluye una gran variedad de juegos, aunque un poco gastado es jugable",
+			"name": "Risk",
+			"description": "Alquiilo estrategia Risk",
 			"status": "Desgastado",
-			"price": 7,
-			"picture": "board/staticfiles/media/myfolder/juegos.jpeg",
+			"price": 5,
+			"picture": "board/staticfiles/media/myfolder/risk.jpg",
 			"owner": 31
 		},
 		"model": "rent.game",
@@ -469,11 +473,11 @@
 	},
 	{
 		"fields": {
-			"name": "Alto voltaje",
-			"description": "Juego alto voltaje, en perfecto estado",
+			"name": "Risk juego de tronos",
+			"description": "Juego risk con la temática de juego de tronos",
 			"status": "Nuevo",
-			"price": 7,
-			"picture": "board/staticfiles/media/myfolder/voltaje.jpeg",
+			"price": 8,
+			"picture": "board/staticfiles/media/myfolder/risk_got.jpg",
 			"owner": 32
 		},
 		"model": "rent.game",
@@ -481,11 +485,11 @@
 	},
 	{
 		"fields": {
-			"name": "5 segundos",
-			"description": "Alquio juego 5 segundos, u poco usado pero muy divertido",
+			"name": "Sushi go",
+			"description": "Alquio juego, un poco usado pero muy divertido",
 			"status": "Usado",
-			"price": 3,
-			"picture": "board/staticfiles/media/myfolder/segundos.jpeg",
+			"price": 1,
+			"picture": "board/staticfiles/media/myfolder/sushi_go.jpg",
 			"owner": 10
 		},
 		"model": "rent.game",
@@ -493,11 +497,11 @@
 	},
 	{
 		"fields": {
-			"name": "Mad",
-			"description": "Alquilo juego Mad aun sin usar, esta nuevo sin uso",
+			"name": "Exit",
+			"description": "Alquilo juego Exit la cabaña abandonada",
 			"status": "Nuevo",
-			"price": 12,
-			"picture": "board/staticfiles/media/myfolder/mad.jpeg",
+			"price": 3,
+			"picture": "board/staticfiles/media/myfolder/exit.jpg",
 			"owner": 11
 		},
 		"model": "rent.game",
@@ -508,7 +512,7 @@
 			"name": "Juego de mesa de Bob Esponja",
 			"description": "Alquilo juego de mesa de bob esponja para que puedas jugar con tus hijos",
 			"status": "Usado",
-			"price": 10,
+			"price": 4,
 			"picture": "board/staticfiles/media/myfolder/esponja.jpeg",
 			"owner": 10
 		},
@@ -517,11 +521,11 @@
 	},
 	{
 		"fields": {
-			"name": "BackGammon",
-			"description": "Alquilo juego BackGammon un poco gastado, pero jugable",
+			"name": "Dixit",
+			"description": "Alquilo juego Dixit un poco gastado, pero jugable",
 			"status": "Desgastado",
-			"price": 7,
-			"picture": "board/staticfiles/media/myfolder/backgammon.jpeg",
+			"price": 3.6,
+			"picture": "board/staticfiles/media/myfolder/dixit.jpg",
 			"owner": 16
 		},
 		"model": "rent.game",
@@ -529,11 +533,11 @@
 	},
 	{
 		"fields": {
-			"name": "El gran Reto",
-			"description": "Esta en perfecto estado y es un juego muy divertido",
+			"name": "Jungle Speed",
+			"description": "Esta en perfecto estado y es la versión para la playa",
 			"status": "Nuevo",
-			"price": 7,
-			"picture": "board/staticfiles/media/myfolder/reto.jpeg",
+			"price": 1.5,
+			"picture": "board/staticfiles/media/myfolder/jungle.jpg",
 			"owner": 15
 		},
 		"model": "rent.game",
@@ -541,11 +545,11 @@
 	},
 	{
 		"fields": {
-			"name": "Profesiones",
+			"name": "Zombicide",
 			"description": "Aunque usado apenas se nota el uso y es muy divertido",
 			"status": "Usado",
-			"price": 5,
-			"picture": "board/staticfiles/media/myfolder/profesiones.jpeg",
+			"price": 3,
+			"picture": "board/staticfiles/media/myfolder/zombie.jpg",
 			"owner": 10
 		},
 		"model": "rent.game",
@@ -553,11 +557,11 @@
 	},
 	{
 		"fields": {
-			"name": "Cranium",
-			"description": "Jueg para toda la familia apenas usado",
+			"name": "Ciudadelas",
+			"description": "Juego para toda la familia apenas usado",
 			"status": "Usado",
-			"price": 6,
-			"picture": "board/staticfiles/media/myfolder/cranium.jpeg",
+			"price": 2.1,
+			"picture": "board/staticfiles/media/myfolder/ciudadelas.jpg",
 			"owner": 32
 		},
 		"model": "rent.game",

@@ -19,35 +19,14 @@
         height: 15%;
         background-size: cover;
         background-repeat: no-repeat;
-        background-image: url('{% static "img/header0.png" %}');
+        background-image: url('{% static "img/header1.png" %}');
     }
 
     body {
       height:100%;
        background-size: cover;
-       background-image: url("{% static 'img/bg-masthead.jpg' %}");
+       background-image: url("{% static 'img/bg-masthead3-1.jpg' %}");
       }
-/*
-      .badge {
-        padding-left: 9px;
-        padding-right: 9px;
-        -webkit-border-radius: 9px;
-        -moz-border-radius: 9px;
-        border-radius: 9px;
-      }
-
-      .label-warning[href],
-      .badge-warning[href] {
-        background-color: #c67605;
-      }
-      #lblCartCount {
-          font-size: 12px;
-          background: #ff0000;
-          color: #fff;
-          padding: 0 5px;
-          vertical-align: top;
-          margin-left: -10px; 
-      }*/
 
     </style>
 
@@ -56,7 +35,7 @@
       </div>
     </a>
 
-    <nav id="myHeader" class="navbar navbar-expand-sm navbar-light navbar-fixed-top scrolling-navbar py-0" style="background-color: #BE9FE1;" data-toggle="affix">
+    <nav id="myHeader" class="navbar navbar-expand-sm navbar-light navbar-fixed-top scrolling-navbar py-0" style="background-color: #87CED9;" data-toggle="affix">
       <div class="mx-auto">
 
 
@@ -92,7 +71,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <b>Administración <i class="fas fa-user-lock"></i> </b>
                 </a>
-                <div class="dropdown-menu" style="background-color: #BE9FE1; text-align: center !important;" aria-labelledby="navbarDropdownMenuLink">
+                <div class="dropdown-menu" style="background-color: #87CED9; text-align: center !important;" aria-labelledby="navbarDropdownMenuLink">
                   <a class="nav-link dropdown-item" href="/users"><b>Lista usuarios </b></a>
                   <a class="nav-link dropdown-item" href="/contends"><b>Disputas</b></a>
                 </div>
@@ -102,7 +81,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <b>Cuenta <i class="fas fa-user"></i></b>
                 </a>
-                <div class="dropdown-menu" style="background-color: #BE9FE1; text-align: center !important;" aria-labelledby="navbarDropdownMenuLink">
+                <div class="dropdown-menu" style="background-color: #87CED9; text-align: center !important;" aria-labelledby="navbarDropdownMenuLink">
                   <a class="nav-link dropdown-item" href="/profile/{{request.user.id}}"><b>Mi perfil</b></a>
                   <a class="nav-link dropdown-item" href="/myGames"><b>Mis juegos</b></a>
                   <a class="nav-link dropdown-item" href="/rents/{{request.user.id}}"><b>Historial</b></a>
@@ -157,6 +136,7 @@
     
                         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                           data-key="pk_test_RQqzBNd4chgHUGDPxZtwsKzU00X9dZcRvR"
+                          data-label="Pagar con tarjeta"
                           data-description="Pago"
                           data-currency="eur"
                           data-amount=""
@@ -203,7 +183,7 @@
 
     
 
-    <div class="container" style="background-color:rgb(41, 41, 41); box-shadow: 0 0 20px rgb(41, 41, 41);">
+    <div class="container" style="background-color:rgb(46, 64, 75); box-shadow: 0 0 20px rgb(41, 41, 41);">
       {% block content %}
       
       {% endblock %}
@@ -238,7 +218,7 @@
     </div>
     <footer class="page-footer font-small" style="  position: relative; bottom: 0; width: 100%;">
       <!-- Copyright -->
-      <div class="footer-copyright text-center py-3" style="background-color: #BE9FE1;">
+      <div class="footer-copyright text-center py-3" style="background-color: #87CED9;">
         <a target="_blank" href="https://twitter.com/Try_On_Board"> <i class="fab fa-twitter" style="color:rgb(41, 41, 41); size:50px;"></i></a>
 
         <a target="_blank" href="https://github.com/Acme-Board/board"><i class="fab fa-github" style="color:rgb(41, 41, 41);"></i></a> <br/>

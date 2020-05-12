@@ -18,7 +18,7 @@
 
 <!-- Aqui hacer bucle por columna para hacer una buena vista-->
 
-<div  style= "padding-block-end: 60px;margin: auto;">
+<div class="py-3"  style= "padding-block-end: 60px;margin: auto;">
 	
 	<h1 style="color: white; font-size:30px; border-radius: 8px; width: auto"> Lista de alquileres </h1></br>
 	<!-- Boton de busqueda para un futuro
@@ -31,60 +31,59 @@
 	  </form> -->
 	
 
-
-
-	<div  style= "display: flex; flex-wrap: wrap; ">
-
 	{% for dato in rents %}
 
-	<table class="table"style="margin: 10px;">
+	<table class="table" style="margin: 10px;">
+		<thead>
+			<th style="width: 10%;"></th>
+			<th style="width: 40%"></th>
+			<th style="width: 20%;"></th>
+		</thead>
 	<!-- Vamos a introducir  algunos juegos -->
-	<tr>
-		<td><img style="width:150px;height:150px; ; border-radius: 8px; padding: 5px;" src="{{dato.game.picture.url}} "/></td>
-	<td>
-	 <div style="color: white;"><h4 class=""> {{dato.game.name}} - {{dato.ticker|capfirst}} </h4></div> 
-		<p style="color: white;"> <b>Teléfono: {{dato.user.phone}}</b></p>
-		<p style="color: white;">Días: {{dato.days}}</p>
-		<p style="color: white;">Fecha inicio: {{dato.initial_date|date:'Y-m-d'}}</p>
-
-		<a href= "/gameDetail/{{dato.game.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Ver más</a></br>
-		{% if dato.deliver == False and dato.rentable == False and dato.user == request.user %}
+	<tr style="margin-top: 5px; background-color: #3e5e7e;">
+		<td>
+			<img style="width:150px;height:150px; ; border-radius: 8px; padding: 5px;" src="{{dato.game.picture.url}} "/>
+		</td>
+		<td>
+			<div style="color: white;"><h4> {{dato.game.name}} - {{dato.ticker|capfirst}} </h4></div> 
+			<p style="color: white;"> <b>Teléfono: {{dato.user.phone}}</b></p>
+			<p style="color: white;">Días: {{dato.days}}</p>
+			<p style="color: white;">Fecha inicio: {{dato.initial_date|date:'Y-m-d'}}</p>
+		</td>
+		<td>
+			<a href= "/gameDetail/{{dato.game.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Ver más</a></br>
+			{% if dato.deliver == False and dato.rentable == False and dato.user == request.user %}
 			<a href= "/rents/deliver/{{dato.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Entregado</a></br>
-		{% endif %}
-		{% if dato.deliver == True and dato.game.owner == request.user%}
-			<a href= "/rents/deliver/{{dato.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Recibido</a></br>
-		{% endif %}
+			{% endif %}
+			{% if dato.deliver == True and dato.game.owner == request.user %}
+				<a href= "/rents/deliver/{{dato.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Recibido</a></br>
+			{% endif %}
 
-		{% if dato.game.owner == request.user%}
-		<a href= "/contend/{{dato.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Abrir disputa</a></br> 
-		{% else %}
-		<a href= "/review/{{dato.game.owner.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Comentar</a></td>
+			{% if dato.game.owner == request.user%}
+			<a href= "/contend/{{dato.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Abrir disputa</a></br> 
+			{% else %}
+			<a href= "/review/{{dato.game.owner.id}}" class="btn btn-info btn-sm my-1" style="border-radius: 8px">Comentar</a>
+		</td>
 
 		{% endif %}
-
-		
-	</div>
 	</tr>
 	</table>
+
 	{% empty %}
 
 <!-- Hacer Visible esta pagina. -->
-<div>
-<li class="text-center" style="color:white;">Vaya, parece que no has alquilado ningun Juego, ¿Por qué no le 
-	echas un ojo al catálogo?</li>
-</br>
-	<a href= "/games" class="btn btn-info btn-sm"
-	style="border-radius: 8px; margin: 10px; color:black; font-weight: bold;">Ir al catálogo</a></br> </br>
-</div>
-</table>
+	<div style="text-align: center;">
+		<li class="text-center" style="color:white;">Vaya, parece que no ha habido ningún alquiler.</li>
+		</br>
+		<a href= "/games" class="btn btn-info btn-sm"
+			style="border-radius: 8px; margin: 10px;">Ir al catálogo</a></br> </br>
+	</div>
+
 	{% endfor %}
 
 </div>
 
 
-<!-- Solución Parcial, ver como solucionarlo -->
-
-</div>
 <!-- Una vista final de la vista para darle profesionalidad -->
 
 

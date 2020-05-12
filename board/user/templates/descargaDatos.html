@@ -11,22 +11,7 @@
     #popup{
       text-decoration-color: black;
     }
-    
-    .container{
-        padding:20%;
-        margin-left: 20%;
-        margin-right: 20%;
-    }
-    .container .img{
-        text-align:right;
-    }
-    .container .details{
-        border-left:3px solid #ded4da;
-    }
-    .container .details p{
-        font-size:15px;
-        font-weight:bold;
-    }
+
     </style>    
     </head>
     
@@ -34,13 +19,14 @@
 {% block content %}
     <form method="POST" action="" >
         {% csrf_token %}
-        <div class="container">
-        <h5 class="text-center py-5" style="color: white; max-width: 50%; margin-left: 25%;">
-           En breves sus datos como usuario se descargaran, si lo desea, puede dar su opinión sobre 
-        la aplicación o la causa de la descarga. Muchas gracias por usar TryOnBoard </h5>
+        <div>
+        <h5 class="py-5" style="text-align: justify; color: white; max-width: 50%; margin-left: 25%;">
+           En breves recibirá un correo a su dirección email con los datos que tenemos de usted. 
+           Si lo desea, puede dar su opinión sobre 
+        la aplicación o la causa de la petición. Muchas gracias por usar Try On Board. </h5>
        
             {% for field in form %}
-          <div class="text-center py-5">
+          <div class="text-center">
               <div class="field">               
                  <div style="color:white;"><label class="label">{{field.label}} </label></div>
                   <div>{{field}}</div>
@@ -52,13 +38,12 @@
 
     
         <div style="margin: 15px; text-align: center;">
-            <a href= "/profile/{{user.id}}" class="btn btn-primary" style="border-radius: 8px;">Volver</a>
-            <button type="submit" class="btn btn-primary"  style="border-radius: 8px;">Descargar</button>              
+            <a href= "/profile/{{user.id}}" class="btn btn-info btn-sm" style=" color: white; border-radius: 8px; margin-bottom: 30px; margin-top: 30px;">Volver</a>
+            <button type="submit" class="btn btn-primary"  style="border-radius: 8px;">Recibir datos</button>              
         </div>
     </form>
 {% endblock %}
 
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 {% block vue %}
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
