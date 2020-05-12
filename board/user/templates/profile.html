@@ -202,10 +202,12 @@
 
       <tr style="align-content: center; text-align: left;">
         <td style="width:15%; text-align: center;">
-          <img src="{{dato.fromUser.picture.url}}" style="width:120px;"/>
+          <a href="/profile/{{dato.fromUser.id}}">
+            <img src="{{dato.fromUser.picture.url}}" style="border-radius: 8px;width:120px;"/>
+          </a>
         </td>
         <td style="background-color: rgb(59, 116, 124);">  
-          <em>Usuario: {{dato.fromUser}}</em>
+          <em>Usuario: <a style="text-decoration: underline;" href="/profile/{{dato.fromUser.id}}">{{dato.fromUser}}</a></em>
           <div class="container" style="color:white; width:930px; word-break: break-all;">
             " {{dato.comment}} "
           </div> </br>
