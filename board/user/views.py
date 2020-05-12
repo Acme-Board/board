@@ -95,6 +95,7 @@ def delete_myUSer(request, pk):
             request.session['drop'] = False
             return profile(request,request.user.id)
 
+        request.session['drop'] = True
         instancia.delete()
         if request.user.admin == True:
             return redirect('/users')
