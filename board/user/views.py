@@ -314,10 +314,10 @@ def edit_pic(request):
 
 def user_list(request):
     if(request.user.admin):
-        games = User.objects.exclude(pk=request.user.id)
+        users = User.objects.exclude(pk=request.user.id)
     else:
-        games = []
-    return render(request,'users.html',{'users':games})
+        users = []
+    return render(request,'users.html',{'users':users})
 
 def contact_user(request,pk):
     user = get_object_or_404(User, pk=pk)
@@ -332,7 +332,7 @@ def contact_user(request,pk):
 
             email = EmailMessage(title,body,to=[emailto])
             email.send()
-            return redirect('/')
+            return render(request,'index.html',{'mensaje': 'Se ha enviado correctamente el correo al usuario.'})
     else:
         form = contact()
     return render(request,'contact.html',{'form':form})
