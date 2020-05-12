@@ -82,10 +82,7 @@
                 <h5>Valoración: {{user.rate}}</h5>
                 <h5>{{user.bio}}</h5>
                 </br>
-            
-                {% if request.session.drop == False %}
-                    TIENES PENDIENTES ALQUILERES PENDEJO
-                {% endif %}
+          
 
                 <!-- Aqui viene el pop up-->
     
@@ -178,8 +175,12 @@
                       <h5 class="text-dark" id="popup">¿Estas seguro de que quieres borrar tus datos?</h5>
                     </div>
                     <div class="modal-footer">
-                      <a role="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
-                      <a role="button" href="/deleteUser/{{user.id}}" class="btn btn-primary">Si, continuar</a>
+                      {% if request.session.drop == False %}
+                        TIENES PENDIENTES ALQUILERES PENDEJO</br>
+                        <a role="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</a>
+                      {% else %}
+                        <a role="button" href="/deleteUser/{{user.id}}" class="btn btn-primary">Si, continuar</a>
+                      {% endif %}
                     </div>
                   </div>
                 </div>
