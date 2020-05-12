@@ -16,14 +16,14 @@
 border-radius: 8px;"> {{mensaje}} </p>
 <div class="form-main text-center mx-auto">
     
-    <h2 class="form-title py-3">Haz tu review, {{user}}</h2>
+    <h2 class="form-title py-3">Haz tu valoración, {{user}}</h2>
     <form method="POST">
         {{ form.as_p }}
         {% csrf_token %}
         <br/>
 
         <a href= "/rents/{{user.id}}" class="btn btn-info btn-sm" style=" color: white; border-radius: 8px; margin-bottom: 30px; margin-top: 30px; font-weight: bold;">Volver</a>
-        <button class="btn btn-primary my-1" type="submit">Crear review</button>
+        <button class="btn btn-primary my-1" type="submit">Crear valoración</button>
     </form>
     </div>
 </div>
