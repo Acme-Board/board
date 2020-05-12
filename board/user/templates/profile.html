@@ -76,11 +76,17 @@
 
                 <h5 class="text-left">{{user.first_name}} {{user.last_name}}</h5>
                 <small>{{user.range}}</small>
+                <small>{{drop}}</small>
+                <small>{{prueba}}</small>
                 <h5>Usuario: {{user.username}}</h5>
                 <h5>Valoración: {{user.rate}}</h5>
                 <h5>{{user.bio}}</h5>
                 </br>
             
+                {% if request.session.drop == False %}
+                    TIENES PENDIENTES ALQUILERES PENDEJO
+                {% endif %}
+
                 <!-- Aqui viene el pop up-->
     
                 {% if request.user.id == user.id and request.user.is_authenticated == True %} 

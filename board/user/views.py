@@ -17,7 +17,7 @@ from user.models import User
 from user.forms import Register, editPass, editUsername, editProfile, editPic, contact,descargaDatos, LoginForm
 from payment.views import charge
 from reviews.models import Comment
-from rent.models import JuegosFav, Game
+from rent.models import JuegosFav, Game, Rent
 
 # Create your views here.
 
@@ -68,8 +68,33 @@ def delete_myUSer(request, pk):
 
     # Recuperamos la instancia del user y la borramos
     instancia = User.objects.get(id=pk)
+
+    # Comprobamos que no tiene alquileres pendientes antes de borrar sus datos
+    rents = Rent.objects.filter(user=request.user)
+    games = Game.objects.filter(owner=request.user)
+
+    drop = True
+
+    for x in rents:
+        if(x.rentable == False):
+            drop = False
+            break
     
+    for x in games:
+        rents1 = Rent.objects.filter(game=x)
+
+        for y in rents1:
+            if(y.rentable == False):
+                drop = False
+                break
+
+    # Comprobamos que está logueado el usuario o el administrador para poder borrar sus datos
     if(instancia == request.user or request.user.admin == True):
+        
+        if(drop == False):
+            request.session['drop'] = False
+            return profile(request,request.user.id)
+
         instancia.delete()
         if request.user.admin == True:
             return redirect('/users')
