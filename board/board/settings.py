@@ -33,7 +33,7 @@ ALLOWED_HOSTS = []
 
 APIS={}
 
-BASEURL = 'https://tryonboard-sprint3.herokuapp.com/'
+BASEURL = 'https://try-on-board.herokuapp.com/'
 # Application definition
 
 INSTALLED_APPS = [
