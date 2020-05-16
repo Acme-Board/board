@@ -33,7 +33,9 @@
                </div>
                <div style="margin-top: 10px;">
                     <a href= "/games" class="btn btn-info btn-sm;" style="border-radius: 8px; color:white;">¡Empezar!</a>
-                    <a class="btn btn-light btn-xl js-scroll-trigger" href= "#about" style="border-radius: 8px; margin-left: 5%; color:black; font-weight: bold;">¿Quiénes somos?</a>
+                    <a class="btn btn-light btn-xl js-scroll-trigger" href= "#about"
+                     style="border-radius: 8px; margin-left: 5%; color:black; font-weight: bold;">¿Quiénes somos?</a>
+                    </br></br>
                     <a class="btn btn-light btn-xl js-scroll-trigger" href= "#marketing" style="border-radius: 8px; margin-left: 5%; color:black; font-weight: bold;">Publicidad</a>
                </div>
           </div>
@@ -65,7 +67,7 @@
                     <hr class="divider my-4">
                     <div style="margin-bottom: 25px;">
                          <div class="row justify-content-center">
-                              <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1" >
+                              <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
                                    <i class="fas fa-4x fa-handshake text-primary mb-4"></i><br>
                                    <h3 class="h4 mb-2" >Alquila juegos</h3>
                                    <p class="mb-0">Alquila los juegos de mesa que te interesen</p>
@@ -113,107 +115,100 @@
 
 
      <section class="page-section py-3" id="team">
-               <div style="border-radius: 8px; width:85%; margin-left: 7%; height:300px; background-color: cadetblue;">
-                    <h2 class="text-center mt-0 py-3">El equipo</h2>
+          <div style="background-color: cadetblue;border-radius: 8px;">
+               <h2 class="text-center mt-0 py-3">El equipo</h2>
 
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                         <ol class="carousel-indicators">
+               <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
                          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                          <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-                         </ol>
-                         <div class="carousel-inner">
-                         <div class="carousel-item active" style="background-color: cadetblue; text-align: center; margin-bottom: 50px;margin-top:20px;">
-                         <img src="{% static 'img/team/david.png' %}" style="height: 100px;" alt="First slide">
-                         <div>
-                              David Cuevas <br> Jefe de Proyecto
-                         </div>
-                         </div>
-                              <div class="carousel-item" style="background-color: cadetblue;text-align: center; margin-bottom: 50px; margin-top:20px;">
-                                   <table style="margin-left: 11%; width: 85%; text-align: center;">                              
-                                        <tr>
-                                             <td>
-                                                  <div style="text-align: center;">
-                                                       <img src="{% static 'img/team/juan.png' %}" style="height: 100px;"><br>
-                                                       Juan Parra <br> Frontend Leader 
-                                                  </div>
-                                             </td>
-                                             <td>
-                                                  <div style="text-align: center;">
-                                                       <img src="{% static 'img/team/antonio.png' %}" style="height: 100px;"><br>
-                                                       Antonio Macías Zambrano <br> Backend Leader 
-                                                  </div>
-                                             </td>
-                                             <td>
-                                                  <div style="text-align: center;">
-                                                       <img src="{% static 'img/team/felix.png' %}" style="height: 100px;"><br>
-                                                       Félix Jiménez Gonzalez <br> Full Stack
-                                                  </div>
-                                             </td>
-                                        </tr>
-                                   </table>
+                    </ol>
+                    <div class="carousel-inner">
+                         <div class="carousel-item active" style="background-color: cadetblue; text-align: center; margin-bottom: 50px; margin-top:20px;">
+                              <div style="text-align: center;">
+                                   <img src="{% static 'img/team/david.png' %}" style="height: 100px;" alt="First slide"><br>
+                                   David Cuevas <br> Jefe de Proyecto
                               </div>
-                         <div class="carousel-item" style="background-color: cadetblue; text-align: center; margin-bottom: 50px; margin-top:20px;">
-                              <table style="margin-left: 8%; width: 85%; text-align: center;">                              
-                                   <tr>
-                                        <td>
-                                             <div style="text-align: center;">
-                                                  <img src="{% static 'img/team/pruizma.png' %}" style="height: 100px;"><br>
-                                                  Jose Manuel Ruiz-Mateos <br> Frontend 
-                                             </div>
-                                        </td>
-                                        <td>
-                                             <div style="text-align: center;">
-                                                  <img src="{% static 'img/team/pepe.png' %}" style="height: 100px;"><br>
-                                                  Jose María Fernandez <br> Backend 
-                                             </div>
-                                        </td>
-                                        <td>
-                                             <div style="text-align: center;">
-                                                  <img src="{% static 'img/team/gonzalo a.png' %}" style="height: 100px;"><br>
-                                                  Gonzalo Aguilar Hermoso <br> Backend
-                                             </div> 
-                                        </td>
-                                   </tr>
-                              </table>
                          </div>
                          <div class="carousel-item" style="background-color: cadetblue; text-align: center; margin-bottom: 50px; margin-top:20px;">
-                              <table style="margin-left: 9%; width: 85%; text-align: center;">                              
-                                   <tr>
-                                        <td>
-                                             <div style="text-align: center;">
-                                                  <img src="{% static 'img/team/gonzalo.png' %}" style="height: 100px;"><br>
-                                                  Gonzalo Fernández <br> Frontend 
-                                             </div>
-                                        </td>
-                                        <td>
-                                             <div style="text-align: center;">
-                                                  <img src="{% static 'img/team/adrian.png' %}" style="height: 100px;"><br>
-                                                  Adrían Roldan <br> Backend 
-                                             </div>  
-                                        </td>
-                                        <td>
-                                             <div style="text-align: center;">
-                                                  <img src="{% static 'img/team/luis.png' %}" style="height: 100px;"><br>
-                                                  Luis Manuel Sánchez <br> Frontend
-                                             </div>   
-                                        </td>
-                                   
-                                   </tr>
-                              </table>
+                              <div class="row justify-content-center">
+                                   <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">                            
+                                        <div style="text-align: center;">
+                                             <img src="{% static 'img/team/juan.png' %}" style="height: 100px;"><br>
+                                             Juan Parra <br> Frontend Leader 
+                                        </div>
+                                   </div>
+                                   <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">  
+                                        <div style="text-align: center;">
+                                             <img src="{% static 'img/team/antonio.png' %}" style="height: 100px;"><br>
+                                             Antonio Macías Zambrano <br> Backend Leader 
+                                        </div>
+                                   </div>
+                                   <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">  
+                                        <div style="text-align: center;">
+                                             <img src="{% static 'img/team/felix.png' %}" style="height: 100px;"><br>
+                                             Félix Jiménez Gonzalez <br> Full Stack
+                                        </div>
+                                   </div>
+                              </div>
                          </div>
+                         <div class="carousel-item" style="background-color: cadetblue; text-align: center; margin-bottom: 50px; margin-top:20px;">
+                              <div class="row justify-content-center">
+                                   <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">                            
+                                        <div style="text-align: center;">
+                                             <img src="{% static 'img/team/pruizma.png' %}" style="height: 100px;"><br>
+                                             Jose Manuel Ruiz-Mateos <br> Frontend 
+                                        </div>
+                                   </div>
+                                   <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
+                                        <div style="text-align: center;">
+                                             <img src="{% static 'img/team/pepe.png' %}" style="height: 100px;"><br>
+                                             Jose María Fernandez <br> Backend 
+                                        </div>
+                                   </div>
+                                   <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
+                                        <div style="text-align: center;">
+                                             <img src="{% static 'img/team/gonzalo a.png' %}" style="height: 100px;"><br>
+                                             Gonzalo Aguilar Hermoso <br> Backend
+                                        </div> 
+                                   </div>
+                              </div>
+                         </div>
+                         <div class="carousel-item" style="background-color: cadetblue; text-align: center; margin-bottom: 50px; margin-top:20px;">
+                              <div class="row justify-content-center">
+                                   <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">                            
+                                        <div style="text-align: center;">
+                                             <img src="{% static 'img/team/gonzalo.png' %}" style="height: 100px;"><br>
+                                             Gonzalo Fernández <br> Frontend 
+                                        </div>
+                                   </div>
+                                   <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
+                                       <div style="text-align: center;">
+                                             <img src="{% static 'img/team/adrian.png' %}" style="height: 100px;"><br>
+                                             Adrían Roldan <br> Backend 
+                                        </div>  
+                                   </div>
+                                   <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
+                                        <div style="text-align: center;">
+                                             <img src="{% static 'img/team/luis.png' %}" style="height: 100px;"><br>
+                                             Luis Manuel Sánchez <br> Frontend
+                                        </div>   
+                                   </div>                               
+                              </div>
                          </div>
                          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                         <span class="sr-only">Previous</span>
+                                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                   <span class="sr-only">Previous</span>
                          </a>
                          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                         <span class="sr-only">Next</span>
+                                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                   <span class="sr-only">Next</span>
                          </a>
                     </div>
                </div>
+          </div>
      </section>
 
      <section class="py-4"></section>
