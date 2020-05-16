@@ -64,56 +64,31 @@
                     <h2 class="text-center mt-0">¡A tu servicio!</h2>
                     <hr class="divider my-4">
                     <div style="margin-bottom: 25px;">
-                         <table>
-                              <tr>
-                                   <td style="width:25%; text-align: justify;">
-                                        <div class="lg-3 md-6 text-center">
-                                             <i class="fas fa-4x fa-handshake text-primary mb-4"></i>
-                                        </div>
-                                   </td>
-                                   <td style="width:25%; text-align: justify;">
-                                        <div class="lg-3 -md-6 text-center">
-                                             <i class="fas fa-4x fa-comments text-primary mb-4"></i>
-                                        </div>
-                                   </td>
-                                   <td style="width:25%;">
-                                        <div class="lg-3 md-6 text-center">
-                                             <i class="fas fa-4x fa-map-marker-alt text-primary mb-4"></i>
-                                        </div>
-                                   </td>
-                                   <td style="width:25%;">
-                                        <div class="lg-3 md-6 text-center">
-                                             <i class="fas fa-4x fa-thumbs-up text-primary mb-4"></i>
-                                        </div>
-                                   </td>
-                              </tr>
-                              <tr>
-                                   <td style="width:25%; text-align: justify;">
-                                        <div class="lg-3 md-6 text-center">
-                                             <h3 class="h4 mb-2" >Alquila juegos</h3>
-                                             <p class="mb-0">Alquila los juegos de mesa que te interesen</p>
-                                        </div>
-                                   </td>
-                                   <td style="width:25%; text-align: justify;">
-                                        <div class="lg-3 -md-6 text-center">
-                                             <h3 class="h4 mb-2">Ponte en contacto</h3>
-                                             <p class="mb-0">Contacta con los usuarios para aclarar dudas de los juegos</p>
-                                        </div>
-                                   </td>
-                                   <td style="width:25%;">
-                                        <div class="lg-3 md-6 text-center">
-                                             <h3 class="h4 mb-2">Localización</h3>
-                                             <p class="mb-0">Puedes buscar los juegos publicados más cerca de tu zona</p>
-                                        </div>
-                                   </td>
-                                   <td style="width:25%;">
-                                        <div class="lg-3 md-6 text-center">
-                                             <h3 class="h4 mb-2" style="margin-top: 20px;">Valoraciones</h3>
-                                             <p class="mb-0">¿Te ha gustado algún juego? ¿No? ¡Exprésate valorando a los usuarios!</p>
-                                        </div>
-                                   </td>
-                              </tr>
-                         </table>
+                         <div class="row justify-content-center">
+                              <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1" >
+                                   <i class="fas fa-4x fa-handshake text-primary mb-4"></i><br>
+                                   <h3 class="h4 mb-2" >Alquila juegos</h3>
+                                   <p class="mb-0">Alquila los juegos de mesa que te interesen</p>
+                              </div>
+                              <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1 text-center">
+                                   <i class="fas fa-4x fa-comments text-primary mb-4"></i><br>
+                                   <h3 class="h4 mb-2">Ponte en contacto</h3>
+                                   <p class="mb-0">Contacta con los usuarios para aclarar dudas de los juegos</p>
+ 
+                              </div>
+                              <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1 text-center">
+                                   <i class="fas fa-4x fa-map-marker-alt text-primary mb-4"></i><br>
+                                   <h3 class="h4 mb-2">Localización</h3>
+                                   <p class="mb-0">Puedes buscar los juegos publicados más cerca de tu zona</p>
+                              </div>
+                                                            
+                              <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1 text-center" >
+                                   <i class="fas fa-4x fa-thumbs-up text-primary mb-4"></i>
+                                   <h3 class="h4 mb-2" style="margin-top: 20px;">Valoraciones</h3>
+                                   <p class="mb-0">¿Te ha gustado algún juego? ¿No? ¡Exprésate valorando a los usuarios!</p>
+ 
+                              </div>
+                         </div>
                     </div>
                     <a class="btn btn-light btn-xl js-scroll-trigger" href="#marketing">Publicidad</a>
                </div>
@@ -149,13 +124,13 @@
                          <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
                          </ol>
                          <div class="carousel-inner">
-                         <div class="carousel-item active" style="text-align: center; margin-bottom: 50px;margin-top:20px;">
+                         <div class="carousel-item active" style="background-color: cadetblue; text-align: center; margin-bottom: 50px;margin-top:20px;">
                          <img src="{% static 'img/team/david.png' %}" style="height: 100px;" alt="First slide">
                          <div>
                               David Cuevas <br> Jefe de Proyecto
                          </div>
                          </div>
-                              <div class="carousel-item" style="text-align: center; margin-bottom: 50px; margin-top:20px;">
+                              <div class="carousel-item" style="background-color: cadetblue;text-align: center; margin-bottom: 50px; margin-top:20px;">
                                    <table style="margin-left: 11%; width: 85%; text-align: center;">                              
                                         <tr>
                                              <td>
@@ -179,7 +154,7 @@
                                         </tr>
                                    </table>
                               </div>
-                         <div class="carousel-item" style="text-align: center; margin-bottom: 50px; margin-top:20px;">
+                         <div class="carousel-item" style="background-color: cadetblue; text-align: center; margin-bottom: 50px; margin-top:20px;">
                               <table style="margin-left: 8%; width: 85%; text-align: center;">                              
                                    <tr>
                                         <td>
@@ -203,7 +178,7 @@
                                    </tr>
                               </table>
                          </div>
-                         <div class="carousel-item" style="text-align: center; margin-bottom: 50px; margin-top:20px;">
+                         <div class="carousel-item" style="background-color: cadetblue; text-align: center; margin-bottom: 50px; margin-top:20px;">
                               <table style="margin-left: 9%; width: 85%; text-align: center;">                              
                                    <tr>
                                         <td>
