@@ -5,98 +5,93 @@
     {% load static %}
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/rent_style.css' %}">
-
-
 </head>
 
 <body>
+  {% block content %}
 
+  <div class="d-flex justify-content-center py-5">
+    <div class="d-sm-inline-flex d-inline-flex d-md-inline-flex justify-content-center my-5 py-4 px-4 form-register" style="background: #3e5e7e; 
+      border-radius: 8px; font-family: 'calibri'; color: white;">
 
-{% block content %}
-<!--<div class="container" style="width:600px;"> -->
-<div class="py-5">
-<section class="form-register" style=" 
-  width:  600px;
-  background: #3e5e7e;
-  padding: 30px;
-  margin: auto;
-  border-radius: 8px;
-  font-family: 'calibri';
-  color: white;">
+      <div><h3  class ="well well-sm"> {{texto}} </h3> </div>
+    
+      <div id="app">      
+        <div><h6  class ="well well-sm">Los campos con * son obligatorios</h6> </div>
+        <form method="POST" enctype="multipart/form-data" class="NewGame" style=" margin: 20px;
+          padding: 5px">
+          
+          {% csrf_token %}  
 
-  <div><h3  class ="well well-sm"> {{texto}} </h3> </div>
-  
-    <div id="app">      
-            <div><h6  class ="well well-sm">Los campos con * son obligatorios</h6> </div>
-            <form method="POST" enctype="multipart/form-data" class="NewGame" style=" margin: 20px;
-            padding: 5px">{% csrf_token %}
-         
-        <table>
-          {% for field in form %}
-            <tr style="height: 40px; width: 40px; color:white;">
-              <div class="field">               
-                <td style="color:white;"><label class="label">{{field.label}} </label></td>
-                {% if field.label == "Precio (€/día)*" %}
-                  <td><input name="precio" id="precio" v-model="precio" required></td>
-                  <div style="color:rgb(241, 101, 101) !important">
-                    {{ field.errors }}
-                </div>
-                {% endif %}
-
-                {% if field.label != "Precio (€/día)*" %}          
-                  <td>{{field}}
+          
+          <table>
+            {% for field in form %}
+              <tr style="height: 40px; width: 40px; color:white;">
+                <div class="field">               
+                  <td style="color:white;"><label class="label">{{field.label}} </label></td>
+                  {% if field.label == "Precio (€/día)*" %}
+                    <td><input name="precio" id="precio" v-model="precio" required></td>
                     <div style="color:rgb(241, 101, 101) !important">
                       {{ field.errors }}
                   </div>
-                  </td>
-                {% endif %}
-              </div>
-            </tr>
-          {% endfor %}
-        </table>
-          
-        <div style="text-align:center; margin: 15px">
-          {% if foto != True %}
-          {% if request.user.premium == True %}
-          <p class="text-warning">Su beneficio con este juego será de [[totalPremium]] €</p>
-          <p class="text-warning">Sin Premium, ganaría [[totalPrecio]] €</p>
-          {% else %}
-          <p class="text-warning">Su beneficio con este juego será de [[totalPrecio]] €</p>
-          <p class="text-warning">Consiguiendo suscripción premium, ganaría [[totalPremium]] €</p>
-          {% endif %}
+                  {% endif %}
 
-          <a href= "/games" class="btn btn-info btn-sm" style=" color: white; border-radius: 8px; margin-bottom: 30px; margin-top: 30px;">Volver</a>
- 
-          {% else %}
-          <a href= "/myGames" class="btn btn-info btn-sm" style=" color: white; border-radius: 8px; margin-bottom: 30px; margin-top: 30px; font-weight: bold;">Volver</a>
- 
-        {% endif %}
-          
-          <button type="submit" class="btn btn-primary" style="border-radius: 8px">{{Alquilar}}</button>
-        </div>
-
-      </form>
-      <div>
-        {% if form.errors %}
-            {% for field in form %}
-                {% for error in field.errors %}
-                    <div class="alert alert-danger">
-                        <strong>{{ error|escape }}</strong>
+                  {% if field.label != "Precio (€/día)*" %}          
+                    <td>{{field}}
+                      <div style="color:rgb(241, 101, 101) !important">
+                        {{ field.errors }}
                     </div>
-                {% endfor %}
-            {% endfor %}
-            {% for error in form.non_field_errors %}
-                <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
+                    </td>
+                  {% endif %}
                 </div>
+              </tr>
             {% endfor %}
+          </table>
+            
+          <div style="text-align:center; margin: 15px">
+            {% if foto != True %}
+            {% if request.user.premium == True %}
+            <p class="text-warning">Su beneficio con este juego será de [[totalPremium]] €</p>
+            <p class="text-warning">Sin Premium, ganaría [[totalPrecio]] €</p>
+            {% else %}
+            <p class="text-warning">Su beneficio con este juego será de [[totalPrecio]] €</p>
+            <p class="text-warning">Consiguiendo suscripción premium, ganaría [[totalPremium]] €</p>
+            {% endif %}
 
-        {% endif %}
-    </div>
-    </div>        
+            <a href= "/games" class="btn btn-info btn-sm" style=" color: white; border-radius: 8px; margin-bottom: 30px; margin-top: 30px;">Volver</a>
+  
+            {% else %}
+            <a href= "/myGames" class="btn btn-info btn-sm" style=" color: white; border-radius: 8px; margin-bottom: 30px; margin-top: 30px; font-weight: bold;">Volver</a>
+  
+          {% endif %}
+            
+            <button type="submit" class="btn btn-primary" style="border-radius: 8px">{{Alquilar}}</button>
+          </div>
+
+        </form>
+        
+        <div>
+          {% if form.errors %}
+              {% for field in form %}
+                  {% for error in field.errors %}
+                      <div class="alert alert-danger">
+                          <strong>{{ error|escape }}</strong>
+                      </div>
+                  {% endfor %}
+              {% endfor %}
+              {% for error in form.non_field_errors %}
+                  <div class="alert alert-danger">
+                      <strong>{{ error|escape }}</strong>
+                  </div>
+              {% endfor %}
+
+          {% endif %}
+        </div>
+      </div> 
+
+    </div>       
   </div>
-</section>
-</div>
+
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
         const app = new Vue({
@@ -126,7 +121,7 @@
               }
           }
       })
-    </script>
+  </script>
  
 
 {% endblock %}
