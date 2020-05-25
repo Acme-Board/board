@@ -3,115 +3,75 @@
 <head>
 
      {% extends "base.html" %}
-
      {% load static %}
-
-     {% block extrahead %}
-
-          <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css"> 
-
-     {% endblock %}   
-
-     {% block vue %}
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
-{% endblock %}
 
 </head>
 
 <body>
-
-
-
 {% block content %}
 
-<style>
-
-.index-main {
-
-     background-image: url("{% static 'img/bg-masthead.jpg' %}");
-
-}   
-
-</style>
-
 <div class="py-5">
-
-<div class="index-main" style="
-background: #e3d9c9;
-max-height: 90%;
-max-width: 45%;
-margin: auto;
-margin-bottom: 50px;
-border-radius: 8px;
-color: black;">
-     <div style="text-align: center;">
-     <img class="index-icon" style="align-items: center;" src="{% static 'img/icon.png' %}"/>
-</div>
-<h3 class="index-title" style="color: black; margin-top: 5px;">¿ Confirmar la comprar por {{total}}€ ?</h3> 
-
-<div>      
-     <div  style=" margin-top: 15px; background: #f5f5dc; padding: 10px; margin: 10px; border-radius: 8px;">
-     <table>
-          <h5> Informacion de la compra: </h5></br>
-         
-          <thead>
-               <tr>
-          <th style="width:20%">Imagen</th>
-          <th style="width:15%">Usuario</th>
-          <th style="width:60%">Estado</th>
-          <th style="margin: 10%">Precio</th>
-          </tr>
-          </thead>
-               {% for dato in order %}
-               <tbody>
-               <tr>
-                   <div> <td> <img style="width:70px;height:70px; border-radius: 8px" src="{{dato.game.picture.url}}"/></td>
-                    <td> {{dato.game.owner}} </td>
-                    <td> {{dato.game.status}} </td>
-                    <td> {{dato.game.price}}&euro;</td>
-                    </div>
-               {% empty %}
-                    <li class="text-center" style="color:black;">Vaya, parece que no hay articulos en su carrito</li>
-			{% endfor %}
-
- <!--         <td> <img style="width:100px;height:100px; border-radius: 8px" src="{{game.picture}}"/> </td>
-          <td style=" color: white;"> 
-            <h5> Usuario: {{game.owner}} </h5>
-            <h5> Precio/dia: {{game.price}} &euro;</h5>
-            <h5> Estado: {{game.status}}</h5>
-          </td>-->
-          </tr>
-     </tbody>
-     </table>
-     </div>
-     <div style="text-align:center; margin-top: 15px;">
-
-          <div>
-               <form action='/charge/{{id}}' method="POST">
-                    <a class="btn btn-info btn-sm" href="/cart"
-                         role="stripe-button" style='border-radius: 8px; margin-right: 5%'>Volver</a> 
-                 {% csrf_token %}
-                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                 data-key="{{ key }}"
-                 data-label="Pagar con tarjeta"
-                data-description="Pago"
-                 data-currency="eur"
-                data-amount="{{cent}}"
-                data-locale="auto"
-                ></script>
-               
-               </form> 
-
-         
-
+     <div class="index-main" style="
+     background: #e3d9c9;
+     width:auto;
+     margin: auto;
+     margin-bottom: 50px;
+     border-radius: 8px;
+     color: black;">
+          <div style="text-align: center;">
+               <img class="index-icon" style="align-items: center;" src="{% static 'img/icon.png' %}"/>
           </div>
+          <h3 class="index-title" style="color: black; margin-top: 5px;">¿ Confirmar la comprar por {{total}}€ ?</h3> 
 
+          <div>      
+               <div  style=" margin-top: 15px; background: #f5f5dc; padding: 10px; margin: 10px; border-radius: 8px;">
+                    <h5> Información de la compra: </h5></br>
+                    {% for dato in order %}
+                    <div class="row">                  
+                         <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
+                              <p style="text-decoration: underline;"><b>Foto</b></p> <br>
+                              <img style="width:70px;height:70px; border-radius: 8px" src="{{dato.game.picture.url}}"/>
+                         </div>
+                         
+                         <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
+                              <p style="text-decoration: underline;"><b>Usuario</b></p> <br>
+                              {{dato.game.owner}}
+                         </div>
+                         
+                         <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
+                              <p style="text-decoration: underline;"><b>Estado</b></p> <br>
+                              {{dato.game.status}}
+                         </div>
+                         
+                         <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
+                              <p style="text-decoration: underline;"><b>Precio</b></p> <br>
+                              {{dato.game.price}}&euro;
+                         </div>
+                    </div>
+                    {% empty %}
+                         <li class="text-center" style="color:black;">Vaya, parece que no hay artículos en su carrito.</li>
+                    {% endfor %}
+
+                    <div style="text-align:center; margin-top: 15px;">
+                         <div>
+                              <form action='/charge/{{id}}' method="POST">
+                                   <a class="btn btn-info btn-sm" href="/cart"
+                                        role="stripe-button" style='border-radius: 8px; margin-right: 5%'>Volver</a> 
+                                   {% csrf_token %}
+                                   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                   data-key="{{ key }}"
+                                   data-label="Pagar con tarjeta"
+                                   data-description="Pago"
+                                   data-currency="eur"
+                                   data-amount="{{cent}}"
+                                   data-locale="auto"
+                                   ></script>             
+                              </form> 
+                         </div>
+                    </div>
+               </div>
+          </div>
      </div>
-</div>
-</div>
-
 </div>
 {% endblock %}
 
