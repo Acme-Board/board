@@ -12,3 +12,4 @@ stripe==2.23.0
 pillow==7.0.0
 request
 selenium==3.141.0
+django-crispy-forms==1.9.0

@@ -8,16 +8,17 @@
 </head>
 
 <body>
+  {% load crispy_forms_tags %}
   {% block content %}
 
   <div class="d-flex justify-content-center py-5">
     <div class="d-sm-inline-flex d-inline-flex d-md-inline-flex justify-content-center my-5 py-4 px-4 form-register" style="background: #3e5e7e; 
       border-radius: 8px; font-family: 'calibri'; color: white;">
 
-      <div><h3  class ="well well-sm"> {{texto}} </h3> </div>
-    
-      <div id="app">      
-        <div><h6  class ="well well-sm">Los campos con * son obligatorios</h6> </div>
+      <div id="app">
+        <h3  class ="well well-sm"> {{texto}} </h3> 
+          
+        <h6  class ="well well-sm">Los campos con * son obligatorios</h6>
         <form method="POST" enctype="multipart/form-data" class="NewGame" style=" margin: 20px;
           padding: 5px">
           
@@ -27,20 +28,19 @@
           <table>
             {% for field in form %}
               <tr style="height: 40px; width: 40px; color:white;">
-                <div class="field">               
-                  <td style="color:white;"><label class="label">{{field.label}} </label></td>
+                <div class="field">                          
                   {% if field.label == "Precio (€/día)*" %}
-                    <td><input name="precio" id="precio" v-model="precio" required></td>
+                  <td style="color:white;">
+                    <label class="label">{{field.label}} </label><br>
+                    <input class="textinput textInput form-control" type="number" min="1" max="100" name="precio" id="precio" v-model="precio" required>
+                  </td>
                     <div style="color:rgb(241, 101, 101) !important">
                       {{ field.errors }}
                   </div>
                   {% endif %}
 
                   {% if field.label != "Precio (€/día)*" %}          
-                    <td>{{field}}
-                      <div style="color:rgb(241, 101, 101) !important">
-                        {{ field.errors }}
-                    </div>
+                    <td>{{field|as_crispy_field}}
                     </td>
                   {% endif %}
                 </div>
@@ -70,23 +70,7 @@
 
         </form>
         
-        <div>
-          {% if form.errors %}
-              {% for field in form %}
-                  {% for error in field.errors %}
-                      <div class="alert alert-danger">
-                          <strong>{{ error|escape }}</strong>
-                      </div>
-                  {% endfor %}
-              {% endfor %}
-              {% for error in form.non_field_errors %}
-                  <div class="alert alert-danger">
-                      <strong>{{ error|escape }}</strong>
-                  </div>
-              {% endfor %}
 
-          {% endif %}
-        </div>
       </div> 
 
     </div>       

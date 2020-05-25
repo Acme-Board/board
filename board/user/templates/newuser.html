@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    {% load crispy_forms_tags %}
 
     {% block content %}
     <div class="row justify-content-md-center py-5">
@@ -26,34 +27,15 @@
         
                         <form method="POST" enctype="multipart/form-data" class="NewUser" style=" margin: 5px; padding: 5px; border-radius: 8px;">
                             {% csrf_token %}
-                            <table>
-                              {% for field in form %}
-                            <tr style="height: 40px; width: 40px;">
+                            
+                            {% for field in form %}
+                              
+                            <div class="col-sm-5 col-md-7 col-lg-12">
                                 <div class="field">               
-                                    <td style="color:white;">
-                                        {% if field.label == "Acepto Términos y Condiciones de uso*" %}
-                                        <a target="_blank" href="/terms">
-                                            <label class="label" style="text-decoration: underline;"  style="color:white;">{{field.label}} </label></a>
-
-                                        {% else %}
-                                            {% if field.label == "Acepto la política de privacidad*" %}
-                                                <a target="_blank" href="/privacy">
-                                                    <label class="label" style="text-decoration: underline;"  style="color:white;">{{field.label}} </label></a>
-                                            {% else %}
-                                              <label class="label"  style="color:white;">{{field.label}} </label>
-                                            {% endif %}
-                                        {% endif %}
-                                    </td>
-                                    <td style="color:white;">{{field}}
-                                        <div style="color:rgb(241, 101, 101) !important">
-                                            {{ field.errors }}
-                                        </div>
-                                    </td>
-
+                                    {{field|as_crispy_field}}
                                 </div>
-                            </tr>
+                            </div>
                             {% endfor %}
-                            </table>
                             {% if request.user.is_authenticated %} 
                             <div style="margin: 15px; text-align: center;">
                                 <a href="/profile/{{user.id}}" class="btn btn-info btn-sm"  style="border-radius: 8px"> Volver </a>

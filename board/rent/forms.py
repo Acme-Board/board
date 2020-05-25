@@ -10,11 +10,11 @@ my_default_errors = {
 }
 
 class NewGame(forms.Form):
-   name = forms.CharField(max_length=20,label="Nombre*", validators=[name_regex])
-   description = forms.CharField(max_length=200,label="Descripción*",widget=forms.Textarea)
+   name = forms.CharField(max_length=20,label="Nombre", validators=[name_regex])
+   description = forms.CharField(max_length=200,label="Descripción",widget=forms.Textarea)
    price = forms.CharField(max_length=5,label="Precio (€/día)*", required=False)
-   status = forms.ChoiceField(choices=[(str(x),x.value) for x in Status], label="Estado*")
-   picture = forms.ImageField( label="Foto*",error_messages=my_default_errors)
+   status = forms.ChoiceField(choices=[(str(x),x.value) for x in Status], label="Estado")
+   picture = forms.ImageField( label="Foto",error_messages=my_default_errors)
 
 class editData(forms.Form):
    name = forms.CharField(max_length=20,label="Nombre*", validators=[name_regex])

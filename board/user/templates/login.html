@@ -7,6 +7,7 @@
     {% endblock %}
 </head>
 <body>
+    {% load crispy_forms_tags %}
 
 {% block content %}
 <div class="row justify-content-md-center justify-content-center py-5">
@@ -15,34 +16,11 @@
     <form method="POST">
         {% csrf_token %}
         
-        <table style="margin-left: 80px;">
             {% for field in form %}
-              <tr style="height: 40px; width: 40px;">
-                    {% if field.label == "Usuario" %}         
-                        <td style="color:white;"><label class="label">Usuario: </label></td>
-                    {% else %}
-                        <td style="color:white;"><label class="label">Contraseña: </label></td>
-                    {% endif %}
-  
-                    <td>{{field}}
-                        <div style="color:rgb(241, 101, 101) !important">
-                            {{ field.errors }}
-                        </div>
-                    </td>
-              </tr>
+                    <div class="col-sm-5 col-md-7 col-lg-12 text-center justify-content-center" style="color:white;">{{field|as_crispy_field}}
+                    </div>
             {% endfor %}
-          </table>
-         
-         <div>
-               {% if form.errors %}
-                   {% for error in form.non_field_errors %}
-                       <div class="alert alert-danger">
-                           <strong>{{ error|escape }}</strong>
-                       </div>
-                   {% endfor %}
 
-               {% endif %}
-           </div>
 
         <div style="text-align:center; margin-top: 10px;">
             <button type="submit" class="btn btn-primary"  style="border-radius: 8px">Entrar</button>
