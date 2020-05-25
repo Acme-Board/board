@@ -8,6 +8,7 @@
 </head>
 <body>
 
+    {% load crispy_forms_tags %}
 {% block content %}
 
 <div class="py-5">
@@ -18,8 +19,8 @@ border-radius: 8px;"> {{mensaje}} </p>
     
     <h2 class="form-title py-3">Haz tu valoración, {{user}}</h2>
     <form method="POST">
-        {{ form.as_p }}
         {% csrf_token %}
+        {{ form|crispy }}
         <br/>
 
         <a href= "/rents/{{user.id}}" class="btn btn-info btn-sm" style=" color: white; border-radius: 8px; margin-bottom: 30px; margin-top: 30px; font-weight: bold;">Volver</a>

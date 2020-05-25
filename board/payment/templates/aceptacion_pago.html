@@ -14,6 +14,7 @@
      <div class="index-main" style="
      background: #e3d9c9;
      width:auto;
+     height:auto;
      margin: auto;
      margin-bottom: 50px;
      border-radius: 8px;
@@ -21,33 +22,47 @@
           <div style="text-align: center;">
                <img class="index-icon" style="align-items: center;" src="{% static 'img/icon.png' %}"/>
           </div>
-          <h3 class="index-title" style="color: black; margin-top: 5px;">¿ Confirmar la comprar por {{total}}€ ?</h3> 
+          <h3 class="index-title" style="color: black; margin-top: 5px;">¿Confirmar la comprar por {{total}}€ ?</h3> 
 
           <div>      
                <div  style=" margin-top: 15px; background: #f5f5dc; padding: 10px; margin: 10px; border-radius: 8px;">
                     <h5> Información de la compra: </h5></br>
+                    <div class="row">                  
+                         <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
+                              <p style="text-decoration: underline;"><b>Foto</b></p> 
+                         </div>
+                         
+                         <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
+                              <p style="text-decoration: underline;"><b>Usuario</b></p> 
+                         </div>
+                         
+                         <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
+                              <p style="text-decoration: underline;"><b>Estado</b></p> 
+                         </div>
+                         
+                         <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
+                              <p style="text-decoration: underline;"><b>Precio</b></p> 
+                         </div>
+                    </div>
                     {% for dato in order %}
                     <div class="row">                  
                          <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
-                              <p style="text-decoration: underline;"><b>Foto</b></p> <br>
                               <img style="width:70px;height:70px; border-radius: 8px" src="{{dato.game.picture.url}}"/>
                          </div>
                          
                          <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
-                              <p style="text-decoration: underline;"><b>Usuario</b></p> <br>
                               {{dato.game.owner}}
                          </div>
                          
                          <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
-                              <p style="text-decoration: underline;"><b>Estado</b></p> <br>
                               {{dato.game.status}}
                          </div>
                          
                          <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
-                              <p style="text-decoration: underline;"><b>Precio</b></p> <br>
                               {{dato.game.price}}&euro;
                          </div>
                     </div>
+                    <hr>
                     {% empty %}
                          <li class="text-center" style="color:black;">Vaya, parece que no hay artículos en su carrito.</li>
                     {% endfor %}
