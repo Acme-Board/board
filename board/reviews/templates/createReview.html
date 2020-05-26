@@ -9,28 +9,29 @@
 <body>
 
     {% load crispy_forms_tags %}
-{% block content %}
+    {% block content %}
 
-<div class="py-5">
-
-<p style=" background-color: #ffa420 ; color: black; text-align: center;
-border-radius: 8px;"> {{mensaje}} </p>
-<div class="form-main text-center mx-auto">
+    <div class="d-flex justify-content-center py-5">
+        <div class="d-sm-inline-flex d-inline-flex d-md-inline-flex justify-content-center my-5 py-4 px-4 form-register" style="background: #3e5e7e; 
+          border-radius: 8px; font-family: 'calibri'; color: white;">
     
-    <h2 class="form-title py-3">Haz tu valoración, {{user}}</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <br/>
-
-        <a href= "/rents/{{user.id}}" class="btn btn-info btn-sm" style=" color: white; border-radius: 8px; margin-bottom: 30px; margin-top: 30px; font-weight: bold;">Volver</a>
-        <button class="btn btn-primary my-1" type="submit">Crear valoración</button>
-    </form>
+            <p style=" background-color: #ffa420 ; color: black; text-align: center;
+                border-radius: 8px;"> {{mensaje}} </p>
+            <div>
+                <h2 class="form-title py-3">Haz tu valoración, {{user}}</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div style="text-align: center;">
+                        <a href= "/rents/{{user.id}}" class="btn btn-info btn-sm" style="color: white; border-radius: 8px; 
+                        margin-bottom: 30px; margin-top: 30px;">Volver</a>
+                        <button class="btn btn-primary my-1" type="submit">Crear valoración</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-</div>
 
-
-</div
 {% endblock %}
 {% block vue %}
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
