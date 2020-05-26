@@ -25,40 +25,40 @@
           <h3 class="index-title" style="color: black; margin-top: 5px;">¿Confirmar la comprar por {{total}}€ ?</h3> 
 
           <div>      
-               <div  style=" margin-top: 15px; background: #f5f5dc; padding: 10px; margin: 10px; border-radius: 8px;">
-                    <h5> Información de la compra: </h5></br>
+               <div class="justify-content-center" style=" margin-top: 15px; background: #f5f5dc; padding: 10px; margin: 10px; border-radius: 8px;">
+                    <h5 style="text-align: center;"> Información de la compra: </h5></br>
                     <div class="row">                  
-                         <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
+                         <div class="col-lg-3 col-md-6 col-10 d-none d-lg-block col-sm-offset-1" style="text-align: center;">
                               <p style="text-decoration: underline;"><b>Foto</b></p> 
                          </div>
                          
-                         <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
+                         <div class="col-lg-3 col-md-6 col-10 d-none d-lg-block col-sm-offset-1" style="text-align: center;">
                               <p style="text-decoration: underline;"><b>Usuario</b></p> 
                          </div>
                          
-                         <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
+                         <div class="col-lg-3 col-md-6 col-10 d-none d-lg-block col-sm-offset-1" style="text-align: center;">
                               <p style="text-decoration: underline;"><b>Estado</b></p> 
                          </div>
                          
-                         <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
+                         <div class="col-lg-3 col-md-6 col-10 d-none d-lg-block col-sm-offset-1" style="text-align: center;">
                               <p style="text-decoration: underline;"><b>Precio</b></p> 
                          </div>
                     </div>
                     {% for dato in order %}
-                    <div class="row">                  
-                         <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
+                    <div class="row justify-content-center">                  
+                         <div class="col-lg-3 col-md-6 col-10 col-sm-offset-1" style="text-align: center;">
                               <img style="width:70px;height:70px; border-radius: 8px" src="{{dato.game.picture.url}}"/>
                          </div>
                          
-                         <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
+                         <div class="col-lg-3 col-md-6 col-10 col-sm-offset-1" style="text-align: center;">
                               {{dato.game.owner}}
                          </div>
                          
-                         <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
+                         <div class="col-lg-3 col-md-6 col-10 col-sm-offset-1" style="text-align: center;">
                               {{dato.game.status}}
                          </div>
                          
-                         <div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1">
+                         <div class="col-lg-3 col-md-6 col-10 col-sm-offset-1" style="text-align: center;">
                               {{dato.game.price}}&euro;
                          </div>
                     </div>

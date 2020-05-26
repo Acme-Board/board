@@ -42,57 +42,51 @@
 		<a href="/deleteAll" onclick="mensaje()"
 		class="btn btn-danger btn-sm">Borrar todo</a></br> </br></td>
 	</div>	
-	
-	<table  class= "table table-hover table-condensed">
-		<thead>
-			<tr style="color:white;">
-				<th style="width:50%">Producto</th>
-				<th style="width:10%">Precio</th>
-				<th style="width:10%">Fecha inicio</th>
-				<th style="width:22%" class="text-center">Opciones</th>
-				
-			</tr>
-		</thead>
-		{% for dato in order %}
-		<tbody>
-			
-			<td data-th="Producto">
-				<div class="row">
-					<div class="col-2 hidden-xs"><img src="{{dato.game.picture.url}}" class="img-thumbnail"/></div>
-					<div class="col-10">
-						<h4 class="nomargin" style="color:white;">{{dato.game.name|capfirst}}      -    Estado: {{dato.game.status}}</h4>
-						
-					</div>
-				</div>
-			</td>
-			<td data-th="Precio" style="color:white;">{{dato.game.price}} x {{dato.days}} días</td>
-			<td data-th="Fecha inicio" style="color:white;">{{dato.initial_date|date:'Y-m-d'}}</td>
-			<td data-th="Opciones"class="text-center">
 
+	<div class="row">                  
+		<div class="col-lg-3 col-md-6 d-none d-lg-block col-sm-offset-1">
+			 <p style="text-decoration: underline;"><b>Producto</b></p> 
+		</div>
+		
+		<div class="col-lg-3 col-md-6 d-none d-lg-block col-sm-offset-1">
+			 <p style="text-decoration: underline;"><b>Precio</b></p> 
+		</div>
+		
+		<div class="col-lg-3 col-md-6 d-none d-lg-block col-sm-offset-1">
+			 <p style="text-decoration: underline;"><b>Fecha inicio</b></p> 
+		</div>
+		
+		<div class="col-lg-3 col-md-6 d-none d-lg-block col-sm-offset-1">
+			 <p style="text-decoration: underline;"><b>Opciones</b></p> 
+		</div>
+   </div>
+
+		{% for dato in order %}
+		<div class="row justify-content-center">           
+			<div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1" style="text-align: center;" data-th="Producto">
+					<img src="{{dato.game.picture.url}}" style="height: 100px;" class="img-thumbnail"/>
+					<h4 class="nomargin" style="color:white;">
+						{{dato.game.name|capfirst}}      -    Estado: {{dato.game.status}}
+					</h4>
+			</div>
+			<div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1" style="text-align: center;" data-th="Precio">
+				{{dato.game.price}} x {{dato.days}} días
+			</div>
+				
+			<div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1" style="text-align: center;" data-th="Fecha inicio">
+				{{dato.initial_date|date:'Y-m-d'}}
+			</div>
+				
+			<div class="col-lg-3 col-md-6 col-sm-10 col-10 col-sm-offset-1" style="text-align: center;"  data-th="Opciones">
 				<a role=button href="/gameDetail/{{dato.game.id}}" class="btn btn-info btn-sm">Info</a>
 
 				<a href="/deleteCart/{{dato.id}}"
 					class="btn btn-danger btn-sm">Borrar</a>
+			</div>
+	   </div>
+	   <hr>
 
-			</td>
-			<!-- -->
-			
-			<!--
-			<tr style="text-align:center;">
-				<td><img style="width: 245px;height: 245px; ; border-radius: 8px;" src="{{dato.game.picture}} "/>
-			<div><h3> {{dato.game.name|capfirst}} - <i> {{dato.game.price}} €</i> </br></h3>
-				Estado: {{dato.game.status}} </br>
-				<a href= "/gameDetail/{{dato.game.id}}" class="btn btn-info btn-sm"
-					style="border-radius: 8px; margin-top: 10px;">Ver mas</a></br> </br></div></td>
-
-			</tr>
-			-->			
-			{% endfor %}
-
-		</tbody>
-	</table>
-
-
+	   {% endfor %}
 	
 	<div style="text-align: center;">
 		Total: {{sum}} €<br>
