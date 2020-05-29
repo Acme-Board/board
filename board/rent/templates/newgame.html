@@ -32,7 +32,7 @@
                   {% if field.label == "Precio (€/día)*" %}
                   <td style="color:white;">
                     <label class="label">{{field.label}} </label><br>
-                    <input class="textinput textInput form-control" type="number" min="1" max="100" name="precio" id="precio" v-model="precio" required>
+                    <input class="textinput textInput form-control" min="1" max="100" name="precio" id="precio" v-model="precio" required>
                   </td>
                     <div style="color:rgb(241, 101, 101) !important">
                       {{ field.errors }}
@@ -89,19 +89,19 @@
         },
         computed: {
               totalPrecio(){
-                  this.total = parseInt(this.precio) - parseInt(this.precio)* 0.2;
-                  if(isNaN(this.total)){
+                  this.total = this.precio - this.precio* 0.2;
+                  if(isNaN(this.total) || this.total<0){
                     this.total=0;
                   }
-                  return this.total;
+                  return Math.round(this.total*100)/100;
                   
               },
               totalPremium(){
-                  this.total = parseInt(this.precio) - parseInt(this.precio)* 0.15;
-                  if(isNaN(this.total)){
+                  this.total = this.precio - this.precio* 0.15;
+                  if(isNaN(this.total) || this.total<0){
                     this.total=0;
                   }
-                  return this.total;
+                  return Math.round(this.total*100)/100;
               }
           }
       })
