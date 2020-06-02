@@ -1,52 +1,73 @@
 <html>
 <head>
-     {% extends "base.html" %}
-     {% load static %}
-     {% block extrahead %}
+{% extends "base.html" %}
 
-     {% endblock %}   
+{% load static %}
+
+
 </head>
+
 <body>
-    {% block content %}
   
-      <h1 style="color:white; text-align: center;">Detalles disputa </h1>
+{% block content %}
 
-      {% if request.user.admin == True %}
+{% if request.user.admin == True %}
+<h1 style="color:white; text-align: center;">Detalles disputa </h1>
 
-      <div>
-        <h3 class ="py-5" style="border-radius: 8px; color:white; text-align: center;">
-          {{contend.rent.game.name}} - {{contend.status}}
-        </h3> 
-      </div>
 
-      <div style="text-align: center;">
-        <img style="width:284px;height:300px; border-radius: 8px" src="{{contend.rent.game.picture.url}}"/>
-   
-        <div style="color:white; margin-left:30px;"> 
 
+<div class="container">
+<div class="d-flex justify-content-center">
+<table style="text-align: center;">
+  <thead>
+    <tr>
+      <td>
+        <div><h3 style="border-radius: 8px; color:white; padding-top: 10px;">{{contend.rent.game.name}} - {{contend.status}}</h3> </div>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+         <img style="width:300px;height:300px; border-radius: 8px" src="{{contend.rent.game.picture.url}}"/>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div  style="color: #eee;">
           <h4> Identificador: <a href="/gameDetail/{{contend.rent.game.id}}/rents/" style="color:white; text-decoration: underline;">{{contend.rent}}</a> </h4>
           <h5>Disputador:  {{contend.owner}}</h5>
           <h5>Disputado: {{contend.rent.user}}</h5>
           <h5>Descripción:</h5>
           {{contend.description}}</br>
+        
+          {% if contend.status == 'PENDING' %}
+            <form action="/compensation/{{contend.id}}/new/" method="POST" style="color: white;">
+                
+              {% csrf_token %}
+              <div>
+                Indemnización:</br> 
+                <input type="number" id="price" name="price" value="1" min="1" required> € </br>
+                <button type="submit" class="btn btn-info btn-sm" style="border-radius: 8px;">Indemnizar</button>
+              </div>
+            </form>
+          {% endif %} 
         </div>
-      
-        {% if contend.status == 'PENDING' %}
-          <form action="/compensation/{{contend.id}}/new/" method="POST" style="margin-top: 16px; margin-left: 5px; 
-            color: white;">
-              
-            {% csrf_token %}
-            <div style="margin-top: 10px;">
-              Indemnización:</br> 
-              <input type="number" id="price" name="price" value="1" min="1" required> € </br>
-              <button type="submit" class="btn btn-info btn-sm" style="border-radius: 8px; 
-                color:black; font-weight: bold;">Indemnizar</button>
-            </div>
-          </form>
-        {% endif %}      
-      </div>
-      {% endif %}
+      </td>  
+    </tr>
+    <tr>
 
-  {% endblock %}
+</tr>
+<tr>
+
+</tr>
+</tbody>
+</table>
+</div>
+
+{% endif %}
+{% endblock %}
+
+
 </body>
 </html>

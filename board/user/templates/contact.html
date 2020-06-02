@@ -14,6 +14,7 @@
     </head>
     
     <body> 
+        {% load crispy_forms_tags %}
         {% block content %}
             <div class="text-center">
                 <h5 class="py-5" style="color: white; max-width: 50%; margin-left: 25%;">
@@ -21,7 +22,7 @@
                             
                 <form method="POST" action="" style="color:white">
                     {% csrf_token %}
-                    {{form.as_p}}      
+                    {{form|crispy}}      
                     <div style="margin: 15px; text-align: center;">
                         <button type="submit" class="btn btn-primary"  style="border-radius: 8px">Crear</button>              
                     </div>

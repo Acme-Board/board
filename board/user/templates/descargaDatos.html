@@ -16,8 +16,10 @@
     </head>
     
     <body> 
+      {% load crispy_forms_tags %}
 {% block content %}
     <form method="POST" action="" >
+      
         {% csrf_token %}
         <div>
         <h5 class="py-5" style="text-align: justify; color: white; max-width: 50%; margin-left: 25%;">
@@ -28,8 +30,7 @@
             {% for field in form %}
           <div class="text-center">
               <div class="field">               
-                 <div style="color:white;"><label class="label">{{field.label}} </label></div>
-                  <div>{{field}}</div>
+                  <div style="color:white;">{{field|as_crispy_field}}</div>
               </div>
             </div>
           {% endfor %}
